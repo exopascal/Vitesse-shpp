@@ -33,8 +33,9 @@ import { Content, fetchOneEntry } from '@builder.io/sdk-vue'
 const config = useRuntimeConfig()
 const apiKey = config.public.BUILDER_API_KEY
 
-// Design Tokens laden und bereitstellen
-const { designTokensData } = useDesignTokens()
+// Design Tokens vom globalen Plugin verwenden
+const { $designTokensData } = useNuxtApp()
+const designTokensData = computed(() => $designTokensData)
 
 // Fetch header content from Builder.io
 const { data: header } = await useLazyAsyncData('header', async () => {

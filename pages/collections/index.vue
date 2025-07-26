@@ -15,12 +15,12 @@
         :api-key="apiKey"
         :model="model" 
         :content="builderContent"
-        :data="builderData"
+        :data="{builderData, designTokensData}"
         :customComponents="registeredComponents"
       />
       
       <!-- Fallback: Standard Collections Grid -->
-      <div v-else class="collections-grid">
+      <!-- <div v-else class="collections-grid">
         <h1>Alle Kategorien</h1>
         <div class="grid">
           <NuxtLink 
@@ -51,7 +51,7 @@
             </div>
           </NuxtLink>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -61,7 +61,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useShopifyStore } from '../../store/shopifyStore'
 import { Content, fetchOneEntry } from '@builder.io/sdk-vue'
 import { registeredComponents } from '../../plugins/builder-components'
-import { useRuntimeConfig } from 'nuxt/app'
+import { useNuxtApp, useRuntimeConfig } from 'nuxt/app'
 
 // Store und Daten
 const shopifyStore = useShopifyStore()
@@ -73,7 +73,11 @@ const error = ref<string | null>(null)
 // Builder.io Konfiguration
 const config = useRuntimeConfig()
 const apiKey = config.public.BUILDER_API_KEY as string
-const model = 'collections-overview'
+const model = 'page'
+
+// Design Tokens vom globalen Plugin verwenden
+const { $designTokensData } = useNuxtApp()
+const designTokensData = computed(() => $designTokensData)
 
 // Builder.io Daten f�r Template
 const builderData = computed(() => ({

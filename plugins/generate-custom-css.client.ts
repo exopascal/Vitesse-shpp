@@ -17,10 +17,12 @@ interface DesignTokens {
   components?: any
 }
 
-export default defineNuxtPlugin(async () => {
-  // Nur im Client ausführen
-  if (process.server) return
+// Globales Design Token System
+let globalDesignTokens: any = null
+let globalMetadata: any = null
 
+// Async-Funktion zum Laden der Design Tokens
+async function loadDesignTokens() {
   const config = useRuntimeConfig()
   const apiKey = config.public.BUILDER_API_KEY as string
 
@@ -30,6 +32,8 @@ export default defineNuxtPlugin(async () => {
   }
 
   try {
+    console.log('[Design Tokens] 🚀 Loading design tokens from Builder.io...')
+    
     // Design Tokens von Builder.io laden
     const builderContent = await fetchOneEntry({
       model: 'design-tokens',
@@ -40,36 +44,97 @@ export default defineNuxtPlugin(async () => {
     })
 
     if (!builderContent?.data) {
+      console.log('[Design Tokens] ⚠️ No content found in Builder.io')
       return
     }
 
+    // Vollständige Builder.io Daten für globale Verwendung speichern
+    const fullData = builderContent.data
+    
     // Die Tokens können in verschiedenen Strukturen kommen
     let tokens: DesignTokens
+    let metadata: any = null
     
-    if (builderContent.data.tokens?.tokens) {
+    if (fullData.tokens?.tokens) {
       // Structure: { tokens: { tokens: {...}, metadata: {...} } }
-      tokens = builderContent.data.tokens.tokens
-    } else if (builderContent.data.tokens) {
+      tokens = fullData.tokens.tokens
+      metadata = fullData.tokens.metadata
+    } else if (fullData.tokens) {
       // Structure: { tokens: {...} }
-      tokens = builderContent.data.tokens
+      tokens = fullData.tokens
+      metadata = fullData.metadata
     } else {
       // Direct structure: {...}
-      tokens = builderContent.data as DesignTokens
+      tokens = fullData as DesignTokens
     }
     
     if (!tokens || typeof tokens !== 'object') {
       console.log('[Design Tokens] Invalid token structure')
       return
     }
-    // CSS generieren
-    const css = generateTokenCSS(tokens)
+
+    // Globale Design Tokens setzen
+    globalDesignTokens = {
+      // Originale Builder.io Struktur
+      raw: fullData,
+      // Verarbeitete Tokens
+      tokens: tokens,
+      metadata: metadata,
+      // Helper-Funktionen
+      getColor: (path: string) => getNestedValue(tokens.colors, path),
+      getComponent: (name: string) => tokens.components?.[name] || {},
+      // Data für Builder.io Content Components (wie in default.vue)
+      designTokensData: {
+        tokens: tokens,
+        metadata: metadata,
+        theme: metadata?.theme || 'default'
+      }
+    }
     
-    // CSS in den DOM einfügen
+    globalMetadata = metadata
+
+    console.log('[Design Tokens] ✅ Global design tokens initialized:', {
+      colors: Object.keys(tokens.colors || {}),
+      components: Object.keys(tokens.components || {}),
+      theme: metadata?.theme || 'default'
+    })
+    
+    // CSS generieren und einfügen
+    const css = generateTokenCSS(tokens)
     injectCSS(css)
+
+    console.log('[Design Tokens] 🎨 CSS injected and global tokens ready!')
+
   } catch (error) {
     console.error('[Design Tokens] Error loading tokens:', error)
   }
+}
+
+export default defineNuxtPlugin(() => {
+  // Nur im Client ausführen
+  if (process.server) return
+
+  // Tokens asynchron laden (non-blocking)
+  nextTick(() => {
+    loadDesignTokens()
+  })
+
+  // Plugin-Funktionen bereitstellen
+  return {
+    provide: {
+      designTokens: () => globalDesignTokens,
+      getDesignTokens: () => globalDesignTokens,
+      designTokensData: () => globalDesignTokens?.designTokensData || {}
+    }
+  }
 })
+
+/**
+ * Helper-Funktion um verschachtelte Werte zu bekommen (z.B. "primary.500")
+ */
+function getNestedValue(obj: any, path: string): any {
+  return path.split('.').reduce((current, key) => current?.[key], obj)
+}
 
 /**
  * CSS aus Design Tokens generieren
