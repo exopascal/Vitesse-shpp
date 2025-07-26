@@ -30,8 +30,6 @@ export default defineNuxtPlugin(async () => {
   }
 
   try {
-    console.log('[Design Tokens] Loading tokens from Builder.io...')
-    
     // Design Tokens von Builder.io laden
     const builderContent = await fetchOneEntry({
       model: 'design-tokens',
@@ -42,11 +40,8 @@ export default defineNuxtPlugin(async () => {
     })
 
     if (!builderContent?.data) {
-      console.log('[Design Tokens] No design tokens found in Builder.io')
       return
     }
-
-    console.log('[Design Tokens] Design tokens loaded:', builderContent.data)
 
     // Die Tokens können in verschiedenen Strukturen kommen
     let tokens: DesignTokens
@@ -66,117 +61,15 @@ export default defineNuxtPlugin(async () => {
       console.log('[Design Tokens] Invalid token structure')
       return
     }
-
-    console.log('[Design Tokens] ✅ Tokens loaded, generating CSS...', Object.keys(tokens))
-    console.log('[Design Tokens] 🔍 Full token structure:', JSON.stringify(tokens, null, 2))
-
     // CSS generieren
     const css = generateTokenCSS(tokens)
-
-    console.log('[Design Tokens] Generated CSS finish:', css)
     
     // CSS in den DOM einfügen
     injectCSS(css)
-
-    console.log('[Design Tokens] ✅ Custom CSS injected successfully')
-
   } catch (error) {
     console.error('[Design Tokens] Error loading tokens:', error)
   }
 })
-
-/**
- * Generiere Tailwind-Class-Overrides basierend auf aktuellen CSS Custom Properties
- */
-function generateTailwindOverrides(): string {
-  // Diese Funktion wird zur Runtime ausgeführt und kann die echten CSS Custom Property Werte lesen
-  return `
-
-/* === DYNAMIC TAILWIND OVERRIDES FROM BUILDER.IO === */
-/* Diese verwenden die echten Builder.io Werte aus den CSS Custom Properties */
-
-/* Primary Colors */
-.text-primary {
-  color: var(--color-primary-500) !important;
-}
-
-.bg-primary {
-  background-color: var(--color-primary-500) !important;
-}
-
-.text-primary-400 {
-  color: var(--color-primary-400) !important;
-}
-
-.text-primary-500 {
-  color: var(--color-primary-500) !important;
-}
-
-.text-primary-600 {
-  color: var(--color-primary-600) !important;
-}
-
-.bg-primary-400 {
-  background-color: var(--color-primary-400) !important;
-}
-
-.bg-primary-500 {
-  background-color: var(--color-primary-500) !important;
-}
-
-.bg-primary-600 {
-  background-color: var(--color-primary-600) !important;
-}
-
-.bg-primary-700 {
-  background-color: var(--color-primary-700) !important;
-}
-
-/* Neutral Colors */
-.text-neutral-100 {
-  color: var(--color-neutral-100) !important;
-}
-
-.text-neutral-300 {
-  color: var(--color-neutral-300) !important;
-}
-
-.text-neutral-700 {
-  color: var(--color-neutral-700) !important;
-}
-
-.text-neutral-900 {
-  color: var(--color-neutral-900) !important;
-}
-
-.bg-neutral-100 {
-  background-color: var(--color-neutral-100) !important;
-}
-
-.bg-neutral-800 {
-  background-color: var(--color-neutral-800) !important;
-}
-
-.bg-neutral-900 {
-  background-color: var(--color-neutral-900) !important;
-}
-
-.border-neutral-700 {
-  border-color: var(--color-neutral-700) !important;
-}
-
-/* Hover States */
-.hover\\:text-primary-400:hover {
-  color: var(--color-primary-400) !important;
-}
-
-.hover\\:bg-primary-700:hover {
-  background-color: var(--color-primary-700) !important;
-}
-
-/* === END TAILWIND OVERRIDES === */
-`
-}
 
 /**
  * CSS aus Design Tokens generieren
@@ -500,50 +393,8 @@ function injectCSS(css: string) {
   const style = document.createElement('style')
   style.id = 'builder-design-tokens'
   
-  // CSS + zusätzliche direkte Component-Overrides mit echten Builder.io Werten
-  const enhancedCSS = css + generateTailwindOverrides() + `
-
-/* Direct Component Overrides for Footer */
-.footer {
-  background-color: var(--color-neutral-900) !important;
-  color: var(--color-neutral-100) !important;
-}
-
-.footer h3 {
-  color: var(--color-primary-500) !important;
-}
-
-.footer a {
-  color: var(--color-neutral-300) !important;
-}
-
-.footer a:hover {
-  color: var(--color-primary-400) !important;
-}
-
-.footer input {
-  background-color: var(--color-neutral-800) !important;
-  border-color: var(--color-neutral-700) !important;
-  color: var(--color-neutral-100) !important;
-}
-
-.footer button {
-  background-color: var(--color-primary-600) !important;
-  color: white !important;
-}
-
-.footer button:hover {
-  background-color: var(--color-primary-700) !important;
-}
-
-/* Ende der Component Overrides */
-`
-  
-  style.textContent = enhancedCSS
+  style.textContent = css
   
   // CSS mit höchster Priorität einfügen (am Ende des head)
   document.head.appendChild(style)
-  
-  console.log('[Design Tokens] ✅ Enhanced CSS injected with', enhancedCSS.split('\n').length, 'lines')
-  console.log('[Design Tokens] 🎯 Added direct component overrides for Footer')
 }
