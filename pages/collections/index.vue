@@ -15,7 +15,7 @@
         :api-key="apiKey"
         :model="model" 
         :content="builderContent"
-        :data="{builderData, designTokensData}"
+        :data="builderData"
         :customComponents="registeredComponents"
       />
       
@@ -67,6 +67,7 @@ import { useNuxtApp, useRuntimeConfig } from 'nuxt/app'
 const shopifyStore = useShopifyStore()
 const collections = ref<any[]>([])
 const builderContent = ref<any>(null)
+const contentForBuilder = ref<any>(null)
 const isLoading = ref(true)
 const error = ref<string | null>(null)
 
@@ -82,7 +83,8 @@ const designTokensData = computed(() => $designTokensData)
 // Builder.io Daten f�r Template
 const builderData = computed(() => ({
   collections: collections.value,
-  collectionsCount: collections.value.length
+  collectionsCount: collections.value.length,
+  designTokens: designTokensData,
 }))
 
 // Collections laden
@@ -118,6 +120,10 @@ async function loadBuilderContent() {
     })
     
     builderContent.value = content
+    contentForBuilder.value = {
+      builderContent: content,
+      designe: designTokensData
+    }
     console.log('Builder content loaded:', content)
   } catch (err) {
     console.log('Builder.io content not found, using fallback:', err)
