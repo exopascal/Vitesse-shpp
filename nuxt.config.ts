@@ -148,59 +148,33 @@ export default defineNuxtConfig({
 
   // Cookie Consent Configuration (GDPR/DSGVO compliant)
   cookieConsent: {
-    consentMode: true,
+    cookieName: 'vs_cookie_consent',
+    cookieExpiryDays: 365,
 
-    cookies: {
+    categories: {
       essential: {
         label: 'Essenzielle Cookies',
-        description: 'Diese Cookies sind für die Grundfunktionen der Website erforderlich und können nicht deaktiviert werden.',
+        description: 'Für die Grundfunktionen der Website erforderlich – können nicht deaktiviert werden.',
         required: true
       },
       analytics: {
         label: 'Analyse & Statistik',
-        description: 'Diese Cookies helfen uns, die Nutzung unserer Website zu verstehen und zu verbessern.',
-        required: false,
-        src: 'https://www.googletagmanager.com/gtag/js',
-        async: true,
-        accepted: () => {
-          if (typeof window !== 'undefined' && window.gtag) {
-            window.gtag('consent', 'update', {
-              analytics_storage: 'granted'
-            })
-          }
-        },
-        declined: () => {
-          if (typeof window !== 'undefined' && window.gtag) {
-            window.gtag('consent', 'update', {
-              analytics_storage: 'denied'
-            })
-          }
-        }
+        description: 'Helfen uns zu verstehen, wie Besucher die Website nutzen, um sie zu verbessern.',
+        required: false
       },
       marketing: {
         label: 'Marketing',
-        description: 'Diese Cookies werden verwendet, um Ihnen personalisierte Werbung anzuzeigen.',
+        description: 'Werden verwendet, um personalisierte Werbung anzuzeigen.',
         required: false
       },
       functional: {
         label: 'Funktional',
-        description: 'Diese Cookies ermöglichen erweiterte Funktionalitäten wie z.B. die Speicherung Ihrer Präferenzen.',
+        description: 'Ermöglichen erweiterte Funktionen wie gespeicherte Präferenzen.',
         required: false
       }
     },
 
-    cookieExpiryDays: 365,
-
-    // Google Consent Mode v2
-    googleConsentMode: {
-      enabled: true,
-      defaultConsent: {
-        ad_storage: 'denied',
-        analytics_storage: 'denied',
-        functionality_storage: 'denied',
-        personalization_storage: 'denied',
-        security_storage: 'granted'
-      }
-    }
+    // Scripts werden ergänzt sobald die verwendeten Tools bekannt sind
+    scripts: []
   },
 })

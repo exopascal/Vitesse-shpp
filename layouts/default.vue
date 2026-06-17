@@ -13,6 +13,8 @@
 
     <Footer />
 
+    <CookieConsent />
+
   </div>
 </template>
 
