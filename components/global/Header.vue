@@ -5,8 +5,13 @@
       <div class="header-logo">
         <NuxtLink to="/" class="logo-link">
           <img v-if="logo" :src="logo" :alt="siteName" class="logo-image" />
+          <span v-else-if="siteName === 'Vitesse Sports'" class="logo-wordmark" aria-label="Vitesse Sports">
+            <span class="logo-wordmark-vitesse">Vitesse</span>
+            <span class="logo-wordmark-sports">Sports</span>
+          </span>
           <span v-else class="logo-text">{{ siteName }}</span>
         </NuxtLink>
+        <span class="b2b-badge">Geschäftskunde</span>
       </div>
 
       <!-- Desktop Navigation -->
@@ -65,8 +70,51 @@
                   </div>
                 </div>
                 
+                <div v-if="item.featuredProducts?.length" class="mega-menu-highlights">
+                  <div class="mega-menu-highlights-header">
+                    <h4 class="mega-menu-highlights-title">Unsere Highlights</h4>
+                  </div>
+                  <div class="mega-menu-highlights-grid">
+                    <article
+                      v-for="product in item.featuredProducts"
+                      :key="product.id"
+                      class="highlight-card"
+                    >
+                      <NuxtLink
+                        :to="`/products/${product.handle}`"
+                        class="highlight-card-link"
+                        @click="hideMegaMenu"
+                      >
+                        <img
+                          v-if="product.featured_image"
+                          :src="product.featured_image"
+                          :alt="product.title"
+                          class="highlight-card-image"
+                        />
+                        <div v-else class="highlight-card-image highlight-card-image-placeholder">
+                          {{ product.title.charAt(0) }}
+                        </div>
+                        <div class="highlight-card-copy">
+                          <p class="highlight-card-title">{{ product.title }}</p>
+                          <p class="highlight-card-price">{{ formatPrice(product.price) }} <TaxNote /></p>
+                        </div>
+                      </NuxtLink>
+                      <button
+                        type="button"
+                        class="highlight-card-button"
+                        :disabled="!product.available || addingHighlightId === product.id"
+                        @click.stop.prevent="addHighlightToCart(product)"
+                      >
+                        <span v-if="addingHighlightId === product.id">Wird hinzugefuegt...</span>
+                        <span v-else-if="product.available">In den Warenkorb</span>
+                        <span v-else>Nicht verfuegbar</span>
+                      </button>
+                    </article>
+                  </div>
+                </div>
+
                 <!-- Featured Content -->
-                <div v-if="item.featured" class="mega-menu-featured">
+                <div v-else-if="item.featured" class="mega-menu-featured">
                   <div class="featured-content">
                     <img v-if="item.featured.image" :src="item.featured.image" :alt="item.featured.title" class="featured-image" />
                     <div class="featured-text">
@@ -94,11 +142,11 @@
         </button>
 
         <!-- User Account -->
-        <button v-if="showAccount" @click="toggleAccount" class="action-btn account-btn">
+        <a v-if="showAccount" :href="accountUrl" class="action-btn account-btn" aria-label="Mein Konto">
           <svg class="action-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
           </svg>
-        </button>
+        </a>
 
         <!-- Shopping Cart -->
         <button v-if="showCart" @click="toggleCart" class="action-btn cart-btn">
@@ -123,25 +171,71 @@
     <!-- Search Overlay -->
     <Transition name="search-fade">
       <div v-if="isSearchOpen" class="search-overlay">
-        <div class="search-container">
-          <input 
-            ref="searchInput"
-            v-model="searchQuery"
-            type="text" 
-            placeholder="Nach Produkten suchen..."
-            class="search-input"
-            @keyup.enter="performSearch"
-          />
-          <button @click="performSearch" class="search-submit">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-            </svg>
-          </button>
-          <button @click="toggleSearch" class="search-close">
-            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-          </button>
+        <div class="search-panel">
+          <div class="search-container">
+            <input 
+              ref="searchInput"
+              v-model="searchQuery"
+              type="text" 
+              placeholder="Nach Produkten suchen..."
+              class="search-input"
+              @keyup.enter="performSearch"
+            />
+            <button @click="performSearch" class="search-submit">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+            </button>
+            <button @click="toggleSearch" class="search-close">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+
+          <div v-if="searchQuery.trim()" class="search-results">
+            <div v-if="isSearching" class="search-results-state">
+              Produkte werden gesucht...
+            </div>
+
+            <div v-else-if="searchError" class="search-results-state search-results-state-error">
+              {{ searchError }}
+            </div>
+
+            <div v-else-if="searchResults.length" class="search-results-list">
+              <NuxtLink
+                v-for="product in searchResults"
+                :key="product.id"
+                :to="`/products/${product.handle}`"
+                class="search-result-card"
+                @click="handleProductSelection"
+              >
+                <img
+                  v-if="product.featured_image"
+                  :src="product.featured_image"
+                  :alt="product.title"
+                  class="search-result-image"
+                />
+                <div v-else class="search-result-image search-result-image-placeholder">
+                  {{ product.title.charAt(0) }}
+                </div>
+
+                <div class="search-result-content">
+                  <p class="search-result-title">{{ product.title }}</p>
+                  <p v-if="product.vendor" class="search-result-vendor">{{ product.vendor }}</p>
+                  <p class="search-result-price">{{ formatPrice(product.price) }} <TaxNote /></p>
+                </div>
+              </NuxtLink>
+            </div>
+
+            <div v-else-if="hasSearched" class="search-results-state">
+              Keine Produkte gefunden.
+            </div>
+
+            <button type="button" class="search-results-more" @click="performSearch">
+              Alle Ergebnisse anzeigen
+            </button>
+          </div>
         </div>
       </div>
     </Transition>
@@ -153,6 +247,10 @@
           <div class="mobile-sidebar-header">
             <div class="mobile-logo">
               <img v-if="logo" :src="logo" :alt="siteName" class="logo-image" />
+              <span v-else-if="siteName === 'Vitesse Sports'" class="logo-wordmark" aria-label="Vitesse Sports">
+                <span class="logo-wordmark-vitesse">Vitesse</span>
+                <span class="logo-wordmark-sports">Sports</span>
+              </span>
               <span v-else class="logo-text">{{ siteName }}</span>
             </div>
             <button @click="closeMobileMenu" class="mobile-close">
@@ -221,12 +319,12 @@
                 Suchen
               </button>
               
-              <button v-if="showAccount" @click="handleMobileAccount" class="mobile-action-btn">
+              <a v-if="showAccount" :href="accountUrl" class="mobile-action-btn" @click="closeMobileMenu">
                 <svg class="mobile-action-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                 </svg>
                 Mein Konto
-              </button>
+              </a>
             </div>
           </div>
         </nav>
@@ -236,8 +334,10 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useShopifyCardStore } from '~/store/shopifyCardStore'
+import { useShopifyStore } from '~/store/shopifyStore'
 
 const props = defineProps({
   // Logo Configuration
@@ -250,7 +350,7 @@ const props = defineProps({
     default: 'My Store'
   },
   
-  // Navigation wird über props nicht mehr konfiguriert - statisch für bessere Builder.io Integration
+  // Navigation wird über props nicht mehr konfiguriert - statisch
   
   // Feature Toggles
   showSearch: {
@@ -287,55 +387,173 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['search', 'toggle-cart', 'toggle-account'])
+const emit = defineEmits(['search', 'toggle-cart'])
+const { toggleCart: toggleGlobalCart, openCart } = useCartSidebar()
 
 const route = useRoute()
+const router = useRouter()
+const shopifyStore = useShopifyStore()
+const shopifyCardStore = useShopifyCardStore()
 
-// Static Navigation - einfacher für Builder.io zu verwenden
-const navigationItems = [
+const fallbackShopChildren = [
   {
-    title: 'Home',
-    url: '/'
-  },
-  {
-    title: 'Shop',
+    title: 'Unsere Marken',
     children: [
-      {
-        title: 'Kategorien',
-        children: [
-          { title: 'Elektronik', url: '/shop/electronics' },
-          { title: 'Mode', url: '/shop/fashion' },
-          { title: 'Haushalt', url: '/shop/home' },
-          { title: 'Sport', url: '/shop/sports' }
-        ]
-      },
-      {
-        title: 'Marken',
-        children: [
-          { title: 'Apple', url: '/brands/apple' },
-          { title: 'Samsung', url: '/brands/samsung' },
-          { title: 'Nike', url: '/brands/nike' },
-          { title: 'Adidas', url: '/brands/adidas' }
-        ]
-      }
-    ],
-    featured: {
-      title: 'Neue Kollektion',
-      description: 'Entdecken Sie unsere neuesten Produkte',
-      image: 'https://placehold.co/300x200',
-      url: '/new-collection',
-      buttonText: 'Jetzt shoppen'
-    }
+      { title: 'Sportreact', url: '/collections/sportreact' },
+      { title: 'T-Apex', url: '/collections/t-apex' },
+      { title: 'EXOPEK', url: '/collections/exopek' },
+      { title: 'Witty', url: '/collections/witty' },
+      { title: 'Tunturi', url: '/collections/tunturi' },
+      { title: 'Torque', url: '/collections/torque' },
+      { title: 'IVO Trainer', url: '/collections/ivo-trainer' }
+    ]
   },
   {
-    title: 'Über uns',
-    url: '/about'
-  },
-  {
-    title: 'Kontakt',
-    url: '/contact'
+    title: 'Unsere Kollektionen',
+    children: [
+      { title: 'Widerstandstraining', url: '/collections/widerstandstraining' },
+      { title: 'Reaktionsgeschwindigkeit & kognitives Training', url: '/collections/reaktionsgeschwindigkeit-kognitives-training' },
+      { title: 'Zeitmessung & Leistungsanalyse', url: '/collections/zeitmessung-leistungsanalyse' },
+      { title: 'Sprinttraining', url: '/collections/sprinttraining' }
+    ]
   }
 ]
+
+const preferredCollectionHandles = [
+  'widerstandstraining',
+  'reaktionsgeschwindigkeit-kognitives-training',
+  'zeitmessung-leistungsanalyse',
+  'sprinttraining'
+]
+
+const brandLinks = [
+  { title: 'Sportreact', url: '/collections/sportreact' },
+  { title: 'T-Apex', url: '/collections/t-apex' },
+  { title: 'EXOPEK', url: '/collections/exopek' },
+  { title: 'Witty', url: '/collections/witty' },
+  { title: 'Tunturi', url: '/collections/tunturi' },
+  { title: 'Torque', url: '/collections/torque' },
+  { title: 'IVO Trainer', url: '/collections/ivo-trainer' }
+]
+
+const highlightedProductConfigs = [
+  { query: 't-apex', matches: ['t-apex'] },
+  { query: 'exopek pro', matches: ['exopek pro'] },
+  { query: 'witty zeitmesser microgate', matches: ['witty', 'microgate'] },
+  { query: 'sportreact academy bundle', matches: ['sportreact academy bundle', 'academy bundle'] }
+]
+
+const { data: shopCollections } = await useAsyncData('header-shop-collections', async () => {
+  const collections = await shopifyStore.fetchAllCollections()
+
+  const prioritizedCollections = preferredCollectionHandles
+    .map((handle) => collections.find((collection) => collection.handle === handle))
+    .filter(Boolean)
+
+  const fallbackCollections = collections.filter(
+    (collection) => !preferredCollectionHandles.includes(collection.handle)
+  )
+
+  return [...prioritizedCollections, ...fallbackCollections].slice(0, 8).map((collection) => ({
+    title: collection.title,
+    handle: collection.handle,
+    url: `/collections/${collection.handle}`,
+    image: collection.image || '',
+    description: collection.description || ''
+  }))
+})
+
+function normalizeText(value) {
+  return String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+}
+
+const { data: highlightedProducts } = await useAsyncData('header-highlight-products', async () => {
+  const products = await Promise.all(
+    highlightedProductConfigs.map(async (config) => {
+      const matches = await shopifyStore.fetchProducts({
+        filterQuery: config.query,
+        sortBy: 'title-asc',
+        limit: 8,
+      })
+
+      const selectedProduct = matches.find((product) => {
+        const haystack = `${normalizeText(product.title)} ${normalizeText(product.handle)}`
+        return config.matches.every((needle) => haystack.includes(normalizeText(needle)))
+      }) || matches[0]
+
+      return selectedProduct || null
+    })
+  )
+
+  return products.filter(Boolean)
+})
+
+const navigationItems = computed(() => {
+  const collectionLinks = shopCollections.value ?? []
+  const featuredCollection = collectionLinks[0]
+  const featuredProducts = highlightedProducts.value ?? []
+  const curatedCollectionLinks = preferredCollectionHandles.map((handle) => {
+    const collection = collectionLinks.find((entry) => entry.handle === handle)
+
+    if (collection) {
+      return {
+        title: collection.title,
+        url: collection.url
+      }
+    }
+
+    return fallbackShopChildren[1].children.find((entry) => entry.url.endsWith(`/${handle}`))
+  }).filter(Boolean)
+
+  return [
+  {
+    title: 'Sprint',
+    url: '/collections/sprinttraining'
+  },
+  {
+    title: 'Kollektion',
+    children: collectionLinks.length > 0
+      ? [
+          {
+            title: 'Unsere Marken',
+            children: brandLinks
+          },
+          {
+            title: 'Unsere Kollektionen',
+            children: curatedCollectionLinks
+          }
+        ]
+      : fallbackShopChildren,
+    featuredProducts,
+    featured: featuredCollection
+      ? {
+          title: featuredCollection.title,
+          description: featuredCollection.description || 'Direkt in die passende Kollektion wechseln.',
+          image: featuredCollection.image,
+          url: featuredCollection.url,
+          buttonText: 'Kollektion ansehen'
+        }
+      : {
+          title: 'Shop entdecken',
+          description: 'Direkt zu allen Produkten und verfuegbaren Kollektionen.',
+          image: '',
+          url: '/products',
+          buttonText: 'Zum Shop'
+        }
+  },
+  {
+    title: 'Widerstand',
+    url: '/collections/widerstandstraining'
+  },
+  {
+    title: 'Witty',
+    url: '/collections/witty'
+  }
+]
+})
 
 // State
 const isScrolled = ref(false)
@@ -345,6 +563,12 @@ const activeMobileDropdown = ref(-1)
 const isSearchOpen = ref(false)
 const searchQuery = ref('')
 const searchInput = ref(null)
+const searchResults = ref([])
+const isSearching = ref(false)
+const addingHighlightId = ref('')
+const searchError = ref('')
+const hasSearched = ref(false)
+let searchDebounceTimer = null
 
 // Computed
 const isActiveRoute = (url) => {
@@ -352,9 +576,51 @@ const isActiveRoute = (url) => {
   return route.path === url || route.path.startsWith(url + '/')
 }
 
+const formatPrice = (price) => {
+  if (!price) {
+    return ''
+  }
+
+  return new Intl.NumberFormat('de-DE', {
+    style: 'currency',
+    currency: 'EUR'
+  }).format(price)
+}
+
 // Methods
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 50
+}
+
+const resetSearchState = () => {
+  searchResults.value = []
+  isSearching.value = false
+  searchError.value = ''
+  hasSearched.value = false
+}
+
+const fetchSearchResults = async () => {
+  const query = searchQuery.value.trim()
+
+  if (!query) {
+    resetSearchState()
+    return
+  }
+
+  isSearching.value = true
+  searchError.value = ''
+
+  try {
+    searchResults.value = await shopifyStore.searchProducts(query, 6)
+    hasSearched.value = true
+  } catch (error) {
+    console.error('Header search failed:', error)
+    searchResults.value = []
+    searchError.value = 'Die Suche ist aktuell nicht verfuegbar.'
+    hasSearched.value = true
+  } finally {
+    isSearching.value = false
+  }
 }
 
 const toggleMobileMenu = () => {
@@ -393,22 +659,57 @@ const toggleSearch = async () => {
   if (isSearchOpen.value) {
     await nextTick()
     searchInput.value?.focus()
+  } else {
+    searchQuery.value = ''
+    resetSearchState()
   }
 }
 
 const toggleCart = () => {
+  toggleGlobalCart()
   emit('toggle-cart')
 }
 
-const toggleAccount = () => {
-  emit('toggle-account')
+const accountUrl = useRuntimeConfig().public.shopify.accountUrl
+
+const performSearch = async () => {
+  const query = searchQuery.value.trim()
+
+  if (!query) {
+    return
+  }
+
+  const nextQuery = route.path === '/products'
+    ? { ...route.query, q: query }
+    : { q: query }
+
+  emit('search', query)
+  isSearchOpen.value = false
+  await router.push({ path: '/products', query: nextQuery })
+  searchQuery.value = ''
 }
 
-const performSearch = () => {
-  if (searchQuery.value.trim()) {
-    emit('search', searchQuery.value.trim())
-    toggleSearch()
-    searchQuery.value = ''
+const handleProductSelection = () => {
+  isSearchOpen.value = false
+  searchQuery.value = ''
+  resetSearchState()
+}
+
+const addHighlightToCart = async (product) => {
+  if (!product?.variant_id || !product.available || addingHighlightId.value) {
+    return
+  }
+
+  addingHighlightId.value = product.id
+
+  try {
+    await shopifyCardStore.addToCart(product.variant_id, 1)
+    openCart()
+    hideMegaMenu()
+  } catch (error) {
+    console.error('Error adding highlighted product to cart:', error)
+  } finally {
+    addingHighlightId.value = ''
   }
 }
 
@@ -419,12 +720,32 @@ const openMobileSearch = () => {
   }, 300)
 }
 
-const handleMobileAccount = () => {
-  closeMobileMenu()
-  setTimeout(() => {
-    toggleAccount()
-  }, 300)
-}
+watch(searchQuery, () => {
+  if (searchDebounceTimer) {
+    clearTimeout(searchDebounceTimer)
+  }
+
+  const query = searchQuery.value.trim()
+
+  if (!query) {
+    resetSearchState()
+    return
+  }
+
+  searchDebounceTimer = window.setTimeout(() => {
+    fetchSearchResults()
+  }, 250)
+})
+
+watch(() => route.fullPath, () => {
+  if (!isSearchOpen.value) {
+    return
+  }
+
+  isSearchOpen.value = false
+  searchQuery.value = ''
+  resetSearchState()
+})
 
 // Lifecycle
 onMounted(() => {
@@ -432,6 +753,9 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  if (searchDebounceTimer) {
+    clearTimeout(searchDebounceTimer)
+  }
   window.removeEventListener('scroll', handleScroll)
   document.body.style.overflow = ''
 })
@@ -440,7 +764,7 @@ onUnmounted(() => {
 <style scoped>
 .header {
   position: fixed;
-  top: 0;
+  top: 48px;
   left: 0;
   right: 0;
   z-index: 1000;
@@ -485,6 +809,47 @@ onUnmounted(() => {
   font-size: 1.5rem;
   font-weight: 700;
   color: v-bind(textColor);
+}
+
+.logo-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-size: clamp(1.15rem, 1.45vw, 1.75rem);
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.logo-wordmark-vitesse {
+  color: #005eb8;
+}
+
+.logo-wordmark-sports {
+  color: #ffab3d;
+}
+
+/* B2B Badge */
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.b2b-badge {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: #f0f7ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 /* Desktop Navigation */
@@ -542,7 +907,7 @@ onUnmounted(() => {
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  width: 800px;
+  width: min(1120px, calc(100vw - 2rem));
   background: white;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -566,9 +931,9 @@ onUnmounted(() => {
 }
 
 .mega-menu-grid {
-  flex: 2;
+  flex: 0 0 360px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 2rem;
 }
 
@@ -612,6 +977,109 @@ onUnmounted(() => {
   background: #f9fafb;
   border-radius: 8px;
   padding: 1.5rem;
+}
+
+.mega-menu-highlights {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0.75rem;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f8fbfd 0%, #eef4f8 100%);
+  border: 1px solid rgba(15, 94, 156, 0.08);
+}
+
+.mega-menu-highlights-header {
+  margin-bottom: 0.5rem;
+}
+
+.mega-menu-highlights-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.mega-menu-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+.highlight-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.32rem;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(203, 213, 225, 0.7);
+}
+
+.highlight-card-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  text-decoration: none;
+}
+
+.highlight-card-image {
+  width: 100%;
+  aspect-ratio: 1 / 0.72;
+  border-radius: 5px;
+  object-fit: cover;
+  background: #e5e7eb;
+}
+
+.highlight-card-image-placeholder {
+  display: grid;
+  place-items: center;
+  color: #475569;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.highlight-card-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.highlight-card-title {
+  margin: 0;
+  font-size: 0.64rem;
+  line-height: 1.1;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.highlight-card-price {
+  margin: 0;
+  font-size: 0.6rem;
+  color: #0f5e9c;
+  font-weight: 700;
+}
+
+.highlight-card-button {
+  min-height: 1.55rem;
+  border: none;
+  border-radius: 999px;
+  background: #f26a21;
+  color: white;
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.highlight-card-button:hover {
+  background: #da5b17;
+}
+
+.highlight-card-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 .featured-content {
@@ -715,7 +1183,7 @@ onUnmounted(() => {
 /* Search Overlay */
 .search-overlay {
   position: fixed;
-  top: 70px;
+  top: 118px;
   left: 0;
   right: 0;
   background: white;
@@ -724,9 +1192,12 @@ onUnmounted(() => {
   z-index: 999;
 }
 
-.search-container {
+.search-panel {
   max-width: 600px;
   margin: 0 auto;
+}
+
+.search-container {
   display: flex;
   gap: 0.5rem;
   align-items: center;
@@ -775,6 +1246,109 @@ onUnmounted(() => {
   height: 1.25rem;
 }
 
+.search-results {
+  margin-top: 0.9rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 1rem;
+  background: #f8fafc;
+  overflow: hidden;
+}
+
+.search-results-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-result-card {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: center;
+  padding: 0.9rem 1rem;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s ease;
+}
+
+.search-result-card:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.search-result-card:last-child {
+  border-bottom: none;
+}
+
+.search-result-image {
+  width: 4.5rem;
+  height: 4.5rem;
+  object-fit: cover;
+  border-radius: 0.8rem;
+  background: #e5e7eb;
+}
+
+.search-result-image-placeholder {
+  display: grid;
+  place-items: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+.search-result-content {
+  min-width: 0;
+}
+
+.search-result-title,
+.search-result-vendor,
+.search-result-price {
+  margin: 0;
+}
+
+.search-result-title {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.search-result-vendor {
+  margin-top: 0.2rem;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.search-result-price {
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f766e;
+}
+
+.search-results-state {
+  padding: 1rem;
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+.search-results-state-error {
+  color: #b91c1c;
+}
+
+.search-results-more {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  background: white;
+  color: v-bind(accentColor);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-results-more:hover {
+  background: #eff6ff;
+}
+
 /* Mobile Sidebar */
 .mobile-sidebar-overlay {
   position: fixed;
@@ -814,6 +1388,10 @@ onUnmounted(() => {
 .mobile-logo .logo-text {
   font-size: 1.25rem;
   font-weight: 600;
+}
+
+.mobile-logo .logo-wordmark {
+  font-size: 1.2rem;
 }
 
 .mobile-close {
@@ -1006,16 +1584,30 @@ onUnmounted(() => {
   .nav-hidden {
     display: none;
   }
+
+  .search-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+  }
+
+  .search-result-card {
+    grid-template-columns: 3.75rem minmax(0, 1fr);
+  }
+
+  .search-result-image {
+    width: 3.75rem;
+    height: 3.75rem;
+  }
 }
 
 /* Large Screens */
 @media (min-width: 1200px) {
   .mega-menu {
-    width: 1000px;
+    width: 1120px;
   }
   
   .mega-menu-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 </style>

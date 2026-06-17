@@ -3,22 +3,41 @@
     <div v-if="isLoading" class="loading">Produkt wird geladen...</div>
     <div v-else-if="!product" class="not-found">Produkt nicht gefunden.</div>
     <div v-else>
-      <!-- Builder.io Content falls verfügbar -->
-      <Content :api-key="apiKey"
-      model="page" :data = "builderIoData" :customComponents="registeredComponents" :content="builderContent" :context="{
-          addToCart,
-          selectOption,
-          incrementQuantity,
-          decrementQuantity,
-          formatPrice,
-          isOptionValueAvailable
-        }"  />
-        
-      
-      
-        
-      <Cart :isOpen="isCartOpen"
-        @close="isCartOpen = false"/>
+      <div>
+        <AccessoryProductTemplate
+          v-if="productPagePreset.template === 'accessory'"
+          :product="product"
+          :selectedOptions="selectedOptions"
+          :selectedVariant="selectedVariant"
+          :quantity="quantity"
+          :isLoading="isLoading"
+          :content="productDetailContent"
+          @addToCart="handleCartAdded"
+          @selectOption="selectOption"
+          @incrementQuantity="incrementQuantity"
+          @decrementQuantity="decrementQuantity"
+        />
+        <ProductDetailsLayout
+          v-else
+          :product="product"
+          :selectedOptions="selectedOptions"
+          :selectedVariant="selectedVariant"
+          :quantity="quantity"
+          :isLoading="isLoading"
+          @addToCart="handleCartAdded"
+          @selectOption="selectOption"
+          @incrementQuantity="incrementQuantity"
+          @decrementQuantity="decrementQuantity"
+        />
+
+        <template v-if="productPagePreset.template === 'main'">
+          <ProductHighlights :product="product" :content="productDetailContent.highlights" />
+          <ShopBanner :content="productDetailContent.banner" />
+          <ProductFeatures :content="productDetailContent.features" />
+        </template>
+
+        <ProductFaq :product="product" :content="productDetailContent.faq" />
+      </div>
     </div>
     
   </div>
@@ -29,31 +48,31 @@
 import { ref, computed, onMounted, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useShopifyStore } from "../../store/shopifyStore";
-import { useAsyncData, useRuntimeConfig } from "nuxt/app";
-import { Content, fetchOneEntry, isPreviewing } from "@builder.io/sdk-vue";
 import { useShopifyCardStore } from "../../store/shopifyCardStore";
-import  { registeredComponents } from '../../plugins/builder-components';
+import AccessoryProductTemplate from '~/components/productDetails/AccessoryProductTemplate.vue'
+import ProductDetailsLayout from '~/components/productDetails/ProductDetailsLayout.vue'
+import ProductFaq from '~/components/productDetails/ProductFaq.vue'
+import ProductHighlights from '~/components/productDetails/ProductHighlights.vue'
+import ShopBanner from '~/components/productDetails/ShopBanner.vue'
+import ProductFeatures from '~/components/productDetails/ProductFeatures.vue'
+import { getProductDetailContent } from '~/utils/productDetailContent'
+import { resolveProductPagePreset } from '~/utils/productPageConfig'
 
 // Route und Store
 const route = useRoute();
 const shopifyStore = useShopifyStore();
 const shopifyCardStore = useShopifyCardStore();
-const config = useRuntimeConfig();
+const { openCart } = useCartSidebar();
 
 // Produkt-Daten und Status
 const product = ref<any>(null);
-const builderContent = ref<any>(null);
 const loadingError = ref(false);
 const isLoading = ref(true);
 const quantity = ref(1);
-const isCartOpen = ref(false);
 const selectedOptions = ref<Record<string, string>>({});
 
 // Produkt-Handle aus der Route
 const handle = computed(() => route.params.id as string);
-
-const apiKey = config.public.BUILDER_API_KEY as string;
-const model = "page";
 
 // Ausgewählte Variante basierend auf den gewählten Optionen
 const selectedVariant = computed(() => {
@@ -66,20 +85,19 @@ const selectedVariant = computed(() => {
   });
 });
 
+const productDetailContent = computed(() => getProductDetailContent(product.value))
+const productPagePreset = computed(() => resolveProductPagePreset(handle.value))
+
+function handleCartAdded() {
+  openCart();
+}
+
 // Verfügbarkeit basierend auf der gewählten Variante
 const isAvailable = computed(() => {
   if (selectedVariant.value) {
     return selectedVariant.value.availableForSale;
   }
   return product.value?.available || false;
-});
-
-const builderIoData = computed(() => {
-  return {
-    product: product,
-    quantity: quantity,
-    formatedPrice: formatPrice(product.value.price),
-  };
 });
 
 // Removed: base64ProductId - now using handle directly
@@ -107,85 +125,11 @@ async function loadProduct() {
     } else {
       console.log("Keine Optionen für das Produkt gefunden.");
       console.log("Produkt-Details:", product.value);
-      selectedOptions.value[product.value.name] = product.value;
     }
   } catch (error) {
     console.error("Error loading product:", error);
   } finally {
     isLoading.value = false;
-  }
-}
-
-async function loadBuilderContent() {
-  try {
-    console.log("Loading Builder.io content for:", {
-      model,
-      urlPath: route.path,
-      productId: handle.value,
-      apiKey
-    });
-
-    // Versuche verschiedene Strategien für Builder.io Content
-    let content = null;
-
-    // 1. Versuche mit spezifischer URL
-    try {
-      content = await fetchOneEntry({
-        model,
-        apiKey,
-        userAttributes: {
-          urlPath: route.path,
-        },
-        options: {
-          cachebust: true
-        }
-      });
-      console.log("Content with URL targeting:", content);
-    } catch (err) {
-      console.log("URL targeting failed:", err);
-    }
-
-    // 2. Falls kein Content gefunden, versuche ohne URL-Targeting (Standard Template)
-    if (!content) {
-      try {
-        content = await fetchOneEntry({
-          model,
-          apiKey,
-          options: {
-            cachebust: true
-          }
-        });
-        console.log("Content without URL targeting:", content);
-      } catch (err) {
-        console.log("Standard template failed:", err);
-      }
-    }
-
-    // 3. Falls immer noch kein Content, versuche mit Wildcard Pattern
-    if (!content) {
-      try {
-        content = await fetchOneEntry({
-          model,
-          apiKey,
-          userAttributes: {
-            urlPath: '/products/*',
-          },
-          options: {
-            cachebust: true
-          }
-        });
-        console.log("Content with wildcard pattern:", content);
-      } catch (err) {
-        console.log("Wildcard pattern failed:", err);
-      }
-    }
-
-    builderContent.value = content;
-    console.log("Final builderContent:", builderContent.value);
-
-  } catch (error) {
-    console.error("Fehler beim Laden der Builder.io-Produktkarte:", error);
-    loadingError.value = true;
   }
 }
 
@@ -260,7 +204,7 @@ async function addToCart() {
 
     // Warenkorb öffnen
     console.log("Warenkorb öffnen");
-    isCartOpen.value = true;
+    openCart();
   } catch (error) {
     console.error("Error adding to  art:", error);
   } finally {
@@ -282,14 +226,13 @@ function formatPrice(price: number) {
 // Produkt bei Seitenaufruf laden
 onMounted(() => {
   loadProduct();
-  loadBuilderContent();
 });
 
 // Bei Änderung der Route (z.B. Navigation zu einem anderen Produkt) neu laden
 watch(
-  () => route.params.handle,
+  () => route.params.id,
   () => {
-    if (route.params.handle) {
+    if (route.params.id) {
       loadProduct();
       // Zurücksetzen des Zustands
       selectedOptions.value = {};

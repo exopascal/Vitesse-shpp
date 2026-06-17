@@ -22,3 +22,7 @@ logs
 .env
 .env.*
 !.env.example
+
+# Yarn Berry
+.yarn/cache
+.yarn/install-state.gz

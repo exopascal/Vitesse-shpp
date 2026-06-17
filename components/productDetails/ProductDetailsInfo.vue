@@ -1,182 +1,233 @@
 <template>
-  <div class="product-details-info space-y-6">
-    <!-- Brand & Title -->
-    <div>
-      <p v-if="product?.vendor" class="text-sm text-gray-600 mb-2">{{ product.vendor }}</p>
-      <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight">
+  <div class="space-y-4 pb-4">
+    <div class="rounded-[28px] bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] sm:p-8">
+      <div class="mb-5 flex flex-wrap items-center gap-3 text-sm text-[#756a5d]">
+        <span class="inline-flex items-center rounded-full bg-[#f4ede4] px-3 py-1 font-medium uppercase tracking-[0.14em]">
+          {{ product?.vendor || 'T-Apex' }}
+        </span>
+        <span
+          class="inline-flex items-center rounded-full px-3 py-1 font-medium"
+          :class="isAvailable ? 'bg-[#e7f7ef] text-[#17633d]' : 'bg-[#fce8e5] text-[#9f2d22]'"
+        >
+          {{ isAvailable ? 'Sofort verfuegbar' : 'Aktuell nicht verfuegbar' }}
+        </span>
+      </div>
+
+      <h1 class="max-w-[16ch] text-3xl font-black uppercase leading-[0.95] text-[#17120d] sm:text-4xl lg:text-[3.25rem]">
         {{ product?.title || 'Product Title' }}
       </h1>
-    </div>
 
-    <!-- Price -->
-    <div class="text-2xl sm:text-3xl font-bold text-gray-900">
-      {{ formatPrice(selectedVariant?.price || product?.price) }}
-      <span v-if="selectedVariant?.compareAtPrice" class="text-lg text-gray-500 line-through ml-2">
-        {{ formatPrice(selectedVariant.compareAtPrice) }}
-      </span>
-    </div>
+      <p v-if="product?.subtitle" class="mt-4 max-w-2xl text-base leading-7 text-[#5f5549]">
+        {{ product.subtitle }}
+      </p>
 
-    <!-- Product Options -->
-    <div v-if="product?.options?.length" class="space-y-4">
-      <div v-for="option in product.options" :key="option.name" class="space-y-2">
-        <label class="block text-sm font-medium text-gray-700">{{ option.name }}</label>
-        <div class="flex flex-wrap gap-2">
-          <button
-            v-for="value in option.values"
-            :key="value"
-            @click="selectOption(option.name, value)"
-            :disabled="!isOptionValueAvailable(option.name, value)"
-            :class="[
-              'px-4 py-2 border rounded-lg text-sm font-medium transition-colors',
-              selectedOptions[option.name] === value
-                ? 'border-blue-500 bg-blue-50 text-blue-700'
-                : 'border-gray-300 bg-white text-gray-700 hover:border-gray-400',
-              !isOptionValueAvailable(option.name, value)
-                ? 'opacity-50 cursor-not-allowed'
-                : 'cursor-pointer'
-            ]"
+      <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-[#4f463b]">
+        <div class="flex items-center gap-1.5" aria-label="Bewertungen">
+          <span
+            v-for="star in 5"
+            :key="star"
+            class="text-lg"
+            :class="star <= filledStars ? 'text-[#f26a21]' : 'text-[#d5cabd]'"
           >
-            {{ value }}
+            ★
+          </span>
+        </div>
+        <span class="font-semibold">{{ ratingLabel }}</span>
+        <span v-if="reviewCountLabel" class="text-[#7d7164]">{{ reviewCountLabel }}</span>
+      </div>
+
+      <div class="mt-6 flex flex-wrap items-end gap-3">
+        <span class="text-3xl font-black text-[#17120d] sm:text-4xl">{{ formatPrice(currentPrice) }}</span>
+        <span v-if="comparePrice" class="pb-1 text-lg font-medium text-[#8a7f72] line-through">
+          {{ formatPrice(comparePrice) }}
+        </span>
+        <TaxNote class="pb-1.5" />
+      </div>
+
+      <div class="mt-8 space-y-5">
+        <div v-if="product?.options?.length" class="space-y-5">
+          <div v-for="option in product.options" :key="option.name" class="space-y-2.5">
+            <div class="flex items-center justify-between gap-3">
+              <label class="text-sm font-semibold uppercase tracking-[0.12em] text-[#5a5045]">
+                {{ option.name }}
+              </label>
+              <span class="text-sm text-[#8b8073]">
+                {{ selectedOptions[option.name] || 'Bitte waehlen' }}
+              </span>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <button
+                v-for="value in option.values"
+                :key="value"
+                type="button"
+                :disabled="!isOptionValueAvailable(option.name, value)"
+                :class="[
+                  'rounded-full border px-4 py-2 text-sm font-semibold transition',
+                  selectedOptions[option.name] === value
+                    ? 'border-[#17120d] bg-[#17120d] text-white'
+                    : 'border-[#ded5c8] bg-[#fbf8f3] text-[#2f2922] hover:border-[#17120d]',
+                  !isOptionValueAvailable(option.name, value) ? 'cursor-not-allowed opacity-40' : ''
+                ]"
+                @click="selectOption(option.name, value)"
+              >
+                {{ value }}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid gap-3 sm:grid-cols-[auto_1fr]">
+          <div class="inline-flex items-center rounded-full border border-[#ded5c8] bg-[#fbf8f3] p-1">
+            <button
+              type="button"
+              class="flex h-11 w-11 items-center justify-center rounded-full text-xl text-[#17120d] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-35"
+              :disabled="quantity <= 1"
+              @click="decrementQuantity"
+            >
+              -
+            </button>
+            <span class="min-w-[3rem] text-center text-base font-semibold text-[#17120d]">{{ quantity }}</span>
+            <button
+              type="button"
+              class="flex h-11 w-11 items-center justify-center rounded-full text-xl text-[#17120d] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-35"
+              :disabled="selectedVariant && quantity >= selectedVariant.quantityAvailable"
+              @click="incrementQuantity"
+            >
+              +
+            </button>
+          </div>
+
+          <button
+            type="button"
+            class="min-h-[3.25rem] rounded-full bg-[#f26a21] px-6 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:bg-[#dc5d18] disabled:cursor-not-allowed disabled:bg-[#c9c1b6]"
+            :disabled="!isAvailable || isLoading"
+            @click="addToCart"
+          >
+            <span v-if="isLoading">Wird hinzugefuegt...</span>
+            <span v-else-if="!isAvailable">Nicht verfuegbar</span>
+            <span v-else>In den Warenkorb</span>
           </button>
         </div>
       </div>
     </div>
 
-    <!-- Quantity Selector -->
-    <div class="space-y-2">
-      <label class="block text-sm font-medium text-gray-700">Menge</label>
-      <div class="flex items-center space-x-3">
-        <button
-          @click="decrementQuantity"
-          :disabled="quantity <= 1"
-          class="w-10 h-10 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
-          </svg>
-        </button>
-        <span class="text-lg font-medium">{{ quantity }}</span>
-        <button
-          @click="incrementQuantity"
-          :disabled="selectedVariant && quantity >= selectedVariant.quantityAvailable"
-          class="w-10 h-10 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-          </svg>
-        </button>
-      </div>
-    </div>
+    <div class="grid gap-4">
+      <article class="rounded-[24px] border border-[#ebe2d7] bg-white p-6">
+        <h2 class="text-lg font-bold uppercase tracking-[0.08em] text-[#17120d]">Produktdetails</h2>
+        <div v-if="product?.description" class="prose prose-sm mt-4 max-w-none text-[#4f463b] prose-p:text-[#4f463b] prose-li:text-[#4f463b] prose-strong:text-[#17120d]">
+          <div v-html="product.description"></div>
+        </div>
+        <p v-else class="mt-4 text-sm leading-6 text-[#6e6458]">
+          Weitere Produktdetails folgen.
+        </p>
+      </article>
 
-    <!-- Add to Cart Button -->
-    <button
-      @click="addToCart"
-      :disabled="!isAvailable || isLoading"
-      class="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium py-4 px-6 rounded-lg transition-colors disabled:cursor-not-allowed"
-    >
-      <span v-if="isLoading">Wird hinzugefügt...</span>
-      <span v-else-if="!isAvailable">Nicht verfügbar</span>
-      <span v-else>In den Warenkorb</span>
-    </button>
-
-    <!-- Product Description -->
-    <div v-if="product?.description" class="prose prose-sm max-w-none">
-      <div v-html="product.description"></div>
+      <article class="rounded-[24px] border border-[#ebe2d7] bg-white p-6">
+        <h2 class="text-lg font-bold uppercase tracking-[0.08em] text-[#17120d]">Technische Daten</h2>
+        <dl class="mt-4 space-y-3">
+          <div class="flex items-center justify-between gap-4 border-b border-[#f1ebe2] pb-3 text-sm">
+            <dt class="text-[#7c7165]">Marke</dt>
+            <dd class="font-semibold text-[#17120d]">{{ product?.vendor || 'T-Apex' }}</dd>
+          </div>
+          <div class="flex items-center justify-between gap-4 border-b border-[#f1ebe2] pb-3 text-sm">
+            <dt class="text-[#7c7165]">Produktcode</dt>
+            <dd class="font-semibold text-[#17120d]">{{ product?.handle || '-' }}</dd>
+          </div>
+          <div class="flex items-center justify-between gap-4 border-b border-[#f1ebe2] pb-3 text-sm">
+            <dt class="text-[#7c7165]">Varianten</dt>
+            <dd class="font-semibold text-[#17120d]">{{ variantCount }}</dd>
+          </div>
+          <div class="flex items-center justify-between gap-4 text-sm">
+            <dt class="text-[#7c7165]">Status</dt>
+            <dd class="font-semibold text-[#17120d]">{{ isAvailable ? 'Verfuegbar' : 'Nicht verfuegbar' }}</dd>
+          </div>
+        </dl>
+      </article>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, inject } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps({
   product: {
     type: Object,
-    default: null
+    default: null,
   },
   selectedOptions: {
     type: Object,
-    default: () => ({})
+    default: () => ({}),
   },
   selectedVariant: {
     type: Object,
-    default: null
+    default: null,
   },
   quantity: {
     type: Number,
-    default: 1
+    default: 1,
   },
   isLoading: {
     type: Boolean,
-    default: false
-  }
-})
-
-// Für Builder.io Context - falls Product nicht als Prop übergeben wird
-const builderState = inject('builderState', null)
-const builderContext = inject('builderContext', null)
-
-// Product aus verschiedenen Quellen holen
-const product = computed(() => {
-  // Zuerst Props prüfen
-  if (props.product) return props.product
-  
-  // Dann Builder.io State/Context prüfen
-  if (builderState?.product) return builderState.product
-  if (builderContext?.product) return builderContext.product
-  
-  // Fallback für leeres Produkt
-  return null
+    default: false,
+  },
 })
 
 const emit = defineEmits(['selectOption', 'incrementQuantity', 'decrementQuantity', 'addToCart'])
 
+const product = computed(() => props.product ?? null)
+
 const isAvailable = computed(() => {
-  if (props.selectedVariant) {
-    return props.selectedVariant.availableForSale
-  }
+  if (props.selectedVariant) return props.selectedVariant.availableForSale
   return product.value?.available || false
 })
 
+const currentPrice = computed(() => props.selectedVariant?.price || product.value?.price || 0)
+const comparePrice = computed(() => props.selectedVariant?.compareAtPrice || product.value?.compare_at_price || 0)
+const ratingValue = computed(() => product.value?.reviewSummary?.ratingValue)
+const reviewCount = computed(() => product.value?.reviewSummary?.reviewCount)
+const filledStars = computed(() => Math.round(ratingValue.value || 0))
+const ratingLabel = computed(() => (ratingValue.value ? `${ratingValue.value.toFixed(1)} / 5` : 'Noch keine Bewertungen'))
+const reviewCountLabel = computed(() => {
+  if (!reviewCount.value) return ''
+  return `${reviewCount.value} Bewertungen`
+})
+const variantCount = computed(() => product.value?.variants?.length || 1)
+
 function selectOption(optionName, optionValue) {
-  console.log('ProductDetailsInfo: selectOption called', optionName, optionValue)
   emit('selectOption', optionName, optionValue)
 }
 
 function incrementQuantity() {
-  console.log('ProductDetailsInfo: incrementQuantity called')
   emit('incrementQuantity')
 }
 
 function decrementQuantity() {
-  console.log('ProductDetailsInfo: decrementQuantity called')
   emit('decrementQuantity')
 }
 
 function addToCart() {
-  console.log('ProductDetailsInfo: addToCart called')
   emit('addToCart')
 }
 
 function isOptionValueAvailable(optionName, optionValue) {
-  if (!product.value?.variants) return false
+  if (!product.value?.variants?.length) return false
 
-  const testOptions = { ...props.selectedOptions }
-  testOptions[optionName] = optionValue
+  const testOptions = { ...props.selectedOptions, [optionName]: optionValue }
 
   return product.value.variants.some((variant) => {
     const optionsMatch = variant.selectedOptions.every((option) => {
       return !testOptions[option.name] || testOptions[option.name] === option.value
     })
+
     return optionsMatch && variant.availableForSale
   })
 }
 
 function formatPrice(price) {
-  if (!price) return "€0,00"
-  return new Intl.NumberFormat("de-DE", {
-    style: "currency",
-    currency: "EUR",
-  }).format(price)
+  return new Intl.NumberFormat('de-DE', {
+    style: 'currency',
+    currency: 'EUR',
+  }).format(price || 0)
 }
 </script>

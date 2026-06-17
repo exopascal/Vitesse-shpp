@@ -9,8 +9,11 @@
             class="product-image"
           />
           <!-- Button innerhalb des Containers, aber mit event.stop -->
-          <button @click.stop.prevent="addToCart" class="add-to-cart-button" :disabled="!productData.available">
-            {{addToCartButtonText}}
+          <button @click.stop.prevent="addToCart" class="add-to-cart-button gradient-action-button" :disabled="!productData.available">
+            <span class="gradient-action-button-ui" aria-hidden="true">
+              <span class="gradient-action-button-overlay"></span>
+            </span>
+            <span class="gradient-action-button-content gradient-action-button-label">{{addToCartButtonText}}</span>
           </button>
         </div>
         <div class="product-info">
@@ -23,6 +26,7 @@
               formatPrice(productData.comparePrice)
             }}</span>
           </div>
+          <TaxNote />
         </div>
       </div>
     </Nuxt-link>
@@ -34,6 +38,7 @@
   import { useShopifyCardStore } from '../../store/shopifyCardStore';
 
   const shopifyCardStore = useShopifyCardStore();
+  const { openCart } = useCartSidebar();
   const isLoading = ref(false);
   
   const props = defineProps({
@@ -43,10 +48,7 @@
   }
 });
 
-const emit = defineEmits(['openCart']);
-
 const productData = computed(() => {
-  // Füge hier alle Daten hinzu, die in der Builder.io-Karte verwendet werden sollen
   console.log("Props of Product",props.product);
   return {
     product: props.product,
@@ -81,7 +83,7 @@ async function addToCart() {
 
     // Warenkorb öffnen
     console.log("Warenkorb öffnen");
-    emit('openCart');
+    openCart();
   
   } catch (error) {
     console.error("Error adding to  art:", error);
@@ -155,12 +157,12 @@ function formatPrice(price) {
 }
 
 .add-to-cart-button {
+  --gradient-action-expand: 0px;
   position: absolute;
   bottom: 1rem;
-  left: 1rem;
-  right: 1rem;
+  left: 50%;
+  width: min(calc(100% - 2rem + (var(--gradient-action-expand) * 2)), calc(100% - 1rem));
   padding: 0.75rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -169,23 +171,20 @@ function formatPrice(price) {
   font-size: 0.875rem;
   transition: all 0.3s ease;
   opacity: 0;
-  transform: translateY(1rem);
+  transform: translateX(-50%) translateY(1rem);
   backdrop-filter: blur(10px);
 }
 
 .product-image-container:hover .add-to-cart-button {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 
 .add-to-cart-button:hover {
-  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateX(-50%) translateY(-2px);
 }
 
 .add-to-cart-button:disabled {
-  background: #9ca3af;
   cursor: not-allowed;
   transform: none;
 }
@@ -288,8 +287,7 @@ function formatPrice(price) {
   
   .add-to-cart-button {
     bottom: 0.75rem;
-    left: 0.75rem;
-    right: 0.75rem;
+    width: min(calc(100% - 1.5rem + (var(--gradient-action-expand) * 2)), calc(100% - 0.75rem));
     padding: 0.625rem;
     font-size: 0.8rem;
   }

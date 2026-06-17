@@ -85,6 +85,10 @@
   --gradient-secondary: linear-gradient(135deg, var(--color-accent-blue) 0%, var(--color-accent-purple) 100%);
   --gradient-warm: linear-gradient(135deg, #dc2626 0%, #f87171 40%, #fb923c 100%);
   --gradient-cool: linear-gradient(135deg, #4A90E2 0%, #7B68EE 100%);
+  --gradient-action-button: linear-gradient(120deg, #0f5e9c 0%, #66b3f3 56%, #ffbf5a 100%);
+  --gradient-action-button-hover: linear-gradient(120deg, #0c4f84 0%, #4da3ec 54%, #ffb648 100%);
+  --gradient-action-button-shadow: rgba(5, 54, 97, 0.3);
+  --gradient-action-button-highlight: rgba(255, 255, 255, 0.18);
   
   /* Typography */
   --font-family-primary: 'Fira Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -239,6 +243,161 @@ body {
 .bg-gradient-secondary { background: var(--gradient-secondary); }
 .bg-gradient-warm { background: var(--gradient-warm); }
 .bg-gradient-cool { background: var(--gradient-cool); }
+
+.gradient-action-button {
+  --gradient-action-expand: 0px;
+  --gradient-action-button-bg: var(--gradient-action-button);
+  --gradient-action-button-fg: var(--color-white);
+  --gradient-action-button-overlay-bg: var(--color-white);
+  --gradient-action-button-hover-label-bg: var(--gradient-action-button);
+  --gradient-action-button-hover-label-color: transparent;
+  --gradient-action-button-hover-text-fill: transparent;
+  position: relative;
+  isolation: isolate;
+  background: var(--gradient-action-button-bg);
+  color: var(--gradient-action-button-fg);
+  box-shadow:
+    0 16px 30px -18px var(--gradient-action-button-shadow),
+    inset 0 1px 0 var(--gradient-action-button-highlight);
+}
+
+.gradient-action-button-ui {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.gradient-action-button-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--gradient-action-button-overlay-bg);
+}
+
+.gradient-action-button-content {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gradient-action-button-label {
+  color: inherit;
+  transition:
+    color 120ms ease,
+    background 120ms ease,
+    -webkit-text-fill-color 120ms ease;
+}
+
+.gradient-action-button.is-hovered,
+.gradient-action-button:hover,
+.gradient-action-button:focus-visible {
+  box-shadow:
+    0 22px 36px -18px var(--gradient-action-button-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+.gradient-action-button.is-hovered .gradient-action-button-label,
+.gradient-action-button[data-gradient-action-mode='default']:hover .gradient-action-button-label,
+.gradient-action-button[data-gradient-action-mode='default']:focus-visible .gradient-action-button-label {
+  background: var(--gradient-action-button-hover-label-bg);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: var(--gradient-action-button-hover-text-fill);
+  color: var(--gradient-action-button-hover-label-color);
+}
+
+.gradient-action-button.action-button-tapex,
+.gradient-button-variant-tapex {
+  --gradient-action-button-bg: #ef4544;
+  --gradient-action-button-fg: #ffffff;
+  --gradient-action-button-overlay-bg: #ffffff;
+  --gradient-action-button-hover-label-bg: none;
+  --gradient-action-button-hover-label-color: #ef4544;
+  --gradient-action-button-hover-text-fill: #ef4544;
+  --gradient-action-button-shadow: rgba(239, 69, 68, 0.34);
+  --gradient-action-button-highlight: rgba(255, 255, 255, 0.14);
+}
+
+.gradient-action-button.action-button-torque,
+.gradient-button-variant-torque {
+  --gradient-action-button-bg: #ec6a29;
+  --gradient-action-button-fg: #ffffff;
+  --gradient-action-button-overlay-bg: #ffffff;
+  --gradient-action-button-hover-label-bg: none;
+  --gradient-action-button-hover-label-color: #ec6a29;
+  --gradient-action-button-hover-text-fill: #ec6a29;
+  --gradient-action-button-shadow: rgba(236, 106, 41, 0.34);
+  --gradient-action-button-highlight: rgba(255, 255, 255, 0.14);
+}
+
+.gradient-action-button.action-button-exopek,
+.gradient-button-variant-exopek {
+  --gradient-action-button-bg: #bb3630;
+  --gradient-action-button-fg: #ffffff;
+  --gradient-action-button-overlay-bg: #ffffff;
+  --gradient-action-button-hover-label-bg: none;
+  --gradient-action-button-hover-label-color: #bb3630;
+  --gradient-action-button-hover-text-fill: #bb3630;
+  --gradient-action-button-shadow: rgba(187, 54, 48, 0.34);
+  --gradient-action-button-highlight: rgba(255, 255, 255, 0.14);
+}
+
+.gradient-action-button.action-button-sportreact,
+.gradient-button-variant-sportreact {
+  --gradient-action-button-bg: #c7aa00;
+  --gradient-action-button-fg: #ffffff;
+  --gradient-action-button-overlay-bg: #ffffff;
+  --gradient-action-button-hover-label-bg: none;
+  --gradient-action-button-hover-label-color: #c7aa00;
+  --gradient-action-button-hover-text-fill: #c7aa00;
+  --gradient-action-button-shadow: rgba(199, 170, 0, 0.34);
+  --gradient-action-button-highlight: rgba(255, 255, 255, 0.14);
+}
+
+.gradient-action-button.action-button-witty,
+.gradient-button-variant-witty {
+  --gradient-action-button-bg: #2d73b9;
+  --gradient-action-button-fg: #ffffff;
+  --gradient-action-button-overlay-bg: #ffffff;
+  --gradient-action-button-hover-label-bg: none;
+  --gradient-action-button-hover-label-color: #2d73b9;
+  --gradient-action-button-hover-text-fill: #2d73b9;
+  --gradient-action-button-shadow: rgba(45, 115, 185, 0.34);
+  --gradient-action-button-highlight: rgba(255, 255, 255, 0.14);
+}
+
+.gradient-action-button.action-button-tunturi,
+.gradient-button-variant-tunturi {
+  --gradient-action-button-bg: #52a730;
+  --gradient-action-button-fg: #ffffff;
+  --gradient-action-button-overlay-bg: #ffffff;
+  --gradient-action-button-hover-label-bg: none;
+  --gradient-action-button-hover-label-color: #52a730;
+  --gradient-action-button-hover-text-fill: #52a730;
+  --gradient-action-button-shadow: rgba(82, 167, 48, 0.34);
+  --gradient-action-button-highlight: rgba(255, 255, 255, 0.14);
+}
+
+.gradient-action-button:disabled,
+.gradient-action-button.gradient-button-disabled,
+.gradient-action-button[aria-disabled='true'] {
+  background: #9ca3af;
+  color: var(--color-white);
+  box-shadow: none;
+}
+
+.gradient-action-button:disabled .gradient-action-button-label,
+.gradient-action-button.gradient-button-disabled .gradient-action-button-label,
+.gradient-action-button[aria-disabled='true'] .gradient-action-button-label {
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  color: currentColor;
+}
 
 /* Text Gradient Utilities - Futuristic Orange & Neon */
 .text-gradient-warm {

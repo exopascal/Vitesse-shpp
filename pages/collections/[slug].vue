@@ -13,20 +13,41 @@
     </div>
     
     <div v-else>
-      <!-- Builder.io Content falls verf�gbar -->
-      <Content 
-        v-if="builderContent"
-        :api-key="apiKey"
-        :model="model" 
-        :content="builderContent"
-        :data="builderData"
-        :customComponents="registeredComponents"
-      />
-      
-      <!-- Fallback: Standard Collection Page -->
-      <div v-else class="collection-fallback">
+      <div class="collection-fallback">
+        <HeroSection
+          v-if="collectionHero"
+          :kicker="collectionHero.kicker"
+          :title="collectionHero.title"
+          :text="collectionHero.text"
+          :background-video="collectionHero.backgroundVideo"
+          :background-image="collectionHero.backgroundImage"
+          :button-text="collectionHero.buttonText"
+          :href="collectionHero.href"
+          :button-variant="collectionHero.buttonVariant"
+        />
+
+        <section v-if="collectionSeoContent" class="collection-seo-section">
+          <div class="collection-seo-inner">
+            <h2 class="collection-seo-title">{{ collectionSeoContent.title }}</h2>
+            <p class="collection-seo-text">{{ collectionSeoContent.body }}</p>
+            <div
+              v-if="collectionSeoContent.goals?.length"
+              class="collection-seo-goals-grid"
+            >
+              <article
+                v-for="goal in collectionSeoContent.goals"
+                :key="goal.title"
+                class="collection-seo-goal-card"
+              >
+                <h3 class="collection-seo-goal-title">{{ goal.title }}</h3>
+                <p class="collection-seo-goal-text">{{ goal.description }}</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
         <!-- Collection Header -->
-        <div class="collection-header">
+        <div v-else class="collection-header">
           <div v-if="collection.image" class="collection-banner">
             <img :src="collection.image" :alt="collection.title" />
           </div>
@@ -43,7 +64,11 @@
         </div>
         
         <!-- Products Grid -->
-        <div class="products-section">
+        <div id="collection-products" class="products-section">
+          <div class="products-section-header">
+            <p class="products-section-kicker">{{ productsSectionTitle }}</p>
+          </div>
+
           <div v-if="isLoadingProducts" class="loading-products">
             Produkte werden geladen...
           </div>
@@ -54,7 +79,7 @@
           
           <div v-else class="products-grid">
             <NuxtLink 
-              v-for="product in products" 
+              v-for="product in displayedProducts" 
               :key="product.id"
               :to="`/products/${product.handle}`"
               class="product-card"
@@ -87,9 +112,10 @@
                     {{ formatPrice(product.price) }}
                   </span>
                 </div>
+                <TaxNote />
                 <div class="availability">
                   <span v-if="product.available" class="in-stock">
-                    Verf�gbar
+                    Verfügbar
                   </span>
                   <span v-else class="out-of-stock">
                     Ausverkauft
@@ -108,9 +134,7 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useShopifyStore } from '../../store/shopifyStore'
-import { Content, fetchOneEntry } from '@builder.io/sdk-vue'
-import { registeredComponents } from '../../plugins/builder-components'
-import { useRuntimeConfig } from 'nuxt/app'
+import { getCollectionHeroContent, getCollectionSeoContent } from '~/utils/collectionDetailContent'
 
 // Route und Store
 const route = useRoute()
@@ -119,7 +143,6 @@ const shopifyStore = useShopifyStore()
 // Daten
 const collection = ref<any>(null)
 const products = ref<any[]>([])
-const builderContent = ref<any>(null)
 const isLoading = ref(true)
 const isLoadingProducts = ref(false)
 const error = ref<string | null>(null)
@@ -127,18 +150,39 @@ const error = ref<string | null>(null)
 // Slug aus Route
 const slug = computed(() => route.params.slug as string)
 
-// Builder.io Konfiguration
-const config = useRuntimeConfig()
-const apiKey = config.public.BUILDER_API_KEY as string
-const model = 'collection-page'
+const collectionHero = computed(() => getCollectionHeroContent(collection.value, slug.value))
+const collectionSeoContent = computed(() => getCollectionSeoContent(collection.value, slug.value))
+const productsSectionTitle = computed(() => {
+  if (collectionSeoContent.value?.productsSectionTitle) {
+    return collectionSeoContent.value.productsSectionTitle
+  }
 
-// Builder.io Daten f�r Template
-const builderData = computed(() => ({
-  collection: collection.value,
-  products: products.value,
-  productsCount: products.value.length,
-  slug: slug.value
-}))
+  return `Unsere Produkte für ${collection.value?.title || 'diese Collection'}.`
+})
+const displayedProducts = computed(() => {
+  if (slug.value !== 'sprinttraining') {
+    return products.value
+  }
+
+  const prioritizedHandles = [
+    't-apex',
+    'torque-tank-mx',
+    'exopek-pro',
+  ]
+
+  const priorityMap = new Map(prioritizedHandles.map((handle, index) => [handle, index]))
+
+  return [...products.value].sort((left, right) => {
+    const leftPriority = priorityMap.get(left.handle) ?? Number.MAX_SAFE_INTEGER
+    const rightPriority = priorityMap.get(right.handle) ?? Number.MAX_SAFE_INTEGER
+
+    if (leftPriority !== rightPriority) {
+      return leftPriority - rightPriority
+    }
+
+    return left.title.localeCompare(right.title)
+  })
+})
 
 // Collection laden
 async function loadCollection() {
@@ -181,55 +225,6 @@ async function loadCollectionProducts() {
   }
 }
 
-// Builder.io Content laden
-async function loadBuilderContent() {
-  try {
-    console.log('Loading Builder.io content for collection:', slug.value)
-    
-    // Versuche verschiedene URL-Patterns
-    let content = null
-    
-    // 1. Spezifische Collection URL
-    try {
-      content = await fetchOneEntry({
-        model,
-        apiKey,
-        userAttributes: {
-          urlPath: route.path,
-        },
-        options: {
-          cachebust: true
-        }
-      })
-    } catch (err) {
-      console.log('Specific URL targeting failed:', err)
-    }
-    
-    // 2. Wildcard Pattern f�r Collections
-    if (!content) {
-      try {
-        content = await fetchOneEntry({
-          model,
-          apiKey,
-          userAttributes: {
-            urlPath: '/collections/*',
-          },
-          options: {
-            cachebust: true
-          }
-        })
-      } catch (err) {
-        console.log('Wildcard pattern failed:', err)
-      }
-    }
-    
-    builderContent.value = content
-    console.log('Builder content loaded:', content)
-  } catch (err) {
-    console.log('Builder.io content not found, using fallback:', err)
-  }
-}
-
 // Preis formatieren
 function formatPrice(price: number): string {
   if (!price) return '�0,00'
@@ -243,22 +238,16 @@ function formatPrice(price: number): string {
 // Beim Mount laden
 onMounted(async () => {
   await loadCollection()
-  await Promise.all([
-    loadCollectionProducts(),
-    loadBuilderContent()
-  ])
+  await loadCollectionProducts()
 })
 
-// Bei �nderung der Route neu laden
+// Bei Änderung der Route neu laden
 watch(
   () => route.params.slug,
   async () => {
     if (route.params.slug) {
       await loadCollection()
-      await Promise.all([
-        loadCollectionProducts(),
-        loadBuilderContent()
-      ])
+      await loadCollectionProducts()
     }
   }
 )
@@ -267,6 +256,64 @@ watch(
 <style scoped>
 .collection-page {
   min-height: 100vh;
+  background: #ffffff;
+}
+
+.collection-seo-section {
+  background: #ffffff;
+  padding: 3.5rem 0 1.5rem;
+}
+
+.collection-seo-inner {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.collection-seo-title {
+  margin: 0 0 1rem;
+  max-width: 64rem;
+  font-size: clamp(2rem, 3vw, 3.2rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+  color: #17120d;
+}
+
+.collection-seo-text {
+  margin: 0;
+  max-width: 62rem;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: #4b5563;
+}
+
+.collection-seo-goals-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.collection-seo-goal-card {
+  padding: 1.4rem 1.45rem;
+  border-radius: 1.15rem;
+  background: #ffffff;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.collection-seo-goal-title {
+  margin: 0 0 0.7rem;
+  font-size: clamp(1.15rem, 1.5vw, 1.45rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #17120d;
+}
+
+.collection-seo-goal-text {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #4b5563;
 }
 
 .loading, .error, .not-found {
@@ -334,7 +381,27 @@ watch(
 
 /* Products Section */
 .products-section {
-  padding: 0 2rem 2rem;
+  margin-top: clamp(3rem, 7vw, 6rem);
+  padding: clamp(2rem, 4vw, 3rem) 2rem 3rem;
+  background: #ffffff;
+}
+
+.products-section-header {
+  max-width: 1500px;
+  margin: 0 auto 1.75rem;
+}
+
+.products-section-kicker {
+  margin: 0;
+  font-size: clamp(1.5rem, 2.8vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  background: linear-gradient(90deg, #0f5e9c 0%, #2f76bb 28%, #74baff 72%, #ffbf5a 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 .loading-products, .no-products {
@@ -346,39 +413,52 @@ watch(
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  max-width: 1400px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.8rem;
+  max-width: 1500px;
   margin: 0 auto;
 }
 
 .product-card {
   display: block;
-  background: white;
-  border-radius: 12px;
+  position: relative;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfaf7 100%);
+  border: 1px solid rgba(23, 18, 13, 0.06);
+  border-radius: 1.5rem;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 18px 44px -28px rgba(15, 23, 42, 0.18);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
   text-decoration: none;
   color: inherit;
 }
 
 .product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  box-shadow: 0 28px 60px -30px rgba(15, 23, 42, 0.26);
+  border-color: rgba(242, 106, 33, 0.18);
 }
 
 .product-image {
-  height: 250px;
+  height: 22rem;
   position: relative;
   overflow: hidden;
-  background: #f5f5f5;
+  background: #ffffff;
 }
 
 .product-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center center;
+  padding: 1.5rem;
+  transition: transform 260ms ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.04);
 }
 
 .no-image {
@@ -407,19 +487,20 @@ watch(
 }
 
 .product-info {
-  padding: 1.5rem;
+  padding: 1.35rem 1.45rem 1.5rem;
 }
 
 .product-info h3 {
-  margin: 0 0 0.75rem 0;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #333;
-  line-height: 1.3;
+  margin: 0 0 0.9rem 0;
+  font-size: clamp(1.15rem, 1.4vw, 1.45rem);
+  font-weight: 700;
+  color: #17120d;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
 }
 
 .price {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.7rem;
 }
 
 .original-price {
@@ -430,22 +511,69 @@ watch(
 }
 
 .current-price {
-  font-weight: 600;
-  color: #333;
-  font-size: 1.1rem;
+  font-weight: 700;
+  color: #17120d;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
 }
 
 .availability {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
 }
 
 .in-stock {
   color: #27ae60;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .out-of-stock {
   color: #e74c3c;
-  font-weight: 500;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .collection-seo-section {
+    padding: 2.5rem 0 1rem;
+  }
+
+  .collection-seo-title {
+    font-size: clamp(1.9rem, 8vw, 2.7rem);
+  }
+
+  .collection-seo-text {
+    font-size: 1rem;
+  }
+
+  .collection-seo-goals-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .collection-seo-goal-card {
+    padding: 1.15rem 1.1rem;
+  }
+
+  .products-section {
+    margin-top: 2.5rem;
+    padding: 1.5rem 1rem 2rem;
+  }
+
+  .products-section-header {
+    margin-bottom: 1.25rem;
+  }
+
+  .products-section-kicker {
+    font-size: clamp(1.4rem, 8vw, 2rem);
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .product-image {
+    height: 18rem;
+  }
 }
 </style>

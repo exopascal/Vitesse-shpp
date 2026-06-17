@@ -20,7 +20,7 @@
               <div class="cart-item-info">
                 <h4>{{ item.title }}</h4>
                 <p>Menge: {{ item.quantity }}</p>
-                <p>Preis: {{ formatMoney(item.price) }}</p>
+                <p>Preis: {{ formatMoney(item.price) }} <TaxNote /></p>
               </div>
             </div>
           </div>
@@ -28,7 +28,7 @@
             <p>Dein Warenkorb ist leer.</p>
           </div>
           <div v-if="(cartData?.totalAmount > 0) || (storeCartData?.totalAmount > 0)" class="cart-total">
-            <p>Gesamtbetrag: {{ formatMoney((cartData?.totalAmount || storeCartData?.totalAmount || 0)) }}</p>
+            <p>Gesamtbetrag: {{ formatMoney((cartData?.totalAmount || storeCartData?.totalAmount || 0)) }} <TaxNote /></p>
             <button class="checkout-button" @click="goToCheckout">Zur Kasse</button>
           </div>
         </div>
@@ -36,7 +36,7 @@
   
       <!-- Hintergrund-Overlay für den Warenkorb -->
       <Transition name="fade">
-        <div v-if="props.isOpen" class="cart-overlay" @click="toggleCart"></div>
+        <div v-if="props.isOpen" class="cart-overlay" @click="closeCart"></div>
       </Transition>
     </div>
   </template>
@@ -47,7 +47,6 @@
   
   const shopifyStore = useShopifyCardStore();
   const cartData = ref<any>(null);
-  const isCartOpen = ref(false);
 
   // Direkte Verwendung der Store-Daten als Alternative
   const storeCartData = computed(() => shopifyStore.cart);
@@ -64,21 +63,8 @@ const emit = defineEmits(['close', 'update:isOpen']);
 
 function closeCart() {
   emit('close');
-  emit('update:isOpen', props.isOpen);
+  emit('update:isOpen', false);
 }
-  
-  const cartItemCount = computed(() => {
-    return cartData.value?.totalQuantity || 0;
-  });
-  
-  function toggleCart() {
-    isCartOpen.value = !isCartOpen.value;
-    
-    // Bei Öffnen des Warenkorbs die Daten aktualisieren
-    if (isCartOpen.value) {
-      loadCartData();
-    }
-  }
 
 
   

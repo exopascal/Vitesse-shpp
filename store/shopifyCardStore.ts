@@ -439,13 +439,10 @@ export const useShopifyCardStore = defineStore('shopifyCardStore', {
          */
         async getShopifyConfig() {
           const config = useRuntimeConfig()
-          const tenantId = config.public.TENANT_ID
-          console.log('Tenant ID:', tenantId)
-          console.log('Shopify config:', config.public.shopify)
-          
+
           return {
-            shopifyDomain: config.public.shopify.domain || 'flash-reflex-training.myshopify.com',
-            shopifyAccessToken: config.public.shopifyAccessToken || '0c54fa2544bf3c6ce9b1fe8d03e79f5e',
+            shopifyDomain: config.public.shopify.domain || '',
+            shopifyAccessToken: config.public.shopify.accessToken || '',
             shopifyApiVersion: config.public.shopify.apiVersion || '2025-01'
           }
         },

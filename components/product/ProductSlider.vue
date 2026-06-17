@@ -34,7 +34,7 @@
             class="flex-none snap-start px-2"
             :class="getWidthClass()"
           >
-            <ProductCard :product="product" :api-key="apiKey" :model="model" @openCart="openCart"/>
+            <ProductCard :product="product" />
           </div>
         </div>
         
@@ -62,8 +62,6 @@
         </div>
       </div>
       
-      <!-- Shopping Cart -->
-      <Cart :isOpen="isCartOpen" @close="isCartOpen = false" />
     </div>
   </template>
   
@@ -86,14 +84,11 @@
   const shopifyStore = useShopifyStore();
   const { isLoading, error } = storeToRefs(shopifyStore);
   const products = ref<any[]>([]);
-  const isCartOpen = ref(false);
   const sliderContainer = ref<HTMLElement | null>(null);
   const currentSlide = ref(0);
   const atLeftEnd = ref(true);
   const atRightEnd = ref(false);
   
-  const apiKey = 'b2253c87fe4d4111ad4211f05e4080bb';
-  const model = 'product-card';
   const route = useRoute();
   
   // Lade Produkte
@@ -175,11 +170,6 @@
       case 6: return 'w-1/6';
       default: return 'w-1/4';
     }
-  }
-  
-  function openCart() {
-    console.log("Open Cart", isCartOpen.value);
-    isCartOpen.value = true;
   }
   
   // Lifecycle Hooks

@@ -1,42 +1,40 @@
 <template>
-  <div class="product-details-layout bg-gray-50 py-8 lg:py-16">
-    <div class="container mx-auto px-4 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
-        <!-- Produktbilder -->
-        <div class="order-1 lg:order-1">
-          <div class="space-y-6">
-            <!-- Hauptbild -->
-            <div class="relative">
-              <img 
-                :src="currentImage" 
-                :alt="product?.title || 'Product'"
-                class="w-full h-64 sm:h-80 lg:h-96 object-cover rounded-lg shadow-lg"
+  <section class="product-details-layout bg-[#f7f4ef] py-6 lg:py-10">
+    <div class="mx-auto max-w-[1500px] px-4 lg:px-8">
+      <div class="grid gap-6 lg:grid-cols-[minmax(0,1.45fr)_minmax(360px,0.9fr)] lg:gap-10">
+        <div class="lg:sticky lg:top-6 lg:self-start">
+          <div class="overflow-hidden rounded-[28px] bg-white shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
+            <div class="relative aspect-[4/3] bg-[#f3efe8]">
+              <img
+                :src="currentImage"
+                :alt="currentImageAlt"
+                class="h-full w-full object-cover"
               />
             </div>
 
-            <!-- Thumbnail Grid -->
-            <div v-if="product?.images && product.images.length > 1" class="grid grid-cols-4 gap-2 sm:gap-4">
-              <button 
-                v-for="(image, index) in product.images" 
-                :key="index"
-                @click="currentImageIndex = index"
+            <div
+              v-if="galleryItems.length > 1"
+              class="flex gap-3 overflow-x-auto border-t border-[#ebe5dc] px-4 py-4 sm:px-5"
+            >
+              <button
+                v-for="(item, index) in galleryItems"
+                :key="`${item.src}-${index}`"
+                type="button"
                 :class="[
-                  'aspect-square rounded-lg overflow-hidden border-2 transition-all',
-                  currentImageIndex === index ? 'border-blue-500 ring-2 ring-blue-200' : 'border-gray-200 hover:border-gray-300'
+                  'relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border transition',
+                  currentImageIndex === index
+                    ? 'border-[#f26a21] ring-2 ring-[#f7c9ae]'
+                    : 'border-[#e7dfd3] hover:border-[#c9bcab]'
                 ]"
+                @click="currentImageIndex = index"
               >
-                <img 
-                  :src="image" 
-                  :alt="`${product?.title || 'Product'} view ${index + 1}`"
-                  class="w-full h-full object-cover"
-                />
+                <img :src="item.src" :alt="item.alt" class="h-full w-full object-cover" />
               </button>
             </div>
           </div>
         </div>
 
-        <!-- Produktinformationen -->
-        <div class="order-2 lg:order-2">
+        <div class="lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto lg:pr-1">
           <ProductDetailsInfo
             :product="product"
             :selectedOptions="internalSelectedOptions"
@@ -51,171 +49,159 @@
         </div>
       </div>
     </div>
-
-    <!-- Cart Modal -->
-    <Cart :isOpen="isCartOpen" @close="isCartOpen = false" />
-  </div>
+  </section>
 </template>
 
 <script setup>
-import { ref, computed, inject } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useShopifyCardStore } from '../../store/shopifyCardStore'
-import Cart from '../global/Cart.vue'
 
 const props = defineProps({
   product: {
     type: Object,
-    default: null
+    default: null,
   },
   selectedOptions: {
     type: Object,
-    default: () => ({})
+    default: () => ({}),
   },
   selectedVariant: {
     type: Object,
-    default: null
+    default: null,
   },
   quantity: {
     type: Number,
-    default: 1
+    default: 1,
   },
   isLoading: {
     type: Boolean,
-    default: false
-  }
-})
-
-// Stores
-const shopifyCardStore = useShopifyCardStore()
-
-// Für Builder.io Context - falls Product nicht als Prop übergeben wird
-const builderState = inject('builderState', null)
-const builderContext = inject('builderContext', null)
-
-// Product aus verschiedenen Quellen holen
-const product = computed(() => {
-  // Zuerst Props prüfen
-  if (props.product) return props.product
-  
-  // Dann Builder.io State/Context prüfen
-  if (builderState?.product) return builderState.product
-  if (builderContext?.product) return builderContext.product
-  
-  // Fallback für leeres Produkt
-  return null
-})
-
-// Eigene State-Verwaltung für Builder.io Kontext
-const internalSelectedOptions = ref(props.selectedOptions || {})
-const internalQuantity = ref(props.quantity || 1)
-const internalIsLoading = ref(false)
-
-// Cart State
-const isCartOpen = ref(false)
-
-// Computed für selectedVariant
-const selectedVariant = computed(() => {
-  if (!product.value || !product.value.variants) return null
-  
-  return product.value.variants.find((variant) => {
-    return variant.selectedOptions.every((option) => {
-      return internalSelectedOptions.value[option.name] === option.value
-    })
-  })
+    default: false,
+  },
 })
 
 const emit = defineEmits(['selectOption', 'incrementQuantity', 'decrementQuantity', 'addToCart'])
 
-// Event Handler mit interner State-Verwaltung
+const shopifyCardStore = useShopifyCardStore()
+const { openCart } = useCartSidebar()
+
+const product = computed(() => props.product ?? null)
+
+const internalSelectedOptions = ref({ ...props.selectedOptions })
+const internalQuantity = ref(props.quantity || 1)
+const internalIsLoading = ref(false)
+const currentImageIndex = ref(0)
+
+watch(
+  () => props.selectedOptions,
+  (nextValue) => {
+    internalSelectedOptions.value = { ...(nextValue || {}) }
+  },
+  { deep: true }
+)
+
+watch(
+  product,
+  () => {
+    currentImageIndex.value = 0
+  }
+)
+
+const selectedVariant = computed(() => {
+  if (!product.value?.variants?.length) return null
+
+  return (
+    product.value.variants.find((variant) =>
+      variant.selectedOptions.every((option) => internalSelectedOptions.value[option.name] === option.value)
+    ) || null
+  )
+})
+
+const galleryItems = computed(() => {
+  const images = product.value?.images || []
+  const alts = product.value?.imageAlts || []
+
+  if (!images.length && product.value?.featured_image) {
+    return [
+      {
+        src: product.value.featured_image,
+        alt: product.value?.title || 'Product image',
+      },
+    ]
+  }
+
+  return images.map((src, index) => ({
+    src,
+    alt: alts[index] || `${product.value?.title || 'Product'} image ${index + 1}`,
+  }))
+})
+
+const currentGalleryItem = computed(() => {
+  if (!galleryItems.value.length) {
+    return {
+      src: 'https://placehold.co/1200x900',
+      alt: product.value?.title || 'Product image',
+    }
+  }
+
+  return galleryItems.value[currentImageIndex.value] || galleryItems.value[0]
+})
+
+const currentImage = computed(() => currentGalleryItem.value.src)
+const currentImageAlt = computed(() => currentGalleryItem.value.alt)
+
 function handleSelectOption(optionName, optionValue) {
-  console.log('ProductDetailsLayout: handleSelectOption', optionName, optionValue)
-  internalSelectedOptions.value[optionName] = optionValue
+  internalSelectedOptions.value = {
+    ...internalSelectedOptions.value,
+    [optionName]: optionValue,
+  }
   emit('selectOption', optionName, optionValue)
 }
 
 function handleIncrementQuantity() {
-  console.log('ProductDetailsLayout: handleIncrementQuantity')
   if (selectedVariant.value && internalQuantity.value < selectedVariant.value.quantityAvailable) {
-    internalQuantity.value++
+    internalQuantity.value += 1
   } else if (!selectedVariant.value) {
-    internalQuantity.value++
+    internalQuantity.value += 1
   }
+
   emit('incrementQuantity')
 }
 
 function handleDecrementQuantity() {
-  console.log('ProductDetailsLayout: handleDecrementQuantity')
   if (internalQuantity.value > 1) {
-    internalQuantity.value--
+    internalQuantity.value -= 1
   }
+
   emit('decrementQuantity')
 }
 
 async function handleAddToCart() {
-  console.log('ProductDetailsLayout: handleAddToCart')
-  
-  if (!product.value) {
-    console.error('Kein Produkt verfügbar')
-    return
-  }
-  
-  // Verfügbarkeit prüfen
-  const isAvailable = selectedVariant.value 
-    ? selectedVariant.value.availableForSale 
+  if (!product.value) return
+
+  const isAvailable = selectedVariant.value
+    ? selectedVariant.value.availableForSale
     : product.value.available
-    
-  if (!isAvailable) {
-    console.error('Produkt nicht verfügbar')
-    return
-  }
-  
+
+  if (!isAvailable) return
+
   internalIsLoading.value = true
-  
+
   try {
-    // Variant ID bestimmen
     const variantId = selectedVariant.value?.id || product.value.variant_id
-    
-    console.log('Adding to cart:', {
-      variantId,
-      quantity: internalQuantity.value,
-      product: product.value.title
-    })
-    
-    // Produkt zum Warenkorb hinzufügen
-    await shopifyCardStore.addToCart(variantId, internalQuantity.value)
-    
-    // Kurze Wartezeit für Shopify API
-    await new Promise(resolve => setTimeout(resolve, 300))
-    
-    // Cart Daten neu laden
-    try {
-      await shopifyCardStore.getCartData()
-      console.log('Cart refreshed after adding item')
-    } catch (refreshError) {
-      console.error('Error refreshing cart:', refreshError)
+
+    if (!variantId) {
+      throw new Error('Missing product variant ID')
     }
-    
-    // Cart öffnen
-    isCartOpen.value = true
-    
-    console.log('Successfully added to cart')
-    
+
+    await shopifyCardStore.addToCart(variantId, internalQuantity.value)
+    await new Promise((resolve) => setTimeout(resolve, 250))
+    await shopifyCardStore.getCartData()
+    openCart()
+    emit('addToCart')
   } catch (error) {
     console.error('Error adding to cart:', error)
   } finally {
     internalIsLoading.value = false
   }
-  
-  emit('addToCart')
 }
-
-// Image slider logic
-const currentImageIndex = ref(0)
-
-const currentImage = computed(() => {
-  if (product.value?.images && product.value.images.length > 0) {
-    return product.value.images[currentImageIndex.value]
-  }
-  return product.value?.featured_image || 'https://placehold.co/600x800'
-})
 </script>

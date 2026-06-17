@@ -58,10 +58,12 @@ export default defineNuxtConfig({
         }
       },
 
-      // API routes
+      // API routes – CORS nur für eigene Domain erlauben (Origin aus .env)
       '/api/**': {
         cors: true,
         headers: {
+          'Access-Control-Allow-Origin': process.env.NUXT_PUBLIC_SITE_URL || '',
+          'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
           'cache-control': 'max-age=60'
         }
       }
@@ -78,7 +80,8 @@ export default defineNuxtConfig({
       shopify: {
         domain: process.env.SHOPIFY_DOMAIN,
         apiVersion: process.env.SHOPIFY_API_VERSION || '2023-10',
-        accessToken: process.env.SHOPIFY_ACCESS_TOKEN
+        accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
+        accountUrl: process.env.SHOPIFY_ACCOUNT_URL || ''
       }
     }
   },

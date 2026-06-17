@@ -8,91 +8,57 @@
       {{ error }}
     </div>
     
-    <div v-else>
-      <!-- Builder.io Content falls verf�gbar -->
-      <Content 
-        v-if="builderContent"
-        :api-key="apiKey"
-        :model="model" 
-        :content="builderContent"
-        :data="builderData"
-        :customComponents="registeredComponents"
-      />
-      
-      <!-- Fallback: Standard Collections Grid -->
-      <!-- <div v-else class="collections-grid">
-        <h1>Alle Kategorien</h1>
-        <div class="grid">
-          <NuxtLink 
-            v-for="collection in collections" 
-            :key="collection.id"
-            :to="`/collections/${collection.handle}`"
-            class="collection-card"
-          >
-            <div class="collection-image">
-              <img 
-                v-if="collection.image" 
-                :src="collection.image" 
-                :alt="collection.title"
-              />
-              <div v-else class="no-image">
-                {{ collection.title.charAt(0) }}
-              </div>
+    <div v-else class="collections-grid">
+      <h1>Alle Kategorien</h1>
+      <div class="grid">
+        <NuxtLink
+          v-for="collection in collections"
+          :key="collection.id"
+          :to="`/collections/${collection.handle}`"
+          class="collection-card"
+        >
+          <div class="collection-image">
+            <img
+              v-if="collection.image"
+              :src="collection.image"
+              :alt="collection.title"
+            />
+            <div v-else class="no-image">
+              {{ collection.title.charAt(0) }}
             </div>
-            
-            <div class="collection-info">
-              <h3>{{ collection.title }}</h3>
-              <p v-if="collection.description" class="description text-xl text-primary">
-                {{ collection.description }}
-              </p>
-              <span class="product-count">
-                {{ collection.productsCount }} Produkte
-              </span>
-            </div>
-          </NuxtLink>
-        </div>
-      </div> -->
+          </div>
+
+          <div class="collection-info">
+            <h3>{{ collection.title }}</h3>
+            <p v-if="collection.description" class="description text-xl text-primary">
+              {{ collection.description }}
+            </p>
+            <span class="product-count">
+              {{ collection.productsCount }} Produkte
+            </span>
+          </div>
+        </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useShopifyStore } from '../../store/shopifyStore'
-import { Content, fetchOneEntry } from '@builder.io/sdk-vue'
-import { registeredComponents } from '../../plugins/builder-components'
-import { useNuxtApp, useRuntimeConfig } from 'nuxt/app'
 
 // Store und Daten
 const shopifyStore = useShopifyStore()
 const collections = ref<any[]>([])
-const builderContent = ref<any>(null)
-const contentForBuilder = ref<any>(null)
 const isLoading = ref(true)
 const error = ref<string | null>(null)
-
-// Builder.io Konfiguration
-const config = useRuntimeConfig()
-const apiKey = config.public.BUILDER_API_KEY as string
-const model = 'page'
-
-// Design Tokens vom globalen Plugin verwenden
-const { $designTokensData } = useNuxtApp()
-const designTokensData = computed(() => $designTokensData)
-
-// Builder.io Daten f�r Template
-const builderData = computed(() => ({
-  collections: collections.value,
-  collectionsCount: collections.value.length,
-  designTokens: designTokensData,
-}))
 
 // Collections laden
 async function loadCollections() {
   try {
     isLoading.value = true
     error.value = null
-    
+
     collections.value = await (shopifyStore as any).fetchAllCollections()
     console.log('Loaded collections:', collections.value)
   } catch (err) {
@@ -103,39 +69,9 @@ async function loadCollections() {
   }
 }
 
-// Builder.io Content laden
-async function loadBuilderContent() {
-  try {
-    console.log('Loading Builder.io content for collections overview...')
-    
-    const content = await fetchOneEntry({
-      model,
-      apiKey,
-      userAttributes: {
-        urlPath: '/collections',
-      },
-      options: {
-        cachebust: true
-      }
-    })
-    
-    builderContent.value = content
-    contentForBuilder.value = {
-      builderContent: content,
-      designe: designTokensData
-    }
-    console.log('Builder content loaded:', content)
-  } catch (err) {
-    console.log('Builder.io content not found, using fallback:', err)
-  }
-}
-
 // Beim Mount laden
 onMounted(async () => {
-  await Promise.all([
-    loadCollections(),
-    loadBuilderContent()
-  ])
+  await loadCollections()
 })
 </script>
 

@@ -6,6 +6,147 @@ import type {
   ShopifyProduct,
 } from "~/types/domain/shopify";
 
+function parseMoneyAmount(value?: string | null): number {
+  const amount = Number.parseFloat(value || "0");
+  return Number.isFinite(amount) ? amount : 0;
+}
+
+function parseIntegerValue(value?: string | null): number | undefined {
+  const amount = Number.parseInt(value || "", 10);
+  return Number.isFinite(amount) ? amount : undefined;
+}
+
+function normalizeReviewSummary(product: any) {
+  const customRating = Number.parseFloat(product.customRating?.value || "");
+  const reviewsRating = Number.parseFloat(product.reviewsRating?.value || "");
+  const customReviewCount = parseIntegerValue(product.customReviewCount?.value);
+  const reviewsCount = parseIntegerValue(product.reviewsCount?.value);
+
+  const ratingValue = Number.isFinite(customRating)
+    ? customRating
+    : Number.isFinite(reviewsRating)
+      ? reviewsRating
+      : undefined;
+
+  const reviewCount = customReviewCount ?? reviewsCount;
+
+  if (ratingValue === undefined && reviewCount === undefined) {
+    return undefined;
+  }
+
+  return {
+    ratingValue,
+    reviewCount,
+  };
+}
+
+function normalizeProduct(shopifyProduct: any): ShopifyProduct {
+  const firstVariant = shopifyProduct.variants?.edges?.[0]?.node;
+  const compareAtPrice = parseMoneyAmount(firstVariant?.compareAtPrice?.amount);
+  const price = parseMoneyAmount(firstVariant?.price?.amount);
+
+  return {
+    id: shopifyProduct.id,
+    variant_id: firstVariant?.id,
+    title: shopifyProduct.title,
+    description: shopifyProduct.descriptionHtml || shopifyProduct.description,
+    createdAt: shopifyProduct.createdAt,
+    handle: shopifyProduct.handle,
+    vendor: shopifyProduct.vendor,
+    subtitle: shopifyProduct.subtitle?.value || undefined,
+    featured_image: shopifyProduct.featuredImage?.url,
+    on_sale: compareAtPrice > price,
+    available: firstVariant?.availableForSale || false,
+    price,
+    compare_at_price: compareAtPrice || undefined,
+    images: shopifyProduct.images?.edges?.map((edge: any) => edge.node.url) || [],
+    imageAlts:
+      shopifyProduct.images?.edges?.map((edge: any) => edge.node.altText || "") || [],
+    options:
+      shopifyProduct.options?.map((option: any) => ({
+        name: option.name,
+        values: option.values,
+      })) || [],
+    variants:
+      shopifyProduct.variants?.edges?.map(({ node }: any) => ({
+        id: node.id,
+        title: node.title,
+        availableForSale: node.availableForSale,
+        quantityAvailable: node.quantityAvailable || 0,
+        price: parseMoneyAmount(node.price?.amount),
+        compareAtPrice: parseMoneyAmount(node.compareAtPrice?.amount) || undefined,
+        image: node.image?.url
+          ? {
+              url: node.image.url,
+              altText: node.image.altText || undefined,
+            }
+          : undefined,
+        selectedOptions:
+          node.selectedOptions?.map((option: any) => ({
+            name: option.name,
+            value: option.value,
+          })) || [],
+      })) || [],
+    reviewSummary: normalizeReviewSummary(shopifyProduct),
+  };
+}
+
+function escapeSearchTerm(value: string): string {
+  return value.replace(/(["\\])/g, "\\$1").trim();
+}
+
+function buildProductSearchQuery(filterQuery: string, minPrice: number, maxPrice: number) {
+  const queryParts: string[] = [];
+  const normalizedQuery = escapeSearchTerm(filterQuery);
+
+  if (normalizedQuery) {
+    queryParts.push(normalizedQuery);
+  }
+
+  if (minPrice > 0 || maxPrice < 1000000) {
+    queryParts.push(`variants.price:>=${minPrice}`);
+    queryParts.push(`variants.price:<=${maxPrice}`);
+  }
+
+  return queryParts.join(" AND ");
+}
+
+function normalizeSearchValue(value?: string | null): string {
+  return (value || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function sortProductsLocally(
+  products: ShopifyProduct[],
+  sortBy: NonNullable<ProductFilterOptions["sortBy"]>
+): ShopifyProduct[] {
+  const sortedProducts = [...products];
+
+  switch (sortBy) {
+    case "price-asc":
+      return sortedProducts.sort((a, b) => a.price - b.price);
+    case "price-desc":
+      return sortedProducts.sort((a, b) => b.price - a.price);
+    case "title-asc":
+      return sortedProducts.sort((a, b) => a.title.localeCompare(b.title, "de"));
+    case "title-desc":
+      return sortedProducts.sort((a, b) => b.title.localeCompare(a.title, "de"));
+    case "created-asc":
+      return sortedProducts.sort((a, b) => {
+        return new Date(a.createdAt || 0).getTime() - new Date(b.createdAt || 0).getTime();
+      });
+    case "created-desc":
+    default:
+      return sortedProducts.sort((a, b) => {
+        return new Date(b.createdAt || 0).getTime() - new Date(a.createdAt || 0).getTime();
+      });
+  }
+}
+
 export interface ShopifyCollection {
   id: string;
   title: string;
@@ -80,19 +221,11 @@ export const useShopifyStore = defineStore("shopifyStore", {
      */
     async getShopifyConfig() {
       const config = useRuntimeConfig();
-      const tenantId = config.public.TENANT_ID;
-      console.log("Tenant ID:", tenantId);
-      console.log("Shopify config:", config.public.shopify);
-      console.log("Shopify Access Token:", config.shopifyAccessToken);
-      console.log("Shopify API Version:", config.public.shopify.apiVersion);
-      console.log("Shopify Domain:", config.public.shopify.domain);
 
       return {
-        shopifyDomain:
-          config.public.shopify.domain || "flash-reflex-training.myshopify.com",
-        shopifyAccessToken:
-          config.public.shopifyAccessToken || "0c54fa2544bf3c6ce9b1fe8d03e79f5e",
-        shopifyApiVersion: config.public.shopify.apiVersion || "2025-01",
+        shopifyDomain: String(config.public.shopify.domain || ''),
+        shopifyAccessToken: String(config.public.shopify.accessToken || ''),
+        shopifyApiVersion: String(config.public.shopify.apiVersion || "2025-01"),
       };
     },
 
@@ -152,7 +285,9 @@ export const useShopifyStore = defineStore("shopifyStore", {
             id
             title
             description
+            descriptionHtml
             handle
+            vendor
             featuredImage {
               url
               altText
@@ -167,6 +302,25 @@ export const useShopifyStore = defineStore("shopifyStore", {
                   }
                 }
             }
+            options {
+              name
+              values
+            }
+            subtitle: metafield(namespace: "custom", key: "subtitle") {
+              value
+            }
+            customRating: metafield(namespace: "custom", key: "rating") {
+              value
+            }
+            customReviewCount: metafield(namespace: "custom", key: "review_count") {
+              value
+            }
+            reviewsRating: metafield(namespace: "reviews", key: "rating") {
+              value
+            }
+            reviewsCount: metafield(namespace: "reviews", key: "rating_count") {
+              value
+            }
             priceRange {
               minVariantPrice {
                 amount
@@ -179,12 +333,13 @@ export const useShopifyStore = defineStore("shopifyStore", {
                 currencyCode
               }
             }
-            variants(first: 5) {  # Hier werden die Varianten abgerufen
+            variants(first: 50) {
               edges {
                 node {
-                  id  # Die Varianten-ID, die du für den Warenkorb benötigst
+                  id
                   title
                   availableForSale
+                  quantityAvailable
                   price {
                     amount
                     currencyCode
@@ -199,6 +354,10 @@ export const useShopifyStore = defineStore("shopifyStore", {
                     amount
                     currencyCode
                   }
+                  selectedOptions {
+                    name
+                    value
+                  }
                 }
               }
             }  
@@ -212,26 +371,7 @@ export const useShopifyStore = defineStore("shopifyStore", {
         return null;
       }
 
-      // Transformieren der Produktdaten in ein einfacheres Format
-      const shopifyProduct = response.data.product;
-      /* const firstVariant = shopifyProduct.variants.edges[0]?.node */
-
-      const product: ShopifyProduct = {
-        id: shopifyProduct.id,
-        variant_id: shopifyProduct.variants.edges[0]?.node.id,
-        title: shopifyProduct.title,
-        description: shopifyProduct.description,
-        handle: shopifyProduct.handle,
-        featured_image: shopifyProduct.featuredImage?.url,
-        on_sale: false,
-        available: shopifyProduct.variants.edges[0]?.node.availableForSale || false,
-        price: parseFloat(shopifyProduct.variants.edges[0]?.node.price.amount || 0),
-        images: shopifyProduct.images.edges.map((edge: any) => edge.node.url),
-        /*  price: parseFloat(firstVariant?.price || 0),
-        compare_at_price: parseFloat(firstVariant?.compareAtPrice || 0),
-        on_sale: firstVariant?.compareAtPrice && firstVariant.compareAtPrice > firstVariant.price,
-        available: firstVariant?.availableForSale || false */
-      };
+      const product = normalizeProduct(response.data.product);
 
       // Im Cache speichern
       this.products.set(productId, product);
@@ -253,7 +393,9 @@ export const useShopifyStore = defineStore("shopifyStore", {
             id
             title
             description
+            descriptionHtml
             handle
+            vendor
             featuredImage {
               url
               altText
@@ -268,6 +410,25 @@ export const useShopifyStore = defineStore("shopifyStore", {
                   }
                 }
             }
+            options {
+              name
+              values
+            }
+            subtitle: metafield(namespace: "custom", key: "subtitle") {
+              value
+            }
+            customRating: metafield(namespace: "custom", key: "rating") {
+              value
+            }
+            customReviewCount: metafield(namespace: "custom", key: "review_count") {
+              value
+            }
+            reviewsRating: metafield(namespace: "reviews", key: "rating") {
+              value
+            }
+            reviewsCount: metafield(namespace: "reviews", key: "rating_count") {
+              value
+            }
             priceRange {
               minVariantPrice {
                 amount
@@ -280,12 +441,13 @@ export const useShopifyStore = defineStore("shopifyStore", {
                 currencyCode
               }
             }
-            variants(first: 5) {
+            variants(first: 50) {
               edges {
                 node {
                   id
                   title
                   availableForSale
+                  quantityAvailable
                   price {
                     amount
                     currencyCode
@@ -300,6 +462,10 @@ export const useShopifyStore = defineStore("shopifyStore", {
                     amount
                     currencyCode
                   }
+                  selectedOptions {
+                    name
+                    value
+                  }
                 }
               }
             }  
@@ -313,21 +479,7 @@ export const useShopifyStore = defineStore("shopifyStore", {
         return null;
       }
 
-      // Transformieren der Produktdaten in ein einfacheres Format
-      const shopifyProduct = response.data.productByHandle;
-
-      const product: ShopifyProduct = {
-        id: shopifyProduct.id,
-        variant_id: shopifyProduct.variants.edges[0]?.node.id,
-        title: shopifyProduct.title,
-        description: shopifyProduct.description,
-        handle: shopifyProduct.handle,
-        featured_image: shopifyProduct.featuredImage?.url,
-        on_sale: false,
-        available: shopifyProduct.variants.edges[0]?.node.availableForSale || false,
-        price: parseFloat(shopifyProduct.variants.edges[0]?.node.price.amount || 0),
-        images: shopifyProduct.images.edges.map((edge: any) => edge.node.url),
-      };
+      const product = normalizeProduct(response.data.productByHandle);
 
       // Im Cache speichern (verwende ID als Key für Konsistenz)
       this.products.set(product.id, product);
@@ -424,11 +576,11 @@ export const useShopifyStore = defineStore("shopifyStore", {
             title: node.title,
             handle: node.handle,
             featured_image: node.featuredImage?.url,
-            price: parseFloat(firstVariant?.price.amount || 0),
-            compare_at_price: parseFloat(firstVariant?.compareAtPrice || 0),
+            price: parseMoneyAmount(firstVariant?.price?.amount),
+            compare_at_price: parseMoneyAmount(firstVariant?.compareAtPrice?.amount) || undefined,
             on_sale:
-              firstVariant?.compareAtPrice &&
-              firstVariant.compareAtPrice > firstVariant.price,
+              parseMoneyAmount(firstVariant?.compareAtPrice?.amount) >
+              parseMoneyAmount(firstVariant?.price?.amount),
             available: firstVariant?.availableForSale || false,
           };
 
@@ -558,7 +710,7 @@ export const useShopifyStore = defineStore("shopifyStore", {
       const {
         minPrice = 0,
         maxPrice = 1000000,
-        available = true,
+        available,
         sortBy = "price-desc",
         filterQuery = "",
         tags = [],
@@ -566,6 +718,7 @@ export const useShopifyStore = defineStore("shopifyStore", {
         limit = 10,
         cursor = "",
       } = options;
+      const hasSearchTerm = Boolean(filterQuery.trim());
 
       // Cache-Schlüssel basierend auf Filteroptionen generieren
       const cacheKey = `all_products_${minPrice}_${maxPrice}_${available}_${sortBy}_${filterQuery}_${tags.join(
@@ -637,9 +790,11 @@ export const useShopifyStore = defineStore("shopifyStore", {
       const query = `
         query getProducts(
           $numProducts: Int!
+          $query: String
         ) {
           products(
             first: $numProducts
+            query: $query
             sortKey: ${sortKey}
             reverse: ${reverse}
             ${afterCursor}
@@ -656,6 +811,7 @@ export const useShopifyStore = defineStore("shopifyStore", {
                 title
                 description
                 handle
+                vendor
                 productType
                 tags
                 createdAt
@@ -710,21 +866,17 @@ export const useShopifyStore = defineStore("shopifyStore", {
         }
       `;
 
-      // Suchquery erstellen
-      let searchQuery = query ? `title:*${query}*` : "";
-
-      // Preisfilter hinzufügen
-      if (minPrice > 0 || maxPrice < 1000000) {
-        const priceQuery = `variants.price:>=${minPrice} variants.price:<=${maxPrice}`;
-        searchQuery = searchQuery
-          ? `${searchQuery} AND ${priceQuery}`
-          : priceQuery;
-      }
+      const searchQuery = buildProductSearchQuery(
+        hasSearchTerm ? "" : filterQuery,
+        minPrice,
+        maxPrice
+      );
+      const requestedLimit = hasSearchTerm ? Math.max(limit, 250) : limit;
 
       // API-Anfrage senden
       const response = await this.shopifyFetch(query, {
-        query: searchQuery,
-        numProducts: limit,
+        query: searchQuery || null,
+        numProducts: requestedLimit,
       });
 
       console.log("Shopify response:", response);
@@ -737,21 +889,22 @@ export const useShopifyStore = defineStore("shopifyStore", {
       // const pageInfo = response.data.products.pageInfo;
 
       // Produktdaten transformieren
-      const products = response.data.products.edges.map(({ node }: any) => {
+      let products = response.data.products.edges.map(({ node }: any) => {
         const firstVariant = node.variants.edges[0]?.node;
 
         const product: ShopifyProduct = {
           id: node.id,
           title: node.title,
           description: node.description,
+          createdAt: node.createdAt,
           handle: node.handle,
+          vendor: node.vendor,
           featured_image: node.featuredImage?.url,
-          price: parseFloat(firstVariant?.price.amount || 0),
-          compare_at_price: parseFloat(firstVariant?.compareAtPrice || 0),
+          price: parseMoneyAmount(firstVariant?.price?.amount),
+          compare_at_price: parseMoneyAmount(firstVariant?.compareAtPrice?.amount) || undefined,
           on_sale:
-            firstVariant?.compareAtPrice &&
-            parseFloat(firstVariant.compareAtPrice) >
-              parseFloat(firstVariant.price),
+            parseMoneyAmount(firstVariant?.compareAtPrice?.amount) >
+            parseMoneyAmount(firstVariant?.price?.amount),
           available: firstVariant?.availableForSale || false,
           variant_id: firstVariant?.id,
           collections: node.collections.edges.map(
@@ -765,10 +918,136 @@ export const useShopifyStore = defineStore("shopifyStore", {
         return product;
       });
 
+      if (available !== undefined) {
+        products = products.filter((product: ShopifyProduct) => product.available === available);
+      }
+
+      if (hasSearchTerm) {
+        products = this.filterProductsBySearchTerm(products, filterQuery, requestedLimit);
+        products = sortProductsLocally(products, sortBy);
+        products = products.slice(0, limit);
+      }
+
       // Im Collection-Cache speichern
       this.collections.set(cacheKey, products);
 
       return products;
+    },
+
+    async searchProducts(searchTerm: string, limit = 6): Promise<ShopifyProduct[]> {
+      const normalizedQuery = searchTerm.trim();
+
+      if (!normalizedQuery) {
+        return [];
+      }
+
+      const query = `
+        query predictiveSearchProducts($query: String!, $limit: Int!) {
+          predictiveSearch(
+            query: $query
+            limit: $limit
+            types: [PRODUCT]
+            searchableFields: [TITLE, PRODUCT_TYPE, VARIANT_TITLE, VENDOR, TAG]
+          ) {
+            products {
+              id
+              title
+              handle
+              description
+              vendor
+              featuredImage {
+                url
+                altText
+              }
+              variants(first: 1) {
+                edges {
+                  node {
+                    id
+                    price {
+                      amount
+                      currencyCode
+                    }
+                    compareAtPrice {
+                      amount
+                      currencyCode
+                    }
+                    availableForSale
+                  }
+                }
+              }
+            }
+          }
+        }
+      `;
+
+      const response = await this.shopifyFetch(query, {
+        query: normalizedQuery,
+        limit,
+      });
+
+      const products = response?.data?.predictiveSearch?.products;
+
+      if (!Array.isArray(products)) {
+        return this.searchProductsFromCatalog(normalizedQuery, limit);
+      }
+
+      const mappedProducts = products.map((product) => {
+        const normalizedProduct = normalizeProduct(product);
+        this.products.set(normalizedProduct.id, normalizedProduct);
+        return normalizedProduct;
+      });
+
+      const filteredProducts = this.filterProductsBySearchTerm(
+        mappedProducts,
+        normalizedQuery,
+        limit
+      );
+
+      if (filteredProducts.length > 0) {
+        return filteredProducts;
+      }
+
+      return this.searchProductsFromCatalog(normalizedQuery, limit);
+    },
+
+    filterProductsBySearchTerm(
+      products: ShopifyProduct[],
+      searchTerm: string,
+      limit = 6
+    ): ShopifyProduct[] {
+      const normalizedSearchTerm = normalizeSearchValue(searchTerm);
+
+      if (!normalizedSearchTerm) {
+        return [];
+      }
+
+      const searchTokens = normalizedSearchTerm.split(" ").filter(Boolean);
+
+      return products
+        .filter((product) => {
+          const searchableText = normalizeSearchValue(
+            [
+              product.title,
+              product.vendor,
+              product.handle,
+              product.subtitle,
+              product.description,
+            ].join(" ")
+          );
+
+          return searchTokens.every((token) => searchableText.includes(token));
+        })
+        .slice(0, limit);
+    },
+
+    async searchProductsFromCatalog(searchTerm: string, limit = 6): Promise<ShopifyProduct[]> {
+      const catalog = await this.fetchProducts({
+        sortBy: "created-desc",
+        available: undefined,
+        limit: 100,
+      });
+
+      return this.filterProductsBySearchTerm(catalog, searchTerm, limit);
     },
 
     /*

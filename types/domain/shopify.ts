@@ -1,17 +1,53 @@
+export interface ShopifyProductOption {
+  name: string;
+  values: string[];
+}
+
+export interface ShopifyProductVariantOption {
+  name: string;
+  value: string;
+}
+
+export interface ShopifyProductVariant {
+  id: string;
+  title: string;
+  availableForSale: boolean;
+  quantityAvailable: number;
+  price: number;
+  compareAtPrice?: number;
+  image?: {
+    url: string;
+    altText?: string;
+  };
+  selectedOptions: ShopifyProductVariantOption[];
+}
+
+export interface ShopifyProductReviewSummary {
+  ratingValue?: number;
+  reviewCount?: number;
+}
+
 export interface ShopifyProduct {
-    id: string;
-    variant_id?: string;
-    title: string;
-    description?: string;
-    handle: string;
-    featured_image?: string;
-    price: number;
-    compare_at_price?: number;
-    on_sale: boolean;
-    available: boolean;
-    images?: string[];
-    collections?: string[];
-  }
+  id: string;
+  variant_id?: string;
+  title: string;
+  description?: string;
+  createdAt?: string;
+  handle: string;
+  vendor?: string;
+  subtitle?: string;
+  featured_image?: string;
+  price: number;
+  compare_at_price?: number;
+  on_sale: boolean;
+  available: boolean;
+  images?: string[];
+  imageAlts?: string[];
+  collections?: string[];
+  options?: ShopifyProductOption[];
+  variants?: ShopifyProductVariant[];
+  reviewSummary?: ShopifyProductReviewSummary;
+}
   
   export interface ShopifyCollection {
     id: string;

@@ -27,14 +27,10 @@
       </div>
       <div v-else class="products-grid">
         <div v-for="product in filteredProducts" :key="product.id" class="product-item">
-          <ProductCard :product="product" @openCart="openCart"/>
+          <ProductCard :product="product" />
         </div>
       </div>
     </div>
-    
-    <Cart
-      :isOpen="isCartOpen"
-      @close="isCartOpen = false" />
   </div>
 </template>
   
@@ -57,11 +53,8 @@ const props = defineProps<ProductGridProps>();
 const shopifyStore = useShopifyStore();
 const { isLoading, error } = storeToRefs(shopifyStore);
 const products = ref<any[]>([]);
-const isCartOpen = ref(false);
 const currentFilters = ref<any>({});
 
-const apiKey = 'b2253c87fe4d4111ad4211f05e4080bb';
-const model = 'product-card';
 const route = useRoute();
 
 // Computed für gefilterte und sortierte Produkte
@@ -117,11 +110,6 @@ const filteredProducts = computed(() => {
   
   return filtered;
 });
-
-function openCart() {
-  console.log("Open Cart", isCartOpen.value);
-  isCartOpen.value = true;
-}
 
 function handleFilterChange(filters: any) {
   currentFilters.value = filters;
