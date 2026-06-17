@@ -336,17 +336,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@builder.io/sdk-vue@npm:^5.2.3":
-  version: 5.2.3
-  resolution: "@builder.io/sdk-vue@npm:5.2.3"
-  dependencies:
-    isolated-vm: ^6.0.0
-  peerDependencies:
-    vue: ">= 3"
-  checksum: 9c643cd73f5f97c5749c684274f223a827edc300496f93575951f5af53e8bd137990ac11514747f42c33bcb7ff94c5401d79591c822fc49482d65eb2541d7ccf
-  languageName: node
-  linkType: hard
-
 "@clack/core@npm:1.1.0":
   version: 1.1.0
   resolution: "@clack/core@npm:1.1.0"
@@ -5047,16 +5036,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"isolated-vm@npm:^6.0.0":
-  version: 6.1.2
-  resolution: "isolated-vm@npm:6.1.2"
-  dependencies:
-    node-gyp: latest
-    node-gyp-build: ^4.8.4
-  checksum: ea276492837efcef440741dc93a5665dbf4ae491d8dd14851f4727c7133dc9b4da95f50dd2608939f104e9ee9e56b704e7a68d8e4e174bf1ffe26c9a83c95f41
-  languageName: node
-  linkType: hard
-
 "jackspeak@npm:^3.1.2":
   version: 3.4.3
   resolution: "jackspeak@npm:3.4.3"
@@ -5928,7 +5907,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-gyp-build@npm:^4.2.2, node-gyp-build@npm:^4.8.4":
+"node-gyp-build@npm:^4.2.2":
   version: 4.8.4
   resolution: "node-gyp-build@npm:4.8.4"
   bin:
@@ -6048,7 +6027,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "nuxt-app@workspace:."
   dependencies:
-    "@builder.io/sdk-vue": ^5.2.3
     "@nuxt/icon": ^1.15.0
     "@nuxtjs/sitemap": ^7.4.7
     "@nuxtjs/tailwindcss": ^7.0.0-beta.0

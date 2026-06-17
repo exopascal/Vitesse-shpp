@@ -19,7 +19,6 @@
     "dev:tenant2": "node -r dotenv/config ./node_modules/.bin/nuxt dev dotenv_config_path=.env.tenant2"
   },
   "dependencies": {
-    "@builder.io/sdk-vue": "^5.2.3",
     "@nuxt/icon": "^1.15.0",
     "@nuxtjs/sitemap": "^7.4.7",
     "@vueuse/nuxt": "^13.7.0",
