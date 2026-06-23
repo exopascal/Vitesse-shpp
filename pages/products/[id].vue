@@ -230,7 +230,7 @@ watch(product, (p) => {
 
   const price = p.price ?? 0
   const image = p.featured_image ?? ''
-  const siteUrl = 'https://checkout.vitesse-sports.de'
+  const siteUrl = useRuntimeConfig().public.siteUrl as string
   const url = `${siteUrl}/products/${handle.value}`
   const description = p.description
     ? p.description.slice(0, 160)

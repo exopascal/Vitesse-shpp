@@ -74,7 +74,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       tenantId: process.env.TENANT_ID || 'default',
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://shop.exopek.de',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.vitesse-sports.de',
 
       // Shopify Configuration
       shopify: {
@@ -88,7 +88,7 @@ export default defineNuxtConfig({
 
   // Site Configuration for SEO and Sitemap
   site: {
-    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://shop.exopek.de'
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://www.vitesse-sports.de'
   },
 
   // Sitemap Configuration

@@ -1,0 +1,15 @@
+# Redirects for old Google-indexed URLs (without /products/ prefix)
+/torque-m1           /products/torque-tank%E2%84%A2-m1    301
+/torque-m1/          /products/torque-tank%E2%84%A2-m1    301
+/torque-m4           /products/torque-tank%E2%84%A2-m4    301
+/torque-m4/          /products/torque-tank%E2%84%A2-m4    301
+/torque-tank-mx      /products/tank-mx                    301
+/torque-tank-mx/     /products/tank-mx                    301
+/exopek              /products/exopek-pro                  301
+/exopek/             /products/exopek-pro                  301
+/exopek-pro          /products/exopek-pro                  301
+/exopek-pro/         /products/exopek-pro                  301
+/t-apex              /products/t-apex                      301
+/t-apex/             /products/t-apex                      301
+/ivo-trainer         /products/ivo-trainer                 301
+/ivo-trainer/        /products/ivo-trainer                 301

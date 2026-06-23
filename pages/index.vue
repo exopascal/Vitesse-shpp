@@ -98,7 +98,7 @@ useSeoMeta({
   ogTitle: 'Vitesse Sports | Premium Trainingsgeräte',
   ogDescription: 'Equipment für Sprinttechnik, Overspeed Training und Widerstandstraining. Entdecke T-APEX, Torque Tank MX und mehr.',
   ogImage: '/spitzenprodukte-sprinttraining-widerstandstraining-speedtraining.jpg',
-  ogUrl: 'https://checkout.vitesse-sports.de',
+  ogUrl: useRuntimeConfig().public.siteUrl,
 })
 
 // Aufgelöste Komponente statt String 'NuxtLink' (siehe GradientButton): der

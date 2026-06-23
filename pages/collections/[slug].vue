@@ -240,7 +240,7 @@ function formatPrice(price: number): string {
 watch(collection, (c) => {
   if (!c) return
 
-  const siteUrl = 'https://checkout.vitesse-sports.de'
+  const siteUrl = useRuntimeConfig().public.siteUrl as string
   const url = `${siteUrl}/collections/${c.handle}`
   const seoContent = collectionSeoContent.value
   const title = seoContent?.title ?? c.title
