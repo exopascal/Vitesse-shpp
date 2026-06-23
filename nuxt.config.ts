@@ -78,7 +78,7 @@ export default defineNuxtConfig({
 
       // Shopify Configuration
       shopify: {
-        domain: process.env.SHOPIFY_DOMAIN,
+        domain: process.env.SHOPIFY_DOMAIN || 'flash-reflex-training.myshopify.com',
         apiVersion: process.env.SHOPIFY_API_VERSION || '2023-10',
         accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
         accountUrl: process.env.SHOPIFY_ACCOUNT_URL || ''
