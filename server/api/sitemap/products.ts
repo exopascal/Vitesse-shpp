@@ -1,54 +1,57 @@
-/**
- * Sitemap API Route - Products
- *
- * Generates sitemap URLs for all products in the e-commerce store
- * Fetches products from Shopify/database and returns them in sitemap format
- */
-
 import { defineSitemapEventHandler } from '#imports'
 
-export default defineSitemapEventHandler(async (e) => {
-  // TODO: Replace with actual product fetching from Shopify
-  // For now, return empty array - implement based on your data source
-
+export default defineSitemapEventHandler(async () => {
   const config = useRuntimeConfig()
+  const { domain, apiVersion, accessToken } = config.public.shopify as {
+    domain: string
+    apiVersion: string
+    accessToken: string
+  }
 
-  // Example: Fetch products from Shopify
-  // const products = await fetchProductsFromShopify(config.public.shopify)
+  if (!domain || !accessToken) return []
 
-  // Placeholder - replace with actual product data
+  const query = `
+    query getSitemapProducts($cursor: String) {
+      products(first: 250, after: $cursor) {
+        pageInfo { hasNextPage endCursor }
+        edges {
+          node {
+            handle
+            updatedAt
+            featuredImage { url }
+          }
+        }
+      }
+    }
+  `
+
   const products: any[] = []
+  let cursor: string | null = null
 
-  return products.map((product) => ({
-    loc: `/products/${product.handle}`,
-    lastmod: product.updatedAt || new Date().toISOString(),
+  do {
+    const res = await $fetch<any>(`https://${domain}/api/${apiVersion}/graphql.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': accessToken,
+      },
+      body: JSON.stringify({ query, variables: { cursor } }),
+    })
+
+    const page = res?.data?.products
+    if (!page) break
+
+    products.push(...page.edges.map((e: any) => e.node))
+    cursor = page.pageInfo.hasNextPage ? page.pageInfo.endCursor : null
+  } while (cursor)
+
+  return products.map((p) => ({
+    loc: `/products/${p.handle}`,
+    lastmod: p.updatedAt,
     changefreq: 'weekly' as const,
     priority: 0.8,
-
-    // Optional: Add images
-    // images: product.images?.map((img: any) => ({
-    //   loc: img.url,
-    //   title: product.title
-    // }))
+    images: p.featuredImage?.url
+      ? [{ loc: p.featuredImage.url, title: p.handle }]
+      : undefined,
   }))
 })
-
-/**
- * Example implementation with Shopify:
- *
- * async function fetchProductsFromShopify(shopifyConfig: any) {
- *   const { domain, apiVersion, accessToken } = shopifyConfig
- *
- *   const response = await fetch(
- *     `https://${domain}/admin/api/${apiVersion}/products.json`,
- *     {
- *       headers: {
- *         'X-Shopify-Access-Token': accessToken
- *       }
- *     }
- *   )
- *
- *   const data = await response.json()
- *   return data.products
- * }
- */

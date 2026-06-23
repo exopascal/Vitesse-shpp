@@ -135,6 +135,7 @@ import { ref, computed, onMounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useShopifyStore } from '../../store/shopifyStore'
 import { getCollectionHeroContent, getCollectionSeoContent } from '~/utils/collectionDetailContent'
+import { createBreadcrumbSchema, schemaToString } from '~/utils/schemas/productSchema'
 
 // Route und Store
 const route = useRoute()
@@ -234,6 +235,40 @@ function formatPrice(price: number): string {
     currency: 'EUR'
   }).format(price)
 }
+
+// SEO: reaktiv wenn collection geladen ist
+watch(collection, (c) => {
+  if (!c) return
+
+  const siteUrl = 'https://checkout.vitesse-sports.de'
+  const url = `${siteUrl}/collections/${c.handle}`
+  const seoContent = collectionSeoContent.value
+  const title = seoContent?.title ?? c.title
+  const description = c.description
+    ? c.description.slice(0, 160)
+    : `${c.title} – Alle Produkte der Collection bei Vitesse Sports.`
+
+  useSeoMeta({
+    title,
+    description,
+    ogTitle: `${title} | Vitesse Sports`,
+    ogDescription: description,
+    ogImage: c.image ?? '',
+    ogUrl: url,
+  })
+
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Collections', url: `${siteUrl}/collections` },
+    { name: c.title, url },
+  ])
+
+  useHead({
+    script: [
+      { type: 'application/ld+json', innerHTML: schemaToString(breadcrumbSchema) },
+    ],
+  })
+}, { immediate: true })
 
 // Beim Mount laden
 onMounted(async () => {

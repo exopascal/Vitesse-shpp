@@ -57,6 +57,7 @@ import ShopBanner from '~/components/productDetails/ShopBanner.vue'
 import ProductFeatures from '~/components/productDetails/ProductFeatures.vue'
 import { getProductDetailContent } from '~/utils/productDetailContent'
 import { resolveProductPagePreset } from '~/utils/productPageConfig'
+import { createProductSchema, createBreadcrumbSchema, schemaToString } from '~/utils/schemas/productSchema'
 
 // Route und Store
 const route = useRoute();
@@ -222,6 +223,55 @@ function formatPrice(price: number) {
     currency: "EUR",
   }).format(price);
 }
+
+// SEO: Meta tags + Schema.org (reaktiv auf Produktdaten)
+watch(product, (p) => {
+  if (!p) return
+
+  const price = p.price ?? 0
+  const image = p.featured_image ?? ''
+  const siteUrl = 'https://checkout.vitesse-sports.de'
+  const url = `${siteUrl}/products/${handle.value}`
+  const description = p.description
+    ? p.description.slice(0, 160)
+    : `${p.title} – Premium Trainingsgerät von Vitesse Sports.`
+
+  useSeoMeta({
+    title: p.title,
+    description,
+    ogTitle: `${p.title} | Vitesse Sports`,
+    ogDescription: description,
+    ogImage: image,
+    ogUrl: url,
+    ogType: 'product',
+  })
+
+  const productSchema = createProductSchema({
+    name: p.title,
+    description: p.description ?? description,
+    image,
+    price,
+    availability: p.available ? 'InStock' : 'OutOfStock',
+    url,
+    ...(p.reviewSummary?.ratingValue && {
+      ratingValue: p.reviewSummary.ratingValue,
+      ratingCount: p.reviewSummary.reviewCount ?? 1,
+    }),
+  })
+
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: siteUrl },
+    { name: 'Produkte', url: `${siteUrl}/products` },
+    { name: p.title, url },
+  ])
+
+  useHead({
+    script: [
+      { type: 'application/ld+json', innerHTML: schemaToString(productSchema) },
+      { type: 'application/ld+json', innerHTML: schemaToString(breadcrumbSchema) },
+    ],
+  })
+}, { immediate: true })
 
 // Produkt bei Seitenaufruf laden
 onMounted(() => {

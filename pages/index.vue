@@ -92,6 +92,15 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, resolveComponent } from 'vue'
 
+useSeoMeta({
+  title: 'Premium Trainingsgeräte für Spitzenleistung',
+  description: 'Vitesse Sports – Equipment für Sprinttechnik, Overspeed Training und Widerstandstraining. T-APEX, Torque Tank MX und mehr. Jetzt entdecken.',
+  ogTitle: 'Vitesse Sports | Premium Trainingsgeräte',
+  ogDescription: 'Equipment für Sprinttechnik, Overspeed Training und Widerstandstraining. Entdecke T-APEX, Torque Tank MX und mehr.',
+  ogImage: '/spitzenprodukte-sprinttraining-widerstandstraining-speedtraining.jpg',
+  ogUrl: 'https://checkout.vitesse-sports.de',
+})
+
 // Aufgelöste Komponente statt String 'NuxtLink' (siehe GradientButton): der
 // String wird von <component :is> nicht aufgelöst und bliebe ohne Navigation.
 const NuxtLink = resolveComponent('NuxtLink')

@@ -120,6 +120,13 @@ import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useShopifyStore } from '~/store/shopifyStore'
 
+useSeoMeta({
+  title: 'Alle Produkte',
+  description: 'Das gesamte Vitesse Sports Sortiment: T-APEX, Torque Tank MX, Exopek Pro und mehr. Premium Trainingsgeräte für Athleten auf höchstem Niveau.',
+  ogTitle: 'Alle Produkte | Vitesse Sports',
+  ogDescription: 'Das gesamte Sortiment an Premium Trainingsgeräten: Sprinttechnik, Widerstandstraining, Overspeed Training.',
+})
+
 const route = useRoute()
 const router = useRouter()
 const shopifyStore = useShopifyStore()

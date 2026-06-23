@@ -110,6 +110,14 @@ export default defineNuxtConfig({
     head: {
       viewport: 'width=device-width, initial-scale=1',
       charset: 'utf-8',
+      titleTemplate: '%s | Vitesse Sports',
+      meta: [
+        { name: 'description', content: 'Premium Trainingsgeräte für Sprinttechnik, Widerstandstraining und Overspeed Training. Entdecke das Vitesse Sports Equipment.' },
+        { property: 'og:site_name', content: 'Vitesse Sports' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:locale', content: 'de_DE' },
+        { name: 'robots', content: 'index, follow' },
+      ],
 
       // Hydration Debug (development only)
       script: process.env.NODE_ENV === 'development' ? [

@@ -1,48 +1,53 @@
-/**
- * Sitemap API Route - Categories
- *
- * Generates sitemap URLs for all product categories
- * Fetches categories from Shopify/database and returns them in sitemap format
- */
-
 import { defineSitemapEventHandler } from '#imports'
 
-export default defineSitemapEventHandler(async (e) => {
-  // TODO: Replace with actual category fetching from Shopify
-  // For now, return empty array - implement based on your data source
-
+export default defineSitemapEventHandler(async () => {
   const config = useRuntimeConfig()
+  const { domain, apiVersion, accessToken } = config.public.shopify as {
+    domain: string
+    apiVersion: string
+    accessToken: string
+  }
 
-  // Example: Fetch collections/categories from Shopify
-  // const categories = await fetchCategoriesFromShopify(config.public.shopify)
+  if (!domain || !accessToken) return []
 
-  // Placeholder - replace with actual category data
-  const categories: any[] = []
+  const query = `
+    query getSitemapCollections($cursor: String) {
+      collections(first: 250, after: $cursor) {
+        pageInfo { hasNextPage endCursor }
+        edges {
+          node {
+            handle
+            updatedAt
+          }
+        }
+      }
+    }
+  `
 
-  return categories.map((category) => ({
-    loc: `/categories/${category.handle}`,
-    lastmod: category.updatedAt || new Date().toISOString(),
+  const collections: any[] = []
+  let cursor: string | null = null
+
+  do {
+    const res = await $fetch<any>(`https://${domain}/api/${apiVersion}/graphql.json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': accessToken,
+      },
+      body: JSON.stringify({ query, variables: { cursor } }),
+    })
+
+    const page = res?.data?.collections
+    if (!page) break
+
+    collections.push(...page.edges.map((e: any) => e.node))
+    cursor = page.pageInfo.hasNextPage ? page.pageInfo.endCursor : null
+  } while (cursor)
+
+  return collections.map((c) => ({
+    loc: `/collections/${c.handle}`,
+    lastmod: c.updatedAt,
     changefreq: 'weekly' as const,
     priority: 0.7,
   }))
 })
-
-/**
- * Example implementation with Shopify:
- *
- * async function fetchCategoriesFromShopify(shopifyConfig: any) {
- *   const { domain, apiVersion, accessToken } = shopifyConfig
- *
- *   const response = await fetch(
- *     `https://${domain}/admin/api/${apiVersion}/collections.json`,
- *     {
- *       headers: {
- *         'X-Shopify-Access-Token': accessToken
- *       }
- *     }
- *   )
- *
- *   const data = await response.json()
- *   return data.collections
- * }
- */

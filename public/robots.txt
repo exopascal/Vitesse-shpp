@@ -1,1 +1,9 @@
+User-agent: *
+Allow: /
 
+Disallow: /api/
+Disallow: /checkout/
+Disallow: /cart
+Disallow: /debug-simple
+
+Sitemap: https://checkout.vitesse-sports.de/sitemap.xml
