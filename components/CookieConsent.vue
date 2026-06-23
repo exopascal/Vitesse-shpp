@@ -1,11 +1,10 @@
 <template>
-  <Teleport to="body">
-    <Transition name="cookie-modal">
-      <div
-        v-if="showModal"
-        class="cookie-overlay"
-        @click.self="handleOverlayClick"
-      >
+  <Transition name="cookie-modal">
+    <div
+      v-if="showModal"
+      class="cookie-overlay"
+      @click.self="handleOverlayClick"
+    >
         <div class="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
 
           <!-- Header -->
@@ -66,9 +65,8 @@
           </div>
 
         </div>
-      </div>
-    </Transition>
-  </Teleport>
+    </div>
+  </Transition>
 </template>
 
 <script setup lang="ts">

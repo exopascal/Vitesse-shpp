@@ -13,7 +13,9 @@
 
     <Footer />
 
-    <CookieConsent />
+    <ClientOnly>
+      <CookieConsent />
+    </ClientOnly>
 
   </div>
 </template>
