@@ -226,8 +226,9 @@ withDefaults(defineProps<{
   }
 
   .hero-kicker {
-    max-width: 10ch;
-    font-size: clamp(2.2rem, 12vw, 4rem);
+    max-width: 100%;
+    font-size: clamp(2rem, 10vw, 4rem);
+    overflow-wrap: break-word;
   }
 
   .hero-title {
@@ -239,13 +240,15 @@ withDefaults(defineProps<{
   }
 
   .hero-section-home .hero-kicker {
-    max-width: 9ch;
-    font-size: clamp(2.6rem, 13vw, 4.6rem);
+    max-width: 100%;
+    font-size: clamp(1.8rem, 8vw, 4.6rem);
+    overflow-wrap: break-word;
   }
 
   .hero-section-home .hero-title {
-    max-width: 10ch;
-    font-size: clamp(2.4rem, 11vw, 4rem);
+    max-width: 22rem;
+    font-size: clamp(1.35rem, 5.5vw, 2rem);
+    overflow-wrap: break-word;
   }
 
   .hero-section-home .hero-text {

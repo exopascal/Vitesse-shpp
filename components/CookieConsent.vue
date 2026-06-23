@@ -349,6 +349,24 @@ function handleOverlayClick() {}
   font-size: var(--text-xs, 0.75rem);
 }
 
+@media (max-width: 480px) {
+  .cookie-modal {
+    padding: 1.25rem;
+  }
+
+  .cookie-modal__actions {
+    flex-wrap: wrap;
+  }
+
+  .cookie-btn {
+    min-width: calc(50% - 0.375rem);
+  }
+
+  .cookie-btn--primary {
+    flex: 1 0 100%;
+  }
+}
+
 /* Transition */
 .cookie-modal-enter-active,
 .cookie-modal-leave-active {

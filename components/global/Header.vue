@@ -1580,7 +1580,11 @@ onUnmounted(() => {
   .header-container {
     padding: 0 0.5rem;
   }
-  
+
+  .b2b-badge {
+    display: none;
+  }
+
   .nav-hidden {
     display: none;
   }

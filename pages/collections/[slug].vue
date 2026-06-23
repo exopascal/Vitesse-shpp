@@ -603,12 +603,25 @@ watch(
   }
 
   .products-grid {
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
   }
 
   .product-image {
-    height: 18rem;
+    height: 12rem;
+  }
+
+  .product-info {
+    padding: 0.9rem 1rem 1rem;
+  }
+
+  .product-info h3 {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .current-price {
+    font-size: 1.05rem;
   }
 }
 </style>

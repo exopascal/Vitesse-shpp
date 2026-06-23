@@ -458,5 +458,10 @@ function formatPrice(price: number) {
   .archive-reset {
     width: 100%;
   }
+
+  .archive-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
 }
 </style>
