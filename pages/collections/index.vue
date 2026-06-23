@@ -3,11 +3,11 @@
     <div v-if="isLoading" class="loading">
       Collections werden geladen...
     </div>
-    
+
     <div v-else-if="error" class="error">
       {{ error }}
     </div>
-    
+
     <div v-else class="collections-grid">
       <h1>Alle Kategorien</h1>
       <div class="grid">
@@ -30,12 +30,10 @@
 
           <div class="collection-info">
             <h3>{{ collection.title }}</h3>
-            <p v-if="collection.description" class="description text-xl text-primary">
+            <p v-if="collection.description" class="description">
               {{ collection.description }}
             </p>
-            <span class="product-count">
-              {{ collection.productsCount }} Produkte
-            </span>
+            <span class="collection-cta">Kollektion ansehen →</span>
           </div>
         </NuxtLink>
       </div>
@@ -44,40 +42,24 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { computed } from 'vue'
 import { useShopifyStore } from '../../store/shopifyStore'
 
-// Store und Daten
 const shopifyStore = useShopifyStore()
-const collections = ref<any[]>([])
-const isLoading = ref(true)
-const error = ref<string | null>(null)
 
-// Collections laden
-async function loadCollections() {
-  try {
-    isLoading.value = true
-    error.value = null
+const { data, pending: isLoading, error: fetchError } = await useAsyncData(
+  'all-collections',
+  () => shopifyStore.fetchAllCollections()
+)
 
-    collections.value = await (shopifyStore as any).fetchAllCollections()
-    console.log('Loaded collections:', collections.value)
-  } catch (err) {
-    console.error('Error loading collections:', err)
-    error.value = 'Fehler beim Laden der Collections'
-  } finally {
-    isLoading.value = false
-  }
-}
-
-// Beim Mount laden
-onMounted(async () => {
-  await loadCollections()
-})
+const collections = computed(() => data.value ?? [])
+const error = computed(() => fetchError.value ? 'Fehler beim Laden der Collections' : null)
 </script>
 
 <style scoped>
 .collections-overview {
   padding: 2rem;
+  min-height: 100vh;
 }
 
 .loading, .error {
@@ -102,8 +84,8 @@ onMounted(async () => {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -113,19 +95,19 @@ onMounted(async () => {
   background: white;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-decoration: none;
   color: inherit;
 }
 
 .collection-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
 }
 
 .collection-image {
-  height: 200px;
+  height: 180px;
   position: relative;
   overflow: hidden;
   background: #f5f5f5;
@@ -145,32 +127,71 @@ onMounted(async () => {
   justify-content: center;
   font-size: 3rem;
   font-weight: bold;
-  color: #999;
-  background: linear-gradient(135deg, #f5f5f5, #e5e5e5);
+  color: #bbb;
+  background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
 }
 
 .collection-info {
-  padding: 1.5rem;
+  padding: 1.25rem 1.5rem 1.5rem;
 }
 
 .collection-info h3 {
   margin: 0 0 0.5rem 0;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #333;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1f2937;
 }
 
 .description {
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.9rem 0;
+  font-size: 0.9rem;
+  color: #6b7280;
+  line-height: 1.5;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.product-count {
-  color: #888;
-  font-size: 0.85rem;
-  font-weight: 500;
+.collection-cta {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0f5e9c;
+}
+
+@media (max-width: 640px) {
+  .collections-overview {
+    padding: 1.5rem 1rem;
+  }
+
+  .collections-grid h1 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .collection-image {
+    height: 120px;
+  }
+
+  .no-image {
+    font-size: 2rem;
+  }
+
+  .collection-info {
+    padding: 0.9rem 1rem 1rem;
+  }
+
+  .collection-info h3 {
+    font-size: 0.9rem;
+  }
+
+  .description {
+    display: none;
+  }
 }
 </style>
