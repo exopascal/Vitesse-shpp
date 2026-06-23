@@ -70,6 +70,8 @@
 </template>
 
 <script setup lang="ts">
+import { useCookieConsent } from '~/composables/useCookieConsent'
+
 const {
   preferences,
   categoryMeta,

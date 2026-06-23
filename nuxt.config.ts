@@ -158,6 +158,7 @@ export default defineNuxtConfig({
   cookieConsent: {
     cookieName: 'vs_cookie_consent',
     cookieExpiryDays: 365,
+    consentVersion: '1',
 
     categories: {
       essential: {
