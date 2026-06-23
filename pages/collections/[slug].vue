@@ -131,25 +131,31 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useShopifyStore } from '../../store/shopifyStore'
 import { getCollectionHeroContent, getCollectionSeoContent } from '~/utils/collectionDetailContent'
 import { createBreadcrumbSchema, schemaToString } from '~/utils/schemas/productSchema'
 
-// Route und Store
 const route = useRoute()
 const shopifyStore = useShopifyStore()
-
-// Daten
-const collection = ref<any>(null)
-const products = ref<any[]>([])
-const isLoading = ref(true)
-const isLoadingProducts = ref(false)
-const error = ref<string | null>(null)
-
-// Slug aus Route
 const slug = computed(() => route.params.slug as string)
+
+// SSR-kompatibel: Collection-Metadaten und Produkte parallel laden
+const { data: collection, pending: isLoading, error: collectionError } = await useAsyncData(
+  () => `collection-${slug.value}`,
+  () => shopifyStore.fetchCollection(slug.value),
+  { watch: [slug] }
+)
+
+const { data: productsData, pending: isLoadingProducts } = await useAsyncData(
+  () => `collection-products-${slug.value}`,
+  () => shopifyStore.fetchProductsByCollection(slug.value, 24),
+  { watch: [slug] }
+)
+
+const error = computed(() => collectionError.value ? 'Fehler beim Laden der Collection' : null)
+const products = computed(() => productsData.value ?? [])
 
 const collectionHero = computed(() => getCollectionHeroContent(collection.value, slug.value))
 const collectionSeoContent = computed(() => getCollectionSeoContent(collection.value, slug.value))
@@ -185,50 +191,9 @@ const displayedProducts = computed(() => {
   })
 })
 
-// Collection laden
-async function loadCollection() {
-  try {
-    isLoading.value = true
-    error.value = null
-    
-    console.log('Loading collection:', slug.value)
-    collection.value = await (shopifyStore as any).fetchCollection(slug.value)
-    
-    if (!collection.value) {
-      error.value = 'Collection nicht gefunden'
-      return
-    }
-    
-    console.log('Loaded collection:', collection.value)
-  } catch (err) {
-    console.error('Error loading collection:', err)
-    error.value = 'Fehler beim Laden der Collection'
-  } finally {
-    isLoading.value = false
-  }
-}
-
-// Produkte der Collection laden
-async function loadCollectionProducts() {
-  if (!collection.value) return
-  
-  try {
-    isLoadingProducts.value = true
-    
-    console.log('Loading products for collection:', slug.value)
-    products.value = await (shopifyStore as any).fetchProductsByCollection(slug.value, 24)
-    
-    console.log('Loaded products:', products.value)
-  } catch (err) {
-    console.error('Error loading collection products:', err)
-  } finally {
-    isLoadingProducts.value = false
-  }
-}
-
 // Preis formatieren
 function formatPrice(price: number): string {
-  if (!price) return '�0,00'
+  if (!price) return '€0,00'
   
   return new Intl.NumberFormat('de-DE', {
     style: 'currency',
@@ -269,23 +234,6 @@ watch(collection, (c) => {
     ],
   })
 }, { immediate: true })
-
-// Beim Mount laden
-onMounted(async () => {
-  await loadCollection()
-  await loadCollectionProducts()
-})
-
-// Bei Änderung der Route neu laden
-watch(
-  () => route.params.slug,
-  async () => {
-    if (route.params.slug) {
-      await loadCollection()
-      await loadCollectionProducts()
-    }
-  }
-)
 </script>
 
 <style scoped>
