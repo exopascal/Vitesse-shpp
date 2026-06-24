@@ -97,7 +97,7 @@ useSeoMeta({
   description: 'Vitesse Sports – Equipment für Sprinttechnik, Overspeed Training und Widerstandstraining. T-APEX, Torque Tank MX und mehr. Jetzt entdecken.',
   ogTitle: 'Vitesse Sports | Premium Trainingsgeräte',
   ogDescription: 'Equipment für Sprinttechnik, Overspeed Training und Widerstandstraining. Entdecke T-APEX, Torque Tank MX und mehr.',
-  ogImage: '/spitzenprodukte-sprinttraining-widerstandstraining-speedtraining.jpg',
+  ogImage: '/vitesse-thumbnail.png',
   ogUrl: useRuntimeConfig().public.siteUrl,
 })
 
@@ -163,7 +163,7 @@ const featureSections: FeatureSection[] = [
       text: 'Maximale Belastung - stufenloser Widerstand. Auf jedem Untergrund.',
       to: '/collections/torque',
       buttonVariant: 'torque',
-      logoImage: '/Torque_USA_weiß-orange_2000x.webp',
+      logoImage: '/Torque-USA-weiss-orange-2000x.webp',
       logoAlt: 'TORQUE',
       overlayStrength: 'strong' as const,
       accentGradient: 'rgba(236, 106, 41, 0.08), rgba(236, 106, 41, 0.14)'
