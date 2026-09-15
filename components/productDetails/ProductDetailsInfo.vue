@@ -21,20 +21,6 @@
         {{ product.subtitle }}
       </p>
 
-      <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-[#4f463b]">
-        <div class="flex items-center gap-1.5" aria-label="Bewertungen">
-          <span
-            v-for="star in 5"
-            :key="star"
-            class="text-lg"
-            :class="star <= filledStars ? 'text-[#f26a21]' : 'text-[#d5cabd]'"
-          >
-            ★
-          </span>
-        </div>
-        <span class="font-semibold">{{ ratingLabel }}</span>
-        <span v-if="reviewCountLabel" class="text-[#7d7164]">{{ reviewCountLabel }}</span>
-      </div>
 
       <div class="mt-6 flex flex-wrap items-end gap-3">
         <span class="text-3xl font-black text-[#17120d] sm:text-4xl">{{ formatPrice(currentPrice) }}</span>
@@ -99,7 +85,7 @@
 
           <button
             type="button"
-            class="min-h-[3.25rem] rounded-full bg-[#f26a21] px-6 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:bg-[#dc5d18] disabled:cursor-not-allowed disabled:bg-[#c9c1b6]"
+            class="min-h-[3.25rem] rounded-full bg-[#111827] px-6 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:bg-[#374151] disabled:cursor-not-allowed disabled:bg-[#c9c1b6]"
             :disabled="!isAvailable || isLoading"
             @click="addToCart"
           >
@@ -184,14 +170,7 @@ const isAvailable = computed(() => {
 
 const currentPrice = computed(() => props.selectedVariant?.price || product.value?.price || 0)
 const comparePrice = computed(() => props.selectedVariant?.compareAtPrice || product.value?.compare_at_price || 0)
-const ratingValue = computed(() => product.value?.reviewSummary?.ratingValue)
-const reviewCount = computed(() => product.value?.reviewSummary?.reviewCount)
-const filledStars = computed(() => Math.round(ratingValue.value || 0))
-const ratingLabel = computed(() => (ratingValue.value ? `${ratingValue.value.toFixed(1)} / 5` : 'Noch keine Bewertungen'))
-const reviewCountLabel = computed(() => {
-  if (!reviewCount.value) return ''
-  return `${reviewCount.value} Bewertungen`
-})
+
 const variantCount = computed(() => product.value?.variants?.length || 1)
 
 function selectOption(optionName, optionValue) {

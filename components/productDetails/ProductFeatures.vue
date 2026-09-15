@@ -1,5 +1,5 @@
 <template>
-  <section class="product-features-section">
+  <section v-if="content.items?.length" class="product-features-section">
     <div class="product-features-container">
       <header class="product-features-header">
         <h2>{{ content.title }}</h2>

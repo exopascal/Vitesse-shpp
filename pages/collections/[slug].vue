@@ -78,32 +78,32 @@
           </div>
           
           <div v-else class="products-grid">
-            <NuxtLink 
-              v-for="product in displayedProducts" 
+            <NuxtLink
+              v-for="product in displayedProducts"
               :key="product.id"
               :to="`/products/${product.handle}`"
               class="product-card"
             >
               <div class="product-image">
-                <img 
-                  v-if="product.featured_image" 
-                  :src="product.featured_image" 
+                <img
+                  v-if="product.featured_image"
+                  :src="product.featured_image"
                   :alt="product.title"
                 />
                 <div v-else class="no-image">
                   {{ product.title.charAt(0) }}
                 </div>
-                
+
                 <div v-if="product.on_sale" class="sale-badge">
                   Sale
                 </div>
               </div>
-              
+
               <div class="product-info">
                 <h3>{{ product.title }}</h3>
                 <div class="price">
-                  <span 
-                    v-if="product.on_sale && product.compare_at_price" 
+                  <span
+                    v-if="product.on_sale && product.compare_at_price"
                     class="original-price"
                   >
                     {{ formatPrice(product.compare_at_price) }}
@@ -124,6 +124,13 @@
               </div>
             </NuxtLink>
           </div>
+
+          <div v-if="hasNextPage" class="load-more-wrapper">
+            <button class="load-more-btn" :disabled="isLoadingMore" @click="loadMore">
+              <span v-if="isLoadingMore">Wird geladen…</span>
+              <span v-else>Mehr Produkte laden</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -131,7 +138,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { useShopifyStore } from '../../store/shopifyStore'
 import { getCollectionHeroContent, getCollectionSeoContent } from '~/utils/collectionDetailContent'
@@ -148,14 +155,41 @@ const { data: collection, pending: isLoading, error: collectionError } = await u
   { watch: [slug] }
 )
 
-const { data: productsData, pending: isLoadingProducts } = await useAsyncData(
+const { data: initialPageData, pending: isLoadingProducts } = await useAsyncData(
   () => `collection-products-${slug.value}`,
-  () => shopifyStore.fetchProductsByCollection(slug.value, 24),
+  () => shopifyStore.fetchCollectionPage(slug.value, 12),
   { watch: [slug] }
 )
 
+const extraProducts = ref<import('~/types/domain/shopify').ShopifyProduct[]>([])
+const endCursor = ref<string | null>(null)
+const hasNextPage = ref(false)
+const isLoadingMore = ref(false)
+
+watch(initialPageData, (data) => {
+  extraProducts.value = []
+  endCursor.value = data?.endCursor ?? null
+  hasNextPage.value = data?.hasNextPage ?? false
+}, { immediate: true })
+
+async function loadMore() {
+  if (!hasNextPage.value || isLoadingMore.value) return
+  isLoadingMore.value = true
+  try {
+    const result = await shopifyStore.fetchCollectionPage(slug.value, 12, endCursor.value ?? undefined)
+    extraProducts.value.push(...result.products)
+    endCursor.value = result.endCursor
+    hasNextPage.value = result.hasNextPage
+  } finally {
+    isLoadingMore.value = false
+  }
+}
+
 const error = computed(() => collectionError.value ? 'Fehler beim Laden der Collection' : null)
-const products = computed(() => productsData.value ?? [])
+const products = computed(() => [
+  ...(initialPageData.value?.products ?? []),
+  ...extraProducts.value,
+])
 
 const collectionHero = computed(() => getCollectionHeroContent(collection.value, slug.value))
 const collectionSeoContent = computed(() => getCollectionSeoContent(collection.value, slug.value))
@@ -166,16 +200,14 @@ const productsSectionTitle = computed(() => {
 
   return `Unsere Produkte für ${collection.value?.title || 'diese Collection'}.`
 })
-const displayedProducts = computed(() => {
-  if (slug.value !== 'sprinttraining') {
-    return products.value
-  }
 
-  const prioritizedHandles = [
-    't-apex',
-    'torque-tank-mx',
-    'exopek-pro',
-  ]
+const collectionPriorities: Record<string, string[]> = {
+  sprinttraining: ['t-apex', 'torque-tank-mx', 'exopek-pro'],
+}
+
+const displayedProducts = computed(() => {
+  const prioritizedHandles = collectionPriorities[slug.value]
+  if (!prioritizedHandles) return products.value
 
   const priorityMap = new Map(prioritizedHandles.map((handle, index) => [handle, index]))
 
@@ -512,6 +544,34 @@ watch(collection, (c) => {
 .out-of-stock {
   color: #e74c3c;
   font-weight: 600;
+}
+
+.load-more-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.load-more-btn {
+  padding: 0.85rem 2.5rem;
+  border: 2px solid #0f5e9c;
+  border-radius: 999px;
+  background: transparent;
+  color: #0f5e9c;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.load-more-btn:hover:not(:disabled) {
+  background: #0f5e9c;
+  color: white;
+}
+
+.load-more-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 @media (max-width: 640px) {

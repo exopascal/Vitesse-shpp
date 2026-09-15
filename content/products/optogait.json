@@ -1,0 +1,65 @@
+{
+  "highlights": {
+    "kicker": "Product Highlights",
+    "title": "Optogait. Praezise Bewegungsanalyse.",
+    "ctaLabel": "Weitere Produkte",
+    "ctaHref": "/collections/witty#collection-products",
+    "items": [
+      {
+        "body": "Optogait unterstuetzt objektive Analysen von Laufbild, Schrittparametern und Belastungsprofilen im Performance- und Reha-Umfeld.",
+        "image": "",
+        "alt": "Optogait Analyse-Setup"
+      },
+      {
+        "body": "Geeignet fuer Athletiktraining, Screening, Diagnostik-nahe Tests und therapeutische Verlaufskontrolle.",
+        "image": "",
+        "alt": "Optogait im Einsatz"
+      },
+      {
+        "body": "Messdaten lassen sich dort einsetzen, wo Bewegung nicht nur beobachtet, sondern nachvollziehbar bewertet werden soll.",
+        "image": "",
+        "alt": "Optogait Detailansicht"
+      },
+      {
+        "body": "Das System passt in moderne Setups zwischen Leistungsdiagnostik, Return-to-Play und technischer Laufanalyse.",
+        "image": "",
+        "alt": "Optogait fuer Diagnostik und Reha"
+      }
+    ]
+  },
+  "banner": {
+    "title": "Analyse statt Schaetzung.",
+    "text": "Optogait bringt praezise Bewegungs- und Laufanalysen in ein Setup, das sich fuer Performance, Testung und Reha gleichermassen nutzen laesst.",
+    "image": "",
+    "alt": "Optogait Hero-Bild"
+  },
+  "features": {
+    "title": "Gebaut fuer messbare Entscheidungen",
+    "items": [
+      {
+        "title": "Objektive Laufanalyse",
+        "description": "Schrittlaenge, Kontaktzeit, Symmetrie und weitere Parameter lassen sich strukturiert erfassen und in Trainings- oder Reha-Entscheidungen ueberfuehren.",
+        "image": "",
+        "alt": "Optogait Laufanalyse"
+      },
+      {
+        "title": "Vielseitig einsetzbar",
+        "description": "Das System passt in Leistungsdiagnostik, Athletiktraining, Return-to-Play und medizinisch betreute Beurteilungen von Bewegungsablaeufen.",
+        "image": "",
+        "alt": "Optogait vielseitig im Einsatz"
+      },
+      {
+        "title": "Modular erweiterbar",
+        "description": "Die Produktseite kann spaeter mit produktspezifischen FAQs, Medien und Detailsektionen erweitert werden.",
+        "image": "",
+        "alt": "Optogait modular aufgebaut"
+      }
+    ]
+  },
+  "faq": {
+    "title": "FAQs",
+    "subtitle": "Wir beantworten Deine Fragen",
+    "initiallyOpen": [],
+    "items": []
+  }
+}

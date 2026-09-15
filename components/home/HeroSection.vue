@@ -160,6 +160,10 @@ withDefaults(defineProps<{
   height: auto;
 }
 
+.hero-logo-tapex {
+  width: clamp(6.5rem, 12vw, 9rem);
+}
+
 .hero-kicker {
   margin: 0;
   max-width: 15ch;

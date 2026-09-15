@@ -1,11 +1,15 @@
 <template>
   <main class="home-page">
     <HeroSection
-      kicker="Spitzenprodukte. Spitzenleistung."
-      title="Unser Equipment steht für Leistungssteigerung und erhöhte Performance."
-      background-image="/spitzenprodukte-sprinttraining-widerstandstraining-speedtraining.jpg"
+      kicker="Die Zukunft des Seilzugtrainings"
+      title="Offizieller deutscher T-Apex Händler"
+      background-image="/t-apex-zugwiderstandtraining-sprinttraining.jpg"
+      logo-image="/t-apex-logo.weiss.svg"
+      logo-alt="T-APEX"
+      logo-class="hero-logo-tapex"
       button-text="Jetzt entdecken"
-      to="/collections/widerstandstraining"
+      button-variant="tapex"
+      to="/products/t-apex"
       size-variant="home"
     />
 
@@ -105,7 +109,7 @@ useSeoMeta({
 // String wird von <component :is> nicht aufgelöst und bliebe ohne Navigation.
 const NuxtLink = resolveComponent('NuxtLink')
 
-type ButtonVariant = 'default' | 'tapex' | 'torque' | 'exopek' | 'sportreact' | 'witty' | 'tunturi'
+type ButtonVariant = 'default' | 'tapex' | 'torque' | 'exopek' | 'witty' | 'tunturi'
 type FeatureSection = {
   backgroundImage: string
   title: string
@@ -137,7 +141,6 @@ const homeBrands = [
   { name: 'T-APEX', slug: 'tapex', image: '/t-apex-logo.png.avif', imageClass: 'brand-strip-logo-image-tapex', url: '/products?collection=sprinttraining&q=t-apex' },
   { name: 'TORQUE', slug: 'torque', image: '/Torque_USA_black-orange_2000x.png.webp', imageClass: 'brand-strip-logo-image-torque', url: '/products?q=torque' },
   { name: 'EXOPEK', slug: 'exopek', image: '/Exopek_Logo_horizontal-Wortmarke-bildmarke_schwarz.png', imageClass: 'brand-strip-logo-image-exopek', url: '/products?q=exopek' },
-  { name: 'SPORTREACT', slug: 'sportreact', image: '/sportreact-logo.png', imageClass: 'brand-strip-logo-image-sportreact', url: '/products?q=sportreact' },
   { name: 'HP COSMOS', slug: 'hp-cosmos', image: '/hp-cosmos-logo.png', imageClass: 'brand-strip-logo-image-hp-cosmos', url: '/products?q=hp%20cosmos' },
 ]
 const introWords = [
@@ -148,38 +151,30 @@ const introWords = [
 ]
 const featureSections: FeatureSection[] = [
   {
-    backgroundImage: '/t-apex-zugwiderstandtraining-sprinttraining.jpg',
-    title: 'Die Zukunft des Seilzugtrainings',
-    text: 'Trainiere Smart und Dynamisch. Steigert Deine Leistung messbar.',
-    to: '/products/t-apex',
-    buttonVariant: 'tapex',
-    logoImage: '/t-apex-logo.weiss.svg',
-    logoAlt: 'T-APEX',
-    logoClass: 'feature-brand-image-tapex'
+    backgroundImage: '/tunturi-schlittentraining-power.jpg',
+    title: 'Maximale Vielseitigkeit für Training & Reha.',
+    text: 'Klassisches Lauftraining, Power-Schlitten-Modus und Reha-Programme in einem Gerät.',
+    to: '/products/tunturi-platinum-tr30-core-treadmill',
+    buttonVariant: 'tunturi',
+    logoImage: '/tunturi-logo.png',
+    logoAlt: 'TUNTURI',
+    overlayStrength: 'strong' as const,
+    accentGradient: 'rgba(37, 99, 43, 0.08), rgba(37, 99, 43, 0.16)'
   },
-    {
-      backgroundImage: '/torque-widerstandstraining-schlittentraining.jpg',
-      title: 'Beladbarer Schlitten auf Rädern.',
-      text: 'Maximale Belastung - stufenloser Widerstand. Auf jedem Untergrund.',
-      to: '/collections/torque',
-      buttonVariant: 'torque',
-      logoImage: '/Torque-USA-weiss-orange-2000x.webp',
-      logoAlt: 'TORQUE',
-      overlayStrength: 'strong' as const,
-      accentGradient: 'rgba(236, 106, 41, 0.08), rgba(236, 106, 41, 0.14)'
+  {
+    backgroundImage: '/torque-widerstandstraining-schlittentraining.jpg',
+    title: 'Beladbarer Schlitten auf Rädern.',
+    text: 'Maximale Belastung - stufenloser Widerstand. Auf jedem Untergrund.',
+    to: '/collections/torque-1',
+    buttonVariant: 'torque',
+    logoImage: '/Torque-USA-weiss-orange-2000x.webp',
+    logoAlt: 'TORQUE',
+    overlayStrength: 'strong' as const,
+    accentGradient: 'rgba(236, 106, 41, 0.08), rgba(236, 106, 41, 0.14)'
   }
 ]
 const collectionGridSections: GridCard[][] = [
   [
-    {
-      backgroundImage: '/sportreact-reaktionsgeschwindigkeit-laser-gates.jpg',
-      title: 'Reagiere schneller. Klüger. Smarter.',
-      text: 'Trainiere Wahrnehmung und Reaktion mit intelligentem Licht-, Sound- und Vibrationsfeedback.',
-      to: '/collections/sportreact',
-      buttonVariant: 'sportreact',
-      logoImage: '/sportreact-logo.png',
-      logoAlt: 'SPORTREACT'
-    },
     {
       backgroundImage: '/exopek-widerstandstraining-performance-widerstandsbaender.jpg',
       title: 'Maximaler Widerstand. In jeder Bewegung.',
@@ -190,9 +185,7 @@ const collectionGridSections: GridCard[][] = [
       logoAlt: 'EXOPEK',
       overlayStrength: 'strong' as const,
       accentGradient: 'rgba(187, 54, 48, 0.08), rgba(187, 54, 48, 0.14)'
-    }
-  ],
-  [
+    },
     {
       backgroundImage: '/zeitmessung-witty-microgate-lichtschranke.jpg',
       title: 'Präzise Zeitmessung.',
@@ -203,19 +196,6 @@ const collectionGridSections: GridCard[][] = [
       logoAlt: 'HP Cosmos',
       overlayStrength: 'strong' as const,
       accentGradient: 'rgba(44, 113, 184, 0.08), rgba(44, 113, 184, 0.18)'
-    },
-    {
-      backgroundImage: '/tunturi-schlittentraining-power.jpg',
-      backgroundSize: '145%',
-      backgroundPosition: 'center center',
-      title: 'Maximale Vielseitigkeit für Training & Reha.',
-      text: 'Klassisches Lauftraining, Power-Schlitten-Modus und Reha-Programme in einem Gerät.',
-      to: '/products/tunturi-platinum-tr30-core-treadmill',
-      buttonVariant: 'tunturi',
-      logoImage: '/tunturi-logo.png',
-      logoAlt: 'TUNTURI',
-      overlayStrength: 'strong' as const,
-      accentGradient: 'rgba(37, 99, 43, 0.08), rgba(37, 99, 43, 0.16)'
     }
   ]
 ]
@@ -302,9 +282,6 @@ onBeforeUnmount(() => {
   width: clamp(8rem, 13vw, 10.5rem);
 }
 
-.brand-strip-logo-image-sportreact {
-  width: clamp(10rem, 16vw, 13rem);
-}
 
 .brand-strip-logo-link:hover {
   transform: translateY(-1px);
@@ -503,10 +480,6 @@ onBeforeUnmount(() => {
 
   .brand-strip-logo-torque {
     font-size: clamp(1.5rem, 8vw, 2rem);
-  }
-
-  .brand-strip-logo-sportreact {
-    font-size: clamp(1.75rem, 11vw, 2.6rem);
   }
 
   .intro-section {

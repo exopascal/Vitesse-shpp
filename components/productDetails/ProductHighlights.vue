@@ -162,7 +162,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section ref="sectionRef" class="product-highlights-section">
+  <section v-if="content.items?.length" ref="sectionRef" class="product-highlights-section">
     <div class="product-highlights-container">
       <div class="product-highlights-header">
         <div>

@@ -93,22 +93,13 @@ const footerSections = [
 <style scoped>
 .site-footer {
   position: relative;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    radial-gradient(circle at top, rgba(60, 121, 189, 0.28), transparent 38%),
-    linear-gradient(180deg, #13263c 0%, #0a1422 100%);
+  border-top: 1px solid #e5e7eb;
+  background: #f5f5f5;
   overflow: hidden;
 }
 
 .site-footer__glow {
-  position: absolute;
-  inset: -8rem auto auto 50%;
-  width: 28rem;
-  height: 28rem;
-  background: rgba(106, 163, 218, 0.2);
-  filter: blur(110px);
-  transform: translateX(-50%);
-  pointer-events: none;
+  display: none;
 }
 
 .site-footer__inner,
@@ -145,21 +136,21 @@ const footerSections = [
 .site-footer__copy {
   max-width: 28rem;
   margin: 0;
-  color: var(--color-text-secondary);
+  color: #4b5563;
   font-size: var(--font-size-base);
   line-height: var(--line-height-relaxed);
 }
 
 .site-footer__contact {
   width: fit-content;
-  color: var(--color-white);
+  color: #111827;
   font-weight: var(--font-weight-semibold);
   text-decoration: none;
   transition: color var(--transition-base);
 }
 
 .site-footer__contact:hover {
-  color: #6aa3da;
+  color: #374151;
 }
 
 .site-footer__nav {
@@ -175,7 +166,7 @@ const footerSections = [
 
 .site-footer__title {
   margin: 0;
-  color: var(--color-white);
+  color: #111827;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
   letter-spacing: 0.12em;
@@ -192,7 +183,7 @@ const footerSections = [
 
 .site-footer__link,
 .site-footer__legal-link {
-  color: var(--color-text-secondary);
+  color: #4b5563;
   text-decoration: none;
   transition:
     color var(--transition-base),
@@ -201,7 +192,7 @@ const footerSections = [
 
 .site-footer__link:hover,
 .site-footer__legal-link:hover {
-  color: var(--color-white);
+  color: #111827;
   transform: translateX(2px);
 }
 
@@ -212,8 +203,8 @@ const footerSections = [
   justify-content: space-between;
   gap: 1rem;
   padding: 1.5rem 0 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--color-text-tertiary);
+  border-top: 1px solid #e5e7eb;
+  color: #6b7280;
   font-size: var(--font-size-sm);
 }
 
@@ -226,8 +217,8 @@ const footerSections = [
   margin-top: 0.75rem;
   font-size: 0.72rem;
   line-height: 1.5;
-  color: var(--color-text-tertiary);
-  opacity: 0.75;
+  color: #9ca3af;
+  opacity: 0.9;
 }
 
 .site-footer__legal {

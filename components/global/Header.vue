@@ -5,13 +5,10 @@
       <div class="header-logo">
         <NuxtLink to="/" class="logo-link">
           <img v-if="logo" :src="logo" :alt="siteName" class="logo-image" />
-          <span v-else-if="siteName === 'Vitesse Sports'" class="logo-wordmark" aria-label="Vitesse Sports">
-            <span class="logo-wordmark-vitesse">Vitesse</span>
-            <span class="logo-wordmark-sports">Sports</span>
-          </span>
+          <img v-else-if="siteName === 'Vitesse Sports'" src="/Vitesse-Bildmarke.png" alt="Vitesse Sports" class="logo-image" />
           <span v-else class="logo-text">{{ siteName }}</span>
         </NuxtLink>
-        <span class="b2b-badge">Geschäftskunde</span>
+
       </div>
 
       <!-- Desktop Navigation -->
@@ -247,10 +244,7 @@
           <div class="mobile-sidebar-header">
             <div class="mobile-logo">
               <img v-if="logo" :src="logo" :alt="siteName" class="logo-image" />
-              <span v-else-if="siteName === 'Vitesse Sports'" class="logo-wordmark" aria-label="Vitesse Sports">
-                <span class="logo-wordmark-vitesse">Vitesse</span>
-                <span class="logo-wordmark-sports">Sports</span>
-              </span>
+              <img v-else-if="siteName === 'Vitesse Sports'" src="/Vitesse-Bildmarke.png" alt="Vitesse Sports" class="logo-image" />
               <span v-else class="logo-text">{{ siteName }}</span>
             </div>
             <button @click="closeMobileMenu" class="mobile-close">
@@ -399,12 +393,11 @@ const fallbackShopChildren = [
   {
     title: 'Unsere Marken',
     children: [
-      { title: 'Sportreact', url: '/collections/sportreact' },
-      { title: 'T-Apex', url: '/collections/t-apex' },
-      { title: 'EXOPEK', url: '/collections/exopek' },
+      { title: 'T-Apex', url: '/products/t-apex' },
+      { title: 'EXOPEK', url: '/products/exopek-pro' },
       { title: 'Witty', url: '/collections/witty' },
       { title: 'Tunturi', url: '/collections/tunturi' },
-      { title: 'Torque', url: '/collections/torque' },
+      { title: 'Torque', url: '/collections/torque-1' },
       { title: 'IVO Trainer', url: '/collections/ivo-trainer' }
     ]
   },
@@ -427,12 +420,11 @@ const preferredCollectionHandles = [
 ]
 
 const brandLinks = [
-  { title: 'Sportreact', url: '/collections/sportreact' },
-  { title: 'T-Apex', url: '/collections/t-apex' },
-  { title: 'EXOPEK', url: '/collections/exopek' },
+  { title: 'T-Apex', url: '/products/t-apex' },
+  { title: 'EXOPEK', url: '/products/exopek-pro' },
   { title: 'Witty', url: '/collections/witty' },
   { title: 'Tunturi', url: '/collections/tunturi' },
-  { title: 'Torque', url: '/collections/torque' },
+  { title: 'Torque', url: '/collections/torque-1' },
   { title: 'IVO Trainer', url: '/collections/ivo-trainer' }
 ]
 
@@ -440,7 +432,6 @@ const highlightedProductConfigs = [
   { query: 't-apex', matches: ['t-apex'] },
   { query: 'exopek pro', matches: ['exopek pro'] },
   { query: 'witty zeitmesser microgate', matches: ['witty', 'microgate'] },
-  { query: 'sportreact academy bundle', matches: ['sportreact academy bundle', 'academy bundle'] }
 ]
 
 const { data: shopCollections } = await useAsyncData('header-shop-collections', async () => {
@@ -510,11 +501,23 @@ const navigationItems = computed(() => {
 
   return [
   {
-    title: 'Sprint',
-    url: '/collections/sprinttraining'
+    title: 'T-Apex',
+    url: '/products/t-apex'
   },
   {
-    title: 'Kollektion',
+    title: 'Tunturi',
+    url: '/products/tunturi-platinum-tr30-core-treadmill'
+  },
+  {
+    title: 'Torque',
+    url: '/collections/torque-1'
+  },
+  {
+    title: 'Witty',
+    url: '/collections/witty'
+  },
+  {
+    title: 'Shop',
     children: collectionLinks.length > 0
       ? [
           {
@@ -543,14 +546,6 @@ const navigationItems = computed(() => {
           url: '/products',
           buttonText: 'Zum Shop'
         }
-  },
-  {
-    title: 'Widerstand',
-    url: '/collections/widerstandstraining'
-  },
-  {
-    title: 'Witty',
-    url: '/collections/witty'
   }
 ]
 })
@@ -838,20 +833,6 @@ onUnmounted(() => {
   gap: 0.6rem;
 }
 
-.b2b-badge {
-  display: inline-block;
-  padding: 0.2rem 0.55rem;
-  border-radius: 999px;
-  background: #f0f7ff;
-  border: 1px solid #bfdbfe;
-  color: #1d4ed8;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
 /* Desktop Navigation */
 .desktop-nav {
   display: none;
@@ -1063,7 +1044,7 @@ onUnmounted(() => {
   min-height: 1.55rem;
   border: none;
   border-radius: 999px;
-  background: #f26a21;
+  background: #111827;
   color: white;
   font-size: 0.54rem;
   font-weight: 700;
@@ -1074,7 +1055,7 @@ onUnmounted(() => {
 }
 
 .highlight-card-button:hover {
-  background: #da5b17;
+  background: #374151;
 }
 
 .highlight-card-button:disabled {
@@ -1579,10 +1560,6 @@ onUnmounted(() => {
 @media (max-width: 767px) {
   .header-container {
     padding: 0 0.5rem;
-  }
-
-  .b2b-badge {
-    display: none;
   }
 
   .nav-hidden {

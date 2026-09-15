@@ -1,0 +1,70 @@
+{
+  "highlights": {
+    "kicker": "Product Highlights",
+    "title": "EXOPEK Pro. Widerstand mit System.",
+    "ctaLabel": "Weitere Produkte",
+    "ctaHref": "/products#products-archive-controls",
+    "items": [
+      {
+        "body": "Variable Widerstandsreize fuer Sprints, Beschleunigung, Richtungswechsel und athletische Zugmuster.",
+        "image": "/exopek-widerstandstraining-performance-widerstandsbaender.jpg",
+        "alt": "EXOPEK Pro Performance-Widerstandsbaender"
+      },
+      {
+        "body": "Schnell im Setup, klar in der Belastungssteuerung und direkt einsetzbar fuer Feld, Halle und Gym.",
+        "image": "",
+        "alt": "EXOPEK Pro im Training"
+      },
+      {
+        "body": "Geeignet fuer Einzelathlet:innen, Small-Group-Training und strukturierte Performance-Blocks im Teamkontext.",
+        "image": "",
+        "alt": "EXOPEK Pro Detailansicht"
+      },
+      {
+        "body": "Saubere Progression fuer Speed-, Power- und Return-to-Play-Einheiten mit reproduzierbaren Widerstandsstufen.",
+        "image": "/exopek-widerstandstraining-performance-widerstandsbaender.jpg",
+        "alt": "EXOPEK Pro im leistungsorientierten Widerstandstraining"
+      },
+      {
+        "body": "Gebaut fuer Trainer:innen, die ein mobiles Tool mit klarer Trainingslogik statt improvisierter Band-Setups wollen.",
+        "image": "",
+        "alt": "EXOPEK Pro mobil einsetzbar"
+      }
+    ]
+  },
+  "banner": {
+    "title": "Widerstandstraining, das mit deinem Setup skaliert.",
+    "text": "EXOPEK Pro bringt kontrollierten Widerstand in Speed-, Kraft- und Athletik-Sessions. Schnell aufgebaut, leicht transportiert und direkt reproduzierbar im Coaching-Alltag.",
+    "image": "/exopek-widerstandstraining-performance-widerstandsbaender.jpg",
+    "alt": "EXOPEK Pro im Performance-Training"
+  },
+  "features": {
+    "title": "Gebaut fuer Performance",
+    "items": [
+      {
+        "title": "Mobil im Einsatz",
+        "description": "EXOPEK Pro ist auf schnelle Wechsel zwischen Trainingsorten ausgelegt und passt in Setups, die ohne grossen Materialaufwand funktionieren muessen.",
+        "image": "/exopek-widerstandstraining-performance-widerstandsbaender.jpg",
+        "alt": "EXOPEK Pro mobil im Einsatz"
+      },
+      {
+        "title": "Saubere Progression",
+        "description": "Das System unterstuetzt klare Belastungsstufen fuer Beschleunigung, Sprinttechnik und allgemein athletisches Widerstandstraining.",
+        "image": "",
+        "alt": "EXOPEK Pro fuer progressive Belastungssteuerung"
+      },
+      {
+        "title": "Einfach reproduzierbar",
+        "description": "Dieselben Komponenten lassen sich schnell auf weitere EXOPEK-Produkte oder Varianten uebertragen.",
+        "image": "",
+        "alt": "EXOPEK Pro reproduzierbar aufgebaut"
+      }
+    ]
+  },
+  "faq": {
+    "title": "FAQs",
+    "subtitle": "Wir beantworten Deine Fragen",
+    "initiallyOpen": [],
+    "items": []
+  }
+}

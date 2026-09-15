@@ -1,0 +1,65 @@
+{
+  "highlights": {
+    "kicker": "Product Highlights",
+    "title": "Tunturi Platinum TR30 Core. Vielseitig im Einsatz.",
+    "ctaLabel": "Weitere Produkte",
+    "ctaHref": "/collections/tunturi#collection-products",
+    "items": [
+      {
+        "body": "Geeignet fuer Lauftraining, athletische Grundlageneinheiten und strukturierte Reha-Workflows in einem Setup.",
+        "image": "/tunturi-schlittentraining-power.jpg",
+        "alt": "Tunturi Laufband im Athletiktraining"
+      },
+      {
+        "body": "Robuste Plattform fuer Studios, Performance-Center und medizinisch betreute Return-to-Play-Prozesse.",
+        "image": "",
+        "alt": "Tunturi Platinum TR30 Core im Einsatz"
+      },
+      {
+        "body": "Sauber steuerbare Belastung fuer Einsteiger:innen, Leistungssport und therapeutische Progression.",
+        "image": "",
+        "alt": "Tunturi Platinum TR30 Core Detailansicht"
+      },
+      {
+        "body": "Kombiniert Ausdauer, Diagnostik-nahe Belastungssteuerung und funktionellen Einsatz im modernen Athletiktraining.",
+        "image": "/tunturi-schlittentraining-power.jpg",
+        "alt": "Tunturi Trainingssystem fuer Performance und Reha"
+      }
+    ]
+  },
+  "banner": {
+    "title": "Training und Reha auf einer Plattform.",
+    "text": "Das Tunturi Platinum TR30 Core verbindet kontrolliertes Lauftraining mit belastbarer Studio-Hardware fuer Performance, Diagnostik und Reha.",
+    "image": "/tunturi-schlittentraining-power.jpg",
+    "alt": "Tunturi Platinum TR30 Core Hero-Bild"
+  },
+  "features": {
+    "title": "Gebaut fuer vielseitige Umgebungen",
+    "items": [
+      {
+        "title": "Belastung kontrollieren",
+        "description": "Das System eignet sich fuer fein abgestufte Lauf- und Reha-Einheiten, bei denen Geschwindigkeit und Umfang reproduzierbar geplant werden muessen.",
+        "image": "/tunturi-schlittentraining-power.jpg",
+        "alt": "Tunturi fuer kontrollierte Laufbelastung"
+      },
+      {
+        "title": "Studio bis Reha",
+        "description": "Ob Performance-Flaeche, Vereinsumfeld oder medizinisch betreutes Training: das Setup laesst sich in verschiedene Anwendungsfaelle uebertragen.",
+        "image": "",
+        "alt": "Tunturi Platinum TR30 Core in Studio und Reha"
+      },
+      {
+        "title": "Sauber integrierbar",
+        "description": "Die Produktseite folgt derselben modularen Architektur wie andere Kernprodukte und kann damit spaeter leicht erweitert werden.",
+        "image": "",
+        "alt": "Tunturi Platinum TR30 Core modular integriert"
+      }
+    ]
+  },
+  "faq": {
+    "title": "FAQs",
+    "subtitle": "Wir beantworten Deine Fragen",
+    "initiallyOpen": [],
+    "items": []
+  }
+}

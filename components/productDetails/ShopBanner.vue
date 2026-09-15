@@ -1,5 +1,5 @@
 <template>
-  <section class="shop-banner-section">
+  <section v-if="content.title || content.text || content.image" class="shop-banner-section">
     <div class="shop-banner-container">
       <header class="shop-banner-header">
         <h2 class="shop-banner-title">{{ content.title }}</h2>

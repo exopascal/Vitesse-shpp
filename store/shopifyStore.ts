@@ -597,6 +597,100 @@ export const useShopifyStore = defineStore("shopifyStore", {
       return products;
     },
 
+    async fetchCollectionPage(
+      collectionHandle: string,
+      limit: number = 12,
+      cursor?: string
+    ): Promise<{ products: ShopifyProduct[], hasNextPage: boolean, endCursor: string | null }> {
+      const query = `
+        query getCollectionPage($collectionHandle: String!, $numProducts: Int!, $cursor: String) {
+          collection(handle: $collectionHandle) {
+            products(first: $numProducts, after: $cursor) {
+              pageInfo {
+                hasNextPage
+                endCursor
+              }
+              edges {
+                node {
+                  id
+                  title
+                  handle
+                  featuredImage {
+                    url
+                    altText
+                  }
+                  priceRange {
+                    minVariantPrice {
+                      amount
+                      currencyCode
+                    }
+                  }
+                  compareAtPriceRange {
+                    minVariantPrice {
+                      amount
+                      currencyCode
+                    }
+                  }
+                  variants(first: 1) {
+                    edges {
+                      node {
+                        id
+                        price {
+                          amount
+                          currencyCode
+                        }
+                        compareAtPrice {
+                          amount
+                          currencyCode
+                        }
+                        availableForSale
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `;
+
+      const response = await this.shopifyFetch(query, {
+        collectionHandle,
+        numProducts: limit,
+        cursor: cursor ?? null,
+      });
+
+      if (!response?.data?.collection?.products) {
+        return { products: [], hasNextPage: false, endCursor: null };
+      }
+
+      const { edges, pageInfo } = response.data.collection.products;
+
+      const products = edges.map(({ node }: any) => {
+        const firstVariant = node.variants.edges[0]?.node;
+        const product: ShopifyProduct = {
+          id: node.id,
+          title: node.title,
+          handle: node.handle,
+          featured_image: node.featuredImage?.url,
+          price: parseMoneyAmount(firstVariant?.price?.amount),
+          compare_at_price: parseMoneyAmount(firstVariant?.compareAtPrice?.amount) || undefined,
+          on_sale:
+            parseMoneyAmount(firstVariant?.compareAtPrice?.amount) >
+            parseMoneyAmount(firstVariant?.price?.amount),
+          available: firstVariant?.availableForSale || false,
+        };
+        this.products.set(product.id, product);
+        return product;
+      });
+
+      return {
+        products,
+        hasNextPage: pageInfo.hasNextPage,
+        endCursor: pageInfo.endCursor ?? null,
+      };
+    },
+
     /**
      * Holt alle Collections von Shopify
      */
