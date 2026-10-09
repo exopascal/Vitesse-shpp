@@ -13,10 +13,6 @@
 
     <Footer />
 
-    <ClientOnly>
-      <CookieConsent />
-    </ClientOnly>
-
   </div>
 </template>
 

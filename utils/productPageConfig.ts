@@ -25,7 +25,7 @@ export const productPagePresets: ProductPagePreset[] = [
     contentKey: 'exopek-pro',
   },
   {
-    handles: ['tunturi-platinum-tr30-core-treadmill'],
+    handles: ['tunturi-platinum-t30-core-treadmill'],
     template: 'main',
     contentKey: 'tunturi',
   },

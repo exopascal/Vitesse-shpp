@@ -1,0 +1,52 @@
+/* Klaro Cookie Consent — Vitesse Sports Brand Overrides */
+
+.klaro {
+  /* Brand: red replaces default green */
+  --green1: #dc2626;
+  --green2: #991b1b;
+  --green3: rgba(220, 38, 38, 0.12);
+
+  /* Surfaces: shop dark palette */
+  --dark1: #141414;
+  --dark2: #1f1f1f;
+  --dark3: #2a2a2a;
+
+  /* Text */
+  --light1: #d1d5db;
+  --light2: #9ca3af;
+  --light3: #6b7280;
+  --white2: #f9fafb;
+  --white3: #e5e7eb;
+
+  /* Typography: match shop fonts */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --title-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-size: 14px;
+
+  /* Shape */
+  --border-radius: 8px;
+  --border-width: 1px;
+  --border-style: solid;
+}
+
+/* Full-width footer bar for the notice */
+.klaro .cookie-notice:not(.cookie-modal-notice) {
+  border-radius: 0 !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  border-top: 1px solid #2a2a2a !important;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Tighten up the notice body padding on mobile */
+@media (max-width: 767px) {
+  .klaro .cn-body {
+    padding: 1rem !important;
+  }
+
+  .klaro .cn-buttons {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+}

@@ -31,7 +31,7 @@
       </div>
 
       <div class="mt-8 space-y-5">
-        <div v-if="product?.options?.length" class="space-y-5">
+        <div v-if="hasRealVariants" class="space-y-5">
           <div v-for="option in product.options" :key="option.name" class="space-y-2.5">
             <div class="flex items-center justify-between gap-3">
               <label class="text-sm font-semibold uppercase tracking-[0.12em] text-[#5a5045]">
@@ -172,6 +172,13 @@ const currentPrice = computed(() => props.selectedVariant?.price || product.valu
 const comparePrice = computed(() => props.selectedVariant?.compareAtPrice || product.value?.compare_at_price || 0)
 
 const variantCount = computed(() => product.value?.variants?.length || 1)
+
+const hasRealVariants = computed(() => {
+  const options = product.value?.options
+  if (!options?.length) return false
+  if (options.length === 1 && options[0].name === 'Title') return false
+  return true
+})
 
 function selectOption(optionName, optionValue) {
   emit('selectOption', optionName, optionValue)

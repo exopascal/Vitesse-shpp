@@ -87,8 +87,8 @@ const cardStyle = (card: GridCard) => {
 
 <style scoped>
 .brand-collection-section {
-  padding: 0 1.5rem;
-  margin: 0;
+  padding: 0 0.75rem;
+  margin: 0 0 0.75rem;
 }
 
 .brand-collection-grid {

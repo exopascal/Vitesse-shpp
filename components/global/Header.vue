@@ -397,7 +397,7 @@ const fallbackShopChildren = [
       { title: 'EXOPEK', url: '/products/exopek-pro' },
       { title: 'Witty', url: '/collections/witty' },
       { title: 'Tunturi', url: '/collections/tunturi' },
-      { title: 'Torque', url: '/collections/torque-1' },
+      { title: 'Torque', url: '/collections/torque' },
       { title: 'IVO Trainer', url: '/collections/ivo-trainer' }
     ]
   },
@@ -424,7 +424,7 @@ const brandLinks = [
   { title: 'EXOPEK', url: '/products/exopek-pro' },
   { title: 'Witty', url: '/collections/witty' },
   { title: 'Tunturi', url: '/collections/tunturi' },
-  { title: 'Torque', url: '/collections/torque-1' },
+  { title: 'Torque', url: '/collections/torque' },
   { title: 'IVO Trainer', url: '/collections/ivo-trainer' }
 ]
 
@@ -506,11 +506,29 @@ const navigationItems = computed(() => {
   },
   {
     title: 'Tunturi',
-    url: '/products/tunturi-platinum-tr30-core-treadmill'
+    children: [
+      {
+        title: 'Übersicht',
+        children: [
+          { title: 'Alle Tunturi Produkte', url: '/collections/tunturi' },
+        ]
+      },
+      {
+        title: 'Gerätekategorien',
+        children: [
+          { title: 'Indoor Bikes',     url: '/collections/tunturi-indoor-bikes' },
+          { title: 'Fahrradergometer', url: '/collections/tunturi-fahrradergometer' },
+          { title: 'Liegeergometer',   url: '/collections/tunturi-liegeergometer' },
+          { title: 'Crosstrainer',     url: '/collections/tunturi-crosstrainer' },
+          { title: 'Laufband',         url: '/collections/tunturi-laufband' },
+          { title: 'Armergometer',     url: '/collections/tunturi-armergometer' },
+        ]
+      }
+    ]
   },
   {
     title: 'Torque',
-    url: '/collections/torque-1'
+    url: '/collections/torque'
   },
   {
     title: 'Witty',

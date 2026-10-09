@@ -18,15 +18,22 @@
       >
         <source :src="backgroundVideo" />
       </video>
+      <!-- natural: img element drives height, no fixed min-height -->
+      <img
+        v-else-if="backgroundImage && sizeVariant === 'natural'"
+        :src="backgroundImage"
+        :alt="title"
+        class="hero-natural-img"
+      />
       <div
         v-else-if="backgroundImage"
         class="hero-media hero-media-image"
         :style="{ backgroundImage: `url('${backgroundImage}')` }"
       ></div>
 
-      <div class="hero-overlay"></div>
+      <div v-if="overlay" class="hero-overlay"></div>
 
-      <div class="hero-content">
+      <div v-if="overlay" class="hero-content">
         <img
           v-if="logoImage"
           :src="logoImage"
@@ -35,7 +42,7 @@
           :class="logoClass"
         />
         <p v-if="kicker" class="hero-kicker">{{ kicker }}</p>
-        <h1 class="hero-title">{{ title }}</h1>
+        <h1 v-if="title" class="hero-title">{{ title }}</h1>
         <p v-if="text" class="hero-text">{{ text }}</p>
         <GradientButton
           v-if="buttonText && (to || href)"
@@ -70,7 +77,8 @@ withDefaults(defineProps<{
   inverseButton?: boolean
   buttonVariant?: ButtonVariant
   fullHeight?: boolean
-  sizeVariant?: 'default' | 'home'
+  sizeVariant?: 'default' | 'home' | 'compact' | 'natural'
+  overlay?: boolean
 }>(), {
   kicker: '',
   text: '',
@@ -85,7 +93,8 @@ withDefaults(defineProps<{
   inverseButton: true,
   buttonVariant: 'default',
   fullHeight: true,
-  sizeVariant: 'default'
+  sizeVariant: 'default',
+  overlay: true
 })
 </script>
 
@@ -115,6 +124,29 @@ withDefaults(defineProps<{
 
 .hero-section-home.hero-section-full .hero-card {
   min-height: 45vh;
+}
+
+.hero-section-compact .hero-card,
+.hero-section-compact.hero-section-full .hero-card {
+  min-height: 25vh;
+}
+
+/* natural: img drives height — no min-height, content sits absolute */
+.hero-section-natural .hero-card,
+.hero-section-natural.hero-section-full .hero-card {
+  min-height: unset;
+  display: block;
+}
+
+.hero-natural-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero-section-natural .hero-content {
+  position: absolute;
+  inset: 0;
 }
 
 .hero-media {

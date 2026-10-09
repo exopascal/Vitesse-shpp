@@ -145,7 +145,6 @@ const homeBrands = [
 ]
 const introWords = [
   'Spitzensport.',
-  'Fitness.',
   'Olympiastützpunkte.',
   'Vereine.',
 ]
@@ -154,7 +153,7 @@ const featureSections: FeatureSection[] = [
     backgroundImage: '/tunturi-schlittentraining-power.jpg',
     title: 'Maximale Vielseitigkeit für Training & Reha.',
     text: 'Klassisches Lauftraining, Power-Schlitten-Modus und Reha-Programme in einem Gerät.',
-    to: '/products/tunturi-platinum-tr30-core-treadmill',
+    to: '/collections/tunturi',
     buttonVariant: 'tunturi',
     logoImage: '/tunturi-logo.png',
     logoAlt: 'TUNTURI',
@@ -165,7 +164,7 @@ const featureSections: FeatureSection[] = [
     backgroundImage: '/torque-widerstandstraining-schlittentraining.jpg',
     title: 'Beladbarer Schlitten auf Rädern.',
     text: 'Maximale Belastung - stufenloser Widerstand. Auf jedem Untergrund.',
-    to: '/collections/torque-1',
+    to: '/collections/torque',
     buttonVariant: 'torque',
     logoImage: '/Torque-USA-weiss-orange-2000x.webp',
     logoAlt: 'TORQUE',
@@ -219,7 +218,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .home-page {
   min-height: 100vh;
-  padding: 0 0 4rem;
+  padding: 0;
   background:
     radial-gradient(circle at top left, rgba(34, 197, 94, 0.14), transparent 28rem),
     linear-gradient(180deg, #f7fbf8 0%, #ffffff 100%);

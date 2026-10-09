@@ -8,8 +8,8 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@vueuse/nuxt',
     '@nuxtjs/sitemap',
-    'nuxt-simple-cookie-consent',
     '@nuxt/icon',
+    '@nuxt/a11y',
   ],
 
   css: ['~/assets/css/global.css'],
@@ -154,36 +154,4 @@ export default defineNuxtConfig({
     }
   },
 
-  // Cookie Consent Configuration (GDPR/DSGVO compliant)
-  cookieConsent: {
-    cookieName: 'vs_cookie_consent',
-    cookieExpiryDays: 365,
-    consentVersion: '1',
-
-    categories: {
-      essential: {
-        label: 'Essenzielle Cookies',
-        description: 'Für die Grundfunktionen der Website erforderlich – können nicht deaktiviert werden.',
-        required: true
-      },
-      analytics: {
-        label: 'Analyse & Statistik',
-        description: 'Helfen uns zu verstehen, wie Besucher die Website nutzen, um sie zu verbessern.',
-        required: false
-      },
-      marketing: {
-        label: 'Marketing',
-        description: 'Werden verwendet, um personalisierte Werbung anzuzeigen.',
-        required: false
-      },
-      functional: {
-        label: 'Funktional',
-        description: 'Ermöglichen erweiterte Funktionen wie gespeicherte Präferenzen.',
-        required: false
-      }
-    },
-
-    // Scripts werden ergänzt sobald die verwendeten Tools bekannt sind
-    scripts: []
-  },
 })
