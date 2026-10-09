@@ -139,6 +139,7 @@ type GridCard = {
 
 const homeBrands = [
   { name: 'T-APEX', slug: 'tapex', image: '/t-apex-logo.png.avif', imageClass: 'brand-strip-logo-image-tapex', url: '/products?collection=sprinttraining&q=t-apex' },
+  { name: 'TUNTURI', slug: 'tunturi', image: '/tunturi-logo.png', imageClass: 'brand-strip-logo-image-tunturi', url: '/collections/tunturi' },
   { name: 'TORQUE', slug: 'torque', image: '/Torque_USA_black-orange_2000x.png.webp', imageClass: 'brand-strip-logo-image-torque', url: '/products?q=torque' },
   { name: 'EXOPEK', slug: 'exopek', image: '/Exopek_Logo_horizontal-Wortmarke-bildmarke_schwarz.png', imageClass: 'brand-strip-logo-image-exopek', url: '/products?q=exopek' },
   { name: 'HP COSMOS', slug: 'hp-cosmos', image: '/hp-cosmos-logo.png', imageClass: 'brand-strip-logo-image-hp-cosmos', url: '/products?q=hp%20cosmos' },
@@ -279,6 +280,10 @@ onBeforeUnmount(() => {
 
 .brand-strip-logo-image-torque {
   width: clamp(8rem, 13vw, 10.5rem);
+}
+
+.brand-strip-logo-image-tunturi {
+  width: clamp(7rem, 11vw, 9rem);
 }
 
 
