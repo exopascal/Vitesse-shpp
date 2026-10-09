@@ -83,9 +83,29 @@
 
       <!-- Hub: One section per sub-category with product grid -->
       <div v-if="subCollections.length" class="hub-grid">
+        <template v-for="(sub, index) in subCollections" :key="sub.handle">
+          <!-- Video banner: Tunturi only, between Fahrradergometer (index 1) and Liegeergometer (index 2) -->
+          <div v-if="index === 2 && slug === 'tunturi'" class="hub-video-banner">
+            <video
+              src="/tunturi-platinum-logo-animation.mov"
+              autoplay
+              muted
+              loop
+              playsinline
+              class="hub-video-banner__video"
+            />
+          </div>
+          <!-- Video banner: Tunturi only, between Crosstrainer (index 3) and Laufband (index 4) -->
+          <div v-if="index === 4 && slug === 'tunturi'" class="hub-video-banner">
+            <video
+              src="/tunturi-platinum-product-animation.mov"
+              autoplay
+              muted
+              playsinline
+              class="hub-video-banner__video"
+            />
+          </div>
         <section
-          v-for="sub in subCollections"
-          :key="sub.handle"
           class="hub-section"
         >
           <div class="hub-section__inner">
@@ -137,6 +157,7 @@
             <div v-else class="state-message">Produkte werden geladen…</div>
           </div>
         </section>
+        </template>
       </div>
 
       <!-- Products Grid -->
@@ -841,6 +862,20 @@ watch(collection, (c) => {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
+}
+
+/* ─── Hub Video Banner ───────────────────────────────────────────────────── */
+.hub-video-banner {
+  grid-column: 1 / -1;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: #000;
+}
+
+.hub-video-banner__video {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 /* ─── Hub Sections (one per sub-category) ────────────────────────────────── */
