@@ -230,7 +230,7 @@ import { useRoute } from 'vue-router'
 import { useShopifyStore } from '../../store/shopifyStore'
 import { getCollectionHeroContent, getCollectionSeoContent } from '~/utils/collectionDetailContent'
 import { getCollectionBrandGradient, getCollectionSubCollections } from '~/utils/collectionPageConfig'
-import { createBreadcrumbSchema, schemaToString } from '~/utils/schemas/productSchema'
+import { createBreadcrumbSchema, createCollectionPageSchema, schemaToString } from '~/utils/schemas/productSchema'
 
 const route = useRoute()
 const shopifyStore = useShopifyStore()
@@ -370,8 +370,16 @@ watch(collection, (c) => {
     { name: c.title, url },
   ])
 
+  const collectionPageSchema = createCollectionPageSchema({
+    name: title,
+    description: seoContent?.body ?? description,
+    url,
+    ...(c.image && { image: c.image }),
+  })
+
   useHead({
     script: [
+      { type: 'application/ld+json', innerHTML: schemaToString(collectionPageSchema) },
       { type: 'application/ld+json', innerHTML: schemaToString(breadcrumbSchema) },
     ],
   })

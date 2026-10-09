@@ -1,0 +1,103 @@
+{
+  "shortDescription": "Indoor Bike mit automatisch geregeltem Widerstand und präziser Wattmessung für Leistungsdiagnostik.",
+  "highlights": {
+    "kicker": "Product Highlights",
+    "title": "Tunturi Platinum S20. Das Indoor Bike mit automatischer Widerstandsregelung.",
+    "ctaLabel": "Weitere Produkte",
+    "ctaHref": "/collections/tunturi#collection-products",
+    "items": [
+      {
+        "body": "Servomotor mit 32 Widerstandsstufen, 15–350 W in 5-W-Schritten, schnelle automatische Anpassung.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s20-indoor-bike-wiegetritt.jpg?v=1791236878",
+        "alt": "Tunturi Platinum S20 Indoor Cycling Bike, Nutzer fährt im Wiegetritt, Seitenansicht"
+      },
+      {
+        "body": "26 Programme und 4 Benutzerprogramme, wattgesteuert und mit Messung von Watt, RPM und Puls.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s20-indoor-bike-cockpit-display.jpg?v=1791236878",
+        "alt": "Tunturi Platinum S20 Indoor Bike, Cockpit mit LCD-Farbdisplay, Tablet-Halterung und Flaschenhalter"
+      },
+      {
+        "body": "Doppelpedale: SPD-Klicksystem auf der einen, Riemen auf der anderen Seite.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s20-indoor-bike-training.jpg?v=1791236878",
+        "alt": "Mann trainiert sitzend auf dem Tunturi Platinum S20 Indoor Bike, Ansicht schräg von vorne"
+      },
+      {
+        "body": "20 kg Schwungmasse, V-förmige Basis, Nutzergewicht bis 180 kg.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s20-indoor-bike-seitenansicht.jpg?v=1791236878",
+        "alt": "Tunturi Platinum S20 Speedbike in der Seitenansicht mit Sattel- und Lenkerstütze"
+      }
+    ]
+  },
+  "banner": {
+    "title": "Automatisch geregelt. Präzise gemessen.",
+    "text": "Das Tunturi Platinum S20 regelt den Widerstand per Servomotor und misst die Leistung in Watt. Ein Indoor Bike für den professionellen und gewerblichen Gebrauch, das sich auf unterschiedliche Nutzer und Trainingsformen einstellen lässt.",
+    "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s20-indoor-bike-training.jpg?v=1791236878",
+    "alt": "Mann trainiert sitzend auf dem Tunturi Platinum S20 Indoor Bike, Ansicht schräg von vorne"
+  },
+  "features": {
+    "title": "Gebaut für wechselnde Nutzer und präzise Belastung",
+    "items": [
+      {
+        "title": "Servomotor-Regelung",
+        "description": "Schnelle, automatische Widerstandsanpassung über 32 Stufen. Der Widerstand lässt sich auch manuell über die Konsole schnell umstellen. Max. 350 W bei 60 RPM.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s20-indoor-bike-wiegetritt.jpg?v=1791236878",
+        "alt": "Tunturi Platinum S20 Indoor Cycling Bike, Nutzer fährt im Wiegetritt, Seitenansicht"
+      },
+      {
+        "title": "Doppelpedale",
+        "description": "Eine Seite mit Riemen, die andere mit SPD-Klicksystem für effizientere Kraftübertragung und stabile Fußstellung.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s20-indoor-bike-training.jpg?v=1791236878",
+        "alt": "Mann trainiert sitzend auf dem Tunturi Platinum S20 Indoor Bike, Ansicht schräg von vorne"
+      },
+      {
+        "title": "Sattel und Lenker",
+        "description": "Sattel horizontal und vertikal verstellbar mit Längenmarkierungen und Zahlenanzeige. Universalhalterung zum Sattelwechsel. Rennlenker in Höhe und Abstand verstellbar, rutschfest beschichtet.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s20-indoor-bike-seitenansicht.jpg?v=1791236878",
+        "alt": "Tunturi Platinum S20 Speedbike in der Seitenansicht mit Sattel- und Lenkerstütze"
+      },
+      {
+        "title": "Konsole",
+        "description": "5,5-Zoll-LCD-Farbbildschirm mit Hintergrundbeleuchtung, neigbar. Anzeige von Widerstand, Watt, RPM, Geschwindigkeit, Puls, Zeit und Kalorien. Tablet-/Smartphone-Halterung.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s20-indoor-bike-cockpit-display.jpg?v=1791236878",
+        "alt": "Tunturi Platinum S20 Indoor Bike, Cockpit mit LCD-Farbdisplay, Tablet-Halterung und Flaschenhalter"
+      },
+      {
+        "title": "Apps",
+        "description": "Kompatibel mit Tunturi Routes, Kinomap, Zwift und iConsole+.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s20-indoor-bike-training-tablet.jpg?v=1791236878",
+        "alt": "Training auf dem Tunturi Platinum S20 Speedbike mit Tablet in der Halterung über dem Display"
+      }
+    ]
+  },
+  "faq": {
+    "title": "FAQs",
+    "subtitle": "Antworten auf häufige Fragen",
+    "initiallyOpen": [0],
+    "items": [
+      {
+        "question": "Wie wird der Widerstand geregelt?",
+        "answer": ["Automatisch über einen Servomotor mit 32 Stufen. Manuelle Schnellverstellung über die Konsole ist möglich."]
+      },
+      {
+        "question": "Welcher Leistungsbereich ist möglich?",
+        "answer": ["15–350 W in 5-W-Schritten, max. 350 W bei 60 RPM. 26 Programme, 4 Benutzerprogramme."]
+      },
+      {
+        "question": "Welche Pedale hat das S20?",
+        "answer": ["Doppelpedale: auf einer Seite SPD-Klicksystem, auf der anderen Seite Riemen."]
+      },
+      {
+        "question": "Bis zu welchem Nutzergewicht ist das S20 ausgelegt?",
+        "answer": ["Bis 180 kg."]
+      },
+      {
+        "question": "Wie groß ist das Gerät?",
+        "answer": ["L 155 × B 60 × H 140 cm, 53,2 kg."]
+      },
+      {
+        "question": "Welche Apps sind kompatibel?",
+        "answer": ["Tunturi Routes, Kinomap, Zwift und iConsole+."]
+      }
+    ]
+  }
+}

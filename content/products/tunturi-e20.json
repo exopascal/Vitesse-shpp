@@ -1,0 +1,103 @@
+{
+  "shortDescription": "Fahrradergometer mit niedrigem Einstieg und feinstufig regelbarem Widerstand – für Einsteiger und Reha geeignet.",
+  "highlights": {
+    "kicker": "Product Highlights",
+    "title": "Tunturi Platinum E20. Das Fahrradergometer für den sanften Einstieg.",
+    "ctaLabel": "Weitere Produkte",
+    "ctaHref": "/collections/tunturi#collection-products",
+    "items": [
+      {
+        "body": "Niedriger Durchstieg und stabiler Rahmen für sicheres Auf- und Absteigen, auch bei eingeschränkter Mobilität.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e20-fahrradergometer-training.jpg?v=1791233571",
+        "alt": "Frau trainiert auf dem Tunturi Platinum E20 Fahrradergometer, Ansicht schräg von vorne"
+      },
+      {
+        "body": "48 Widerstandsstufen, 20–260 W in 5-W-Schritten, niedriger Startwiderstand und 26 Programme.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e20-fahrradergometer-konsole-drehregler.jpg?v=1791233572",
+        "alt": "Konsole des Tunturi Platinum E20 Ergometers mit LCD-Display, Bedienung über den zentralen Drehregler"
+      },
+      {
+        "body": "Multigrip+-Lenker mit Herzfrequenzsensoren und rutschfester Beschichtung.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e20-fahrradergometer-training-seitenansicht.jpg?v=1791233571",
+        "alt": "Tunturi Platinum E20 Ergometer, Nutzerin trainiert im Sitzen, Seitenansicht mit Trinkflasche am Rahmen"
+      },
+      {
+        "body": "Bluetooth-Konsole mit Tablet-Halterung für Trainings-Apps. Das Tablet gehört nicht zum Lieferumfang.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e20-fahrradergometer-tablet-halterung-training.jpg?v=1791233571",
+        "alt": "Training am Tunturi Platinum E20 Ergometer mit Tablet in der integrierten Halterung über der Konsole"
+      }
+    ]
+  },
+  "banner": {
+    "title": "Sanft starten. Schrittweise steigern.",
+    "text": "Das Tunturi Platinum E20 kombiniert einen niedrigen Einstieg mit feinstufig regelbarem Widerstand. Ein Fahrradergometer für den professionellen und gewerblichen Gebrauch, das auch in Reha und Physiotherapie zum Einsatz kommt.",
+    "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e20-fahrradergometer-training.jpg?v=1791233571",
+    "alt": "Frau trainiert auf dem Tunturi Platinum E20 Fahrradergometer, Ansicht schräg von vorne"
+  },
+  "features": {
+    "title": "Fahrradergometer für Reha, Einstieg und Dauereinsatz",
+    "items": [
+      {
+        "title": "Niedriger Einstieg",
+        "description": "Der tiefe Durchstieg erleichtert das Auf- und Absteigen. Pedale mit Ausgleichsgewicht, Anti-Rutsch-Fläche und Skischuhverschluss.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e20-fahrradergometer.jpg?v=1791233570",
+        "alt": "Tunturi Platinum E20 Fahrradergometer, Gesamtansicht schräg von vorne mit Konsole, Lenker und Sattel"
+      },
+      {
+        "title": "Magnetisches Bremssystem",
+        "description": "Wartungsfrei und stufenlos schaltend über 48 Stufen von 20 bis 260 W. Der niedrige Startwiderstand erlaubt einen schrittweisen Aufbau.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e20-fahrradergometer-training-seitenansicht.jpg?v=1791233571",
+        "alt": "Tunturi Platinum E20 Ergometer, Nutzerin trainiert im Sitzen, Seitenansicht mit Trinkflasche am Rahmen"
+      },
+      {
+        "title": "Multigrip+-Lenker",
+        "description": "Mehrere Griffpositionen, rutschfeste Beschichtung, Herzfrequenzsensoren und Schnelltasten. Das volle Gewicht kann auf den Lenker verlagert werden.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e20-fahrradergometer-konsole-plus-minus-tasten.jpg?v=1791233571",
+        "alt": "Tunturi Platinum E20 Fahrradergometer, Detail von Konsole und Multigrip+-Lenker mit Plus- und Minus-Tasten"
+      },
+      {
+        "title": "Verstellbarer Sattel",
+        "description": "Horizontale und vertikale Verstellung per Schnellspannknopf, mit Längenmarkierungen und Zahlenanzeige für wechselnde Nutzer.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e20-fahrradergometer-training.jpg?v=1791233571",
+        "alt": "Frau trainiert auf dem Tunturi Platinum E20 Fahrradergometer, Ansicht schräg von vorne"
+      },
+      {
+        "title": "Konsole und Apps",
+        "description": "Bluetooth-Monitor mit Herzfrequenzzonen. Kompatibel mit Tunturi Routes, Kinomap, Zwift und iConsole+.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e20-fahrradergometer-tablet-halterung-training.jpg?v=1791233571",
+        "alt": "Training am Tunturi Platinum E20 Ergometer mit Tablet in der integrierten Halterung über der Konsole"
+      }
+    ]
+  },
+  "faq": {
+    "title": "FAQs",
+    "subtitle": "Antworten auf häufige Fragen",
+    "initiallyOpen": [0],
+    "items": [
+      {
+        "question": "Welcher Leistungsbereich ist möglich?",
+        "answer": ["48 Stufen von 20 bis 260 W in 5-W-Schritten, 26 Programme."]
+      },
+      {
+        "question": "Bis zu welchem Nutzergewicht ist das E20 ausgelegt?",
+        "answer": ["Bis 180 kg."]
+      },
+      {
+        "question": "Ist das E20 für die Reha geeignet?",
+        "answer": ["Niedriger Durchstieg, niedriger Startwiderstand und stabiler Rahmen sind dafür ausgelegt. Den Einsatz therapeutisch abklären."]
+      },
+      {
+        "question": "Wie groß ist das Gerät?",
+        "answer": ["L 121,5 × B 61 × H 148,5 cm, 58 kg."]
+      },
+      {
+        "question": "Welche Apps sind kompatibel?",
+        "answer": ["Tunturi Routes, Kinomap, Zwift und iConsole+ über Bluetooth."]
+      },
+      {
+        "question": "Was ist der Unterschied zum E30?",
+        "answer": ["Der E30 reicht bis 450 W, das E20 bis 260 W. Das E20 ist auf sanften Einstieg und Reha ausgelegt."]
+      }
+    ]
+  }
+}

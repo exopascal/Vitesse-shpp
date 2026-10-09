@@ -1,0 +1,109 @@
+{
+  "shortDescription": "Liegeergometer und Armergometer in einem Gerät – für den professionellen und gewerblichen Gebrauch, Sitz drehbar für den Rollstuhltransfer.",
+  "highlights": {
+    "kicker": "Product Highlights",
+    "title": "Fluid Rower E750. Arme und Beine an einem Gerät.",
+    "ctaLabel": "Weitere Produkte",
+    "ctaHref": "/collections/fluid-rower#collection-products",
+    "items": [
+      {
+        "body": "Oberkörper- und Unterkörpertraining an einem Gerät: als Liegeergometer, Armergometer sitzend oder im Stehen.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "body": "Sitz um 90° drehbar: Rollstuhlfahrer wechseln leichter auf den Sitz, auch Nutzer mit eingeschränkter Mobilität steigen leichter auf und ab.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "body": "Vertical Twin Tank mit 10 Widerstandsstufen, vorwärts und rückwärts nutzbar.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "body": "Robuster Stahlrahmen für den professionellen und gewerblichen Einsatz, Nutzergewicht bis 150 kg.",
+        "image": "",
+        "alt": ""
+      }
+    ]
+  },
+  "banner": {
+    "title": "Ein Gerät. Drei Trainingspositionen. Einfacher Einstieg.",
+    "text": "Der Fluid Rower E750 verbindet Liegeergometer und Armergometer in einem robusten Stahlrahmen. Der drehbare Sitz erleichtert Rollstuhlfahrern den Transfer und Nutzern mit eingeschränkter Mobilität den Zugang, auch im professionellen Dauerbetrieb mit wechselnden Nutzern.",
+    "image": "",
+    "alt": ""
+  },
+  "features": {
+    "title": "Ein Gerät für unterschiedliche Nutzer und Trainingsformen",
+    "items": [
+      {
+        "title": "Arm- und Beintraining in einem Gerät",
+        "description": "Beine an den Pedalen mit Fußriemen, Arme an der Kurbel, im Sitzen oder im Stehen. Der Wechsel zwischen den Trainingsformen geht ohne Umbau.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "title": "Sitz um 90° drehbar",
+        "description": "Der Sitz lässt sich nach außen schwenken und schafft Platz neben dem Gerät. Das erleichtert Rollstuhlfahrern den Transfer auf den Sitz und allen Nutzern das Hinsetzen und Aufstehen, ohne über Pedale und Kurbel zu steigen.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "title": "Vertical Twin Tank",
+        "description": "Wasserwiderstand in 10 Stufen, auch bei niedriger Drehzahl gleichmäßig. Geeignet für Warm-up, Cool-down, Reha und schnelle Intervalle.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "title": "Bidirektionales Training",
+        "description": "Vorwärts und rückwärts bewegen, um unterschiedliche Muskelgruppen anzusprechen.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "title": "Fluid Performance Monitor",
+        "description": "Zeigt Zeit, Widerstandsstufe, Watt, Intervalle, Distanz, RPM und Kalorien. Die Widerstandsstufe wird automatisch erkannt, zwei Power-Graph-Ansichten visualisieren die Kraftentwicklung.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "title": "Ausbalancierter Arm",
+        "description": "Der Arm lässt sich um 360° drehen, so wechseln Nutzer schnell zwischen den Positionen.",
+        "image": "",
+        "alt": ""
+      }
+    ]
+  },
+  "faq": {
+    "title": "FAQs",
+    "subtitle": "Antworten auf häufige Fragen",
+    "initiallyOpen": [0],
+    "items": [
+      {
+        "question": "Was ist der E750?",
+        "answer": ["Ein Kombigerät aus Liegeergometer und Armergometer. Es wird sitzend, stehend oder als Liegeergometer genutzt."]
+      },
+      {
+        "question": "Für welches Nutzergewicht ist er ausgelegt?",
+        "answer": ["Bis 150 kg."]
+      },
+      {
+        "question": "Wie wird der Widerstand eingestellt?",
+        "answer": ["Über den Vertical Twin Tank mit 10 Stufen. Der Monitor erkennt die eingestellte Stufe automatisch."]
+      },
+      {
+        "question": "Ist der E750 für Rollstuhlfahrer geeignet?",
+        "answer": ["Der Sitz lässt sich um 90° nach außen drehen. Laut Hersteller entsteht dadurch zusätzlicher Platz neben dem Gerät und der Transfer vom Rollstuhl auf den Sitz wird erleichtert. Die Nutzung hängt von der individuellen Mobilität ab, im Einzelfall therapeutisch abklären."]
+      },
+      {
+        "question": "Wie groß ist das Gerät?",
+        "answer": ["L 133 × B 97 × H 152 cm, 111,4 kg. Sitzhöhe 54 cm, Kurbellänge 18,5 cm."]
+      },
+      {
+        "question": "Kann der Monitor mit Apps gekoppelt werden?",
+        "answer": ["Ja, über die kabellose Verbindung mit kompatiblen Trainings-Apps. Welche Apps kompatibel sind, ist in den Herstellerdaten nicht genannt."]
+      }
+    ]
+  }
+}

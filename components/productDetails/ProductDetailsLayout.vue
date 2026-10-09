@@ -1,14 +1,14 @@
 <template>
-  <section class="product-details-layout bg-[#f7f4ef] py-6 lg:py-10">
+  <section class="product-details-layout overflow-hidden bg-[#f7f4ef] py-6 lg:py-10">
     <div class="mx-auto max-w-[1500px] px-4 lg:px-8">
       <div class="grid gap-6 lg:grid-cols-[minmax(0,1.45fr)_minmax(360px,0.9fr)] lg:gap-10">
-        <div class="lg:sticky lg:top-6 lg:self-start">
+        <div class="min-w-0 lg:sticky lg:top-6 lg:self-start">
           <div class="overflow-hidden rounded-[28px] bg-white shadow-[0_24px_80px_rgba(15,23,42,0.08)]">
-            <div class="relative aspect-[4/3] bg-[#f3efe8]">
+            <div class="relative bg-[#f3efe8]">
               <img
                 :src="currentImage"
                 :alt="currentImageAlt"
-                class="h-full w-full object-cover"
+                class="block h-auto w-full object-contain"
               />
             </div>
 
@@ -28,15 +28,16 @@
                 ]"
                 @click="currentImageIndex = index"
               >
-                <img :src="item.src" :alt="item.alt" class="h-full w-full object-cover" />
+                <img :src="item.src" :alt="item.alt" class="h-full w-full object-contain" />
               </button>
             </div>
           </div>
         </div>
 
-        <div class="lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto lg:pr-1">
+        <div class="min-w-0 lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto lg:pr-1">
           <ProductDetailsInfo
             :product="product"
+            :shortDescription="shortDescription"
             :selectedOptions="internalSelectedOptions"
             :selectedVariant="selectedVariant"
             :quantity="internalQuantity"
@@ -60,6 +61,10 @@ const props = defineProps({
   product: {
     type: Object,
     default: null,
+  },
+  shortDescription: {
+    type: String,
+    default: '',
   },
   selectedOptions: {
     type: Object,

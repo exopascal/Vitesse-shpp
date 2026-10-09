@@ -1,0 +1,103 @@
+{
+  "shortDescription": "Fahrradergometer mit wartungsfreiem EMS-Bremssystem und Widerständen bis 450 W für den professionellen Einsatz.",
+  "highlights": {
+    "kicker": "Product Highlights",
+    "title": "Tunturi Platinum E30. Das Fahrradergometer für hohe Leistung.",
+    "ctaLabel": "Weitere Produkte",
+    "ctaHref": "/collections/tunturi#collection-products",
+    "items": [
+      {
+        "body": "EMS-Bremssystem: elektromagnetisch, ohne motorisierte Teile, wartungsfrei und für schnelle Widerstandswechsel im Intervalltraining.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e30-fahrradergometer-training.jpg?v=1791234225",
+        "alt": "Frau trainiert auf dem Tunturi Platinum E30 Ergometer, Ansicht schräg von vorne"
+      },
+      {
+        "body": "48 Widerstandsstufen, 20–450 W in 5-W-Schritten, 26 Programme.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e30-fahrradergometer-konsole-drehregler.jpg?v=1791234224",
+        "alt": "Konsole des Tunturi Platinum E30 Fahrradergometers mit LCD-Display, Bedienung über den Drehregler"
+      },
+      {
+        "body": "Multigrip+-Lenker mit Herzfrequenzsensoren, Schnelltasten und rutschfester Beschichtung.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e30-fahrradergometer-training-aufrecht.jpg?v=1791234224",
+        "alt": "Tunturi Platinum E30 Fahrradergometer, Nutzerin trainiert aufrecht sitzend, Seitenansicht"
+      },
+      {
+        "body": "Bluetooth-Konsole mit Tablet-Halterung. Nutzergewicht bis 180 kg.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e30-fahrradergometer-training-vorgebeugt.jpg?v=1791234224",
+        "alt": "Tunturi Platinum E30 Ergometer, Nutzerin trainiert vorgebeugt mit Händen an den oberen Lenkerenden"
+      }
+    ]
+  },
+  "banner": {
+    "title": "Hohe Leistung. Schnell geschaltet.",
+    "text": "Das Tunturi Platinum E30 kombiniert ein wartungsfreies EMS-Bremssystem mit Widerständen bis 450 W. Ein Fahrradergometer für den professionellen und gewerblichen Gebrauch, das auch intensive Intervalleinheiten zuverlässig abbildet.",
+    "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e30-fahrradergometer-seitenansicht.jpg?v=1791234439",
+    "alt": "Tunturi Platinum E30 Fahrradergometer, Seitenansicht mit niedrigem Einstieg, Sattelstütze und Lenker"
+  },
+  "features": {
+    "title": "Gebaut für hohe Leistung und häufig wechselnde Nutzer",
+    "items": [
+      {
+        "title": "EMS-Bremssystem",
+        "description": "Elektromagnetischer Widerstand ohne motorisierte Teile. Wartungsfrei und für schnelles, gleichmäßiges Umschalten zwischen den Stufen.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e30-fahrradergometer-seitenansicht.jpg?v=1791234439",
+        "alt": "Tunturi Platinum E30 Fahrradergometer, Seitenansicht mit niedrigem Einstieg, Sattelstütze und Lenker"
+      },
+      {
+        "title": "Wattbereich bis 450 W",
+        "description": "20–450 W in 5-W-Schritten, max. 400 W bei 60 RPM. 16 kg rotierende Masse für gleichmäßigen Lauf.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e30-fahrradergometer.jpg?v=1791234450",
+        "alt": "Tunturi Platinum E30 Fahrradergometer, Gesamtansicht schräg von vorne mit Konsole, Lenker und Sattel"
+      },
+      {
+        "title": "Multigrip+-Lenker",
+        "description": "Mehrere Griffpositionen, rutschfeste Beschichtung, Herzfrequenzsensoren und Schnelltasten für die Steuerung der Konsole.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e30-fahrradergometer-training-vorgebeugt.jpg?v=1791234224",
+        "alt": "Tunturi Platinum E30 Ergometer, Nutzerin trainiert vorgebeugt mit Händen an den oberen Lenkerenden"
+      },
+      {
+        "title": "Sattel und Pedale",
+        "description": "Sattel horizontal und vertikal mit Schnellspannknopf verstellbar, mit Längenmarkierungen. Pedale mit Ausgleichsgewicht, Anti-Rutsch-Fläche und Skischuhverschluss. Tiefer Einstieg.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e30-fahrradergometer-training-aufrecht.jpg?v=1791234224",
+        "alt": "Tunturi Platinum E30 Fahrradergometer, Nutzerin trainiert aufrecht sitzend, Seitenansicht"
+      },
+      {
+        "title": "Konsole und Apps",
+        "description": "Bluetooth-Monitor mit Herzfrequenzzonen. Kompatibel mit Tunturi Routes, Kinomap, Zwift und iConsole+.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e30-fahrradergometer-konsole-drehregler.jpg?v=1791234224",
+        "alt": "Konsole des Tunturi Platinum E30 Fahrradergometers mit LCD-Display, Bedienung über den Drehregler"
+      }
+    ]
+  },
+  "faq": {
+    "title": "FAQs",
+    "subtitle": "Antworten auf häufige Fragen",
+    "initiallyOpen": [0],
+    "items": [
+      {
+        "question": "Welcher Leistungsbereich ist möglich?",
+        "answer": ["48 Stufen von 20 bis 450 W in 5-W-Schritten, max. 400 W bei 60 RPM. 26 Programme."]
+      },
+      {
+        "question": "Bis zu welchem Nutzergewicht ist das E30 ausgelegt?",
+        "answer": ["Bis 180 kg."]
+      },
+      {
+        "question": "Was bedeutet EMS-Bremssystem?",
+        "answer": ["Der Widerstand wird elektromagnetisch erzeugt. Es gibt keine motorisierten Teile, das System ist wartungsfrei und schaltet schnell zwischen den Stufen."]
+      },
+      {
+        "question": "Wie groß ist das Gerät?",
+        "answer": ["L 121,5 × B 61 × H 148,5 cm, 58,5 kg."]
+      },
+      {
+        "question": "Welche Apps sind kompatibel?",
+        "answer": ["Tunturi Routes, Kinomap, Zwift und iConsole+ über Bluetooth."]
+      },
+      {
+        "question": "Was ist der Unterschied zum E20?",
+        "answer": ["Das E20 reicht bis 260 W und ist auf sanften Einstieg und Reha ausgelegt. Das E30 reicht bis 450 W."]
+      }
+    ]
+  }
+}

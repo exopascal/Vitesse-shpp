@@ -169,9 +169,6 @@ onBeforeUnmount(() => {
           <p class="product-highlights-kicker">{{ props.content.kicker }}</p>
           <h2 class="product-highlights-title">{{ props.content.title || title }}</h2>
         </div>
-        <NuxtLink :to="props.content.ctaHref" class="product-highlights-link">
-          {{ props.content.ctaLabel }}
-        </NuxtLink>
       </div>
 
       <div ref="railRef" class="product-highlights-rail">
@@ -251,7 +248,7 @@ onBeforeUnmount(() => {
   height: 80vh;
   height: 80svh;
   margin: 0 auto;
-  padding: 1.5rem 1rem;
+  padding: 2rem 1rem 2rem 2rem;
 }
 
 .product-highlights-header {
@@ -274,9 +271,9 @@ onBeforeUnmount(() => {
 
 .product-highlights-title {
   margin: 0;
-  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
   font-weight: 900;
-  line-height: 0.96;
+  line-height: 1.1;
   text-transform: uppercase;
 }
 
@@ -292,8 +289,8 @@ onBeforeUnmount(() => {
   grid-auto-columns: calc(100% - 12rem);
   grid-auto-flow: column;
   gap: 1.25rem;
-  flex: 0 0 calc(80% - 4rem);
-  height: calc(80% - 4rem);
+  flex: 0 0 calc(76% - 4rem);
+  height: calc(76% - 4rem);
   margin: 2rem 0;
   overflow-x: auto;
   scrollbar-width: none;
@@ -305,60 +302,48 @@ onBeforeUnmount(() => {
 }
 
 .product-highlights-card {
-  display: grid;
-  grid-template-columns: minmax(0, 35%) minmax(0, 65%);
-  align-items: stretch;
-  gap: 0;
+  position: relative;
   min-height: 100%;
-  padding: 0;
-  border: 1px solid rgba(23, 18, 13, 0.08);
   border-radius: 2rem;
-  background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 16px 36px rgba(23, 18, 13, 0.08);
+  box-shadow: 0 16px 36px rgba(23, 18, 13, 0.12);
   overflow: hidden;
 }
 
 .product-highlights-card-copy {
+  position: absolute;
+  inset: 0 55% 0 0;
   display: flex;
   align-items: center;
-  padding: 2rem;
+  padding: 2.5rem;
+  z-index: 2;
+}
+
+.product-highlights-card-copy::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(23, 18, 13, 0.52) 60%, transparent 100%);
+  border-radius: 2rem 0 0 2rem;
+  z-index: -1;
 }
 
 .product-highlights-card-text {
   margin: 0;
-  font-size: clamp(1.55rem, 2.2vw, 2.35rem);
+  font-size: clamp(1.3rem, 1.8vw, 2rem);
   font-weight: 700;
-  line-height: 1.12;
+  line-height: 1.15;
+  color: #fff;
 }
 
 .product-highlights-card-media {
-  position: relative;
-  display: flex;
-  align-items: stretch;
-  justify-content: stretch;
-  min-height: 100%;
-  border-top-left-radius: 2rem;
-  border-bottom-left-radius: 2rem;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
 }
 
-.product-highlights-card-media::before {
-  content: '';
-  position: absolute;
-  inset: auto 12% 6% 12%;
-  height: 14%;
-  border-radius: 999px;
-  background: rgba(242, 106, 33, 0.12);
-  filter: blur(24px);
-  z-index: 0;
-}
-
 .product-highlights-card-image {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
-  border-radius: 0;
   object-fit: cover;
   object-position: center center;
 }
@@ -368,8 +353,8 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  flex: 0 0 5%;
-  min-height: 5%;
+  flex: 0 0 9%;
+  min-height: 9%;
 }
 
 .product-highlights-dots {
@@ -490,23 +475,17 @@ onBeforeUnmount(() => {
 }
 
 @media (max-width: 900px) {
-  .product-highlights-card {
-    grid-template-columns: 1fr;
-    align-items: stretch;
-  }
-
   .product-highlights-card-copy {
-    max-width: none;
-  }
-
-  .product-highlights-card-media {
-    min-height: 12rem;
+    inset: 0 40% 0 0;
+    padding: 1.75rem;
   }
 }
 
 @media (max-width: 640px) {
   .product-highlights-container {
     padding: 1rem;
+    height: 62svh;
+    height: 62vh;
   }
 
   .product-highlights-header {
@@ -515,31 +494,20 @@ onBeforeUnmount(() => {
   }
 
   .product-highlights-title {
-    font-size: 2.35rem;
+    font-size: 1.3rem;
   }
 
   .product-highlights-rail {
     grid-auto-columns: calc(100% - 3.5rem);
   }
 
-  .product-highlights-card {
-    gap: 1.25rem;
-  }
-
   .product-highlights-card-copy {
+    inset: 0 45% 0 0;
     padding: 1.25rem;
   }
 
   .product-highlights-card-text {
-    font-size: 1.45rem;
-  }
-
-  .product-highlights-card-media {
-    min-height: 7rem;
-  }
-
-  .product-highlights-card-image {
-    border-radius: 0;
+    font-size: 1.1rem;
   }
 
   .product-highlights-dots {

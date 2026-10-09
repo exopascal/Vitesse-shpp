@@ -148,7 +148,7 @@ Aktuell konfiguriert:
 
 - `t-apex` -> `main`
 - `exopek-pro` -> `main`
-- `tunturi-platinum-tr30-core-treadmill` -> `main`
+- `tunturi-platinum-t30-core-laufband` -> `main`
 - `optogait` -> `accessory`
 
 ## Empfehlung

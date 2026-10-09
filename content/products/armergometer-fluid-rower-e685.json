@@ -1,0 +1,115 @@
+{
+  "shortDescription": "Armergometer für den professionellen und gewerblichen Gebrauch – im Stehen oder direkt aus dem Rollstuhl, 10 Widerstandsstufen, bis 150 kg.",
+  "highlights": {
+    "kicker": "Product Highlights",
+    "title": "Fluid Rower E685. Das Armergometer für Oberkörper und Core.",
+    "ctaLabel": "Weitere Produkte",
+    "ctaHref": "/collections/fluid-rower#collection-products",
+    "items": [
+      {
+        "body": "Direkt aus dem Rollstuhl nutzbar: Die offene Bauweise erlaubt es, ohne Umsetzen in die Trainingsposition zu fahren.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "body": "Training im Stehen: Kraft aus dem Boden, Core und Schultergürtel arbeiten mit.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "body": "Vertical Twin Tank mit 10 Widerstandsstufen, vorwärts und rückwärts nutzbar.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "body": "Kurbelhöhe ca. 70–130 cm und 7 Kurbelpositionen von horizontal bis vertikal.",
+        "image": "",
+        "alt": ""
+      }
+    ]
+  },
+  "banner": {
+    "title": "Oberkörper trainieren. Im Stehen oder direkt aus dem Rollstuhl.",
+    "text": "Das Fluid Rower E685 ist ein Armergometer mit Wasserwiderstand, verstellbarer Kurbel und offener Bauweise. Ein Oberkörperergometer für den professionellen und gewerblichen Gebrauch, das sich für Reha, Warm-up und intensive Intervalle einstellen lässt.",
+    "image": "",
+    "alt": ""
+  },
+  "features": {
+    "title": "Ein Armergometer für Reha, Warm-up und intensives Training",
+    "items": [
+      {
+        "title": "Offene Bauweise für Rollstuhlnutzer",
+        "description": "Der freie Raum vor dem Gerät erlaubt es Rollstuhlnutzern, direkt in die Trainingsposition zu fahren, ohne auf einen separaten Sitz umzusetzen. Das ist ein Vorteil für Reha, Physiotherapie und inklusive Trainingsbereiche.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "title": "Training im Stehen",
+        "description": "Die Kraft entsteht stehend vom Boden aus und läuft über lange kinetische Ketten durch den Körper. Breite Fußplatten sorgen für eine stabile Basis.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "title": "Vertical Twin Tank",
+        "description": "Wasserwiderstand in 10 Stufen, auch bei niedriger Drehzahl gleichmäßig und für hohe Geschwindigkeiten und Intervalle ausgelegt.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "title": "Verstellbare Kurbel",
+        "description": "Gasdruckunterstützte Höhenverstellung von ca. 70 bis 130 cm, 7 Kurbelpositionen, verstellbare Griffe. Kurbellänge 18,5 cm.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "title": "Bidirektionales Training",
+        "description": "Widerstand in beiden Bewegungsrichtungen. Vorwärts und rückwärts beanspruchen unterschiedliche Muskulatur.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "title": "Fluid Performance Monitor",
+        "description": "Zeigt Zeit, Widerstandsstufe, Watt, Arbeits- und Erholungsintervalle, Distanz, RPM und Kalorien. Die Widerstandsstufe wird automatisch erkannt, zwei Power-Graph-Ansichten zeigen die Kraftentwicklung. Kabellose Kopplung mit kompatiblen Trainings-Apps.",
+        "image": "",
+        "alt": ""
+      },
+      {
+        "title": "Stahlrahmen und Transportrollen",
+        "description": "Robuster Rahmen für den intensiven Einsatz. Mit Transportrollen leicht zu bewegen.",
+        "image": "",
+        "alt": ""
+      }
+    ]
+  },
+  "faq": {
+    "title": "FAQs",
+    "subtitle": "Antworten auf häufige Fragen",
+    "initiallyOpen": [0],
+    "items": [
+      {
+        "question": "Kann das E685 aus dem Rollstuhl genutzt werden?",
+        "answer": ["Ja. Durch die offene Bauweise und den freien Raum vor dem Gerät können Rollstuhlnutzer direkt in die Trainingsposition fahren, ohne umzusetzen. Die Eignung hängt von der individuellen Mobilität ab, im Einzelfall therapeutisch abklären."]
+      },
+      {
+        "question": "Für welches Nutzergewicht ist das E685 ausgelegt?",
+        "answer": ["Bis 150 kg."]
+      },
+      {
+        "question": "Wie wird der Widerstand eingestellt?",
+        "answer": ["Über den Vertical Twin Tank mit 10 Stufen. Der Monitor erkennt die eingestellte Stufe automatisch."]
+      },
+      {
+        "question": "Wie weit lässt sich die Kurbel verstellen?",
+        "answer": ["Die Höhe ca. 70 bis 130 cm, dazu 7 Positionen von horizontal bis vertikal."]
+      },
+      {
+        "question": "Wie groß ist das Gerät?",
+        "answer": ["L 149 × B 81 × H 124,2 cm, 49,4 kg."]
+      },
+      {
+        "question": "Was ist der Unterschied zum E750?",
+        "answer": ["Der E750 ist ein Kombigerät aus Liegeergometer und Armergometer mit drehbarem Sitz. Das E685 ist ein reines Armergometer für das Training im Stehen oder aus dem Rollstuhl."]
+      }
+    ]
+  }
+}

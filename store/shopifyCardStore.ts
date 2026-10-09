@@ -5,6 +5,7 @@ export interface ShopifyCartItem {
   variantId: string;
   productId: string;
   title: string;
+  variantTitle?: string;
   quantity: number;
   price: number;
   featuredImage?: string;
@@ -85,6 +86,7 @@ export const useShopifyCardStore = defineStore('shopifyCardStore', {
                     merchandise {
                       ... on ProductVariant {
                         id
+                        title
                         product {
                           id
                           title
@@ -409,6 +411,35 @@ export const useShopifyCardStore = defineStore('shopifyCardStore', {
       }
     },
 
+    async fetchProductRecommendations(productId: string): Promise<Array<{id: string; title: string; price: number; image: string; variantId: string}>> {
+      const query = `
+        query productRecommendations($productId: ID!) {
+          productRecommendations(productId: $productId) {
+            id
+            title
+            featuredImage { url }
+            variants(first: 1) {
+              edges {
+                node {
+                  id
+                  price { amount }
+                }
+              }
+            }
+          }
+        }
+      `
+      const response = await this.shopifyFetch(query, { productId })
+      if (!response?.data?.productRecommendations) return []
+      return response.data.productRecommendations.slice(0, 4).map((p: any) => ({
+        id: p.id,
+        title: p.title,
+        price: parseFloat(p.variants.edges[0]?.node?.price?.amount || '0'),
+        image: p.featuredImage?.url || '',
+        variantId: p.variants.edges[0]?.node?.id || ''
+      }))
+    },
+
     async getCartData(): Promise<ShopifyCart | null> {
       // Wenn wir noch keinen Warenkorb haben, initialisieren wir ihn
       if (!this.cart.id) {
@@ -503,6 +534,7 @@ export const useShopifyCardStore = defineStore('shopifyCardStore', {
           variantId: merchandise.id,
           productId: product.id,
           title: product.title,
+          variantTitle: merchandise.title,
           quantity: node.quantity,
           price: parseFloat(merchandise.price.amount),
           featuredImage: product.featuredImage?.url

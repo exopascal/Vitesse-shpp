@@ -2,6 +2,7 @@
   <div class="accessory-template">
     <ProductDetailsLayout
       :product="product"
+      :shortDescription="content.shortDescription"
       :selectedOptions="selectedOptions"
       :selectedVariant="selectedVariant"
       :quantity="quantity"

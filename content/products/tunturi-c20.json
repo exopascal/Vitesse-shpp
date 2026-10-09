@@ -1,0 +1,103 @@
+{
+  "shortDescription": "Crosstrainer für den gewerblichen Einsatz – wattgesteuert (35–400 W), belastbar bis 180 kg.",
+  "highlights": {
+    "kicker": "Product Highlights",
+    "title": "Tunturi Platinum C20. Der Crosstrainer für den professionellen Gebrauch.",
+    "ctaLabel": "Weitere Produkte",
+    "ctaHref": "/collections/tunturi#collection-products",
+    "items": [
+      {
+        "body": "Gelenkschonendes Ganzkörpertraining für den professionellen und gewerblichen Einsatz, auch in der Reha.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-c20-crosstrainer-training.jpg?v=1791212524",
+        "alt": "Frau im Training am Tunturi Platinum C20 Crosstrainer im kommerziellen Einsatz"
+      },
+      {
+        "body": "Wattgesteuerte Belastung: 48 Stufen, 35–400 W in 5-W-Schritten, 26 Programme.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-c20-crosstrainer-widerstand-erhoehen.jpg?v=1791212524",
+        "alt": "Einstellung der Widerstandsstufe am Tunturi Platinum C20 Crosstrainer (35–400 W)"
+      },
+      {
+        "body": "Doppelschienensystem für gleichmäßige Gewichtsverteilung, stabiler und geräuscharmer Lauf bis 180 kg.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-c20-crosstrainer-pedale-doppelschiene.jpg?v=1791212523",
+        "alt": "Doppelschienensystem der Pedale am Tunturi Platinum C20 für optimale Gewichtsverteilung und Stabilität"
+      },
+      {
+        "body": "Bluetooth-Konsole mit Tablet-Halterung für Trainings-Apps. Das Tablet gehört nicht zum Lieferumfang.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-c20-crosstrainer-tablet-app.jpg?v=1791212524",
+        "alt": "Detailaufnahme Tablet-Halterung am Tunturi Platinum C20, Frontansicht"
+      }
+    ]
+  },
+  "banner": {
+    "title": "Gelenkschonend trainieren. Dauerhaft belastbar.",
+    "text": "Der Tunturi Platinum C20 verbindet präzise Leistungssteuerung mit einer stabilen Doppelschienen-Konstruktion. Ein Crosstrainer für den professionellen und gewerblichen Gebrauch, auf dem Nutzer mit unterschiedlichem Leistungsniveau am selben Gerät trainieren.",
+    "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-c20-crosstrainer-seitenansicht-hinten.jpg?v=1791212524",
+    "alt": "Tunturi Platinum C20 Crosstrainer, Mood-Image mit trainierender Frau, Seitenansicht von hinten"
+  },
+  "features": {
+    "title": "Gebaut für den Dauereinsatz mit wechselnden Nutzern",
+    "items": [
+      {
+        "title": "Doppelschienensystem",
+        "description": "Zwei Laufschienen verteilen das Gewicht gleichmäßig und halten den Lauf auch bei 180 kg Nutzergewicht stabil und geräuscharm.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-c20-crosstrainer-pedale-doppelschiene.jpg?v=1791212523",
+        "alt": "Doppelschienensystem der Pedale am Tunturi Platinum C20 für optimale Gewichtsverteilung und Stabilität"
+      },
+      {
+        "title": "Minimaler Q-Faktor (13 cm)",
+        "description": "Der geringe Pedalabstand unterstützt eine natürliche Bewegung und schont die Gelenke. Die Schrittlänge von 51 cm ahmt eine Laufbewegung nach.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-c20-crosstrainer-pedale.jpg?v=1791212524",
+        "alt": "Detailaufnahme der Pedale des Tunturi Platinum C20 Crosstrainers mit minimalem Q-Faktor für gelenkschonendes Training"
+      },
+      {
+        "title": "Wattgesteuertes Training",
+        "description": "35–400 W in 5-W-Schritten (max. 400 W bei 60 RPM) machen Belastung planbar und vergleichbar. 20 kg rotierende Masse für gleichmäßigen Lauf.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-c20-crosstrainer-widerstand-erhoehen.jpg?v=1791212524",
+        "alt": "Einstellung der Widerstandsstufe am Tunturi Platinum C20 Crosstrainer (35–400 W)"
+      },
+      {
+        "title": "Multigrip+-Lenker",
+        "description": "Rutschfeste Beschichtung, Herzfrequenzsensoren und Schnelltasten: Die Geschwindigkeit lässt sich anpassen, ohne die Sensoren loszulassen. Inklusive Erholungsprogramm.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-c20-crosstrainer-seitenansicht.jpg?v=1791212523",
+        "alt": "Tunturi Platinum C20 Crosstrainer, Mood-Image mit trainierender Frau Seitenansicht"
+      },
+      {
+        "title": "Konsole und Apps",
+        "description": "7-Zoll-LCD, kippbar, Bluetooth. Kompatibel mit Tunturi Routes, Kinomap, Zwift und iConsole+.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-c20-crosstrainer-tablet-app-front.jpg?v=1791212524",
+        "alt": "Integrierter Tablet-Halterung am Tunturi Platinum C20 macht das Training smart"
+      }
+    ]
+  },
+  "faq": {
+    "title": "FAQs",
+    "subtitle": "Antworten auf häufige Fragen",
+    "initiallyOpen": [0],
+    "items": [
+      {
+        "question": "Für welches Nutzergewicht ist der C20 ausgelegt?",
+        "answer": ["Bis 180 kg. Das Doppelschienensystem verteilt das Gewicht gleichmäßig."]
+      },
+      {
+        "question": "Welche Widerstandsbereiche und Programme gibt es?",
+        "answer": ["48 Stufen von 35 bis 400 W in 5-W-Schritten, dazu 26 Trainingsprogramme."]
+      },
+      {
+        "question": "Wie groß ist das Gerät?",
+        "answer": ["L 193 × B 80 × H 182 cm, 99 kg."]
+      },
+      {
+        "question": "Ist der Crosstrainer gelenkschonend?",
+        "answer": ["Der Pedalabstand (Q-Faktor) beträgt nur 13 cm, die Schrittlänge 51 cm. Das unterstützt eine natürliche, gelenkschonende Bewegung. Für Reha den Einsatz therapeutisch abklären."]
+      },
+      {
+        "question": "Welche Apps sind kompatibel?",
+        "answer": ["Tunturi Routes, Kinomap, Zwift und iConsole+ über Bluetooth."]
+      },
+      {
+        "question": "Ist ein Tablet im Lieferumfang?",
+        "answer": ["Nein. Die Konsole hat eine integrierte Tablet-Halterung, das Tablet wird separat benötigt."]
+      }
+    ]
+  }
+}

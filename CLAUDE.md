@@ -154,6 +154,13 @@ useHead({
 - Category → Products
 - Use SEO recommendation engine (`utils/seo/recommendations.ts`)
 
+**SEO Content & Texterstellung:**
+- Analyse und Rohtexte → `content/seo/<handle>.md` (eine Datei pro Produkt)
+- Freigegebene Texte → `content/products/<handle>.json`
+- Template: `content/seo/_template.md`
+
+**See:** `.claude/skills/seo-content/` for full workflow
+
 ---
 
 ## Multi-Tenancy

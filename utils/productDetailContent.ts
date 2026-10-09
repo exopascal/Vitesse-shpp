@@ -4,7 +4,16 @@ import { resolveProductPagePreset, normalizeProductHandle } from '~/utils/produc
 import tApexJson from '~/content/products/t-apex.json'
 import exopekProJson from '~/content/products/exopek-pro.json'
 import tunturiJson from '~/content/products/tunturi.json'
+import tunturiC20Json from '~/content/products/tunturi-c20.json'
+import tunturiT20Json from '~/content/products/tunturi-t20.json'
+import tunturiE20Json from '~/content/products/tunturi-e20.json'
+import tunturiE30Json from '~/content/products/tunturi-e30.json'
+import tunturiE30RJson from '~/content/products/tunturi-e30-r.json'
+import tunturiS10Json from '~/content/products/tunturi-s10.json'
+import tunturiS20Json from '~/content/products/tunturi-s20.json'
 import optogaitJson from '~/content/products/optogait.json'
+import fluidRowerE685Json from '~/content/products/armergometer-fluid-rower-e685.json'
+import fluidRowerE750Json from '~/content/products/liegeergometer-armergometer-fluid-rower-e750.json'
 
 export interface ProductHighlightsContentItem {
   body: string;
@@ -54,6 +63,7 @@ export interface ProductFaqContent {
 }
 
 export interface ProductDetailContent {
+  shortDescription?: string;
   highlights: ProductHighlightsContent;
   banner: ProductBannerContent;
   features: ProductFeaturesContent;
@@ -64,7 +74,16 @@ const contentMap: Record<string, ProductDetailContent> = {
   't-apex': tApexJson as ProductDetailContent,
   'exopek-pro': exopekProJson as ProductDetailContent,
   'tunturi': tunturiJson as ProductDetailContent,
+  'tunturi-c20': tunturiC20Json as ProductDetailContent,
+  'tunturi-t20': tunturiT20Json as ProductDetailContent,
+  'tunturi-e20': tunturiE20Json as ProductDetailContent,
+  'tunturi-e30': tunturiE30Json as ProductDetailContent,
+  'tunturi-e30-r': tunturiE30RJson as ProductDetailContent,
+  'tunturi-s10': tunturiS10Json as ProductDetailContent,
+  'tunturi-s20': tunturiS20Json as ProductDetailContent,
   'optogait': optogaitJson as ProductDetailContent,
+  'fluid-rower-e685': fluidRowerE685Json as ProductDetailContent,
+  'fluid-rower-e750': fluidRowerE750Json as ProductDetailContent,
 }
 
 const defaultContent: ProductDetailContent = {

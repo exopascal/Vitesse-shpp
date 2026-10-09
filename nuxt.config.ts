@@ -111,6 +111,10 @@ export default defineNuxtConfig({
       viewport: 'width=device-width, initial-scale=1',
       charset: 'utf-8',
       titleTemplate: '%s | Vitesse Sports',
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'apple-touch-icon', sizes: '180x180', href: '/Vitesse-Bildmarke.png' },
+      ],
       meta: [
         { name: 'description', content: 'Premium Trainingsgeräte für Sprinttechnik, Widerstandstraining und Overspeed Training. Entdecke das Vitesse Sports Equipment.' },
         { property: 'og:site_name', content: 'Vitesse Sports' },

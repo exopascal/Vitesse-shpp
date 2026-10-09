@@ -22,7 +22,7 @@
             @mouseenter="showMegaMenu(index)"
             @mouseleave="hideMegaMenu()"
           >
-            <NuxtLink 
+            <NuxtLink
               v-if="!item.children || item.children.length === 0"
               :to="item.url || '/'"
               class="nav-link"
@@ -30,8 +30,21 @@
             >
               {{ item.title }}
             </NuxtLink>
-            
-            <button 
+
+            <!-- Item with url + children: clicking navigates, hover shows dropdown -->
+            <NuxtLink
+              v-else-if="item.url"
+              :to="item.url"
+              class="nav-link dropdown-trigger"
+              :class="{ 'active': activeMegaMenu === index || isActiveRoute(item.url) }"
+            >
+              {{ item.title }}
+              <svg class="dropdown-icon" :class="{ 'rotated': activeMegaMenu === index }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </NuxtLink>
+
+            <button
               v-else
               class="nav-link dropdown-trigger"
               :class="{ 'active': activeMegaMenu === index }"
@@ -44,15 +57,16 @@
             </button>
 
             <!-- Mega Menu -->
-            <div 
+            <div
               v-if="item.children && item.children.length > 0"
               class="mega-menu"
               :class="{ 'mega-menu-active': activeMegaMenu === index }"
+              :style="item.brandColor ? { '--menu-accent': item.brandColor } : {}"
             >
               <div class="mega-menu-container">
                 <div class="mega-menu-grid">
-                  <div 
-                    v-for="(category, catIndex) in item.children" 
+                  <div
+                    v-for="(category, catIndex) in item.children"
                     :key="catIndex"
                     class="mega-menu-category"
                   >
@@ -67,9 +81,13 @@
                   </div>
                 </div>
                 
-                <div v-if="item.featuredProducts?.length" class="mega-menu-highlights">
+                <div
+                  v-if="item.featuredProducts?.length"
+                  class="mega-menu-highlights"
+                  :style="item.brandColor ? { background: 'linear-gradient(180deg, #f6faf2 0%, #eaf3e4 100%)', borderColor: 'rgba(91, 161, 52, 0.15)' } : {}"
+                >
                   <div class="mega-menu-highlights-header">
-                    <h4 class="mega-menu-highlights-title">Unsere Highlights</h4>
+                    <h4 class="mega-menu-highlights-title">{{ item.highlightsTitle || 'Unsere Highlights' }}</h4>
                   </div>
                   <div class="mega-menu-highlights-grid">
                     <article
@@ -238,6 +256,7 @@
     </Transition>
 
     <!-- Mobile Sidebar -->
+    <Teleport to="body">
     <Transition name="sidebar">
       <div v-if="isMobileMenuOpen" class="mobile-sidebar-overlay" @click="closeMobileMenu">
         <nav class="mobile-sidebar" @click.stop>
@@ -324,6 +343,7 @@
         </nav>
       </div>
     </Transition>
+    </Teleport>
   </header>
 </template>
 
@@ -461,6 +481,15 @@ function normalizeText(value) {
     .trim()
 }
 
+const { data: tunturiFeaturedProducts } = await useAsyncData('header-tunturi-featured', async () => {
+  const products = await shopifyStore.fetchProducts({
+    filterQuery: 'tunturi',
+    sortBy: 'title-asc',
+    limit: 4,
+  })
+  return products.filter(Boolean)
+})
+
 const { data: highlightedProducts } = await useAsyncData('header-highlight-products', async () => {
   const products = await Promise.all(
     highlightedProductConfigs.map(async (config) => {
@@ -506,6 +535,10 @@ const navigationItems = computed(() => {
   },
   {
     title: 'Tunturi',
+    url: '/collections/tunturi',
+    brandColor: '#5BA134',
+    highlightsTitle: 'Tunturi Produkte',
+    featuredProducts: tunturiFeaturedProducts.value ?? [],
     children: [
       {
         title: 'Übersicht',
@@ -902,6 +935,7 @@ onUnmounted(() => {
 
 /* Mega Menu */
 .mega-menu {
+  --menu-accent: v-bind(accentColor);
   position: absolute;
   top: 100%;
   left: 50%;
@@ -947,7 +981,7 @@ onUnmounted(() => {
   font-weight: 600;
   color: #1f2937;
   margin: 0;
-  border-bottom: 2px solid v-bind(accentColor);
+  border-bottom: 2px solid var(--menu-accent);
   padding-bottom: 0.5rem;
 }
 
@@ -968,7 +1002,7 @@ onUnmounted(() => {
 }
 
 .category-link:hover {
-  color: v-bind(accentColor);
+  color: var(--menu-accent);
 }
 
 .mega-menu-featured {
@@ -1023,10 +1057,9 @@ onUnmounted(() => {
 
 .highlight-card-image {
   width: 100%;
-  aspect-ratio: 1 / 0.72;
+  aspect-ratio: 1 / 1;
   border-radius: 5px;
   object-fit: cover;
-  background: #e5e7eb;
 }
 
 .highlight-card-image-placeholder {
@@ -1054,7 +1087,7 @@ onUnmounted(() => {
 .highlight-card-price {
   margin: 0;
   font-size: 0.6rem;
-  color: #0f5e9c;
+  color: var(--menu-accent);
   font-weight: 700;
 }
 
@@ -1363,9 +1396,9 @@ onUnmounted(() => {
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
   bottom: 0;
-  width: 320px;
-  max-width: 85vw;
+  width: 100%;
   background: white;
   display: flex;
   flex-direction: column;

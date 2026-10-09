@@ -1,30 +1,26 @@
 <template>
   <div class="space-y-4 pb-4">
     <div class="rounded-[28px] bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] sm:p-8">
-      <div class="mb-5 flex flex-wrap items-center gap-3 text-sm text-[#756a5d]">
-        <span class="inline-flex items-center rounded-full bg-[#f4ede4] px-3 py-1 font-medium uppercase tracking-[0.14em]">
-          {{ product?.vendor || 'T-Apex' }}
-        </span>
+      <div class="mb-3 flex flex-wrap items-center gap-2">
         <span
-          class="inline-flex items-center rounded-full px-3 py-1 font-medium"
-          :class="isAvailable ? 'bg-[#e7f7ef] text-[#17633d]' : 'bg-[#fce8e5] text-[#9f2d22]'"
+          class="inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em]"
+          :class="isAvailable ? 'border-[#bde4ce] text-[#17633d]' : 'border-[#f5c0ba] text-[#9f2d22]'"
         >
-          {{ isAvailable ? 'Sofort verfuegbar' : 'Aktuell nicht verfuegbar' }}
+          {{ isAvailable ? 'Sofort verfügbar' : 'Aktuell nicht verfügbar' }}
         </span>
       </div>
 
-      <h1 class="max-w-[16ch] text-3xl font-black uppercase leading-[0.95] text-[#17120d] sm:text-4xl lg:text-[3.25rem]">
+      <h1 class="break-words text-[1.5rem] font-black uppercase leading-[1.05] tracking-tight text-[#17120d] sm:text-[1.75rem] lg:text-[2rem]">
         {{ product?.title || 'Product Title' }}
       </h1>
 
-      <p v-if="product?.subtitle" class="mt-4 max-w-2xl text-base leading-7 text-[#5f5549]">
-        {{ product.subtitle }}
+      <p v-if="product?.subtitle || shortDescription" class="mt-3 max-w-2xl text-base leading-7 text-[#5f5549]">
+        {{ product?.subtitle || shortDescription }}
       </p>
 
-
-      <div class="mt-6 flex flex-wrap items-end gap-3">
-        <span class="text-3xl font-black text-[#17120d] sm:text-4xl">{{ formatPrice(currentPrice) }}</span>
-        <span v-if="comparePrice" class="pb-1 text-lg font-medium text-[#8a7f72] line-through">
+      <div class="mt-5 flex flex-wrap items-end gap-3">
+        <span class="text-[2rem] font-black text-[#17120d] sm:text-[2.25rem]">{{ formatPrice(currentPrice) }}</span>
+        <span v-if="comparePrice" class="pb-1 text-base font-medium text-[#8a7f72] line-through">
           {{ formatPrice(comparePrice) }}
         </span>
         <TaxNote class="pb-1.5" />
@@ -63,19 +59,19 @@
         </div>
 
         <div class="grid gap-3 sm:grid-cols-[auto_1fr]">
-          <div class="inline-flex items-center rounded-full border border-[#ded5c8] bg-[#fbf8f3] p-1">
+          <div class="flex w-full items-center rounded-full border border-[#ded5c8] bg-[#fbf8f3] p-1">
             <button
               type="button"
-              class="flex h-11 w-11 items-center justify-center rounded-full text-xl text-[#17120d] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-35"
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-xl text-[#17120d] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-35"
               :disabled="quantity <= 1"
               @click="decrementQuantity"
             >
               -
             </button>
-            <span class="min-w-[3rem] text-center text-base font-semibold text-[#17120d]">{{ quantity }}</span>
+            <span class="flex-1 text-center text-base font-semibold text-[#17120d]">{{ quantity }}</span>
             <button
               type="button"
-              class="flex h-11 w-11 items-center justify-center rounded-full text-xl text-[#17120d] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-35"
+              class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-xl text-[#17120d] transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-35"
               :disabled="selectedVariant && quantity >= selectedVariant.quantityAvailable"
               @click="incrementQuantity"
             >
@@ -100,46 +96,54 @@
     <div class="grid gap-4">
       <article class="rounded-[24px] border border-[#ebe2d7] bg-white p-6">
         <h2 class="text-lg font-bold uppercase tracking-[0.08em] text-[#17120d]">Produktdetails</h2>
-        <div v-if="product?.description" class="prose prose-sm mt-4 max-w-none text-[#4f463b] prose-p:text-[#4f463b] prose-li:text-[#4f463b] prose-strong:text-[#17120d]">
-          <div v-html="product.description"></div>
+        <div v-if="product?.description" class="relative mt-4">
+          <div
+            class="prose prose-sm max-w-none overflow-hidden text-[#4f463b] prose-p:text-[#4f463b] prose-li:text-[#4f463b] prose-strong:text-[#17120d] [&_img]:max-w-full [&_img]:h-auto [&_table]:w-full [&_table]:table-fixed [&_iframe]:max-w-full transition-all duration-300"
+            :style="isDescriptionExpanded ? {} : { maxHeight: '7rem', overflow: 'hidden' }"
+          >
+            <div v-html="product.description"></div>
+          </div>
+          <div
+            v-if="!isDescriptionExpanded"
+            class="pointer-events-none absolute bottom-8 left-0 right-0 h-12 bg-gradient-to-t from-white to-transparent"
+          ></div>
+          <button
+            type="button"
+            class="relative mt-3 inline-flex items-center gap-1.5 rounded-full border border-[#ded5c8] bg-[#fbf8f3] px-4 py-2 text-sm font-semibold text-[#17120d] transition hover:bg-[#f0e9e0] hover:border-[#c9bfb3]"
+            @click="isDescriptionExpanded = !isDescriptionExpanded"
+          >
+            <span>{{ isDescriptionExpanded ? 'Weniger anzeigen' : 'Mehr lesen' }}</span>
+            <svg
+              class="h-4 w-4 transition-transform duration-200"
+              :class="isDescriptionExpanded ? 'rotate-180' : ''"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
         </div>
         <p v-else class="mt-4 text-sm leading-6 text-[#6e6458]">
           Weitere Produktdetails folgen.
         </p>
       </article>
 
-      <article class="rounded-[24px] border border-[#ebe2d7] bg-white p-6">
-        <h2 class="text-lg font-bold uppercase tracking-[0.08em] text-[#17120d]">Technische Daten</h2>
-        <dl class="mt-4 space-y-3">
-          <div class="flex items-center justify-between gap-4 border-b border-[#f1ebe2] pb-3 text-sm">
-            <dt class="text-[#7c7165]">Marke</dt>
-            <dd class="font-semibold text-[#17120d]">{{ product?.vendor || 'T-Apex' }}</dd>
-          </div>
-          <div class="flex items-center justify-between gap-4 border-b border-[#f1ebe2] pb-3 text-sm">
-            <dt class="text-[#7c7165]">Produktcode</dt>
-            <dd class="font-semibold text-[#17120d]">{{ product?.handle || '-' }}</dd>
-          </div>
-          <div class="flex items-center justify-between gap-4 border-b border-[#f1ebe2] pb-3 text-sm">
-            <dt class="text-[#7c7165]">Varianten</dt>
-            <dd class="font-semibold text-[#17120d]">{{ variantCount }}</dd>
-          </div>
-          <div class="flex items-center justify-between gap-4 text-sm">
-            <dt class="text-[#7c7165]">Status</dt>
-            <dd class="font-semibold text-[#17120d]">{{ isAvailable ? 'Verfuegbar' : 'Nicht verfuegbar' }}</dd>
-          </div>
-        </dl>
-      </article>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
+
+const isDescriptionExpanded = ref(false)
 
 const props = defineProps({
   product: {
     type: Object,
     default: null,
+  },
+  shortDescription: {
+    type: String,
+    default: '',
   },
   selectedOptions: {
     type: Object,

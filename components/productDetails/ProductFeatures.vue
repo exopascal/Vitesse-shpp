@@ -47,9 +47,9 @@ defineProps<{
 
 .product-features-header h2 {
   margin: 0;
-  font-size: clamp(2rem, 4vw, 3.3rem);
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
   font-weight: 900;
-  line-height: 1;
+  line-height: 1.1;
   text-transform: uppercase;
   color: #121212;
 }

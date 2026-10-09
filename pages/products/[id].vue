@@ -20,6 +20,7 @@
         <ProductDetailsLayout
           v-else
           :product="product"
+          :shortDescription="productDetailContent.shortDescription"
           :selectedOptions="selectedOptions"
           :selectedVariant="selectedVariant"
           :quantity="quantity"
@@ -57,7 +58,7 @@ import ShopBanner from '~/components/productDetails/ShopBanner.vue'
 import ProductFeatures from '~/components/productDetails/ProductFeatures.vue'
 import { getProductDetailContent } from '~/utils/productDetailContent'
 import { resolveProductPagePreset } from '~/utils/productPageConfig'
-import { createProductSchema, createBreadcrumbSchema, schemaToString } from '~/utils/schemas/productSchema'
+import { createProductSchema, createFAQSchema, createBreadcrumbSchema, schemaToString } from '~/utils/schemas/productSchema'
 
 // Route und Store
 const route = useRoute();
@@ -253,6 +254,7 @@ watch(product, (p) => {
     price,
     availability: p.available ? 'InStock' : 'OutOfStock',
     url,
+    ...(p.vendor && { brand: p.vendor }),
     ...(p.reviewSummary?.ratingValue && {
       ratingValue: p.reviewSummary.ratingValue,
       ratingCount: p.reviewSummary.reviewCount ?? 1,
@@ -265,12 +267,19 @@ watch(product, (p) => {
     { name: p.title, url },
   ])
 
-  useHead({
-    script: [
-      { type: 'application/ld+json', innerHTML: schemaToString(productSchema) },
-      { type: 'application/ld+json', innerHTML: schemaToString(breadcrumbSchema) },
-    ],
-  })
+  const faqItems = productDetailContent.value.faq.items
+  const scripts: any[] = [
+    { type: 'application/ld+json', innerHTML: schemaToString(productSchema) },
+    { type: 'application/ld+json', innerHTML: schemaToString(breadcrumbSchema) },
+  ]
+  if (faqItems.length > 0) {
+    const faqSchema = createFAQSchema(
+      faqItems.map(item => ({ question: item.question, answer: item.answer.join(' ') }))
+    )
+    scripts.push({ type: 'application/ld+json', innerHTML: schemaToString(faqSchema) })
+  }
+
+  useHead({ script: scripts })
 }, { immediate: true })
 
 // Produkt bei Seitenaufruf laden

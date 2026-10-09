@@ -122,6 +122,25 @@ export function createBreadcrumbSchema(items: BreadcrumbItem[]) {
   }
 }
 
+export interface CollectionPageSchemaData {
+  name: string
+  description: string
+  url: string
+  image?: string
+}
+
+export function createCollectionPageSchema(data: CollectionPageSchemaData) {
+  const schema: any = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: data.name,
+    description: data.description,
+    url: data.url,
+  }
+  if (data.image) schema.image = data.image
+  return schema
+}
+
 /**
  * Create Organization Schema
  * @param orgData Organization data
