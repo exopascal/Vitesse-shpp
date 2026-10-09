@@ -32,6 +32,19 @@
         />
 
         <template v-if="productPagePreset.template === 'main'">
+          <section v-if="productVideos.length" class="product-videos">
+            <div class="product-videos__inner">
+              <video
+                v-for="(src, i) in productVideos"
+                :key="i"
+                :src="src"
+                autoplay
+                muted
+                playsinline
+                class="product-videos__video"
+              />
+            </div>
+          </section>
           <ProductHighlights :product="product" :content="productDetailContent.highlights" />
           <ShopBanner :content="productDetailContent.banner" />
           <ProductFeatures :content="productDetailContent.features" />
@@ -58,6 +71,7 @@ import ShopBanner from '~/components/productDetails/ShopBanner.vue'
 import ProductFeatures from '~/components/productDetails/ProductFeatures.vue'
 import { getProductDetailContent } from '~/utils/productDetailContent'
 import { resolveProductPagePreset } from '~/utils/productPageConfig'
+import { getProductVideos } from '~/utils/productVideos'
 import { createProductSchema, createFAQSchema, createBreadcrumbSchema, schemaToString } from '~/utils/schemas/productSchema'
 
 // Route und Store
@@ -89,6 +103,7 @@ const selectedVariant = computed(() => {
 
 const productDetailContent = computed(() => getProductDetailContent(product.value))
 const productPagePreset = computed(() => resolveProductPagePreset(handle.value))
+const productVideos = computed(() => getProductVideos(handle.value))
 
 function handleCartAdded() {
   openCart();
@@ -302,6 +317,25 @@ watch(
 </script>
   
   <style scoped>
+.product-videos {
+  width: 100%;
+  background: #000;
+}
+
+.product-videos__inner {
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.product-videos__video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .loading,
 .not-found {
   padding: 3rem;
