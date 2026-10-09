@@ -44,7 +44,13 @@ const brandGradients: Record<string, string> = {
   torque:         'linear-gradient(90deg, #ec6a29 0%, #f09860 100%)',
   exopek:         'linear-gradient(90deg, #bb3630 0%, #d46560 100%)',
   witty:          'linear-gradient(90deg, #2d73b9 0%, #5a9ed6 100%)',
-  tunturi:        'linear-gradient(90deg, #52a730 0%, #7cc455 100%)',
+  tunturi:                    'linear-gradient(90deg, #52a730 0%, #7cc455 100%)',
+  'tunturi-indoor-bikes':     'linear-gradient(90deg, #52a730 0%, #7cc455 100%)',
+  'tunturi-fahrradergometer': 'linear-gradient(90deg, #52a730 0%, #7cc455 100%)',
+  'tunturi-liegeergometer':   'linear-gradient(90deg, #52a730 0%, #7cc455 100%)',
+  'tunturi-crosstrainer':     'linear-gradient(90deg, #52a730 0%, #7cc455 100%)',
+  'tunturi-laufband':         'linear-gradient(90deg, #52a730 0%, #7cc455 100%)',
+  'tunturi-armergometer':     'linear-gradient(90deg, #52a730 0%, #7cc455 100%)',
   sportreact:     'linear-gradient(90deg, #c7aa00 0%, #e0cb3f 100%)',
 }
 

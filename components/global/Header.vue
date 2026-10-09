@@ -73,7 +73,7 @@
                     <h3 class="category-title">{{ category.title }}</h3>
                     <ul class="category-links">
                       <li v-for="(link, linkIndex) in category.children" :key="linkIndex">
-                        <NuxtLink :to="link.url || '/'" class="category-link">
+                        <NuxtLink :to="link.url || '/'" class="category-link" @click="hideMegaMenu">
                           {{ link.title }}
                         </NuxtLink>
                       </li>
@@ -135,7 +135,7 @@
                     <div class="featured-text">
                       <h4 class="featured-title">{{ item.featured.title }}</h4>
                       <p class="featured-description">{{ item.featured.description }}</p>
-                      <NuxtLink v-if="item.featured.url" :to="item.featured.url" class="featured-link">
+                      <NuxtLink v-if="item.featured.url" :to="item.featured.url" class="featured-link" @click="hideMegaMenu">
                         {{ item.featured.buttonText || 'Mehr erfahren' }}
                       </NuxtLink>
                     </div>
@@ -703,6 +703,7 @@ const toggleMobileDropdown = (index) => {
 const toggleSearch = async () => {
   isSearchOpen.value = !isSearchOpen.value
   if (isSearchOpen.value) {
+    hideMegaMenu()
     await nextTick()
     searchInput.value?.focus()
   } else {
@@ -784,6 +785,8 @@ watch(searchQuery, () => {
 })
 
 watch(() => route.fullPath, () => {
+  hideMegaMenu()
+
   if (!isSearchOpen.value) {
     return
   }
@@ -793,9 +796,16 @@ watch(() => route.fullPath, () => {
   resetSearchState()
 })
 
+const handleKeydown = (e) => {
+  if (e.key === 'Escape') {
+    hideMegaMenu()
+  }
+}
+
 // Lifecycle
 onMounted(() => {
   window.addEventListener('scroll', handleScroll)
+  window.addEventListener('keydown', handleKeydown)
 })
 
 onUnmounted(() => {
@@ -803,6 +813,7 @@ onUnmounted(() => {
     clearTimeout(searchDebounceTimer)
   }
   window.removeEventListener('scroll', handleScroll)
+  window.removeEventListener('keydown', handleKeydown)
   document.body.style.overflow = ''
 })
 </script>
