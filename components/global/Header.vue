@@ -14,11 +14,12 @@
       <!-- Desktop Navigation -->
       <nav class="desktop-nav" :class="{ 'nav-hidden': isMobileMenuOpen }">
         <ul class="nav-list">
-          <li 
-            v-for="(item, index) in navigationItems" 
+          <li
+            v-for="(item, index) in navigationItems"
             :key="index"
             class="nav-item"
             :class="{ 'has-dropdown': item.children && item.children.length > 0 }"
+            :style="item.brandColor ? { '--item-accent': item.brandColor } : {}"
             @mouseenter="showMegaMenu(index)"
             @mouseleave="hideMegaMenu()"
           >
@@ -275,7 +276,12 @@
 
           <div class="mobile-nav-content">
             <ul class="mobile-nav-list">
-              <li v-for="(item, index) in navigationItems" :key="index" class="mobile-nav-item">
+              <li
+                v-for="(item, index) in navigationItems"
+                :key="index"
+                class="mobile-nav-item"
+                :style="item.brandColor ? { '--item-accent': item.brandColor } : {}"
+              >
                 <div class="mobile-nav-group">
                   <NuxtLink 
                     v-if="!item.children || item.children.length === 0"
@@ -531,7 +537,8 @@ const navigationItems = computed(() => {
   return [
   {
     title: 'T-Apex',
-    url: '/products/t-apex'
+    url: '/products/t-apex',
+    brandColor: '#ef4544',
   },
   {
     title: 'Tunturi',
@@ -561,11 +568,13 @@ const navigationItems = computed(() => {
   },
   {
     title: 'Torque',
-    url: '/collections/torque'
+    url: '/collections/torque',
+    brandColor: '#ec6a29',
   },
   {
     title: 'Witty',
-    url: '/collections/witty'
+    url: '/collections/witty',
+    brandColor: '#2d73b9',
   },
   {
     title: 'Shop',
@@ -931,7 +940,7 @@ onUnmounted(() => {
 
 .nav-link:hover,
 .nav-link.active {
-  color: v-bind(accentColor);
+  color: var(--item-accent, v-bind(accentColor));
 }
 
 .dropdown-icon {
@@ -1488,7 +1497,7 @@ onUnmounted(() => {
 
 .mobile-nav-link:hover,
 .mobile-nav-link.active {
-  color: v-bind(accentColor);
+  color: var(--item-accent, v-bind(accentColor));
 }
 
 .mobile-dropdown-icon {
@@ -1513,7 +1522,7 @@ onUnmounted(() => {
 
 .mobile-category {
   padding: 0.5rem 0;
-  border-left: 2px solid v-bind(accentColor);
+  border-left: 2px solid var(--item-accent, v-bind(accentColor));
   padding-left: 1rem;
   margin: 0.5rem 0;
 }

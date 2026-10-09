@@ -82,7 +82,7 @@
       </section>
 
       <!-- Hub: One section per sub-category with product grid -->
-      <template v-if="subCollections.length">
+      <div v-if="subCollections.length" class="hub-grid">
         <section
           v-for="sub in subCollections"
           :key="sub.handle"
@@ -99,35 +99,45 @@
               </NuxtLink>
             </div>
 
-            <div v-if="hubProducts?.[sub.handle]?.length" class="products-grid hub-section__grid">
-              <NuxtLink
-                v-for="product in hubProducts[sub.handle]"
-                :key="product.id"
-                :to="`/products/${product.handle}`"
-                class="product-card"
-              >
-                <div class="product-card__image">
-                  <img v-if="product.featured_image" :src="product.featured_image" :alt="product.title" />
-                  <div v-else class="product-card__image-placeholder">{{ product.title.charAt(0) }}</div>
-                  <span v-if="product.on_sale" class="sale-badge">Sale</span>
-                </div>
-                <div class="product-card__info">
-                  <h3 class="product-card__name">{{ product.title }}</h3>
-                  <div class="product-card__price">
-                    <span v-if="product.on_sale && product.compare_at_price" class="price-original">{{ formatPrice(product.compare_at_price) }}</span>
-                    <span class="price-current">{{ formatPrice(product.price) }}</span>
+            <div v-if="hubProducts?.[sub.handle]?.length" class="hub-slider">
+              <div :ref="(el) => setSliderRef(sub.handle, el)" class="hub-slider__track">
+                <NuxtLink
+                  v-for="product in hubProducts[sub.handle]"
+                  :key="product.id"
+                  :to="`/products/${product.handle}`"
+                  class="product-card hub-slider__item"
+                >
+                  <div class="product-card__image">
+                    <img v-if="product.featured_image" :src="product.featured_image" :alt="product.title" />
+                    <div v-else class="product-card__image-placeholder">{{ product.title.charAt(0) }}</div>
+                    <span v-if="product.on_sale" class="sale-badge">Sale</span>
                   </div>
-                  <TaxNote />
-                  <span class="product-card__stock" :class="product.available ? 'product-card__stock--in' : 'product-card__stock--out'">
-                    {{ product.available ? 'Verfügbar' : 'Ausverkauft' }}
-                  </span>
-                </div>
-              </NuxtLink>
+                  <div class="product-card__info">
+                    <h3 class="product-card__name">{{ product.title }}</h3>
+                    <div class="product-card__price">
+                      <span v-if="product.on_sale && product.compare_at_price" class="price-original">{{ formatPrice(product.compare_at_price) }}</span>
+                      <span class="price-current">{{ formatPrice(product.price) }}</span>
+                    </div>
+                    <TaxNote />
+                    <span class="product-card__stock" :class="product.available ? 'product-card__stock--in' : 'product-card__stock--out'">
+                      {{ product.available ? 'Verfügbar' : 'Ausverkauft' }}
+                    </span>
+                  </div>
+                </NuxtLink>
+              </div>
+              <div class="hub-slider__nav">
+                <button class="hub-slider__btn" aria-label="Zurück" @click="scrollSlider(sub.handle, -1)">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button class="hub-slider__btn" aria-label="Weiter" @click="scrollSlider(sub.handle, 1)">
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
             </div>
             <div v-else class="state-message">Produkte werden geladen…</div>
           </div>
         </section>
-      </template>
+      </div>
 
       <!-- Products Grid -->
       <section v-else id="collection-products" class="products-section">
@@ -218,6 +228,7 @@
               <p class="seo-goal-card__text">{{ goal.description }}</p>
             </article>
           </div>
+          <p v-if="brandContent.outro" class="vorteile-section__outro">{{ brandContent.outro }}</p>
         </div>
       </section>
     </div>
@@ -338,6 +349,20 @@ const displayedProducts = computed(() => {
     return left.title.localeCompare(right.title)
   })
 })
+
+const sliderRefs: Record<string, HTMLElement | null> = {}
+
+function setSliderRef(handle: string, el: Element | null) {
+  sliderRefs[handle] = el as HTMLElement | null
+}
+
+function scrollSlider(handle: string, direction: -1 | 1) {
+  const track = sliderRefs[handle]
+  if (!track) return
+  const item = track.querySelector('.hub-slider__item') as HTMLElement | null
+  const step = item ? item.offsetWidth + 20 : 320
+  track.scrollBy({ left: direction * step, behavior: 'smooth' })
+}
 
 function formatPrice(price: number): string {
   if (!price) return '€0,00'
@@ -800,20 +825,34 @@ watch(collection, (c) => {
   cursor: not-allowed;
 }
 
-/* ─── Hub Sections (one per sub-category) ────────────────────────────────── */
-.hub-section {
-  padding: clamp(2.5rem, 5vw, 4rem) 0;
-  border-bottom: 1px solid #f1f5f9;
+.vorteile-section__outro {
+  margin: 2rem 0 0;
+  max-width: 62rem;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #4b5563;
 }
 
-.hub-section:last-of-type {
-  border-bottom: none;
+/* ─── Hub Grid (2-column layout) ─────────────────────────────────────────── */
+.hub-grid {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: clamp(2rem, 4vw, 3.5rem) 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+/* ─── Hub Sections (one per sub-category) ────────────────────────────────── */
+.hub-section {
+  padding: 1.5rem;
+  border: 1px solid #f1f5f9;
+  border-radius: 1.25rem;
+  background: #ffffff;
 }
 
 .hub-section__inner {
-  max-width: 1500px;
-  margin: 0 auto;
-  padding: 0 2rem;
+  height: 100%;
 }
 
 .hub-section__header {
@@ -821,7 +860,7 @@ watch(collection, (c) => {
   align-items: flex-end;
   justify-content: space-between;
   gap: 1.5rem;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.25rem;
   flex-wrap: wrap;
 }
 
@@ -831,10 +870,10 @@ watch(collection, (c) => {
 }
 
 .hub-section__title {
-  margin: 0 0 0.35rem;
-  font-size: clamp(1.6rem, 2.8vw, 2.6rem);
+  margin: 0 0 0.2rem;
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
   font-weight: 800;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.03em;
   line-height: 1.05;
   background-clip: text;
   -webkit-background-clip: text;
@@ -844,14 +883,14 @@ watch(collection, (c) => {
 
 .hub-section__desc {
   margin: 0;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   color: #6b7280;
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 .hub-section__all-link {
   flex-shrink: 0;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: #52a730;
   text-decoration: none;
@@ -863,8 +902,56 @@ watch(collection, (c) => {
   opacity: 0.75;
 }
 
-.hub-section__grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+/* ─── Hub Slider ─────────────────────────────────────────────────────────── */
+.hub-slider {
+  position: relative;
+}
+
+.hub-slider__track {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 0.25rem;
+}
+
+.hub-slider__track::-webkit-scrollbar {
+  display: none;
+}
+
+.hub-slider__item {
+  flex: 0 0 calc(50% - 0.65rem);
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.hub-slider__nav {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin-top: 0.85rem;
+}
+
+.hub-slider__btn {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 1.5px solid #e5e7eb;
+  background: #ffffff;
+  color: #374151;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+}
+
+.hub-slider__btn:hover {
+  border-color: #52a730;
+  color: #52a730;
+  box-shadow: 0 2px 8px rgba(82, 167, 48, 0.15);
 }
 
 /* ─── Vorteile Section ───────────────────────────────────────────────────── */
@@ -898,8 +985,10 @@ watch(collection, (c) => {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .hub-section__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .hub-grid {
+    grid-template-columns: 1fr;
+    padding: 1.5rem 1.5rem;
+    gap: 1.25rem;
   }
 }
 
@@ -952,14 +1041,19 @@ watch(collection, (c) => {
     gap: 0.75rem;
   }
 
-  .hub-section__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .hub-grid {
+    padding: 1.25rem 1rem;
+    gap: 1rem;
+  }
+
+  .hub-slider__item {
+    flex: 0 0 80%;
   }
 
   .hub-section__header {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
 
   .product-card__image {

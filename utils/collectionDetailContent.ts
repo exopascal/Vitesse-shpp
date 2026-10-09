@@ -41,6 +41,7 @@ export interface CollectionSeoContent {
     title: string
     description: string
   }>
+  outro?: string
 }
 
 function buildSprinttrainingCollectionContent(collection?: ShopifyCollection | null): CollectionHeroContent {
@@ -86,7 +87,7 @@ function buildTunturiSeoContent(): CollectionSeoContent {
     titleTag: 'h1',
     subtitle: 'Für anspruchsvolle Nutzer und Spitzenleistung.',
     body:
-      'Die Tunturi Platinum Serie vereint hochwertige Ausdauergeräte für den professionellen Einsatz in Fitnessstudios, Firmenfitness-Bereichen und Rehabilitationszentren. Von Indoor Bikes über Ergometer bis hin zu Laufbändern und Armergometern — jedes Gerät ist auf präzise Trainingssteuerung, robuste Bauweise und breite App-Konnektivität ausgelegt.\n\nDie Tunturi Platinum Kollektion besteht aus kommerziellen Fitnessgeräten, die für anspruchsvolle Benutzer entwickelt wurden, die Spitzenleistung erzielen wollen. Egal, ob du zu Hause trainierst, ein Fitnessstudio betreibst oder als Physiotherapeut arbeitest.',
+      'Die Tunturi Platinum Serie vereint hochwertige Ausdauergeräte für den professionellen Einsatz in Fitnessstudios, Firmenfitness-Bereichen und Rehabilitationszentren. Von Indoor Bikes über Ergometer bis hin zu Laufbändern und Armergometern — jedes Gerät ist auf präzise Trainingssteuerung, robuste Bauweise und breite App-Konnektivität ausgelegt.',
     goalsTitle: 'Die Vorteile von Tunturi',
     goals: [
       {
@@ -106,6 +107,7 @@ function buildTunturiSeoContent(): CollectionSeoContent {
         description: 'Vom Laufband über den Crosstrainer bis zum Armergometer — vollständige Abdeckung aller Ausdauermodalitäten.',
       },
     ],
+    outro: 'Die Tunturi Platinum Kollektion besteht aus kommerziellen Fitnessgeräten, die für anspruchsvolle Benutzer entwickelt wurden, die Spitzenleistung erzielen wollen. Egal, ob du zu Hause trainierst, ein Fitnessstudio betreibst oder als Physiotherapeut arbeitest.',
   }
 }
 
