@@ -14,7 +14,8 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1050;
+  z-index: 900;
+  pointer-events: none;
   background:
     radial-gradient(120% 180% at 50% 0%, rgba(60, 121, 189, 0.3), transparent 60%),
     linear-gradient(90deg, #13263c 0%, #0a1422 100%);
