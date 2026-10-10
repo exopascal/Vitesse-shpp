@@ -3,14 +3,14 @@
     <div class="rounded-[28px] bg-white p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] sm:p-8">
       <div class="mb-3 flex flex-wrap items-center gap-2">
         <span
-          class="inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em]"
+          class="inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold tracking-[0.04em]"
           :class="isAvailable ? 'border-[#bde4ce] text-[#17633d]' : 'border-[#f5c0ba] text-[#9f2d22]'"
         >
           {{ isAvailable ? 'Sofort verfügbar' : 'Aktuell nicht verfügbar' }}
         </span>
       </div>
 
-      <h1 class="break-words text-[1.5rem] font-black uppercase leading-[1.05] tracking-tight text-[#17120d] sm:text-[1.75rem] lg:text-[2rem]">
+      <h1 class="break-words text-[1.5rem] font-black leading-[1.05] tracking-tight text-[#17120d] sm:text-[1.75rem] lg:text-[2rem]">
         {{ product?.title || 'Product Title' }}
       </h1>
 
@@ -30,7 +30,7 @@
         <div v-if="hasRealVariants" class="space-y-5">
           <div v-for="option in product.options" :key="option.name" class="space-y-2.5">
             <div class="flex items-center justify-between gap-3">
-              <label class="text-sm font-semibold uppercase tracking-[0.12em] text-[#5a5045]">
+              <label class="text-sm font-semibold tracking-[0.02em] text-[#5a5045]">
                 {{ option.name }}
               </label>
               <span class="text-sm text-[#8b8073]">
@@ -81,7 +81,7 @@
 
           <button
             type="button"
-            class="min-h-[3.25rem] rounded-full bg-[#111827] px-6 text-sm font-bold uppercase tracking-[0.14em] text-white transition hover:bg-[#374151] disabled:cursor-not-allowed disabled:bg-[#c9c1b6]"
+            class="min-h-[3.25rem] rounded-full bg-[#111827] px-6 text-sm font-bold tracking-[0.04em] text-white transition hover:bg-[#374151] disabled:cursor-not-allowed disabled:bg-[#c9c1b6]"
             :disabled="!isAvailable || isLoading"
             @click="addToCart"
           >
@@ -95,7 +95,7 @@
 
     <div class="grid gap-4">
       <article class="rounded-[24px] border border-[#ebe2d7] bg-white p-6">
-        <h2 class="text-lg font-bold uppercase tracking-[0.08em] text-[#17120d]">Produktdetails</h2>
+        <h2 class="text-lg font-bold tracking-[0.02em] text-[#17120d]">Produktdetails</h2>
         <div v-if="product?.description" class="relative mt-4">
           <div
             class="prose prose-sm max-w-none overflow-hidden text-[#4f463b] prose-p:text-[#4f463b] prose-li:text-[#4f463b] prose-strong:text-[#17120d] [&_img]:max-w-full [&_img]:h-auto [&_table]:w-full [&_table]:table-fixed [&_iframe]:max-w-full transition-all duration-300"

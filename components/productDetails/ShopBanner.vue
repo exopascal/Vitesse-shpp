@@ -9,10 +9,10 @@
       <div class="shop-banner-media">
         <video
           v-if="videoSrc"
+          v-autoplay-on-visible
           :src="videoSrc"
           :poster="content.image"
           class="shop-banner-video"
-          autoplay
           muted
           loop
           playsinline

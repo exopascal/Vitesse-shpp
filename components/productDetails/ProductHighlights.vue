@@ -245,8 +245,8 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   max-width: 1500px;
-  height: 80vh;
-  height: 80svh;
+  min-height: 80vh;
+  min-height: 80svh;
   margin: 0 auto;
   padding: 2rem 1rem 2rem 2rem;
 }
@@ -264,8 +264,7 @@ onBeforeUnmount(() => {
   margin: 0 0 0.4rem;
   font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: #7b6e61;
 }
 
@@ -274,7 +273,6 @@ onBeforeUnmount(() => {
   font-size: clamp(1.4rem, 2vw, 1.8rem);
   font-weight: 900;
   line-height: 1.1;
-  text-transform: uppercase;
 }
 
 .product-highlights-link {
@@ -484,13 +482,16 @@ onBeforeUnmount(() => {
 @media (max-width: 640px) {
   .product-highlights-container {
     padding: 1rem;
-    height: 62svh;
-    height: 62vh;
+    min-height: 62svh;
+    min-height: 62vh;
+    height: auto;
   }
 
   .product-highlights-header {
     align-items: flex-start;
     flex-direction: column;
+    flex: 0 0 auto;
+    min-height: unset;
   }
 
   .product-highlights-title {
@@ -498,7 +499,16 @@ onBeforeUnmount(() => {
   }
 
   .product-highlights-rail {
+    flex: 1 1 0;
+    height: auto;
+    min-height: 30vh;
+    min-height: 30svh;
     grid-auto-columns: calc(100% - 3.5rem);
+  }
+
+  .product-highlights-controls {
+    flex: 0 0 auto;
+    min-height: unset;
   }
 
   .product-highlights-card-copy {

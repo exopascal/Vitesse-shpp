@@ -87,8 +87,8 @@
           <!-- Video banner: Tunturi only, between Fahrradergometer (index 1) and Liegeergometer (index 2) -->
           <div v-if="index === 2 && slug === 'tunturi'" class="hub-video-banner">
             <video
+              v-autoplay-on-visible
               src="/tunturi-platinum-logo-animation.mov"
-              autoplay
               muted
               loop
               playsinline
@@ -98,8 +98,8 @@
           <!-- Video banner: Tunturi only, between Crosstrainer (index 3) and Laufband (index 4) -->
           <div v-if="index === 4 && slug === 'tunturi'" class="hub-video-banner">
             <video
+              v-autoplay-on-visible
               src="/tunturi-platinum-product-animation.mov"
-              autoplay
               muted
               playsinline
               class="hub-video-banner__video"
@@ -660,6 +660,8 @@ watch(collection, (c) => {
   line-height: 1.2;
   letter-spacing: -0.03em;
   color: #0f172a;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .seo-goal-card__text {
@@ -667,6 +669,8 @@ watch(collection, (c) => {
   font-size: 0.95rem;
   line-height: 1.65;
   color: #4b5563;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 /* ─── Products Section ───────────────────────────────────────────────────── */

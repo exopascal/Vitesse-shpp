@@ -9,9 +9,9 @@
     <div class="hero-card">
       <video
         v-if="backgroundVideo"
+        v-autoplay-on-visible
         class="hero-media"
         :poster="backgroundImage || undefined"
-        autoplay
         muted
         loop
         playsinline

@@ -76,8 +76,7 @@ defineEmits<{
   margin: 0 0 0.5rem;
   font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: #0f5e9c;
 }
 

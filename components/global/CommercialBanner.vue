@@ -2,7 +2,7 @@
   <section class="commercial-banner" aria-label="Aktuelle Angebote und Hinweise">
     <div class="commercial-banner__inner">
       <p class="commercial-banner__text">
-        Verkauf nur an Geschäftskunden (B2B) – Kein Verkauf an Verbraucher
+        <span>Verkauf nur an Geschäftskunden (B2B)</span><span class="commercial-banner__sep"> – </span><span>Kein Verkauf an Verbraucher</span>
       </p>
     </div>
   </section>
@@ -56,13 +56,21 @@
 
 @media (max-width: 768px) {
   .commercial-banner__inner {
-    flex-direction: column;
-    gap: 0.35rem;
-    padding: 0.75rem 1rem;
+    min-height: 2.25rem;
+    padding: 0.4rem 0.75rem;
   }
 
   .commercial-banner__text {
-    font-size: 0.92rem;
+    font-size: 0.72rem;
+  }
+
+  .commercial-banner__sep {
+    display: none;
+  }
+
+  .commercial-banner__text span:first-child::after {
+    content: '';
+    display: block;
   }
 }
 </style>
