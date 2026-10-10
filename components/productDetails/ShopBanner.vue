@@ -80,8 +80,9 @@ const videoSrc = computed(() => {
   font-weight: 900;
   line-height: 0.98;
   letter-spacing: -0.03em;
-  text-transform: uppercase;
   color: #050505;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .shop-banner-text {
@@ -167,6 +168,10 @@ const videoSrc = computed(() => {
 
   .shop-banner-header {
     margin-bottom: 1.75rem;
+  }
+
+  .shop-banner-title {
+    font-size: 1.85rem;
   }
 
   .shop-banner-text {
