@@ -1,5 +1,8 @@
 export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.directive('autoplay-on-visible', {
+    getSSRProps() {
+      return {}
+    },
     mounted(el: HTMLVideoElement) {
       const observer = new IntersectionObserver(
         (entries) => {
