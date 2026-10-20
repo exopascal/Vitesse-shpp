@@ -364,9 +364,7 @@ export const useShopifyStore = defineStore("shopifyStore", {
           }
         }
       `;
-      console.log("Fetching product:", productId);
       const response = await this.shopifyFetch(query, { productId });
-      console.log("Product response:", response);
       if (!response?.data?.product) {
         return null;
       }
@@ -559,8 +557,6 @@ export const useShopifyStore = defineStore("shopifyStore", {
         collectionHandle,
         numProducts: limit,
       });
-
-      console.log("Collection response:", response);
 
       if (!response?.data?.collection?.products?.edges) {
         return [];
@@ -972,8 +968,6 @@ export const useShopifyStore = defineStore("shopifyStore", {
         query: searchQuery || null,
         numProducts: requestedLimit,
       });
-
-      console.log("Shopify response:", response);
 
       if (!response?.data?.products?.edges) {
         return [];

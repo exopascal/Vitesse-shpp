@@ -1,5 +1,10 @@
 {
   "shortDescription": "Crosstrainer für den gewerblichen Einsatz – wattgesteuert (35–400 W), belastbar bis 180 kg.",
+  "seoMeta": {
+    "title": "Tunturi C20 Crosstrainer – Wattgesteuert, bis 180 kg",
+    "description": "Der Tunturi C20 ist ein professioneller Crosstrainer für den gewerblichen Einsatz – wattgesteuert (35–400 W), belastbar bis 180 kg, gelenkschonend und dauerhaft belastbar.",
+    "h1": "Tunturi C20 – Crosstrainer für den professionellen Gebrauch"
+  },
   "highlights": {
     "kicker": "Product Highlights",
     "title": "Tunturi Platinum C20. Der Crosstrainer für den professionellen Gebrauch.",
@@ -70,33 +75,93 @@
     ]
   },
   "faq": {
-    "title": "FAQs",
+    "title": "Häufige Fragen zum Tunturi C20",
     "subtitle": "Antworten auf häufige Fragen",
-    "initiallyOpen": [0],
+    "initiallyOpen": [
+      0
+    ],
     "items": [
       {
         "question": "Für welches Nutzergewicht ist der C20 ausgelegt?",
-        "answer": ["Bis 180 kg. Das Doppelschienensystem verteilt das Gewicht gleichmäßig."]
+        "answer": [
+          "Bis 180 kg. Das Doppelschienensystem verteilt das Gewicht gleichmäßig."
+        ]
       },
       {
         "question": "Welche Widerstandsbereiche und Programme gibt es?",
-        "answer": ["48 Stufen von 35 bis 400 W in 5-W-Schritten, dazu 26 Trainingsprogramme."]
+        "answer": [
+          "48 Stufen von 35 bis 400 W in 5-W-Schritten, dazu 26 Trainingsprogramme."
+        ]
       },
       {
         "question": "Wie groß ist das Gerät?",
-        "answer": ["L 193 × B 80 × H 182 cm, 99 kg."]
+        "answer": [
+          "L 193 × B 80 × H 182 cm, 99 kg."
+        ]
       },
       {
         "question": "Ist der Crosstrainer gelenkschonend?",
-        "answer": ["Der Pedalabstand (Q-Faktor) beträgt nur 13 cm, die Schrittlänge 51 cm. Das unterstützt eine natürliche, gelenkschonende Bewegung. Für Reha den Einsatz therapeutisch abklären."]
+        "answer": [
+          "Der Pedalabstand (Q-Faktor) beträgt nur 13 cm, die Schrittlänge 51 cm. Das unterstützt eine natürliche, gelenkschonende Bewegung. Für Reha den Einsatz therapeutisch abklären."
+        ]
       },
       {
         "question": "Welche Apps sind kompatibel?",
-        "answer": ["Tunturi Routes, Kinomap, Zwift und iConsole+ über Bluetooth."]
+        "answer": [
+          "Tunturi Routes, Kinomap, Zwift und iConsole+ über Bluetooth."
+        ]
       },
       {
         "question": "Ist ein Tablet im Lieferumfang?",
-        "answer": ["Nein. Die Konsole hat eine integrierte Tablet-Halterung, das Tablet wird separat benötigt."]
+        "answer": [
+          "Nein. Die Konsole hat eine integrierte Tablet-Halterung, das Tablet wird separat benötigt."
+        ]
+      }
+    ]
+  },
+  "useCases": [
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-c20-crosstrainer-training.jpg?v=1791212524",
+      "imageAlt": "Tunturi Platinum C20 – Ganzkörpertraining",
+      "kicker": "Ganzkörpertraining",
+      "title": "C20 für effektives Kraft- & Ausdauertraining",
+      "text": "Gleichmäßige Ober- und Unterkörperbewegung mit bis zu 400 W und 48 Widerstandsstufen – minimalem Verletzungsrisiko, maximalem Kalorienverbrauch. Minimaler Q-Faktor für ein natürliches Laufgefühl.",
+      "link": "/collections/tunturi",
+      "linkLabel": "Alle Tunturi Geräte",
+      "imageRight": true,
+      "imageAspectRatio": "4 / 3"
+    },
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-c20-crosstrainer-tablet-app.jpg?v=1791212524",
+      "imageAlt": "Tunturi Platinum C20 – Training mit App",
+      "kicker": "Studio & Hotel",
+      "title": "C20 für Fitnessstudios, Hotels & Leistungszentren",
+      "text": "Doppelschienensystem für optimale Gewichtsverteilung, robuste Konstruktion bis 180 kg Nutzergewicht und Bluetooth-AI-Monitor mit 26 Programmen – entwickelt für den täglichen gewerblichen Einsatz.",
+      "link": "/collections/tunturi",
+      "linkLabel": "Alle Tunturi Geräte",
+      "imageAspectRatio": "4 / 3"
+    }
+  ],
+  "featuresAccordion": {
+    "label": "Kraft. Stabilität. Kontrolle.",
+    "items": [
+      {
+        "title": "EMS-Widerstand bis 400 W",
+        "description": "Elektromagnetisches Bremssystem mit 48 Stufen – wartungsfrei, geräuscharm und gleichmäßig. Trainierbar von 35 bis 400 W je nach Leistungsniveau.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-c20-crosstrainer-widerstand-erhoehen.jpg?v=1791212524",
+        "alt": "Tunturi Platinum C20 – Widerstand erhöhen"
+      },
+      {
+        "title": "Doppelschienensystem",
+        "description": "Optimale Gewichtsverteilung und maximale Stabilität bei bis zu 180 kg Nutzergewicht. Minimaler Q-Faktor für ein komfortables, gelenkschonendes Lauferlebnis.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-c20-crosstrainer-pedale-doppelschiene.jpg?v=1791212523",
+        "alt": "Tunturi Platinum C20 – Pedale und Doppelschienensystem"
+      },
+      {
+        "title": "Bluetooth-AI-Monitor",
+        "description": "Alle Trainingsparameter auf einen Blick: Watt, RPM, Herzfrequenz, Kalorien, Distanz und farbkodierte Herzfrequenzzonen. Integrierte Tablet-Halterung mit seitlicher Parameteranzeige.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-c20-crosstrainer-tablet-app-front.jpg?v=1791212524",
+        "alt": "Tunturi Platinum C20 – Bluetooth-Monitor mit Tablet"
       }
     ]
   }

@@ -1,5 +1,10 @@
 {
   "shortDescription": "Laufband mit leisem 4-PS-Motor und breiter Lauffläche für den professionellen und kommerziellen Einsatz.",
+  "seoMeta": {
+    "title": "Tunturi T20 Laufband – Professionell, 4-PS-Motor, leise",
+    "description": "Das Tunturi T20 Laufband mit leisem 4-PS-Motor und breiter Lauffläche – für den professionellen und kommerziellen Einsatz mit wechselnden Nutzern.",
+    "h1": "Tunturi T20 – Laufband für den professionellen Einsatz"
+  },
   "highlights": {
     "kicker": "Product Highlights",
     "title": "Tunturi Platinum T20. Das Laufband für den regelmäßigen, intensiven Einsatz.",
@@ -70,33 +75,93 @@
     ]
   },
   "faq": {
-    "title": "FAQs",
+    "title": "Häufige Fragen zum Tunturi T20",
     "subtitle": "Antworten auf häufige Fragen",
-    "initiallyOpen": [0],
+    "initiallyOpen": [
+      0
+    ],
     "items": [
       {
         "question": "Wie groß ist die Lauffläche?",
-        "answer": ["156 × 56 cm."]
+        "answer": [
+          "156 × 56 cm."
+        ]
       },
       {
         "question": "Bis zu welchem Nutzergewicht ist das T20 ausgelegt?",
-        "answer": ["Bis 165 kg."]
+        "answer": [
+          "Bis 165 kg."
+        ]
       },
       {
         "question": "Welche Geschwindigkeit und Steigung sind möglich?",
-        "answer": ["1 bis 22 km/h und 0 bis 15 % Steigung."]
+        "answer": [
+          "1 bis 22 km/h und 0 bis 15 % Steigung."
+        ]
       },
       {
         "question": "Wie viele Programme gibt es?",
-        "answer": ["47 Laufbandprogramme."]
+        "answer": [
+          "47 Laufbandprogramme."
+        ]
       },
       {
         "question": "Wie groß ist das Gerät?",
-        "answer": ["L 212 × B 90 × H 159 cm, 140,8 kg."]
+        "answer": [
+          "L 212 × B 90 × H 159 cm, 140,8 kg."
+        ]
       },
       {
         "question": "Welche Apps sind kompatibel?",
-        "answer": ["Tunturi Routes, Kinomap, Zwift und iConsole+ über Bluetooth. Ein Tablet gehört nicht zum Lieferumfang."]
+        "answer": [
+          "Tunturi Routes, Kinomap, Zwift und iConsole+ über Bluetooth. Ein Tablet gehört nicht zum Lieferumfang."
+        ]
+      }
+    ]
+  },
+  "useCases": [
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-t20-laufband-laufen.jpg?v=1791285217",
+      "imageAlt": "Tunturi Platinum T20 – Laufen",
+      "kicker": "Ausdauertraining",
+      "title": "T20 für intensives Lauf- & Ausdauertraining",
+      "text": "4-PS-AC-Motor, extra breite Lauffläche (155 × 56 cm) und sechsteiliges Dämpfungssystem für sicheres, gelenkschonendes Training – auch für größere Athleten und lange Trainingseinheiten ausgelegt.",
+      "link": "/collections/tunturi",
+      "linkLabel": "Alle Tunturi Geräte",
+      "imageRight": true,
+      "imageAspectRatio": "4 / 3"
+    },
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-t20-laufband-laufen-seitenansicht.jpg?v=1791285216",
+      "imageAlt": "Tunturi Platinum T20 – Seitenansicht beim Laufen",
+      "kicker": "Studio & Hotel",
+      "title": "T20 für Fitnessstudios, Hotels & gewerblichen Einsatz",
+      "text": "Robustes Laufband für regelmäßigen und intensiven Betrieb – leiser AC-Motor, Bluetooth-Monitor mit 10-Zoll-Display, App-Anbindung (Tunturi Routes, Zwift) und präzise Distanzmessung auf 10 Meter.",
+      "link": "/collections/tunturi",
+      "linkLabel": "Alle Tunturi Geräte",
+      "imageAspectRatio": "4 / 3"
+    }
+  ],
+  "featuresAccordion": {
+    "label": "Motor. Dämpfung. Kontrolle.",
+    "items": [
+      {
+        "title": "4-PS-AC-Motor",
+        "description": "Leistungsstarker, leiser Wechselstrommotor für sanftes, ruhiges Laufen – auch bei hohen Geschwindigkeiten und Dauerbelastung im gewerblichen Betrieb zuverlässig.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-t20-laufband-laufen.jpg?v=1791285217",
+        "alt": "Tunturi Platinum T20 – Laufen auf dem Laufband"
+      },
+      {
+        "title": "Sechsteiliges Dämpfungssystem",
+        "description": "Dicke Diamant-Textur-Laufmatte mit sechsteiligem Dämpfungssystem – schont Knie und Gelenke, ermöglicht längere Einheiten und reduziert das Verletzungsrisiko spürbar.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-t20-laufband-seitenansicht.jpg?v=1791285216",
+        "alt": "Tunturi Platinum T20 – Seitenansicht"
+      },
+      {
+        "title": "10-Zoll-Monitor & Schnelltasten",
+        "description": "LCD-Display mit Bluetooth, zusätzlichem Bedienfeld über den Griffen und Schnelltasten für Geschwindigkeit und Steigung – plus präzise Distanzmessung auf 10 Meter.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-t20-laufband-bedienfeld-schnelltasten.jpg?v=1791285217",
+        "alt": "Tunturi Platinum T20 – Bedienfeld mit Schnelltasten"
       }
     ]
   }

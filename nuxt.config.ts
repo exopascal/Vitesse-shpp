@@ -10,7 +10,18 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     '@nuxt/icon',
     '@nuxt/a11y',
+    '@nuxt/content',
   ],
+
+  content: {
+    database: {
+      type: 'sqlite',
+      filename: '.data/content/content.db',
+    },
+    experimental: {
+      sqliteConnector: 'native',
+    },
+  },
 
   css: ['~/assets/css/global.css'],
 
@@ -31,8 +42,13 @@ export default defineNuxtConfig({
     writeEarlyHints: false
   },
 
+  $production: {
+    nitro: {
+      preset: 'cloudflare-pages',
+    },
+  },
+
   nitro: {
-    preset: 'cloudflare-pages',
     routeRules: {
       // Homepage
       '/': {
@@ -52,6 +68,14 @@ export default defineNuxtConfig({
 
       // Category pages
       '/categories/**': {
+        ssr: true,
+        headers: {
+          'cache-control': 's-maxage=300, stale-while-revalidate=600',
+        }
+      },
+
+      // Blog (Nuxt Content)
+      '/blog/**': {
         ssr: true,
         headers: {
           'cache-control': 's-maxage=300, stale-while-revalidate=600',
@@ -95,7 +119,8 @@ export default defineNuxtConfig({
   sitemap: {
     sources: [
       '/api/sitemap/products',
-      '/api/sitemap/categories'
+      '/api/sitemap/categories',
+      '/api/sitemap/blog'
     ],
     exclude: [
       '/admin/**',

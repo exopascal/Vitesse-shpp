@@ -11,7 +11,7 @@
       </div>
 
       <h1 class="break-words text-[1.5rem] font-black leading-[1.05] tracking-tight text-[#17120d] sm:text-[1.75rem] lg:text-[2rem]">
-        {{ product?.title || 'Product Title' }}
+        {{ pageTitle || product?.title || 'Product Title' }}
       </h1>
 
       <p v-if="product?.subtitle || shortDescription" class="mt-3 max-w-2xl text-base leading-7 text-[#5f5549]">
@@ -140,6 +140,10 @@ const props = defineProps({
   product: {
     type: Object,
     default: null,
+  },
+  pageTitle: {
+    type: String,
+    default: '',
   },
   shortDescription: {
     type: String,

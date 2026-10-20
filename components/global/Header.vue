@@ -65,7 +65,7 @@
               :style="item.brandColor ? { '--menu-accent': item.brandColor } : {}"
             >
               <div class="mega-menu-container">
-                <div class="mega-menu-grid">
+                <div class="mega-menu-grid" :class="{ 'mega-menu-grid--narrow': item.blogLinks?.length }">
                   <div
                     v-for="(category, catIndex) in item.children"
                     :key="catIndex"
@@ -79,18 +79,39 @@
                         </NuxtLink>
                       </li>
                     </ul>
+                    <div v-if="category.ctaButton" class="category-cta-wrapper">
+                      <NuxtLink :to="category.ctaButton.url" class="category-cta-button" @click="hideMegaMenu">
+                        {{ category.ctaButton.title }}
+                      </NuxtLink>
+                    </div>
                   </div>
                 </div>
                 
+                <!-- Blog Links column -->
+                <div v-if="item.blogLinks?.length" class="mega-menu-blog">
+                  <h3 class="category-title">Blog & Wissen</h3>
+                  <ul class="category-links">
+                    <li v-for="(blogLink, bli) in item.blogLinks" :key="bli">
+                      <NuxtLink :to="blogLink.url" class="blog-article-link" @click="hideMegaMenu">
+                        <span v-if="blogLink.category" class="blog-article-category">{{ blogLink.category }}</span>
+                        <span class="blog-article-title">{{ blogLink.title }}</span>
+                      </NuxtLink>
+                    </li>
+                  </ul>
+                </div>
+
                 <div
                   v-if="item.featuredProducts?.length"
                   class="mega-menu-highlights"
-                  :style="item.brandColor ? { background: 'linear-gradient(180deg, #f6faf2 0%, #eaf3e4 100%)', borderColor: 'rgba(91, 161, 52, 0.15)' } : {}"
+                  :style="item.highlightsBackground ? { background: item.highlightsBackground, borderColor: item.highlightsBorderColor } : {}"
                 >
                   <div class="mega-menu-highlights-header">
                     <h4 class="mega-menu-highlights-title">{{ item.highlightsTitle || 'Unsere Highlights' }}</h4>
                   </div>
-                  <div class="mega-menu-highlights-grid">
+                  <div
+                    class="mega-menu-highlights-grid"
+                    :class="{ 'mega-menu-highlights-grid--single': item.featuredProducts.length === 1 }"
+                  >
                     <article
                       v-for="product in item.featuredProducts"
                       :key="product.id"
@@ -121,9 +142,9 @@
                         :disabled="!product.available || addingHighlightId === product.id"
                         @click.stop.prevent="addHighlightToCart(product)"
                       >
-                        <span v-if="addingHighlightId === product.id">Wird hinzugefuegt...</span>
-                        <span v-else-if="product.available">In den Warenkorb</span>
-                        <span v-else>Nicht verfuegbar</span>
+                        <span v-if="addingHighlightId === product.id">Wird hinzugefügt…</span>
+                        <span v-else-if="product.available">{{ item.highlightButtonText || 'In den Warenkorb' }}</span>
+                        <span v-else>Nicht verfügbar</span>
                       </button>
                     </article>
                   </div>
@@ -292,7 +313,29 @@
                     {{ item.title }}
                   </NuxtLink>
                   
-                  <button 
+                  <!-- Item with url + children: link left, chevron right -->
+                  <div v-else-if="item.url" class="mobile-nav-link-row">
+                    <NuxtLink
+                      :to="item.url"
+                      class="mobile-nav-link mobile-nav-link--flex"
+                      @click="closeMobileMenu"
+                    >
+                      {{ item.title }}
+                    </NuxtLink>
+                    <button
+                      class="mobile-nav-chevron"
+                      :class="{ 'active': activeMobileDropdown === index }"
+                      @click="toggleMobileDropdown(index)"
+                      :aria-label="`${item.title} Untermenü öffnen`"
+                    >
+                      <svg class="mobile-dropdown-icon" :class="{ 'rotated': activeMobileDropdown === index }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                      </svg>
+                    </button>
+                  </div>
+
+                  <!-- Item with children but no url -->
+                  <button
                     v-else
                     class="mobile-nav-link mobile-dropdown-trigger"
                     :class="{ 'active': activeMobileDropdown === index }"
@@ -305,8 +348,8 @@
                   </button>
 
                   <!-- Mobile Dropdown -->
-                  <div 
-                    v-if="item.children && item.children.length > 0"
+                  <div
+                    v-if="(item.children && item.children.length > 0) || item.blogLinks?.length"
                     class="mobile-dropdown"
                     :class="{ 'mobile-dropdown-active': activeMobileDropdown === index }"
                   >
@@ -314,12 +357,30 @@
                       <h4 class="mobile-category-title">{{ category.title }}</h4>
                       <ul class="mobile-category-links">
                         <li v-for="(link, linkIndex) in category.children" :key="linkIndex">
-                          <NuxtLink 
-                            :to="link.url || '/'" 
+                          <NuxtLink
+                            :to="link.url || '/'"
                             class="mobile-category-link"
                             @click="closeMobileMenu"
                           >
                             {{ link.title }}
+                          </NuxtLink>
+                        </li>
+                      </ul>
+                      <NuxtLink
+                        v-if="category.ctaButton"
+                        :to="category.ctaButton.url"
+                        class="mobile-category-cta"
+                        @click="closeMobileMenu"
+                      >
+                        {{ category.ctaButton.title }}
+                      </NuxtLink>
+                    </div>
+                    <div v-if="item.blogLinks?.length" class="mobile-category">
+                      <h4 class="mobile-category-title">Blog & Wissen</h4>
+                      <ul class="mobile-category-links">
+                        <li v-for="(blogLink, bli) in item.blogLinks" :key="bli">
+                          <NuxtLink :to="blogLink.url" class="mobile-category-link" @click="closeMobileMenu">
+                            {{ blogLink.title }}
                           </NuxtLink>
                         </li>
                       </ul>
@@ -487,13 +548,20 @@ function normalizeText(value) {
     .trim()
 }
 
+const tunturiMegaMenuHandles = [
+  'tunturi-platinum-s20-indoor-bike',
+  'tunturi-platinum-c20-crosstrainer',
+  'armergometer-fluid-rower-e685',
+  'tunturi-platinum-t30-core-laufband',
+]
+
 const { data: tunturiFeaturedProducts } = await useAsyncData('header-tunturi-featured', async () => {
-  const products = await shopifyStore.fetchProducts({
-    filterQuery: 'tunturi',
-    sortBy: 'title-asc',
-    limit: 4,
-  })
-  return products.filter(Boolean)
+  const query = tunturiMegaMenuHandles.map(h => `handle:${h}`).join(' OR ')
+  const products = await shopifyStore.fetchProducts({ filterQuery: query, limit: 4 })
+  // Reihenfolge gemäß tunturiMegaMenuHandles sicherstellen
+  return tunturiMegaMenuHandles
+    .map(h => products.find(p => p.handle === h))
+    .filter(Boolean)
 })
 
 const { data: highlightedProducts } = await useAsyncData('header-highlight-products', async () => {
@@ -534,17 +602,43 @@ const navigationItems = computed(() => {
     return fallbackShopChildren[1].children.find((entry) => entry.url.endsWith(`/${handle}`))
   }).filter(Boolean)
 
+  const tApexProduct = (highlightedProducts.value ?? []).find(p =>
+    normalizeText(p.handle || '').includes('apex') || normalizeText(p.title || '').includes('apex')
+  ) ?? null
+
   return [
   {
     title: 'T-Apex',
     url: '/products/t-apex',
     brandColor: '#ef4544',
+    children: [
+      {
+        title: 'Anwendungen',
+        ctaButton: { title: 'Zum T-Apex', url: '/products/t-apex' },
+        children: [
+          { title: 'T-Apex für Fußball', url: '/products/t-apex/fussball' },
+          { title: 'T-Apex für Sprinttraining', url: '/products/t-apex/sprinttraining' },
+        ]
+      }
+    ],
+    blogLinks: [
+      { title: 'Positionsspezifisches Fußballtraining', url: '/blog/positionsspezifisches-fussballtraining-t-apex', category: 'Fußball' },
+      { title: 'Seilzugtraining im Fußball: Lateral & Richtungswechsel', url: '/blog/seilzugtraining-fussball-beschleunigung-lateral-richtungswechsel', category: 'Fußball' },
+      { title: 'Overspeed Training: Wie es wirkt, wer profitiert', url: '/blog/overspeed-training-wie-es-wirkt-wer-profitiert', category: 'Overspeed' },
+      { title: 'Das 60-Meter-Plateau: Ursachen und Training', url: '/blog/das-60-meter-plateau-im-sprinttraining', category: 'Sprinttraining' },
+      { title: 'Beschleunigung bis Overspeed: T-Apex in drei Phasen', url: '/blog/von-beschleunigung-bis-overspeed-t-apex-sprinttraining', category: 'Praxis' },
+    ],
+    highlightsTitle: 'T-Apex',
+    highlightButtonText: 'Jetzt kaufen',
+    featuredProducts: tApexProduct ? [tApexProduct] : [],
   },
   {
     title: 'Tunturi',
     url: '/collections/tunturi',
     brandColor: '#5BA134',
     highlightsTitle: 'Tunturi Produkte',
+    highlightsBackground: 'linear-gradient(180deg, #f6faf2 0%, #eaf3e4 100%)',
+    highlightsBorderColor: 'rgba(91, 161, 52, 0.15)',
     featuredProducts: tunturiFeaturedProducts.value ?? [],
     children: [
       {
@@ -993,6 +1087,7 @@ onUnmounted(() => {
 .mega-menu-category {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
   gap: 1rem;
 }
 
@@ -1023,6 +1118,70 @@ onUnmounted(() => {
 
 .category-link:hover {
   color: var(--menu-accent);
+}
+
+.category-cta-wrapper {
+  margin-top: 0.5rem;
+}
+
+.category-cta-button {
+  display: inline-block;
+  padding: 0.45rem 1rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--menu-accent);
+  border: 1.5px solid var(--menu-accent);
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.category-cta-button:hover {
+  background: var(--menu-accent);
+  color: #fff;
+}
+
+.mega-menu-grid--narrow {
+  flex: 0 0 180px;
+  grid-template-columns: 1fr;
+}
+
+.mega-menu-blog {
+  flex: 0 0 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.blog-article-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  text-decoration: none;
+  padding: 0.4rem 0;
+  border-radius: 4px;
+  transition: color 0.2s ease;
+}
+
+.blog-article-link:hover .blog-article-title {
+  color: var(--menu-accent);
+}
+
+.blog-article-category {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--menu-accent);
+}
+
+.blog-article-title {
+  font-size: 0.8rem;
+  color: #374151;
+  line-height: 1.35;
+  transition: color 0.2s ease;
 }
 
 .mega-menu-featured {
@@ -1056,6 +1215,23 @@ onUnmounted(() => {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.4rem;
+}
+
+.mega-menu-highlights-grid--single {
+  grid-template-columns: 1fr;
+}
+
+.mega-menu-highlights-grid--single .highlight-card-image {
+  aspect-ratio: 4 / 3;
+}
+
+.mega-menu-highlights-grid--single .highlight-card-title {
+  font-size: 0.8rem;
+}
+
+.mega-menu-highlights-grid--single .highlight-card-button {
+  font-size: 0.65rem;
+  min-height: 2rem;
 }
 
 .highlight-card {
@@ -1500,6 +1676,30 @@ onUnmounted(() => {
   color: var(--item-accent, v-bind(accentColor));
 }
 
+.mobile-nav-link-row {
+  display: flex;
+  align-items: center;
+}
+
+.mobile-nav-link--flex {
+  flex: 1;
+}
+
+.mobile-nav-chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #1f2937;
+}
+
+.mobile-nav-chevron.active {
+  color: var(--item-accent, v-bind(accentColor));
+}
+
 .mobile-dropdown-icon {
   width: 1rem;
   height: 1rem;
@@ -1551,6 +1751,26 @@ onUnmounted(() => {
 
 .mobile-category-link:hover {
   color: v-bind(accentColor);
+}
+
+.mobile-category-cta {
+  display: block;
+  margin-top: 0.75rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--item-accent, v-bind(accentColor));
+  border: 1.5px solid var(--item-accent, v-bind(accentColor));
+  border-radius: 4px;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.mobile-category-cta:hover {
+  background: var(--item-accent, v-bind(accentColor));
+  color: #fff;
 }
 
 .mobile-actions {

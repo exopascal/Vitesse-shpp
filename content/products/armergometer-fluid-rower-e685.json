@@ -1,5 +1,10 @@
 {
   "shortDescription": "Armergometer für den professionellen und gewerblichen Gebrauch – im Stehen oder direkt aus dem Rollstuhl, 10 Widerstandsstufen, bis 150 kg.",
+  "seoMeta": {
+    "title": "Fluid Rower E685 – Armergometer für Rollstuhl, Stehen & Reha",
+    "description": "Das Fluid Rower E685 trainiert Oberkörper und Core im Stehen oder direkt aus dem Rollstuhl – Wasserwiderstand in 10 Stufen, verstellbare Kurbel von 70–130 cm.",
+    "h1": "Fluid Rower E685 – Armergometer mit Wasserwiderstand"
+  },
   "highlights": {
     "kicker": "Product Highlights",
     "title": "Fluid Rower E685. Das Armergometer für Oberkörper und Core.",
@@ -82,7 +87,7 @@
     ]
   },
   "faq": {
-    "title": "FAQs",
+    "title": "Häufige Fragen zum Fluid Rower E685",
     "subtitle": "Antworten auf häufige Fragen",
     "initiallyOpen": [0],
     "items": [

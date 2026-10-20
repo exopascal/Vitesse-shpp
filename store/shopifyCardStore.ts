@@ -507,10 +507,7 @@ export const useShopifyCardStore = defineStore('shopifyCardStore', {
             throw new Error(`Shopify API error: ${response.status}`)
           }
           //const data = await response.json()
-          console.log('Data immer:', response)
-          
           const data = await response.json()
-          console.log('Data immer:', data)
           return data
         } catch (error) {
           console.log('Error immer:', error)

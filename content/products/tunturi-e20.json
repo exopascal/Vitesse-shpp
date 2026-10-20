@@ -1,5 +1,10 @@
 {
   "shortDescription": "Fahrradergometer mit niedrigem Einstieg und feinstufig regelbarem Widerstand – für Einsteiger und Reha geeignet.",
+  "seoMeta": {
+    "title": "Tunturi E20 Fahrradergometer – Für Einsteiger und Reha",
+    "description": "Das Tunturi E20 Fahrradergometer überzeugt mit niedrigem Einstieg und feinstufig regelbarem Widerstand – geeignet für Einsteiger, Reha und regelmäßiges Training.",
+    "h1": "Tunturi E20 – Fahrradergometer für den sanften Einstieg"
+  },
   "highlights": {
     "kicker": "Product Highlights",
     "title": "Tunturi Platinum E20. Das Fahrradergometer für den sanften Einstieg.",
@@ -70,33 +75,93 @@
     ]
   },
   "faq": {
-    "title": "FAQs",
+    "title": "Häufige Fragen zum Tunturi E20",
     "subtitle": "Antworten auf häufige Fragen",
-    "initiallyOpen": [0],
+    "initiallyOpen": [
+      0
+    ],
     "items": [
       {
         "question": "Welcher Leistungsbereich ist möglich?",
-        "answer": ["48 Stufen von 20 bis 260 W in 5-W-Schritten, 26 Programme."]
+        "answer": [
+          "48 Stufen von 20 bis 260 W in 5-W-Schritten, 26 Programme."
+        ]
       },
       {
         "question": "Bis zu welchem Nutzergewicht ist das E20 ausgelegt?",
-        "answer": ["Bis 180 kg."]
+        "answer": [
+          "Bis 180 kg."
+        ]
       },
       {
         "question": "Ist das E20 für die Reha geeignet?",
-        "answer": ["Niedriger Durchstieg, niedriger Startwiderstand und stabiler Rahmen sind dafür ausgelegt. Den Einsatz therapeutisch abklären."]
+        "answer": [
+          "Niedriger Durchstieg, niedriger Startwiderstand und stabiler Rahmen sind dafür ausgelegt. Den Einsatz therapeutisch abklären."
+        ]
       },
       {
         "question": "Wie groß ist das Gerät?",
-        "answer": ["L 121,5 × B 61 × H 148,5 cm, 58 kg."]
+        "answer": [
+          "L 121,5 × B 61 × H 148,5 cm, 58 kg."
+        ]
       },
       {
         "question": "Welche Apps sind kompatibel?",
-        "answer": ["Tunturi Routes, Kinomap, Zwift und iConsole+ über Bluetooth."]
+        "answer": [
+          "Tunturi Routes, Kinomap, Zwift und iConsole+ über Bluetooth."
+        ]
       },
       {
         "question": "Was ist der Unterschied zum E30?",
-        "answer": ["Der E30 reicht bis 450 W, das E20 bis 260 W. Das E20 ist auf sanften Einstieg und Reha ausgelegt."]
+        "answer": [
+          "Der E30 reicht bis 450 W, das E20 bis 260 W. Das E20 ist auf sanften Einstieg und Reha ausgelegt."
+        ]
+      }
+    ]
+  },
+  "useCases": [
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e20-fahrradergometer-training.jpg?v=1791233571",
+      "imageAlt": "Tunturi Platinum E20 – Training",
+      "kicker": "Rehabilitation",
+      "title": "E20 für Rehabilitation & sanften Einstieg",
+      "text": "Magnetisches Bremssystem mit stufenlosem Wechsel zwischen 48 Widerstandsstufen, niedriger Einstieg und stabiler Rahmen – ideal für Physiotherapie, Rehabilitation und Nutzer mit eingeschränkter Mobilität.",
+      "link": "/collections/tunturi",
+      "linkLabel": "Alle Tunturi Geräte",
+      "imageRight": true,
+      "imageAspectRatio": "4 / 3"
+    },
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e20-fahrradergometer-tablet-halterung-training.jpg?v=1791233571",
+      "imageAlt": "Tunturi Platinum E20 – Training mit Tablet",
+      "kicker": "Fitnessaufbau",
+      "title": "E20 für schrittweisen Fitnessaufbau",
+      "text": "48 Widerstandsstufen in kleinen Schritten, Bluetooth-AI-Monitor mit Herzfrequenzzonen und App-Anbindung (Tunturi Routes, Zwift, Kinomap) – für einen kontinuierlichen, messbaren Trainingsfortschritt.",
+      "link": "/collections/tunturi",
+      "linkLabel": "Alle Tunturi Geräte",
+      "imageAspectRatio": "4 / 3"
+    }
+  ],
+  "featuresAccordion": {
+    "label": "Komfort. Sicherheit. Progression.",
+    "items": [
+      {
+        "title": "Magnetisches Bremssystem",
+        "description": "48 Widerstandsstufen, stufenlos per Tastendrück umschaltbar – wartungsfrei, leise und ohne Reibung. Ideal für einen fließenden Übergang zwischen Trainingsbereichen.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e20-fahrradergometer-konsole-drehregler.jpg?v=1791233572",
+        "alt": "Tunturi Platinum E20 – Konsole mit Drehregler"
+      },
+      {
+        "title": "Niedriger Einstieg",
+        "description": "Breiter, stabiler Durchstieg für sicheres Auf- und Absteigen – besonders geeignet für ältere Nutzer, Personen in der Rehabilitation und Menschen mit eingeschränkter Mobilität.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e20-fahrradergometer-training-seitenansicht.jpg?v=1791233571",
+        "alt": "Tunturi Platinum E20 – Seitenansicht"
+      },
+      {
+        "title": "Bluetooth-AI-Monitor",
+        "description": "Zeit, Distanz, Kalorien, Herzfrequenz, RPM und Watt mit farbkodierten Herzfrequenzzonen – plus integrierte Tablet-Halterung mit seitlicher Parameteranzeige für ablenkungsfreies Training.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e20-fahrradergometer-konsole-plus-minus-tasten.jpg?v=1791233571",
+        "alt": "Tunturi Platinum E20 – Konsole mit Plus-Minus-Tasten"
       }
     ]
   }

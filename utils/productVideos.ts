@@ -14,9 +14,6 @@ const videoMap: Record<string, string[]> = {
   'tunturi-platinum-t30-core-laufband': [
     '/tunturi-platinum-t30-video.mov',
   ],
-  't-apex': [
-    '/T-Apex-1080motion-seilzugtraining.mov',
-  ],
 }
 
 export function getProductVideos(handle: string): string[] {

@@ -1,5 +1,10 @@
 {
   "shortDescription": "Indoor Bike für den kommerziellen Einsatz mit manuell bedienbarer Bremse und wechselbarem Pedalsystem.",
+  "seoMeta": {
+    "title": "Tunturi S10 Indoor Bike – Für Gruppenkurse und Intervalle",
+    "description": "Das Tunturi S10 Indoor Bike für den kommerziellen Einsatz – manuell bedienbare Bremse, wechselbares Pedalsystem, gebaut für intensive Gruppenkurse und Intervalltraining.",
+    "h1": "Tunturi S10 – Indoor Bike für Gruppenkurse und Intervalle"
+  },
   "highlights": {
     "kicker": "Product Highlights",
     "title": "Tunturi Platinum S10. Das Indoor Bike für Gruppenkurse und Intervalle.",
@@ -70,33 +75,93 @@
     ]
   },
   "faq": {
-    "title": "FAQs",
+    "title": "Häufige Fragen zum Tunturi S10",
     "subtitle": "Antworten auf häufige Fragen",
-    "initiallyOpen": [0],
+    "initiallyOpen": [
+      0
+    ],
     "items": [
       {
         "question": "Wie wird der Widerstand eingestellt?",
-        "answer": ["Manuell per Drehknopf über das PMS-Bremssystem, 32 Stufen."]
+        "answer": [
+          "Manuell per Drehknopf über das PMS-Bremssystem, 32 Stufen."
+        ]
       },
       {
         "question": "Welche Pedale hat das S10?",
-        "answer": ["Doppelpedale: auf einer Seite SPD-Klicksystem, auf der anderen Seite Riemen."]
+        "answer": [
+          "Doppelpedale: auf einer Seite SPD-Klicksystem, auf der anderen Seite Riemen."
+        ]
       },
       {
         "question": "Bis zu welchem Nutzergewicht ist das S10 ausgelegt?",
-        "answer": ["Bis 180 kg."]
+        "answer": [
+          "Bis 180 kg."
+        ]
       },
       {
         "question": "Wie groß ist das Gerät?",
-        "answer": ["L 155 × B 60 × H 140 cm, 53,2 kg."]
+        "answer": [
+          "L 155 × B 60 × H 140 cm, 53,2 kg."
+        ]
       },
       {
         "question": "Gibt es Anbindung an Apps?",
-        "answer": ["Das S10 hat eine Tablet-/Smartphone-Halterung. Kompatibel mit Tunturi Routes, Kinomap, Zwift und iConsole+ (laut Hersteller)."]
+        "answer": [
+          "Das S10 hat eine Tablet-/Smartphone-Halterung. Kompatibel mit Tunturi Routes, Kinomap, Zwift und iConsole+ (laut Hersteller)."
+        ]
       },
       {
         "question": "Was ist der Unterschied zum S20?",
-        "answer": ["Das S20 regelt den Widerstand automatisch über einen Servomotor und bietet 26 Programme. Das S10 wird manuell eingestellt und hat 6 Programme."]
+        "answer": [
+          "Das S20 regelt den Widerstand automatisch über einen Servomotor und bietet 26 Programme. Das S10 wird manuell eingestellt und hat 6 Programme."
+        ]
+      }
+    ]
+  },
+  "useCases": [
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s10-indoor-bike-wiegetritt.jpg?v=1791236200",
+      "imageAlt": "Tunturi Platinum S10 – Training im Wiegetritt",
+      "kicker": "Gruppentraining",
+      "title": "S10 für Gruppenkurse & Teamtraining",
+      "text": "Schnelle manuelle Widerstandsumschaltung per PMS-Bremssystem, robuste Konstruktion und universelles Sattelsystem – das S10 ist auf häufig wechselnde Nutzer und den täglichen Studiobetrieb ausgelegt.",
+      "link": "/collections/tunturi",
+      "linkLabel": "Alle Tunturi Geräte",
+      "imageRight": true,
+      "imageAspectRatio": "4 / 3"
+    },
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s10-indoor-bike-training-sitzend.jpg?v=1791236200",
+      "imageAlt": "Tunturi Platinum S10 – sitzend trainieren",
+      "kicker": "Heimtraining",
+      "title": "S10 für zu Hause – effektiv & zuverlässig",
+      "text": "Kompatibel mit Tunturi Routes, Zwift und iConsole+. Mit dualem Pedalsystem (SPD + Riemen), kippbarem LCD-Bildschirm und App-Anbindung – alles für ein abwechslungsreiches Training im eigenen Zuhause.",
+      "link": "/collections/tunturi",
+      "linkLabel": "Alle Tunturi Geräte",
+      "imageAspectRatio": "4 / 3"
+    }
+  ],
+  "featuresAccordion": {
+    "label": "Einfachheit. Vielseitigkeit. Zuverlässigkeit.",
+    "items": [
+      {
+        "title": "PMS-Bremssystem",
+        "description": "32 Widerstandsstufen, manuell per Knopfdruck gesteuert – schnell umzuschalten, wartungsarm und ideal für dynamische Intervalleinheiten oder energiegeladene Gruppenkurse.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s10-indoor-bike-training-sitzend.jpg?v=1791236200",
+        "alt": "Tunturi Platinum S10 Indoor Bike – Training sitzend"
+      },
+      {
+        "title": "Doppelpedale",
+        "description": "SPD-Klicksystem auf einer, Riemenbefestigung auf der anderen Seite – für effiziente Kraftübertragung und sicheren Halt bei jedem Schuhtyp.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s10-indoor-bike-training-seitenansicht.jpg?v=1791236199",
+        "alt": "Tunturi Platinum S10 Indoor Bike Seitenansicht"
+      },
+      {
+        "title": "Verstellbarer Rennsattel",
+        "description": "Horizontal und vertikal verstellbar mit Längenmarkierungen und Zahlenanzeige. Universelles Sattelsystem – schneller Wechsel für unterschiedliche Nutzer, bis 180 kg Benutzergewicht.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s10-indoor-bike-cockpit-tablet.jpg?v=1791236199",
+        "alt": "Tunturi Platinum S10 – Cockpit und Tablet-Halterung"
       }
     ]
   }

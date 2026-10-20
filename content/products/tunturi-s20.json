@@ -1,5 +1,10 @@
 {
   "shortDescription": "Indoor Bike mit automatisch geregeltem Widerstand und präziser Wattmessung für Leistungsdiagnostik.",
+  "seoMeta": {
+    "title": "Tunturi S20 Indoor Bike – Automatische Widerstandsregelung",
+    "description": "Das Tunturi S20 Indoor Bike mit automatisch geregeltem Widerstand und präziser Wattmessung – für Leistungsdiagnostik und gezieltes Intervalltraining.",
+    "h1": "Tunturi S20 – Indoor Bike mit automatischer Widerstandsregelung"
+  },
   "highlights": {
     "kicker": "Product Highlights",
     "title": "Tunturi Platinum S20. Das Indoor Bike mit automatischer Widerstandsregelung.",
@@ -70,33 +75,93 @@
     ]
   },
   "faq": {
-    "title": "FAQs",
+    "title": "Häufige Fragen zum Tunturi S20",
     "subtitle": "Antworten auf häufige Fragen",
-    "initiallyOpen": [0],
+    "initiallyOpen": [
+      0
+    ],
     "items": [
       {
         "question": "Wie wird der Widerstand geregelt?",
-        "answer": ["Automatisch über einen Servomotor mit 32 Stufen. Manuelle Schnellverstellung über die Konsole ist möglich."]
+        "answer": [
+          "Automatisch über einen Servomotor mit 32 Stufen. Manuelle Schnellverstellung über die Konsole ist möglich."
+        ]
       },
       {
         "question": "Welcher Leistungsbereich ist möglich?",
-        "answer": ["15–350 W in 5-W-Schritten, max. 350 W bei 60 RPM. 26 Programme, 4 Benutzerprogramme."]
+        "answer": [
+          "15–350 W in 5-W-Schritten, max. 350 W bei 60 RPM. 26 Programme, 4 Benutzerprogramme."
+        ]
       },
       {
         "question": "Welche Pedale hat das S20?",
-        "answer": ["Doppelpedale: auf einer Seite SPD-Klicksystem, auf der anderen Seite Riemen."]
+        "answer": [
+          "Doppelpedale: auf einer Seite SPD-Klicksystem, auf der anderen Seite Riemen."
+        ]
       },
       {
         "question": "Bis zu welchem Nutzergewicht ist das S20 ausgelegt?",
-        "answer": ["Bis 180 kg."]
+        "answer": [
+          "Bis 180 kg."
+        ]
       },
       {
         "question": "Wie groß ist das Gerät?",
-        "answer": ["L 155 × B 60 × H 140 cm, 53,2 kg."]
+        "answer": [
+          "L 155 × B 60 × H 140 cm, 53,2 kg."
+        ]
       },
       {
         "question": "Welche Apps sind kompatibel?",
-        "answer": ["Tunturi Routes, Kinomap, Zwift und iConsole+."]
+        "answer": [
+          "Tunturi Routes, Kinomap, Zwift und iConsole+."
+        ]
+      }
+    ]
+  },
+  "useCases": [
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s20-indoor-bike-wiegetritt.jpg?v=1791236878",
+      "imageAlt": "Tunturi Platinum S20 – Training im Wiegetritt",
+      "kicker": "Leistungstraining",
+      "title": "S20 für ambitionierte Athleten",
+      "text": "Servomotorgesteuerte Widerstandsanpassung in 32 Stufen – automatisch oder manuell per Schnelltaste. Bis zu 350 W bei 60 RPM, mit Echtzeit-Wattmessung für präzises, programmierbares Leistungstraining.",
+      "link": "/collections/tunturi",
+      "linkLabel": "Alle Tunturi Geräte",
+      "imageRight": true,
+      "imageAspectRatio": "4 / 3"
+    },
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s20-indoor-bike-training.jpg?v=1791236878",
+      "imageAlt": "Tunturi Platinum S20 – Training im Fitness-Studio",
+      "kicker": "Studio & Gruppentraining",
+      "title": "S20 für Fitnessstudios & Leistungszentren",
+      "text": "Robuste Konstruktion für bis zu 180 kg Nutzergewicht, schnell verstellbarer Sattel mit Körpergrößenanzeige und universelles Sattelsystem – gebaut für wechselnde Nutzer und täglichen gewerblichen Betrieb.",
+      "link": "/collections/tunturi",
+      "linkLabel": "Alle Tunturi Geräte",
+      "imageAspectRatio": "4 / 3"
+    }
+  ],
+  "featuresAccordion": {
+    "label": "Leistung. Kontrolle. Komfort.",
+    "items": [
+      {
+        "title": "Automatische Widerstandsregelung",
+        "description": "Der Servomotor regelt den Widerstand in 32 Stufen automatisch – schnell, präzise und ohne manuelle Einstellung zwischendurch. Ideal für programmgesteuertes und wattbasiertes Training.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s20-indoor-bike-wiegetritt.jpg?v=1791236878",
+        "alt": "Tunturi Platinum S20 Indoor Cycling Bike, Nutzer fährt im Wiegetritt"
+      },
+      {
+        "title": "Präzise Wattmessung",
+        "description": "15–350 W in 5-W-Schritten, max. 350 W bei 60 RPM. 26 Programme mit Echtzeit-Anzeige von Watt, RPM, Puls und Kalorien auf dem kippbaren 5,5-Zoll-LCD-Farbdisplay.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s20-indoor-bike-cockpit-display.jpg?v=1791236878",
+        "alt": "Tunturi Platinum S20 Cockpit mit LCD-Farbdisplay und Tablet-Halterung"
+      },
+      {
+        "title": "Doppelpedale",
+        "description": "SPD-Klicksystem auf einer, Riemenbefestigung auf der anderen Seite – für effiziente Kraftübertragung und sichere Fußstellung bei jedem Trainingstyp und Schuhwerk.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-s20-indoor-bike-training-tablet.jpg?v=1791236878",
+        "alt": "Training auf dem Tunturi Platinum S20 mit Tablet in der Halterung"
       }
     ]
   }

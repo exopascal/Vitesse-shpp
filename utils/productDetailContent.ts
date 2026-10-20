@@ -3,7 +3,7 @@ import { resolveProductPagePreset, normalizeProductHandle } from '~/utils/produc
 
 import tApexJson from '~/content/products/t-apex.json'
 import exopekProJson from '~/content/products/exopek-pro.json'
-import tunturiJson from '~/content/products/tunturi.json'
+import tunturiT30Json from '~/content/products/tunturi-t30.json'
 import tunturiC20Json from '~/content/products/tunturi-c20.json'
 import tunturiT20Json from '~/content/products/tunturi-t20.json'
 import tunturiE20Json from '~/content/products/tunturi-e20.json'
@@ -19,6 +19,7 @@ export interface ProductHighlightsContentItem {
   body: string;
   image: string;
   alt: string;
+  blogLink?: string;
 }
 
 export interface ProductHighlightsContent {
@@ -53,6 +54,7 @@ export interface ProductFeaturesContent {
 export interface ProductFaqItem {
   question: string;
   answer: string[];
+  blogLinks?: { href: string; label: string }[];
 }
 
 export interface ProductFaqContent {
@@ -62,18 +64,84 @@ export interface ProductFaqContent {
   initiallyOpen?: number[];
 }
 
+export interface ProductCoachBenefitItem {
+  icon: string;
+  label: string;
+  tags: string[];
+}
+
+export interface ProductCoachBenefitsContent {
+  title: string;
+  subtitle: string;
+  items: ProductCoachBenefitItem[];
+}
+
+export interface ProductUseCaseItem {
+  image: string;
+  imageAlt: string;
+  kicker: string;
+  title: string;
+  text: string;
+  link: string;
+  linkLabel: string;
+  imageRight?: boolean;
+  imageAspectRatio?: string;
+}
+
+export interface ProductFeaturesAccordionItem {
+  title: string;
+  description: string;
+  image: string;
+  alt: string;
+}
+
+export interface ProductFeaturesAccordionContent {
+  label?: string;
+  items: ProductFeaturesAccordionItem[];
+}
+
+export interface ProductInBoxItem {
+  image: string;
+  alt: string;
+  label: string;
+  large?: boolean;
+}
+
+export interface ProductInBoxContent {
+  title?: string;
+  items: ProductInBoxItem[];
+}
+
+export interface ProductBlogTeaserContent {
+  kicker?: string;
+  title?: string;
+  lead?: string;
+}
+
+export interface ProductSeoMeta {
+  title?: string;
+  description?: string;
+  h1?: string;
+}
+
 export interface ProductDetailContent {
   shortDescription?: string;
+  seoMeta?: ProductSeoMeta;
   highlights: ProductHighlightsContent;
   banner: ProductBannerContent;
   features: ProductFeaturesContent;
   faq: ProductFaqContent;
+  coachBenefits?: ProductCoachBenefitsContent;
+  useCases?: ProductUseCaseItem[];
+  featuresAccordion?: ProductFeaturesAccordionContent;
+  inBox?: ProductInBoxContent;
+  blogTeaser?: ProductBlogTeaserContent;
 }
 
 const contentMap: Record<string, ProductDetailContent> = {
   't-apex': tApexJson as ProductDetailContent,
   'exopek-pro': exopekProJson as ProductDetailContent,
-  'tunturi': tunturiJson as ProductDetailContent,
+  'tunturi-t30': tunturiT30Json as ProductDetailContent,
   'tunturi-c20': tunturiC20Json as ProductDetailContent,
   'tunturi-t20': tunturiT20Json as ProductDetailContent,
   'tunturi-e20': tunturiE20Json as ProductDetailContent,
