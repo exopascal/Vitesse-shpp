@@ -1131,15 +1131,15 @@ onUnmounted(() => {
   font-size: 0.8rem;
   font-weight: 600;
   white-space: nowrap;
-  color: var(--menu-accent);
-  border: 1.5px solid var(--menu-accent);
+  color: var(--menu-accent, #ef4544);
+  border: 1.5px solid var(--menu-accent, #ef4544);
   border-radius: 4px;
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
 .category-cta-button:hover {
-  background: var(--menu-accent);
+  background: var(--menu-accent, #ef4544);
   color: #fff;
 }
 
