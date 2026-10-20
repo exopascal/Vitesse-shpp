@@ -180,6 +180,9 @@ onBeforeUnmount(() => {
         >
           <div class="product-highlights-card-copy">
             <p class="product-highlights-card-text">{{ card.body }}</p>
+            <NuxtLink v-if="card.blogLink" :to="card.blogLink" class="product-highlights-card-link">
+              Mehr dazu im Blog →
+            </NuxtLink>
           </div>
           <div class="product-highlights-card-media">
             <img class="product-highlights-card-image" :src="card.image" :alt="card.alt" loading="lazy" />
@@ -284,6 +287,21 @@ onBeforeUnmount(() => {
   text-decoration: none;
 }
 
+.product-highlights-card-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #f26a21;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: opacity 0.2s ease;
+}
+
+.product-highlights-card-link:hover {
+  opacity: 0.75;
+}
+
 .product-highlights-rail {
   display: grid;
   grid-auto-columns: calc(100% - 12rem);
@@ -313,7 +331,9 @@ onBeforeUnmount(() => {
   position: absolute;
   inset: 0 55% 0 0;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   padding: 2.5rem;
   z-index: 2;
 }

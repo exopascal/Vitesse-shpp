@@ -1,5 +1,10 @@
 {
   "shortDescription": "Liegeergometer mit ergonomischer Sitzposition und Widerständen bis 450 W – für Reha und professionelles Training.",
+  "seoMeta": {
+    "title": "Tunturi E30-R Liegeergometer – Reha und professionelles Training",
+    "description": "Das Tunturi E30-R Liegeergometer bietet eine ergonomische Sitzposition mit Widerständen bis 450 W – ideal für Reha, Einsteiger und professionelles Training.",
+    "h1": "Tunturi E30-R – Liegeergometer mit voller Rückenstütze"
+  },
   "highlights": {
     "kicker": "Product Highlights",
     "title": "Tunturi Platinum E30-R. Das Liegeergometer mit voller Rückenstütze.",
@@ -70,33 +75,93 @@
     ]
   },
   "faq": {
-    "title": "FAQs",
+    "title": "Häufige Fragen zum Tunturi E30-R",
     "subtitle": "Antworten auf häufige Fragen",
-    "initiallyOpen": [0],
+    "initiallyOpen": [
+      0
+    ],
     "items": [
       {
         "question": "Welcher Leistungsbereich ist möglich?",
-        "answer": ["48 Stufen von 20 bis 450 W in 5-W-Schritten, max. 400 W bei 60 RPM. 26 Programme."]
+        "answer": [
+          "48 Stufen von 20 bis 450 W in 5-W-Schritten, max. 400 W bei 60 RPM. 26 Programme."
+        ]
       },
       {
         "question": "Bis zu welchem Nutzergewicht ist das E30-R ausgelegt?",
-        "answer": ["Bis 180 kg, 16 kg Schwungmasse."]
+        "answer": [
+          "Bis 180 kg, 16 kg Schwungmasse."
+        ]
       },
       {
         "question": "Für wen ist ein Liegeergometer sinnvoll?",
-        "answer": ["Die volle Rückenstütze und der niedrige Einstieg entlasten Rücken und Gelenke. Das passt zu längeren Einheiten und zur Reha. Den Einsatz therapeutisch abklären."]
+        "answer": [
+          "Die volle Rückenstütze und der niedrige Einstieg entlasten Rücken und Gelenke. Das passt zu längeren Einheiten und zur Reha. Den Einsatz therapeutisch abklären."
+        ]
       },
       {
         "question": "Wie groß ist das Gerät?",
-        "answer": ["L 184 × B 75 × H 117 cm, 68,8 kg."]
+        "answer": [
+          "L 184 × B 75 × H 117 cm, 68,8 kg."
+        ]
       },
       {
         "question": "Welche Apps sind kompatibel?",
-        "answer": ["Tunturi Routes, Zwift und Kinomap über Bluetooth."]
+        "answer": [
+          "Tunturi Routes, Zwift und Kinomap über Bluetooth."
+        ]
       },
       {
         "question": "Gibt es ein Liegeergometer mit Armtraining?",
-        "answer": ["Ja, der Fluid Rower E750 kombiniert Liegeergometer und Armergometer in einem Gerät."]
+        "answer": [
+          "Ja, der Fluid Rower E750 kombiniert Liegeergometer und Armergometer in einem Gerät."
+        ]
+      }
+    ]
+  },
+  "useCases": [
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e30-r-liegeergometer-sitz-rueckenlehne.jpg?v=1791235068",
+      "imageAlt": "Tunturi Platinum E30-R – ergonomischer Sitz mit Rückenlehne",
+      "kicker": "Rehabilitation",
+      "title": "E30-R für gelenkschonendes Cardio & Reha",
+      "text": "Vollständige Rückenunterstützung, sehr niedriger Einstieg und horizontaler Schnellverschlusssitz mit Körpergrößenanzeige – entwickelt für Physiotherapiepraxen, Rehabilitation und längere Trainingseinheiten.",
+      "link": "/collections/tunturi",
+      "linkLabel": "Alle Tunturi Geräte",
+      "imageRight": true,
+      "imageAspectRatio": "4 / 3"
+    },
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e30-r-liegeergometer-fitnessstudio.jpg?v=1791235068",
+      "imageAlt": "Tunturi Platinum E30-R – Training im Fitnessstudio",
+      "kicker": "Leistungstraining",
+      "title": "E30-R für intensives Cardiotraining bis 450 W",
+      "text": "EMS-Widerstandssystem mit 48 Stufen bis 450 W – präzise, wartungsfrei und kompatibel mit Herzfrequenzsteuerung und Watttraining. Für leistungsorientierte Nutzer, die Gelenke schonen wollen.",
+      "link": "/collections/tunturi",
+      "linkLabel": "Alle Tunturi Geräte",
+      "imageAspectRatio": "4 / 3"
+    }
+  ],
+  "featuresAccordion": {
+    "label": "Ergonomie. Leistung. Komfort.",
+    "items": [
+      {
+        "title": "Ergonomische Liegeposition",
+        "description": "Vollständige Rückenunterstützung, horizontaler Schnellverschlusssitz mit Körpergrößenanzeige und sehr niedriger Einstieg – für komfortables Training mit minimaler Belastung auf Rücken und Gelenke.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e30-r-liegeergometer-sitz-rueckenlehne.jpg?v=1791235068",
+        "alt": "Tunturi Platinum E30-R – Sitz mit Rückenlehne"
+      },
+      {
+        "title": "EMS-Widerstand bis 450 W",
+        "description": "48 Stufen, elektromagnetisch, wartungsfrei – ideal für Intervalltraining und wattgesteuertes Training. Herzfrequenzgesteuerte automatische Anpassung möglich.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e30-r-liegeergometer-training.jpg?v=1791235068",
+        "alt": "Tunturi Platinum E30-R – Training"
+      },
+      {
+        "title": "Smart vernetzt",
+        "description": "Bluetooth-Konnektivität für iOS und Android, USB-Ladeanschluss, integrierte Tablet-Halterung und Kompatibilität mit Tunturi Routes, Zwift und Kinomap.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-e30-r-liegeergometer-frontansicht.jpg?v=1791235068",
+        "alt": "Tunturi Platinum E30-R – Frontansicht"
       }
     ]
   }
