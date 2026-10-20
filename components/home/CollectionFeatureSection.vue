@@ -9,6 +9,8 @@
             :alt="logoAlt || title"
             class="feature-brand-image"
             :class="logoClass"
+            loading="lazy"
+            decoding="async"
           />
           <template v-else>
             {{ title }}

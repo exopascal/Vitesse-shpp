@@ -38,6 +38,7 @@
           <ProductDetailsInfo
             :product="product"
             :shortDescription="shortDescription"
+            :pageTitle="pageTitle"
             :selectedOptions="internalSelectedOptions"
             :selectedVariant="selectedVariant"
             :quantity="internalQuantity"
@@ -63,6 +64,10 @@ const props = defineProps({
     default: null,
   },
   shortDescription: {
+    type: String,
+    default: '',
+  },
+  pageTitle: {
     type: String,
     default: '',
   },

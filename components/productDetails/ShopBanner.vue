@@ -4,6 +4,14 @@
       <header class="shop-banner-header">
         <h2 class="shop-banner-title">{{ content.title }}</h2>
         <p class="shop-banner-text">{{ content.text }}</p>
+        <div v-if="content.links?.length" class="shop-banner-links">
+          <NuxtLink
+            v-for="link in content.links"
+            :key="link.href"
+            :to="link.href"
+            class="shop-banner-link"
+          >{{ link.label }} ›</NuxtLink>
+        </div>
       </header>
 
       <div class="shop-banner-media">
@@ -91,6 +99,27 @@ const videoSrc = computed(() => {
   font-size: 1rem;
   line-height: 1.7;
   color: #5b544c;
+}
+
+.shop-banner-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 2rem;
+  margin-top: 1.25rem;
+}
+
+.shop-banner-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #f26a21;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.shop-banner-link:hover {
+  border-bottom-color: #f26a21;
 }
 
 .shop-banner-media {

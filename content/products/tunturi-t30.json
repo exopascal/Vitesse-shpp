@@ -1,5 +1,10 @@
 {
   "shortDescription": "Professionelles Laufband für Performance, Diagnostik und Reha – belastbare Studio-Hardware für wechselnde Nutzer.",
+  "seoMeta": {
+    "title": "Tunturi T30 – Laufband, Sled und Reha in einem Gerät",
+    "description": "Das Tunturi T30 ist ein professionelles Laufband für Performance, Diagnostik und Reha – belastbare Studio-Hardware für wechselnde Nutzer in einer Einrichtung.",
+    "h1": "Tunturi T30 – Laufband, Sled und Reha in einem Gerät"
+  },
   "highlights": {
     "kicker": "Product Highlights",
     "title": "Tunturi Platinum T30 Core. Laufband, Sled und Reha in einem Gerät.",
@@ -70,37 +75,99 @@
     ]
   },
   "faq": {
-    "title": "FAQs",
+    "title": "Häufige Fragen zum Tunturi T30",
     "subtitle": "Antworten auf häufige Fragen",
-    "initiallyOpen": [0],
+    "initiallyOpen": [
+      0
+    ],
     "items": [
       {
         "question": "Welche Modi bietet das T30 Core?",
-        "answer": ["Laufband, Sled, Limit-Modus und Rückwärtsgehen."]
+        "answer": [
+          "Laufband, Sled, Limit-Modus und Rückwärtsgehen."
+        ]
       },
       {
         "question": "Wie viele Programme gibt es?",
-        "answer": ["52 Laufbandprogramme und 5 Sled-Programme (Zeit, Distanz, manuell, persönlich, Krafttest)."]
+        "answer": [
+          "52 Laufbandprogramme und 5 Sled-Programme (Zeit, Distanz, manuell, persönlich, Krafttest)."
+        ]
       },
       {
         "question": "Welche Geschwindigkeit und Steigung sind möglich?",
-        "answer": ["Im Laufbandmodus 0,8 bis 20 km/h und 15 Steigungsstufen. Im Limit- und Rückwärtsmodus 0,1 bis 2,5 km/h."]
+        "answer": [
+          "Im Laufbandmodus 0,8 bis 20 km/h und 15 Steigungsstufen. Im Limit- und Rückwärtsmodus 0,1 bis 2,5 km/h."
+        ]
       },
       {
         "question": "Für welches Nutzergewicht ist das Gerät ausgelegt?",
-        "answer": ["Bis 150 kg. Lauffläche 156 × 56 cm, Motor 3 PS (AC)."]
+        "answer": [
+          "Bis 150 kg. Lauffläche 156 × 56 cm, Motor 3 PS (AC)."
+        ]
       },
       {
         "question": "Wie groß ist das Gerät?",
-        "answer": ["L 196 × B 88 × H 149 cm, 142 kg."]
+        "answer": [
+          "L 196 × B 88 × H 149 cm, 142 kg."
+        ]
       },
       {
         "question": "Ist das Laufband für die Reha geeignet?",
-        "answer": ["Limit-Modus, Rückwärtsgehen, REHA-Schiene und orthopädische Laufmatte sind dafür ausgelegt. Den Einsatz therapeutisch abklären."]
+        "answer": [
+          "Limit-Modus, Rückwärtsgehen, REHA-Schiene und orthopädische Laufmatte sind dafür ausgelegt. Den Einsatz therapeutisch abklären."
+        ]
       },
       {
         "question": "Welche Apps sind kompatibel?",
-        "answer": ["Tunturi Routes und Zwift über Bluetooth."]
+        "answer": [
+          "Tunturi Routes und Zwift über Bluetooth."
+        ]
+      }
+    ]
+  },
+  "useCases": [
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-t30-core-laufband-sled-training.jpg?v=1791583370",
+      "imageAlt": "Power-Sled-Training auf dem Tunturi Platinum T30 Core, Nutzer schiebt an der Core-Bar",
+      "kicker": "Sled-Training",
+      "title": "T30 für Power-Sled-Training & Krafttest",
+      "text": "Core-Bar in zwei Positionen, optionale Bungee-Widerstandsbänder und 5 Sled-Programme – darunter ein einzigartiger Krafttest, der Watt und zurückgelegte Strecke in Echtzeit misst. Ganzkörper-HIIT auf einem Gerät.",
+      "link": "/collections/tunturi",
+      "linkLabel": "Alle Tunturi Geräte",
+      "imageRight": true,
+      "imageAspectRatio": "4 / 3"
+    },
+    {
+      "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-t30-core-laufband-physiotherapie.jpg?v=1791584755",
+      "imageAlt": "Tunturi Platinum T30 Core Laufband im Einsatz bei der Physiotherapie mit REHA-Schiene",
+      "kicker": "Rehabilitation",
+      "title": "T30 für Rehabilitation & präzise Gangtherapie",
+      "text": "Limit-Modus mit 0,1–2,5 km/h in 0,1-km/h-Schritten, Backward-Walking-Modus und REHA-Schiene über die gesamte Laufbandlänge – für sicheres Gangtraining von der Frührehabilitation bis zur Rückkehr in den Sport.",
+      "link": "/collections/tunturi",
+      "linkLabel": "Alle Tunturi Geräte",
+      "imageAspectRatio": "4 / 3"
+    }
+  ],
+  "featuresAccordion": {
+    "label": "Sled. Laufband. Rehabilitation.",
+    "items": [
+      {
+        "title": "Power-Sled mit Core-Bar & Krafttest",
+        "description": "Core-Bar in loser oder fixierter Position, Bungee-Widerstandsbänder und 5 Sled-Programme – einschließlich Krafttest mit Watt-Messung über 30–120 Sekunden. Trainiert Beine, Arme und Körpermitte gleichzeitig.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-t30-core-laufband-sled-funktion.jpg?v=1791583521",
+        "alt": "Tunturi Platinum T30 Core – Sled-Modus mit grafisch eingeblendetem Fitnessschlitten"
+      },
+      {
+        "title": "Limit-Modus & Backward Walking",
+        "description": "Limit-Modus: 0,1–2,5 km/h in 0,1-km/h-Schritten, Distanzanzeige pro Meter – für präzises Rehabilitationstraining. Backward-Walking-Modus dreht die Laufrichtung um, kombinierbar mit Steigung für gezielte physiotherapeutische Übungen.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-t30-core-laufband-rueckwaerts-gehen.jpg?v=1791584443",
+        "alt": "Tunturi Platinum T30 Core – Rückwärtsgehen im Limit-Modus mit REHA-Griffen"
+      },
+      {
+        "title": "52 Programme & 15 Steigungswinkel",
+        "description": "Vollwertiges Laufband mit 0,8–20 km/h, 52 Programmen, 15 Steigungswinkeln, 5 Nutzerprofilen und 10 Grafikprofilen – plus Bluetooth für Tunturi Routes und Zwift. Ein Gerät für alle Trainings- und Leistungsstufen.",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/tunturi-platinum-t30-core-laufband-display.jpg?v=1791584755",
+        "alt": "Tunturi Platinum T30 Core – Display und Konsole mit Bedienfeldern"
       }
     ]
   }

@@ -1,5 +1,5 @@
 export type ProductPageTemplate = 'main' | 'accessory'
-export type ProductContentKey = 'default' | 't-apex' | 'exopek-pro' | 'tunturi' | 'tunturi-c20' | 'tunturi-t20' | 'tunturi-e20' | 'tunturi-e30' | 'tunturi-e30-r' | 'tunturi-s10' | 'tunturi-s20' | 'optogait' | 'fluid-rower-e685' | 'fluid-rower-e750'
+export type ProductContentKey = 'default' | 't-apex' | 'exopek-pro' | 'tunturi-t30' | 'tunturi-t20' | 'tunturi-c20' | 'tunturi-e20' | 'tunturi-e30' | 'tunturi-e30-r' | 'tunturi-s10' | 'tunturi-s20' | 'optogait' | 'fluid-rower-e685' | 'fluid-rower-e750'
 
 export interface ProductPagePreset {
   handles: string[]
@@ -27,7 +27,7 @@ export const productPagePresets: ProductPagePreset[] = [
   {
     handles: ['tunturi-platinum-t30-core-laufband'],
     template: 'main',
-    contentKey: 'tunturi',
+    contentKey: 'tunturi-t30',
   },
   {
     handles: ['tunturi-platinum-c20-crosstrainer'],

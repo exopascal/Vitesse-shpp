@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "NODE_OPTIONS=--experimental-sqlite nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
@@ -20,9 +20,11 @@
   },
   "dependencies": {
     "@nuxt/a11y": "^1.0.0-alpha.1",
+    "@nuxt/content": "^3.15.0",
     "@nuxt/icon": "^1.15.0",
     "@nuxtjs/sitemap": "^7.4.7",
     "@vueuse/nuxt": "^13.7.0",
+    "better-sqlite3": "^13.0.3",
     "gsap": "^3.14.2",
     "klaro": "^0.7.21",
     "nuxt": "^3.17.5",

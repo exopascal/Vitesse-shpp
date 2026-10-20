@@ -44,10 +44,19 @@
               <p
                 v-for="(paragraph, paragraphIndex) in item.answer"
                 :key="`${index}-${paragraphIndex}`"
-                class="whitespace-pre-line"
+                class="whitespace-pre-line faq-paragraph"
+                v-html="paragraph"
+              />
+            </div>
+            <div v-if="item.blogLinks?.length" class="mt-4 flex flex-wrap gap-3">
+              <NuxtLink
+                v-for="link in item.blogLinks"
+                :key="link.href"
+                :to="link.href"
+                class="faq-blog-link"
               >
-                {{ paragraph }}
-              </p>
+                {{ link.label }} →
+              </NuxtLink>
             </div>
           </div>
         </article>
@@ -134,3 +143,31 @@ function toggleItem(index: number) {
     : [...openItems.value, index]
 }
 </script>
+
+<style scoped>
+.faq-paragraph :deep(a) {
+  color: #f26a21;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(242, 106, 33, 0.3);
+  transition: border-color 0.15s ease;
+}
+
+.faq-paragraph :deep(a:hover) {
+  border-bottom-color: #f26a21;
+}
+
+.faq-blog-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #f26a21;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.faq-blog-link:hover {
+  border-bottom-color: #f26a21;
+}
+</style>

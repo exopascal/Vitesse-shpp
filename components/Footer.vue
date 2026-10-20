@@ -45,6 +45,7 @@
         <NuxtLink to="/" class="site-footer__legal-link">Startseite</NuxtLink>
         <NuxtLink to="/products" class="site-footer__legal-link">Produkte</NuxtLink>
         <NuxtLink to="/collections" class="site-footer__legal-link">Kollektionen</NuxtLink>
+        <NuxtLink to="/blog" class="site-footer__legal-link">Blog</NuxtLink>
         <NuxtLink to="/impressum" class="site-footer__legal-link">Impressum</NuxtLink>
         <NuxtLink to="/agb" class="site-footer__legal-link">AGB</NuxtLink>
         <NuxtLink to="/datenschutz" class="site-footer__legal-link">Datenschutz</NuxtLink>

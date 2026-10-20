@@ -32,6 +32,9 @@
             :alt="brand.name"
             class="brand-strip-logo-image"
             :class="brand.imageClass"
+            :loading="brand.eager ? 'eager' : 'lazy'"
+            :fetchpriority="brand.eager ? 'low' : undefined"
+            decoding="async"
           />
           <template v-else>
             {{ brand.name }}
@@ -138,11 +141,11 @@ type GridCard = {
 }
 
 const homeBrands = [
-  { name: 'T-APEX', slug: 'tapex', image: '/t-apex-logo.png.avif', imageClass: 'brand-strip-logo-image-tapex', url: '/products?collection=sprinttraining&q=t-apex' },
-  { name: 'TUNTURI', slug: 'tunturi', image: '/tunturi-logo.png', imageClass: 'brand-strip-logo-image-tunturi', url: '/collections/tunturi' },
-  { name: 'TORQUE', slug: 'torque', image: '/Torque_USA_black-orange_2000x.png.webp', imageClass: 'brand-strip-logo-image-torque', url: '/products?q=torque' },
-  { name: 'EXOPEK', slug: 'exopek', image: '/Exopek_Logo_horizontal-Wortmarke-bildmarke_schwarz.png', imageClass: 'brand-strip-logo-image-exopek', url: '/products?q=exopek' },
-  { name: 'HP COSMOS', slug: 'hp-cosmos', image: '/hp-cosmos-logo.png', imageClass: 'brand-strip-logo-image-hp-cosmos', url: '/products?q=hp%20cosmos' },
+  { name: 'T-APEX', slug: 'tapex', image: '/t-apex-logo.png.avif', imageClass: 'brand-strip-logo-image-tapex', url: '/products?collection=sprinttraining&q=t-apex', eager: true },
+  { name: 'TUNTURI', slug: 'tunturi', image: '/tunturi-logo.png', imageClass: 'brand-strip-logo-image-tunturi', url: '/collections/tunturi', eager: false },
+  { name: 'TORQUE', slug: 'torque', image: '/Torque_USA_black-orange_2000x.png.webp', imageClass: 'brand-strip-logo-image-torque', url: '/products?q=torque', eager: false },
+  { name: 'EXOPEK', slug: 'exopek', image: '/Exopek_Logo_horizontal-Wortmarke-bildmarke_schwarz.png', imageClass: 'brand-strip-logo-image-exopek', url: '/products?q=exopek', eager: false },
+  { name: 'HP COSMOS', slug: 'hp-cosmos', image: '/hp-cosmos-logo.png', imageClass: 'brand-strip-logo-image-hp-cosmos', url: '/products?q=hp%20cosmos', eager: false },
 ]
 const introWords = [
   'Spitzensport.',

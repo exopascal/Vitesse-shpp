@@ -21,6 +21,7 @@
           v-else
           :product="product"
           :shortDescription="productDetailContent.shortDescription"
+          :pageTitle="productDetailContent.seoMeta?.h1"
           :selectedOptions="selectedOptions"
           :selectedVariant="selectedVariant"
           :quantity="quantity"
@@ -29,6 +30,15 @@
           @selectOption="selectOption"
           @incrementQuantity="incrementQuantity"
           @decrementQuantity="decrementQuantity"
+        />
+
+        <ProductCinematicHero
+          v-if="productPagePreset.contentKey === 't-apex' && product"
+          :product="product"
+          :selectedOptions="selectedOptions"
+          :selectedVariant="selectedVariant"
+          @selectOption="selectOption"
+          @addToCart="addToCart"
         />
 
         <template v-if="productPagePreset.template === 'main'">
@@ -47,13 +57,49 @@
           </section>
           <ProductHighlights :product="product" :content="productDetailContent.highlights" />
           <ShopBanner :content="productDetailContent.banner" />
+          <ProductCoachBenefits
+            v-if="productDetailContent.coachBenefits"
+            :content="productDetailContent.coachBenefits"
+          />
+          <template v-if="productPagePreset.contentKey === 't-apex'">
+            <ProductEnvironment />
+            <ProductTrainingModes />
+            <ProductDataSection />
+          </template>
+          <template v-for="(uc, i) in productDetailContent.useCases" :key="i">
+            <ProductUseCaseSplit
+              :image="uc.image"
+              :image-alt="uc.imageAlt"
+              :kicker="uc.kicker"
+              :title="uc.title"
+              :text="uc.text"
+              :link="uc.link"
+              :link-label="uc.linkLabel"
+              :image-right="uc.imageRight"
+              :image-aspect-ratio="uc.imageAspectRatio"
+            />
+            <ProductBlogStrip v-if="i === 0 && productPagePreset.contentKey === 't-apex'" />
+          </template>
+          <ProductFeaturesAccordion
+            v-if="productDetailContent.featuresAccordion"
+            :content="productDetailContent.featuresAccordion"
+          />
           <ProductFeatures :content="productDetailContent.features" />
         </template>
 
+        <ProductInBox
+          v-if="productDetailContent.inBox"
+          :content="productDetailContent.inBox"
+        />
         <ProductFaq :product="product" :content="productDetailContent.faq" />
+
+        <ProductBlogTeaser
+          v-if="productDetailContent.blogTeaser"
+          :content="productDetailContent.blogTeaser"
+        />
       </div>
     </div>
-    
+
   </div>
   
 </template>
@@ -69,6 +115,16 @@ import ProductFaq from '~/components/productDetails/ProductFaq.vue'
 import ProductHighlights from '~/components/productDetails/ProductHighlights.vue'
 import ShopBanner from '~/components/productDetails/ShopBanner.vue'
 import ProductFeatures from '~/components/productDetails/ProductFeatures.vue'
+import ProductBlogTeaser from '~/components/productDetails/ProductBlogTeaser.vue'
+import ProductFeaturesAccordion from '~/components/productDetails/ProductFeaturesAccordion.vue'
+import ProductCoachBenefits from '~/components/productDetails/ProductCoachBenefits.vue'
+import ProductUseCaseSplit from '~/components/productDetails/ProductUseCaseSplit.vue'
+import ProductTrainingModes from '~/components/productDetails/ProductTrainingModes.vue'
+import ProductInBox from '~/components/productDetails/ProductInBox.vue'
+import ProductCinematicHero from '~/components/productDetails/ProductCinematicHero.vue'
+import ProductEnvironment from '~/components/productDetails/ProductEnvironment.vue'
+import ProductBlogStrip from '~/components/productDetails/ProductBlogStrip.vue'
+import ProductDataSection from '~/components/productDetails/ProductDataSection.vue'
 import { getProductDetailContent } from '~/utils/productDetailContent'
 import { resolveProductPagePreset } from '~/utils/productPageConfig'
 import { getProductVideos } from '~/utils/productVideos'
@@ -248,14 +304,15 @@ watch(product, (p) => {
   const image = p.featured_image ?? ''
   const siteUrl = useRuntimeConfig().public.siteUrl as string
   const url = `${siteUrl}/products/${handle.value}`
-  const description = p.description
-    ? p.description.slice(0, 160)
-    : `${p.title} – Premium Trainingsgerät von Vitesse Sports.`
+  const seoMeta = productDetailContent.value.seoMeta
+  const pageTitle = seoMeta?.title || p.title
+  const description = seoMeta?.description
+    || (p.description ? p.description.slice(0, 160) : `${p.title} – Premium Trainingsgerät von Vitesse Sports.`)
 
   useSeoMeta({
-    title: p.title,
+    title: pageTitle,
     description,
-    ogTitle: `${p.title} | Vitesse Sports`,
+    ogTitle: `${pageTitle} | Vitesse Sports`,
     ogDescription: description,
     ogImage: image,
     ogUrl: url,

@@ -25,11 +25,15 @@
         :alt="title"
         class="hero-natural-img"
       />
-      <div
+      <img
         v-else-if="backgroundImage"
-        class="hero-media hero-media-image"
-        :style="{ backgroundImage: `url('${backgroundImage}')` }"
-      ></div>
+        :src="backgroundImage"
+        :alt="title"
+        class="hero-media"
+        fetchpriority="high"
+        loading="eager"
+        decoding="sync"
+      />
 
       <div v-if="overlay" class="hero-overlay"></div>
 
@@ -158,11 +162,7 @@ withDefaults(defineProps<{
   pointer-events: none;
 }
 
-.hero-media-image {
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+/* .hero-media-image removed: img now uses .hero-media (position absolute, object-fit cover) */
 
 .hero-overlay {
   position: absolute;

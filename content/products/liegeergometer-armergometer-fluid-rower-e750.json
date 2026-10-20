@@ -1,5 +1,10 @@
 {
   "shortDescription": "Liegeergometer und Armergometer in einem Gerät – für den professionellen und gewerblichen Gebrauch, Sitz drehbar für den Rollstuhltransfer.",
+  "seoMeta": {
+    "title": "Fluid Rower E750 – Liegeergometer und Armergometer in einem Gerät",
+    "description": "Das Fluid Rower E750 kombiniert Liegeergometer und Armergometer: Arm- und Beintraining an einem Gerät, Sitz um 90° drehbar für Rollstuhlnutzer, Wasserwiderstand in 10 Stufen.",
+    "h1": "Fluid Rower E750 – Liegeergometer und Armergometer in einem Gerät"
+  },
   "highlights": {
     "kicker": "Product Highlights",
     "title": "Fluid Rower E750. Arme und Beine an einem Gerät.",
@@ -76,7 +81,7 @@
     ]
   },
   "faq": {
-    "title": "FAQs",
+    "title": "Häufige Fragen zum Fluid Rower E750",
     "subtitle": "Antworten auf häufige Fragen",
     "initiallyOpen": [0],
     "items": [
