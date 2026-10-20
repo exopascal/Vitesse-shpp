@@ -39,7 +39,7 @@ export default defineNuxtConfig({
   // CRITICAL: Hydration Mismatch Prevention
   experimental: {
     payloadExtraction: false,
-    writeEarlyHints: false
+    writeEarlyHints: true,
   },
 
   $production: {
@@ -54,7 +54,7 @@ export default defineNuxtConfig({
       '/': {
         ssr: true,
         headers: {
-          'cache-control': 's-maxage=60, stale-while-revalidate=300',
+          'cache-control': 's-maxage=3600, stale-while-revalidate=86400',
         },
       },
 
@@ -139,6 +139,12 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/Vitesse-Bildmarke.png' },
+        // Preconnect to Shopify CDN & API
+        { rel: 'preconnect', href: 'https://cdn.shopify.com', crossorigin: '' },
+        { rel: 'preconnect', href: 'https://flash-reflex-training.myshopify.com' },
+        { rel: 'dns-prefetch', href: 'https://cdn.shopify.com' },
+        // Preload LCP hero image
+        { rel: 'preload', as: 'image', href: '/t-apex-zugwiderstandtraining-sprinttraining.jpg', fetchpriority: 'high' },
       ],
       meta: [
         { name: 'description', content: 'Premium Trainingsgeräte für Sprinttechnik, Widerstandstraining und Overspeed Training. Entdecke das Vitesse Sports Equipment.' },
@@ -176,7 +182,7 @@ export default defineNuxtConfig({
         output: {
           manualChunks: {
             'vue-vendor': ['vue', '@vue/shared'],
-            'shopify-vendor': [] // Add Shopify SDK here when needed
+            'pinia-vendor': ['pinia'],
           }
         }
       }
