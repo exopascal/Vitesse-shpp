@@ -556,12 +556,10 @@ const tunturiMegaMenuHandles = [
 ]
 
 const { data: tunturiFeaturedProducts } = await useAsyncData('header-tunturi-featured', async () => {
-  const query = tunturiMegaMenuHandles.map(h => `handle:${h}`).join(' OR ')
-  const products = await shopifyStore.fetchProducts({ filterQuery: query, limit: 4 })
-  // Reihenfolge gemäß tunturiMegaMenuHandles sicherstellen
-  return tunturiMegaMenuHandles
-    .map(h => products.find(p => p.handle === h))
-    .filter(Boolean)
+  const products = await Promise.all(
+    tunturiMegaMenuHandles.map(h => shopifyStore.fetchProductByHandle(h))
+  )
+  return products.filter(Boolean)
 })
 
 const { data: highlightedProducts } = await useAsyncData('header-highlight-products', async () => {
