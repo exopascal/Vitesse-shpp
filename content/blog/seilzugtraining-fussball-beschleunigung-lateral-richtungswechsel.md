@@ -19,7 +19,7 @@ Beschleunigung aus dem Stand ist die häufigste Schnelligkeitsanforderung im Fu�
 
 Das T-Apex trainiert diese Phase mit konstantem Zugwiderstand: der Athlet sprintet gegen einen definierten Widerstand (0–15 kgf), was Hüftstrecker und Kniehub stärker belastet als freier Sprint. Messdaten zeigen die Kraftentfaltung pro Schritt und ob die Antrittsqualität über Wiederholungen konstant bleibt.
 
-Für die Overspeed-Variante: das Gerät zieht aktiv mit und erzwingt höhere Frequenz – ein neuromuskuläres Signal, das die Schrittrate über das selbst erreichbare Niveau hebt.
+Für die [Overspeed-Variante](/blog/overspeed-training-wie-es-wirkt-wer-profitiert): das Gerät zieht aktiv mit und erzwingt höhere Frequenz – ein neuromuskuläres Signal, das die Schrittrate über das selbst erreichbare Niveau hebt.
 
 ## Seitwärtsbewegung: Kontrolle unter Widerstand
 
@@ -35,7 +35,7 @@ Besonders wertvoll: die Daten zeigen, wie symmetrisch die Seitwärtsbewegung ist
 
 Richtungswechsel beginnen mit einem Bremsvorgang. Wer nicht effizient abbremsen kann, verliert Zeit und Kontrolle – und erhöht das Verletzungsrisiko.
 
-Das T-Apex trainiert Bremsphasen durch kontrollierten Widerstand in der Gegenrichtung: der Athlet bremst in den Widerstand hinein, was exzentrischen Krafteinsatz provoziert und gleichzeitig messbar macht. Im Trendbericht zeigt sich, ob die Bremskraftqualität über die Session stabil bleibt oder abfällt.
+Das T-Apex trainiert Bremsphasen durch kontrollierten Widerstand in der Gegenrichtung: der Athlet bremst in den Widerstand hinein, was exzentrischen Krafteinsatz provoziert und gleichzeitig messbar macht. Im [Trendbericht](/blog/motorisiertes-seilzugsystem-messwerte-zuverlaessigkeit-sprinttraining) zeigt sich, ob die Bremskraftqualität über die Session stabil bleibt oder abfällt.
 
 Nach dem Bremsvorgang folgt die Neubeschleunigung – oft der kritische Moment, in dem viele Athleten Zeit verlieren. Training mit T-Apex kann Bremsen und Neubeschleunigen direkt sequenziell abbilden.
 
@@ -54,7 +54,7 @@ Alle Daten werden pro Sprint erfasst und sind nach der Session im Tablet verfüg
 
 Das T-Apex wiegt 20 kg, lässt sich in wenigen Minuten aufstellen und ist per Bluetooth bis 30 m steuerbar. Für den Feldeinsatz nach dem Teamtraining oder in dezidierten Speed-Einheiten geeignet.
 
-Positionsdifferenzierung ist ohne Mehraufwand möglich: gleiche Session, unterschiedlicher Widerstand für Außenspieler vs. Innenverteidiger vs. Mittelfeldspieler – alles über das Tablet einstellbar.
+[Positionsdifferenzierung](/blog/positionsspezifisches-fussballtraining-t-apex) ist ohne Mehraufwand möglich: gleiche Session, unterschiedlicher Widerstand für Außenspieler vs. Innenverteidiger vs. Mittelfeldspieler – alles über das Tablet einstellbar.
 
 Fußballerische Schnelligkeit ist komplex. Training dafür sollte es auch sein.
 

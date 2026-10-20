@@ -145,6 +145,17 @@ function toggleItem(index: number) {
 </script>
 
 <style scoped>
+.faq-paragraph :deep(a) {
+  color: #f26a21;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(242, 106, 33, 0.3);
+  transition: border-color 0.15s ease;
+}
+
+.faq-paragraph :deep(a:hover) {
+  border-bottom-color: #f26a21;
+}
+
 .faq-blog-link {
   display: inline-flex;
   align-items: center;

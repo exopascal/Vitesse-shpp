@@ -31,7 +31,7 @@ Gemessen wurden: Gesamtlaufzeit, Topgeschwindigkeit, maximale Beschleunigung sow
 
 **Zuverlässig (hohe bis sehr hohe Reliabilität):**
 
-Gesamtlaufzeit und Topgeschwindigkeit zeigten in beiden Reliabilitätsformen konsistent ICC-Werte ≥ 0,95 und CV-Werte unter 2 %. Das bedeutet: Diese Metriken sind gut geeignet, um Trainingsfortschritte zu verfolgen und Unterschiede zwischen Athleten zu vergleichen. Die SWC für Topgeschwindigkeit lag bei 0,15 m/s – ein Wert, der laut den Autoren klein genug ist, um die Verbesserungen zu erfassen, die in der Forschungsliteratur nach Overspeed-Interventionen beobachtet wurden.
+Gesamtlaufzeit und Topgeschwindigkeit zeigten in beiden Reliabilitätsformen konsistent ICC-Werte ≥ 0,95 und CV-Werte unter 2 %. Das bedeutet: Diese Metriken sind gut geeignet, um Trainingsfortschritte zu verfolgen und Unterschiede zwischen Athleten zu vergleichen. Die SWC für Topgeschwindigkeit lag bei 0,15 m/s – ein Wert, der laut den Autoren klein genug ist, um die Verbesserungen zu erfassen, die in der Forschungsliteratur nach [Overspeed-Interventionen](/blog/overspeed-training-wie-es-wirkt-wer-profitiert) beobachtet wurden.
 
 5-m-Splittimes und -Geschwindigkeiten ab dem 5-m-Abschnitt zeigten ebenfalls gute absolute Reliabilität (CV < 2 %) und hohe ICC-Werte. Sie sind damit für die Analyse phasenspezifischer Sprintleistung gut geeignet.
 

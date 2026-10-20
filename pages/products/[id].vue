@@ -66,19 +66,20 @@
             <ProductTrainingModes />
             <ProductDataSection />
           </template>
-          <ProductUseCaseSplit
-            v-for="(uc, i) in productDetailContent.useCases"
-            :key="i"
-            :image="uc.image"
-            :image-alt="uc.imageAlt"
-            :kicker="uc.kicker"
-            :title="uc.title"
-            :text="uc.text"
-            :link="uc.link"
-            :link-label="uc.linkLabel"
-            :image-right="uc.imageRight"
-            :image-aspect-ratio="uc.imageAspectRatio"
-          />
+          <template v-for="(uc, i) in productDetailContent.useCases" :key="i">
+            <ProductUseCaseSplit
+              :image="uc.image"
+              :image-alt="uc.imageAlt"
+              :kicker="uc.kicker"
+              :title="uc.title"
+              :text="uc.text"
+              :link="uc.link"
+              :link-label="uc.linkLabel"
+              :image-right="uc.imageRight"
+              :image-aspect-ratio="uc.imageAspectRatio"
+            />
+            <ProductBlogStrip v-if="i === 0 && productPagePreset.contentKey === 't-apex'" />
+          </template>
           <ProductFeaturesAccordion
             v-if="productDetailContent.featuresAccordion"
             :content="productDetailContent.featuresAccordion"
@@ -122,6 +123,7 @@ import ProductTrainingModes from '~/components/productDetails/ProductTrainingMod
 import ProductInBox from '~/components/productDetails/ProductInBox.vue'
 import ProductCinematicHero from '~/components/productDetails/ProductCinematicHero.vue'
 import ProductEnvironment from '~/components/productDetails/ProductEnvironment.vue'
+import ProductBlogStrip from '~/components/productDetails/ProductBlogStrip.vue'
 import ProductDataSection from '~/components/productDetails/ProductDataSection.vue'
 import { getProductDetailContent } from '~/utils/productDetailContent'
 import { resolveProductPagePreset } from '~/utils/productPageConfig'

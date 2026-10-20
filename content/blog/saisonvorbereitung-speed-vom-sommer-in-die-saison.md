@@ -30,7 +30,7 @@ Pausenzeiten: großzügig. Die Qualität der Wiederholungen zählt, nicht die An
 
 Sobald die Beschleunigungsmechanik stabil ist, wird die Topspeed-Phase integriert. Distanzen verlängern sich auf 40–60 m. Widerstand wird reduziert oder neutralisiert für die zweite Hälfte der Strecke.
 
-In dieser Phase kommt Overspeed hinzu: das T-Apex zieht mit unterstützender Kraft und erzwingt eine höhere Schrittfrequenz, als der Athlet aus eigener Kraft erreichen würde. Neuromuskuläre Anpassung an schnellere Frequenz.
+In dieser Phase kommt [Overspeed](/blog/overspeed-training-wie-es-wirkt-wer-profitiert) hinzu: das T-Apex zieht mit unterstützender Kraft und erzwingt eine höhere Schrittfrequenz, als der Athlet aus eigener Kraft erreichen würde. Neuromuskuläre Anpassung an schnellere Frequenz.
 
 Datenschwerpunkt: Topspeed-Wert, Zeitpunkt des Geschwindigkeitsmaximums, Verlauf nach dem Maximum.
 

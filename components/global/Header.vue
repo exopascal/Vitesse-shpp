@@ -1003,6 +1003,8 @@ onUnmounted(() => {
   display: none;
   flex: 1;
   justify-content: center;
+  align-self: stretch;
+  position: relative;
 }
 
 .nav-list {
@@ -1014,7 +1016,6 @@ onUnmounted(() => {
 }
 
 .nav-item {
-  position: relative;
 }
 
 .nav-link {

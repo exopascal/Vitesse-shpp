@@ -15,37 +15,46 @@
         "body": "Zugwiderstand von 0–15 kgf für explosive Starts und kontrollierte Beschleunigung im Sprinttraining.",
         "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/t-apex-sprinttraining-antrittsgeschwindigkeit.webp?v=1792333462",
         "alt": "Sprinter im explosiven Antritt mit T-Apex Seilzugtraining",
-        "blogLink": "/blog/von-beschleunigung-bis-overspeed-t-apex-sprinttraining"
+        "blogLink": "/blog/von-beschleunigung-bis-overspeed-t-apex-sprinttraining",
+        "blogLinkLabel": "Wie T-Apex alle drei Sprintphasen steuert"
       },
       {
         "body": "Overspeed-Modus bis 14 m/s: unterstützte Sprints für Technik, Antritt und Geschwindigkeitsimpulse in einem Setup.",
         "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/t-apex-sprinttraining-cinematic.jpg?v=1792333471",
         "alt": "T-Apex Sprinttraining cinematic – Athlet auf der Bahn",
-        "blogLink": "/blog/seilzugtraining-sprinttraining-widerstand-oder-unterstützung"
+        "blogLink": "/blog/seilzugtraining-sprinttraining-widerstand-oder-unterstuetzung",
+        "blogLinkLabel": "Was ein assistierter Sprint akut bewirkt"
       },
       {
         "body": "Robustes Seilzugsystem für wiederholbare Belastung – auf dem Feld, der Bahn und in der Halle.",
         "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/t-apex-sprinttraining-drei-athleten-startbahn.jpg?v=1792333466",
         "alt": "Drei Athleten mit T-Apex auf der Startbahn",
-        "blogLink": "/blog/motorisiertes-seilzugsystem-messwerte-zuverlaessigkeit-sprinttraining"
+        "blogLink": "/blog/motorisiertes-seilzugsystem-messwerte-zuverlaessigkeit-sprinttraining",
+        "blogLinkLabel": "Welchen Messwerten motorisierter Systeme Trainer vertrauen können"
       },
       {
         "body": "Echtzeit-Feedback zu Geschwindigkeit, Kraft und Sprintmechanik für Athleten und Trainer.",
         "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/t-apex-sprinttraining-coaching-analyse_webp.jpg?v=1792333472",
         "alt": "Trainer analysiert Sprintdaten am T-Apex",
-        "blogLink": "/blog/smarteres-speedprogramm-wie-trainingsgruppen-mit-t-apex-arbeiten"
+        "blogLink": "/blog/smarteres-speedprogramm-wie-trainingsgruppen-mit-t-apex-arbeiten",
+        "blogLinkLabel": "Wie Trainingsgruppen mit T-Apex strukturiert Speed entwickeln"
       },
       {
         "body": "Mobil und kompakt: 20 kg, schneller Aufbau, einsetzbar im Teamtraining und Einzelcoaching.",
         "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/t-apex-produkt-auf-sprintbahn.jpg?v=1792333469",
         "alt": "T-Apex Gerät auf der Sprintbahn bereit für Training",
-        "blogLink": "/blog/saisonvorbereitung-speed-vom-sommer-in-die-saison"
+        "blogLink": "/blog/saisonvorbereitung-speed-vom-sommer-in-die-saison",
+        "blogLinkLabel": "Speed-Block in der Saisonvorbereitung strukturiert aufbauen"
       }
     ]
   },
   "banner": {
     "title": "Sprinttraining mit System.",
     "text": "Das T-Apex kombiniert Zugwiderstand, Overspeed-Training und Echtzeit-Analyse in einem Gerät. Wer schneller werden will, braucht mehr als Laufen – er braucht Messdaten.",
+    "links": [
+      { "label": "Mehr zum Overspeed-Training", "href": "/blog/overspeed-training-wie-es-wirkt-wer-profitiert" },
+      { "label": "Mehr zu den Messdaten", "href": "/blog/motorisiertes-seilzugsystem-messwerte-zuverlaessigkeit-sprinttraining" }
+    ],
     "image": "/t-apex-zugwiderstandtraining-sprinttraining.jpg",
     "alt": "T-Apex Seilzugtraining im Einsatz",
     "actionLabel": "See it in Action",
@@ -77,6 +86,10 @@
   "coachBenefits": {
     "title": "Für wen ist T-Apex geeignet?",
     "subtitle": "Für Trainer und Athleten im Leistungssport – Leichtathleten, Fußball, Teamsport und Reha. T-Apex eignet sich für Einzelcoaching und Gruppentraining auf dem Feld, der Bahn und in der Halle.",
+    "links": [
+      { "label": "Mehr zum Fußballtraining", "href": "/blog/positionsspezifisches-fussballtraining-t-apex" },
+      { "label": "Mehr zum Gruppentraining", "href": "/blog/smarteres-speedprogramm-wie-trainingsgruppen-mit-t-apex-arbeiten" }
+    ],
     "items": [
       {
         "icon": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/t-apex-icon-richtungswechsel.svg?v=1792415983",
@@ -107,16 +120,16 @@
     "items": [
       {
         "question": "Was ist das T-Apex?",
-        "answer": ["Das T-Apex ist ein intelligentes Seilzugsystem für Sprinttraining, Overspeed-Training und Bewegungsanalyse. Es misst Geschwindigkeit, Kraft, Leistung und Symmetrie in Echtzeit und steuert Widerstand oder Unterstützung präzise über eine Tablet-App."]
+        "answer": ["Das T-Apex ist ein intelligentes Seilzugsystem für Sprinttraining, <a href=\"/blog/overspeed-training-wie-es-wirkt-wer-profitiert\">Overspeed-Training</a> und Bewegungsanalyse. Es misst Geschwindigkeit, Kraft, Leistung und Symmetrie in Echtzeit und steuert <a href=\"/blog/seilzugtraining-sprinttraining-widerstand-oder-unterstuetzung\">Widerstand oder Unterstützung</a> präzise über eine Tablet-App."]
       },
       {
         "question": "Für wen ist das T-Apex geeignet?",
-        "answer": ["Für Trainer und Athleten im Leistungssport – Leichtathleten, Fußball, Teamsport und Reha. Das Gerät eignet sich für Einzelcoaching und Gruppentraining auf dem Feld, der Bahn und in der Halle."]
+        "answer": ["Für Trainer und Athleten im Leistungssport – Leichtathleten, <a href=\"/blog/positionsspezifisches-fussballtraining-t-apex\">Fußball</a>, Teamsport und Reha. Das Gerät eignet sich für Einzelcoaching und <a href=\"/blog/smarteres-speedprogramm-wie-trainingsgruppen-mit-t-apex-arbeiten\">Gruppentraining</a> auf dem Feld, der Bahn und in der Halle."]
       },
       {
         "question": "Ermöglicht das System unterstützte Sprints / Overspeed-Training?",
         "answer": [
-          "Ja, der T-APEX bietet Overspeed-Training. Das Gerät selbst kann eine Zuggeschwindigkeit von 0 bis 7 m/s bereitstellen, was für Sportarten mit niedrigerer Geschwindigkeit wie Schwimmen ausgelegt ist.",
+          "Ja, der T-APEX bietet <a href=\"/blog/overspeed-training-wie-es-wirkt-wer-profitiert\">Overspeed-Training</a>. Das Gerät selbst kann eine Zuggeschwindigkeit von 0 bis 7 m/s bereitstellen, was für Sportarten mit niedrigerer Geschwindigkeit wie Schwimmen ausgelegt ist.",
           "Für Sprint-Training können Sie unser Overspeed-Zubehör hinzufügen, mit dem die Geschwindigkeit auf bis zu 14 m/s erhöht werden kann.",
           "Aus softwaretechnischer Sicht unterstützt der T-APEX auch individuelles Overspeed-Training. Sie können bis zu 10 verschiedene Geschwindigkeitsintervalle eingeben. Die Software erstellt automatisch eine gleichmäßige Geschwindigkeits- und Unterstützungskurve."
         ],
@@ -126,7 +139,7 @@
             "label": "Wie Overspeed Training wirkt und wer am meisten davon profitiert"
           },
           {
-            "href": "/blog/seilzugtraining-sprinttraining-widerstand-oder-unterstützung",
+            "href": "/blog/seilzugtraining-sprinttraining-widerstand-oder-unterstuetzung",
             "label": "Widerstand oder Unterstützung: Was eine Sprint-Session akut bewirkt"
           }
         ]
@@ -138,8 +151,8 @@
       {
         "question": "Welche Daten werden erfasst?",
         "answer": [
-          "Der T-APEX kann Echtzeitdaten wie Geschwindigkeit, Distanz, Zeit, Kraft und Leistung präzise erfassen und wertvolle Informationen für die Nachbearbeitung liefern.",
-          "Dazu gehören: Wann und wo tritt die maximale Geschwindigkeit auf? Wie lange wird die Höchstgeschwindigkeit gehalten? Wie ist die Leistung bei jedem Sprint-Schritt? Wie symmetrisch sind die Bewegungen auf beiden Seiten?"
+          "Der T-APEX kann <a href=\"/blog/motorisiertes-seilzugsystem-messwerte-zuverlaessigkeit-sprinttraining\">Echtzeitdaten wie Geschwindigkeit, Distanz, Zeit, Kraft und Leistung</a> präzise erfassen und wertvolle Informationen für die Nachbearbeitung liefern.",
+          "Dazu gehören: Wann und wo tritt die <a href=\"/blog/von-beschleunigung-bis-overspeed-t-apex-sprinttraining\">maximale Geschwindigkeit</a> auf? Wie lange wird die Höchstgeschwindigkeit gehalten? Wie ist die Leistung bei jedem Sprint-Schritt? Wie symmetrisch sind die Bewegungen auf beiden Seiten?"
         ],
         "blogLinks": [
           {
@@ -181,31 +194,31 @@
       },
       {
         "question": "Kann T-APEX für Leichtathletik-Sprinttraining eingesetzt werden?",
-        "answer": ["Ja. T-APEX unterstützt widerstandsbasierte Starts, Beschleunigungslaeufe, assistiertes Sprinten und Overspeed-Einheiten auf der Bahn."],
+        "answer": ["Ja. T-APEX unterstützt <a href=\"/blog/von-beschleunigung-bis-overspeed-t-apex-sprinttraining\">widerstandsbasierte Starts und Beschleunigungsläufe</a>, <a href=\"/blog/seilzugtraining-sprinttraining-widerstand-oder-unterstuetzung\">assistiertes Sprinten</a> und <a href=\"/blog/overspeed-training-wie-es-wirkt-wer-profitiert\">Overspeed-Einheiten</a> auf der Bahn."],
         "blogLinks": [
           {
-            "href": "/blog/seilzugtraining-sprinttraining-widerstand-oder-unterstützung",
+            "href": "/blog/seilzugtraining-sprinttraining-widerstand-oder-unterstuetzung",
             "label": "Widerstand oder Unterstützung: Was eine Sprint-Session akut bewirkt"
           }
         ]
       },
       {
         "question": "Für welche Leichtathleten eignet sich T-APEX?",
-        "answer": ["T-APEX eignet sich für Sprinter, Hürdenlaeufer und Mehrkämpfer, die Geschwindigkeit, Beschleunigung, Anlauftechnik oder Schnellkraft entwickeln wollen. Trainer können das Setup je nach Athlet und Disziplinanforderung individuell anpassen."]
+        "answer": ["T-APEX eignet sich für Sprinter, Hürdenläufer und Mehrkämpfer, die Geschwindigkeit, <a href=\"/blog/von-beschleunigung-bis-overspeed-t-apex-sprinttraining\">Beschleunigung</a>, <a href=\"/blog/das-60-meter-plateau-im-sprinttraining\">Anlauftechnik</a> oder Schnellkraft entwickeln wollen. Trainer können das Setup je nach Athlet und Disziplinanforderung individuell anpassen."]
       },
       {
         "question": "Kann der Widerstand für verschiedene Sprintphasen angepasst werden?",
-        "answer": ["Ja. Die Last lässt sich je nach Trainingsziel anpassen – zum Beispiel staerkerer Widerstand für den Start, kontrollierte Belastung durch die Beschleunigungsphase oder Unterstützung für Overspeed-Einheiten."],
+        "answer": ["Ja. Die Last lässt sich je nach Trainingsziel anpassen – zum Beispiel stärkerer Widerstand für den Start, kontrollierte Belastung durch die <a href=\"/blog/von-beschleunigung-bis-overspeed-t-apex-sprinttraining\">Beschleunigungsphase</a> oder Unterstützung für <a href=\"/blog/overspeed-training-wie-es-wirkt-wer-profitiert\">Overspeed-Einheiten</a>."],
         "blogLinks": [
           {
-            "href": "/blog/seilzugtraining-sprinttraining-widerstand-oder-unterstützung",
+            "href": "/blog/seilzugtraining-sprinttraining-widerstand-oder-unterstuetzung",
             "label": "Wie Widerstand und Unterstützung in einer Session wirken"
           }
         ]
       },
       {
         "question": "Unterstützt T-APEX strukturiertes Overspeed-Training?",
-        "answer": ["Ja. T-APEX kann gezielte Unterstützung bereitstellen, damit Athleten schnellere Sprintrhythmen und Topspeed-Mechanik erleben können. Das ermöglicht Trainern, assistiertes Sprinten planvoll in das Programm zu integrieren."],
+        "answer": ["Ja. T-APEX kann gezielte Unterstützung bereitstellen, damit Athleten schnellere Sprintrhythmen und <a href=\"/blog/von-beschleunigung-bis-overspeed-t-apex-sprinttraining\">Topspeed-Mechanik</a> erleben können. Das ermöglicht Trainern, <a href=\"/blog/seilzugtraining-sprinttraining-widerstand-oder-unterstuetzung\">assistiertes Sprinten</a> planvoll in das Programm zu integrieren."],
         "blogLinks": [
           {
             "href": "/blog/overspeed-training-wie-es-wirkt-wer-profitiert",
@@ -215,7 +228,7 @@
       },
       {
         "question": "Welche Daten können Trainer auswerten?",
-        "answer": ["Trainer können Geschwindigkeit, Kraft, Leistung und den gesamten Sessionoutput erfassen und anschliessend Berichte nutzen, um Wiederholungen zu vergleichen und das weitere Training gezielt zu steuern."],
+        "answer": ["Trainer können <a href=\"/blog/motorisiertes-seilzugsystem-messwerte-zuverlaessigkeit-sprinttraining\">Geschwindigkeit, Kraft, Leistung und den gesamten Sessionoutput erfassen</a> und anschliessend Berichte nutzen, um Wiederholungen zu vergleichen und das weitere <a href=\"/blog/smarteres-speedprogramm-wie-trainingsgruppen-mit-t-apex-arbeiten\">Training gezielt zu steuern</a>."],
         "blogLinks": [
           {
             "href": "/blog/motorisiertes-seilzugsystem-messwerte-zuverlaessigkeit-sprinttraining",
@@ -225,21 +238,21 @@
       },
       {
         "question": "Kann T-APEX auf Rasen oder Kunstrasen eingesetzt werden?",
-        "answer": ["Ja. T-APEX ist für feldbasierte Trainingsumgebungen konzipiert, darunter Fußballfelder, Kunstrasenplätze und Leistungszentren."]
+        "answer": ["Ja. T-APEX ist für feldbasierte Trainingsumgebungen konzipiert, darunter <a href=\"/blog/seilzugtraining-fussball-beschleunigung-lateral-richtungswechsel\">Fußballfelder und Kunstrasenplätze</a> und Leistungszentren."]
       },
       {
         "question": "Ist T-APEX nur für geradliniges Sprinten geeignet?",
-        "answer": ["Nein. Trainer können T-APEX für widerstandsbasierte Starts, Richtungswechseldrills, Lateralbewegungen, assistiertes Sprinten und Wiederholungssprints einsetzen."],
+        "answer": ["Nein. Trainer können T-APEX für widerstandsbasierte Starts, <a href=\"/blog/seilzugtraining-fussball-beschleunigung-lateral-richtungswechsel\">Richtungswechseldrills und Lateralbewegungen</a>, <a href=\"/blog/seilzugtraining-sprinttraining-widerstand-oder-unterstuetzung\">assistiertes Sprinten</a> und Wiederholungssprints einsetzen."],
         "blogLinks": [
           {
-            "href": "/blog/seilzugtraining-fußball-beschleunigung-lateral-richtungswechsel",
+            "href": "/blog/seilzugtraining-fussball-beschleunigung-lateral-richtungswechsel",
             "label": "Seilzugtraining im Fußball: Beschleunigung, Lateralitaet und Richtungswechsel"
           }
         ]
       },
       {
         "question": "Worin unterscheidet sich T-APEX von Schlitten oder Widerstandsbaendern?",
-        "answer": ["T-APEX bietet kontrollierten digitalen Widerstand anstelle von festem Gewicht oder elastischer Spannung. Das ermöglicht Trainern eine konsistentere und messbarere Belastungssteuerung ueber die gesamte Sprintdistanz."],
+        "answer": ["T-APEX bietet kontrollierten digitalen Widerstand anstelle von <a href=\"/blog/motorisiertes-widerstandstraining-vs-schlitten-studie\">festem Gewicht oder elastischer Spannung</a>. Das ermöglicht Trainern eine konsistentere und messbarere Belastungssteuerung über die gesamte Sprintdistanz."],
         "blogLinks": [
           {
             "href": "/blog/motorisiertes-widerstandstraining-vs-schlitten-studie",
@@ -249,7 +262,7 @@
       },
       {
         "question": "Was bietet das Overspeed Training Kit?",
-        "answer": ["Das Kit ermöglicht gezielte Vorwaertsunterstützung für assistiertes Sprinten, Schrittrhythmus-Arbeit und Training bei hohen Geschwindigkeiten – strukturiert in das bestehende Programm integrierbar."],
+        "answer": ["Das Kit ermöglicht gezielte Vorwärtsunterstützung für <a href=\"/blog/seilzugtraining-sprinttraining-widerstand-oder-unterstuetzung\">assistiertes Sprinten</a>, <a href=\"/blog/overspeed-training-wie-es-wirkt-wer-profitiert\">Schrittrhythmus-Arbeit</a> und Training bei hohen Geschwindigkeiten – strukturiert in das bestehende Programm integrierbar."],
         "blogLinks": [
           {
             "href": "/blog/overspeed-training-wie-es-wirkt-wer-profitiert",
@@ -272,7 +285,7 @@
       "imageAspectRatio": "1060 / 1484"
     },
     {
-      "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/t-apex-fußball-coaching-junior_webp.jpg?v=1792333470",
+      "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/t-apex-fussball-coaching-junior_webp.jpg?v=1792333470",
       "imageAlt": "Trainer im positionsspezifischen Fußballtraining mit T-Apex",
       "kicker": "Fußball",
       "title": "T-Apex für den Fußballplatz",
@@ -287,7 +300,7 @@
     "items": [
       {
         "title": "90 kg Höchstwiderstand",
-        "description": "Digitaler Zugwiderstand bis 90 kg – stufenlos einstellbar für explosive Starts, maximale Beschleunigung und phasenspezifische Belastung ohne Reibungsverlust.",
+        "description": "Digitaler Zugwiderstand bis 90 kg – stufenlos einstellbar für <a href=\"/blog/von-beschleunigung-bis-overspeed-t-apex-sprinttraining\">explosive Starts, maximale Beschleunigung</a> und <a href=\"/blog/das-60-meter-plateau-im-sprinttraining\">phasenspezifische Belastung</a> ohne Reibungsverlust.",
         "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/t-apex-produkt-90kg-spitzenwiderstand.jpg?v=1792337202",
         "alt": "Sprinter im Antritt mit T-Apex – 90 kg Spitzenwiderstand"
       },
@@ -299,7 +312,7 @@
       },
       {
         "title": "Bis zu zwei Wochen Akkulaufzeit",
-        "description": "Der Hochleistungsakku läuft bis zu zwei Wochen ohne Nachladen – für intensive Trainingsblöcke ohne Unterbrechung und ohne Abhängigkeit von Steckdosen.",
+        "description": "Der Hochleistungsakku läuft bis zu zwei Wochen ohne Nachladen – für <a href=\"/blog/saisonvorbereitung-speed-vom-sommer-in-die-saison\">intensive Trainingsblöcke</a> ohne Unterbrechung und ohne Abhängigkeit von Steckdosen.",
         "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/t-apex-produkt-zwei-wochen-akku-kapazitaet.jpg?v=1792337202",
         "alt": "T-Apex Akkulaufzeit zwei Wochen – Athlet im Training"
       }
@@ -341,7 +354,7 @@
         "label": "Netzteil"
       },
       {
-        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/t-apex-produkt-lieferumfang-ladegerät-tablet.jpg?v=1792421737",
+        "image": "https://cdn.shopify.com/s/files/1/0347/9214/5029/files/t-apex-produkt-lieferumfang-ladegeraet-tablet.jpg?v=1792421737",
         "alt": "USB-C Ladegerät",
         "label": "USB-C Ladegerät"
       },

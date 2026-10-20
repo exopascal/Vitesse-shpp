@@ -19,11 +19,11 @@ T-Apex ermöglicht es, alle drei Kernphasen des Sprinttrainings – Beschleunigu
 
 Beschleunigung, Maximalgeschwindigkeit und Overspeed sind nicht einfach unterschiedliche Geschwindigkeiten. Sie erfordern unterschiedliche biomechanische Muster, unterschiedliche neuromuskuläre Anforderungen – und damit unterschiedliche Trainingsreize.
 
-**Beschleunigung** verlangt hohe propulsive Kraft bei flachem Körperwinkel und langen Bodenkontaktzeiten. Widerstand ist hier das Mittel der Wahl: Er zwingt den Athleten, gegen einen definierten Zug zu arbeiten, und erzeugt mechanische Anforderungen, die ohne Gerät nicht replizierbar sind.
+**Beschleunigung** verlangt hohe propulsive Kraft bei flachem Körperwinkel und langen Bodenkontaktzeiten. [Widerstand](/blog/seilzugtraining-sprinttraining-widerstand-oder-unterstuetzung) ist hier das Mittel der Wahl: Er zwingt den Athleten, gegen einen definierten Zug zu arbeiten, und erzeugt mechanische Anforderungen, die ohne Gerät nicht replizierbar sind.
 
 **Maximalgeschwindigkeit** erfordert vertikale Kraftproduktion, kurze Kontaktzeiten und hohe Frequenz. Hier ist unkontrollierter Widerstand kontraproduktiv. Das Ziel ist freies Sprinten mit sauberer Mechanik.
 
-**Overspeed** arbeitet mit supramaximaler Geschwindigkeit – schneller als der Athlet alleine laufen kann. Forschungsdaten zeigen, dass Overspeed-Arbeit die Kontaktzeiten verkürzt und neuromuskuläre Muster trainiert, die auf andere Weise nicht erreichbar sind.
+**Overspeed** arbeitet mit supramaximaler Geschwindigkeit – schneller als der Athlet alleine laufen kann. Forschungsdaten zeigen, dass [Overspeed-Arbeit die Kontaktzeiten verkürzt](/blog/overspeed-training-wie-es-wirkt-wer-profitiert) und neuromuskuläre Muster trainiert, die auf andere Weise nicht erreichbar sind.
 
 ## Widerstandsarbeit: Nicht einfach bremsen
 

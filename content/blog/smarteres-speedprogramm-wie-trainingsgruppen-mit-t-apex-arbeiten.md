@@ -19,7 +19,7 @@ Ein Sprint ist ein Sprint – aber was genau passiert dabei? Wie viel Kraft entw
 
 Ohne Messtechnik sind das Schätzungen. Mit dem T-Apex sind es Datenpunkte: Geschwindigkeit, Distanz, Zeit, Kraft und Leistung in Echtzeit, gespeichert auf dem Tablet für jeden Sprint jeder Einheit.
 
-Der Unterschied zeigt sich nicht in der ersten Einheit, sondern im Trendbericht nach vier Wochen: wer hat sich verbessert, wie, und auf welchen Parametern?
+Der Unterschied zeigt sich nicht in der ersten Einheit, sondern im [Trendbericht](/blog/motorisiertes-seilzugsystem-messwerte-zuverlaessigkeit-sprinttraining) nach vier Wochen: wer hat sich verbessert, wie, und auf welchen Parametern?
 
 ## Was ein strukturiertes Programm trainiert
 
@@ -29,7 +29,7 @@ Leistungsorientiertes Speedtraining lässt sich in drei Bereiche gliedern, die g
 
 **Acceleration Under Load** – Beschleunigung unter definierten Bedingungen, nicht im freien Sprint. Widerstand erzwingt höheren Kniehub und stärkere Hüftstreckung – neuromuskuläre Anpassungen, die sich im freien Sprint zeigen.
 
-**Movement Control** – Kontrolle unter Belastung: Bremsphasen, Richtungswechsel, Neubeschleunigung. Wer nicht kontrolliert abbremsen kann, verliert bei jedem Richtungswechsel Zeit und erhöht das Verletzungsrisiko. Das T-Apex macht Bremskraftqualität messbar.
+**Movement Control** – Kontrolle unter Belastung: [Bremsphasen, Richtungswechsel, Neubeschleunigung](/blog/seilzugtraining-fussball-beschleunigung-lateral-richtungswechsel). Wer nicht kontrolliert abbremsen kann, verliert bei jedem Richtungswechsel Zeit und erhöht das Verletzungsrisiko. Das T-Apex macht Bremskraftqualität messbar.
 
 > Train the movement, not just the effort.
 

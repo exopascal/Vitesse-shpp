@@ -43,7 +43,7 @@ Die Studie identifiziert zwei strukturelle Nachteile des klassischen Schlittens:
 
 **Ungleichmäßige Widerstandskurve.** Ein traditioneller Schlitten erzeugt zu Beginn einen hohen statischen Reibungswiderstand. Sobald er in Bewegung ist, sinkt der Widerstand durch kinetische Trägheit ab. Der Athlet kämpft gegen ein physikalisch inkonsistentes Gerät – das macht gezielte Belastungssteuerung schwierig.
 
-**Beschränkte Bewegungsebenen.** Klassische Schlitten sind auf lineare Vorwärtsbewegung ausgelegt. Laterale Bewegungen, Richtungswechsel und multiplanare Drills lassen sich damit kaum strukturiert trainieren. Das ist ein Nachteil für Teamsportler, deren Wettkampfanforderungen weit über den Linearsprint hinausgehen.
+**Beschränkte Bewegungsebenen.** Klassische Schlitten sind auf lineare Vorwärtsbewegung ausgelegt. [Laterale Bewegungen, Richtungswechsel und multiplanare Drills](/blog/seilzugtraining-fussball-beschleunigung-lateral-richtungswechsel) lassen sich damit kaum strukturiert trainieren. Das ist ein Nachteil für Teamsportler, deren Wettkampfanforderungen weit über den Linearsprint hinausgehen.
 
 Motorisierte Systeme liefern dagegen eine konstante Belastung unabhängig von Reibungsverlusten und ermöglichen kontrollierten Widerstand in mehreren Bewegungsebenen – was laut Studie den Leistungsunterschied erklärt.
 

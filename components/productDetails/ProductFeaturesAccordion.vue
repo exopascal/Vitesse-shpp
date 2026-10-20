@@ -36,7 +36,7 @@ const activeFeature = ref(0)
             >
               <span class="pfa__item-title">{{ f.title }}</span>
               <Transition name="pfa-desc">
-                <p v-if="activeFeature === i" class="pfa__item-desc">{{ f.description }}</p>
+                <p v-if="activeFeature === i" class="pfa__item-desc" v-html="f.description" />
               </Transition>
             </button>
           </div>
@@ -153,6 +153,17 @@ const activeFeature = ref(0)
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.7);
   max-width: 360px;
+}
+
+.pfa__item-desc :deep(a) {
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  transition: border-color 0.15s ease;
+}
+
+.pfa__item-desc :deep(a:hover) {
+  border-bottom-color: #fff;
 }
 
 .pfa-desc-enter-active {

@@ -3,6 +3,14 @@
     <div class="pcb__inner">
       <h2 class="pcb__title">{{ content.title }}</h2>
       <p class="pcb__subtitle">{{ content.subtitle }}</p>
+      <div v-if="content.links?.length" class="pcb__links">
+        <NuxtLink
+          v-for="link in content.links"
+          :key="link.href"
+          :to="link.href"
+          class="pcb__link"
+        >{{ link.label }} ›</NuxtLink>
+      </div>
 
       <div class="pcb__grid">
         <div v-for="item in content.items" :key="item.label" class="pcb__item">
@@ -51,6 +59,28 @@ defineProps<{
   font-size: 1rem;
   line-height: 1.7;
   color: #5f584f;
+}
+
+.pcb__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 2rem;
+  margin-top: -2rem;
+  margin-bottom: 3.5rem;
+}
+
+.pcb__link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #f26a21;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+
+.pcb__link:hover {
+  border-bottom-color: #f26a21;
 }
 
 .pcb__grid {

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { ProductBlogTeaserContent } from '~/utils/productDetailContent'
 
 const props = defineProps<{
@@ -11,21 +12,28 @@ type BlogPost = {
   description?: string
   category?: string
   date?: string
+  heroImage?: string
+  heroImageAlt?: string
 }
 
 const { data: posts } = await useAsyncData('product-blog-teaser', () =>
   queryCollection('blog').order('date', 'DESC').all() as unknown as Promise<BlogPost[]>,
 )
 
+const postChunks = computed(() => {
+  if (!posts.value) return []
+  const chunks: BlogPost[][] = []
+  for (let i = 0; i < posts.value.length; i += 3) {
+    chunks.push(posts.value.slice(i, i + 3))
+  }
+  return chunks
+})
+
 const formattedDate = (value?: string) => {
   if (!value) return ''
   const parsed = new Date(value)
   if (Number.isNaN(parsed.getTime())) return value
-  return new Intl.DateTimeFormat('de-DE', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-  }).format(parsed)
+  return new Intl.DateTimeFormat('de-DE', { day: '2-digit', month: 'long', year: 'numeric' }).format(parsed)
 }
 </script>
 
@@ -40,16 +48,34 @@ const formattedDate = (value?: string) => {
         </p>
       </header>
 
-      <ul class="blog-teaser__grid">
-        <li v-for="post in posts" :key="post.path" class="blog-teaser__item">
-          <NuxtLink :to="post.path" class="blog-teaser__card">
-            <p v-if="post.category" class="blog-teaser__category">{{ post.category }}</p>
-            <h3 class="blog-teaser__card-title">{{ post.title }}</h3>
-            <p v-if="post.description" class="blog-teaser__excerpt">{{ post.description }}</p>
-            <time v-if="post.date" class="blog-teaser__date">{{ formattedDate(post.date) }}</time>
-          </NuxtLink>
-        </li>
-      </ul>
+      <div
+        v-for="(chunk, ci) in postChunks"
+        :key="ci"
+        class="blog-teaser__row"
+      >
+        <ul class="blog-teaser__grid">
+          <li v-for="post in chunk" :key="post.path" class="blog-teaser__item">
+            <NuxtLink :to="post.path" class="blog-teaser__card">
+              <div class="blog-teaser__card-image-wrap">
+                <img
+                  v-if="post.heroImage"
+                  :src="post.heroImage"
+                  :alt="post.heroImageAlt || post.title || ''"
+                  class="blog-teaser__card-image"
+                  loading="lazy"
+                />
+                <div v-else class="blog-teaser__card-image-placeholder" />
+              </div>
+              <div class="blog-teaser__card-body">
+                <p v-if="post.category" class="blog-teaser__category">{{ post.category }}</p>
+                <h3 class="blog-teaser__card-title">{{ post.title }}</h3>
+                <p v-if="post.description" class="blog-teaser__excerpt">{{ post.description }}</p>
+                <time v-if="post.date" class="blog-teaser__date">{{ formattedDate(post.date) }}</time>
+              </div>
+            </NuxtLink>
+          </li>
+        </ul>
+      </div>
 
       <div class="blog-teaser__cta">
         <NuxtLink to="/blog" class="blog-teaser__cta-link">Alle Beiträge lesen</NuxtLink>
@@ -60,9 +86,9 @@ const formattedDate = (value?: string) => {
 
 <style scoped>
 .blog-teaser {
-  background: var(--color-gray-50);
-  padding: var(--spacing-3xl) var(--spacing-lg);
-  border-top: 1px solid var(--color-gray-200);
+  background: #f7f5f2;
+  padding: 5rem 1.5rem 4rem;
+  border-top: 1px solid #e8e3dc;
 }
 
 .blog-teaser__inner {
@@ -71,40 +97,52 @@ const formattedDate = (value?: string) => {
 }
 
 .blog-teaser__header {
-  margin-bottom: var(--spacing-2xl);
+  margin-bottom: 3rem;
   max-width: 640px;
 }
 
 .blog-teaser__kicker {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
+  font-size: 0.72rem;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-primary);
-  margin-bottom: var(--spacing-sm);
+  color: #ef4544;
+  margin: 0 0 0.75rem;
 }
 
 .blog-teaser__title {
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-tight);
-  color: var(--color-gray-900);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #121212;
+  margin: 0 0 1rem;
 }
 
 .blog-teaser__lead {
-  margin-top: var(--spacing-md);
-  font-size: var(--font-size-lg);
-  color: var(--color-gray-600);
-  line-height: var(--line-height-normal);
+  font-size: 1rem;
+  color: #5f584f;
+  line-height: 1.7;
+  margin: 0;
 }
 
+/* Row sections */
+.blog-teaser__row {
+  padding: 2.5rem 0;
+  border-top: 1px solid #e8e3dc;
+}
+
+.blog-teaser__row:last-of-type {
+  border-bottom: 1px solid #e8e3dc;
+}
+
+/* 3-column grid */
 .blog-teaser__grid {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-lg);
+  gap: 1.5rem;
 }
 
 @media (min-width: 640px) {
@@ -119,82 +157,125 @@ const formattedDate = (value?: string) => {
   }
 }
 
+/* Card */
 .blog-teaser__card {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-lg);
-  background: var(--color-white);
-  border: 1px solid var(--color-gray-200);
-  border-radius: var(--border-radius-xl);
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
   text-decoration: none;
   color: inherit;
   height: 100%;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #e8e3dc;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .blog-teaser__card:hover {
-  border-color: var(--color-primary);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.09);
+  transform: translateY(-2px);
+}
+
+/* Hero image */
+.blog-teaser__card-image-wrap {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #e8e3dc;
+  flex-shrink: 0;
+}
+
+.blog-teaser__card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.blog-teaser__card:hover .blog-teaser__card-image {
+  transform: scale(1.04);
+}
+
+.blog-teaser__card-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #e8e3dc 0%, #d4cfc8 100%);
+}
+
+/* Card body */
+.blog-teaser__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem 1.25rem 1.5rem;
+  flex: 1;
 }
 
 .blog-teaser__category {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
+  font-size: 0.7rem;
+  font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-primary);
+  color: #ef4544;
+  margin: 0;
 }
 
 .blog-teaser__card-title {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-tight);
-  color: var(--color-gray-900);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #121212;
+  margin: 0;
   overflow-wrap: break-word;
   word-break: break-word;
 }
 
 .blog-teaser__card:hover .blog-teaser__card-title {
-  color: var(--color-primary);
+  color: #ef4544;
 }
 
 .blog-teaser__excerpt {
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-normal);
-  color: var(--color-gray-600);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #5f584f;
   flex: 1;
+  margin: 0;
   overflow-wrap: break-word;
   word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .blog-teaser__date {
-  font-size: var(--font-size-xs);
-  color: var(--color-gray-500);
-  margin-top: auto;
+  font-size: 0.75rem;
+  color: #9b9189;
+  margin-top: 0.5rem;
 }
 
+/* CTA */
 .blog-teaser__cta {
-  margin-top: var(--spacing-2xl);
+  margin-top: 2.5rem;
   text-align: center;
 }
 
 .blog-teaser__cta-link {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-xs);
-  padding: var(--spacing-md) var(--spacing-xl);
-  border: 1px solid var(--color-gray-300);
-  border-radius: var(--border-radius-md);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-gray-800);
+  gap: 0.4rem;
+  padding: 0.85rem 2rem;
+  border: 1.5px solid #1d1d1d;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1d1d1d;
   text-decoration: none;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 .blog-teaser__cta-link:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
+  background: #1d1d1d;
+  color: #fff;
 }
 </style>

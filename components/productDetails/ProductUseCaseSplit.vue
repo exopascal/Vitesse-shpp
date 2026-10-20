@@ -13,7 +13,7 @@
       <div class="ucs__body">
         <p class="ucs__kicker">{{ kicker }}</p>
         <h2 class="ucs__title">{{ title }}</h2>
-        <p class="ucs__text">{{ text }}</p>
+        <p class="ucs__text" v-html="text" />
         <NuxtLink :to="link" class="ucs__cta">
           {{ linkLabel }}
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -107,6 +107,17 @@ const aspectRatio = computed(() => props.imageAspectRatio ?? '4 / 3')
   line-height: 1.75;
   color: #5f584f;
   max-width: 480px;
+}
+
+.ucs__text :deep(a) {
+  color: #f26a21;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(242, 106, 33, 0.3);
+  transition: border-color 0.15s ease;
+}
+
+.ucs__text :deep(a:hover) {
+  border-bottom-color: #f26a21;
 }
 
 .ucs__cta {

@@ -23,7 +23,7 @@ Wer diese Phase nicht separat trainiert, trainiert sie gar nicht.
 
 ## Phasenbasiertes Training mit dem T-Apex
 
-Das T-Apex ermöglicht, einzelne Sprintphasen gezielt zu isolieren und mit definiertem Widerstand oder Unterstützung zu trainieren.
+Das T-Apex ermöglicht, [einzelne Sprintphasen gezielt zu isolieren](/blog/von-beschleunigung-bis-overspeed-t-apex-sprinttraining) und mit definiertem Widerstand oder Unterstützung zu trainieren.
 
 **Phase 1: Beschleunigung (0–30 m)**
 Zugwiderstand von 3–8 kgf, je nach Körpergewicht und Trainingsstand. Hohe Belastung auf Hüftstreckermuskulatur und Kniehub. Das T-Apex misst Kraftentfaltung pro Schritt und zeigt, wo die Beschleunigungskurve abflacht.
@@ -32,7 +32,7 @@ Zugwiderstand von 3–8 kgf, je nach Körpergewicht und Trainingsstand. Hohe Bel
 Reduzierter Widerstand oder neutraler Lauf. Ziel ist das Halten der erarbeiteten Geschwindigkeit und das Einschleifen der Maximalgeschwindigkeitsmechanik.
 
 **Phase 3: Maintainance (60–100 m)**
-Overspeed-Training mit T-Apex-Unterstützung: das System zieht den Athleten mit bis zu 14 m/s, was eine höhere Schrittfrequenz erzwingt, als unter eigener Kraft möglich ist. Neuromuskuläre Gewöhnung an schnellere Frequenz unter Ermüdung.
+[Overspeed-Training](/blog/overspeed-training-wie-es-wirkt-wer-profitiert) mit T-Apex-Unterstützung: das System zieht den Athleten mit bis zu 14 m/s, was eine höhere Schrittfrequenz erzwingt, als unter eigener Kraft möglich ist. Neuromuskuläre Gewöhnung an schnellere Frequenz unter Ermüdung.
 
 Dieses Phasenprinzip kann innerhalb einer Session kombiniert werden – mit messbarer Datenbasis für jede Phase.
 
@@ -56,7 +56,7 @@ Pausenzeiten lang genug für vollständige Erholung (1:8 bis 1:12 Verhältnis), 
 
 ## Für welche Sportarten relevant
 
-Das 60-Meter-Plateau ist kein reines Leichtathletik-Problem. Es betrifft alle Sportarten, in denen Wiederholungssprints über mittlere Distanzen anfallen: Fußball, Rugby, American Football, Handball. Überall dort, wo nach einer Anfangsbeschleunigung Geschwindigkeit gehalten werden muss.
+Das 60-Meter-Plateau ist kein reines Leichtathletik-Problem. Es betrifft alle Sportarten, in denen Wiederholungssprints über mittlere Distanzen anfallen: [Fußball](/blog/seilzugtraining-fussball-beschleunigung-lateral-richtungswechsel), Rugby, American Football, Handball. Überall dort, wo nach einer Anfangsbeschleunigung Geschwindigkeit gehalten werden muss.
 
 Das T-Apex ist für den Feldeinsatz konzipiert – 20 kg, schneller Aufbau, Bluetooth-Steuerung bis 30 m. Kein festes Gerät, keine feste Infrastruktur notwendig.
 

@@ -181,7 +181,7 @@ onBeforeUnmount(() => {
           <div class="product-highlights-card-copy">
             <p class="product-highlights-card-text">{{ card.body }}</p>
             <NuxtLink v-if="card.blogLink" :to="card.blogLink" class="product-highlights-card-link">
-              Mehr dazu im Blog →
+              {{ card.blogLinkLabel || 'Mehr dazu im Blog' }} →
             </NuxtLink>
           </div>
           <div class="product-highlights-card-media">

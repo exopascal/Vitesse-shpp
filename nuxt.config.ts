@@ -75,6 +75,12 @@ export default defineNuxtConfig({
       },
 
       // Blog (Nuxt Content)
+      '/blog': {
+        ssr: true,
+        headers: {
+          'cache-control': 's-maxage=300, stale-while-revalidate=600',
+        }
+      },
       '/blog/**': {
         ssr: true,
         headers: {

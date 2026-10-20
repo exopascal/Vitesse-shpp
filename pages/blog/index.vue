@@ -22,6 +22,9 @@ const tApex = ref<any>(null)
 
 onMounted(async () => {
   tApex.value = await (shopifyStore as any).fetchProductByHandle('t-apex')
+  if (!posts.value?.length) {
+    await refreshPosts()
+  }
 })
 
 function formatProductPrice(price: number) {
@@ -35,7 +38,7 @@ async function buyTApex() {
   openCart()
 }
 
-const { data: posts } = await useAsyncData('blog-index-posts', () =>
+const { data: posts, refresh: refreshPosts } = await useAsyncData('blog-index-posts', () =>
   queryCollection('blog')
     .order('date', 'DESC')
     .all() as unknown as Promise<BlogPost[]>,

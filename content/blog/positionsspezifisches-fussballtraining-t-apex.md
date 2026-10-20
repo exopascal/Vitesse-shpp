@@ -25,7 +25,7 @@ Für Wiederholungssprints lassen sich Serien mit progressivem Widerstand oder ku
 
 Mittelfeldspieler decken im Spiel die größten Distanzen ab. Relevant ist dabei nicht die Topgeschwindigkeit, sondern die Fähigkeit, aus einem Richtungswechsel heraus sofort wieder zu beschleunigen.
 
-Das T-Apex unterstützt dieses Muster durch kontrollierten lateralen Widerstand und Neubeschleunigungsdrills mit messbarer Kraftentfaltung. Trainer können in Echtzeit beobachten, wie viel Kraft beim ersten Schritt nach dem Cut aufgebaut wird – und ob das Muster links-rechts symmetrisch ist.
+Das T-Apex unterstützt dieses Muster durch [kontrollierten lateralen Widerstand und Neubeschleunigungsdrills](/blog/seilzugtraining-fussball-beschleunigung-lateral-richtungswechsel) mit messbarer Kraftentfaltung. Trainer können in Echtzeit beobachten, wie viel Kraft beim ersten Schritt nach dem Cut aufgebaut wird – und ob das Muster links-rechts symmetrisch ist.
 
 Präzise Daten helfen, ineffiziente Bewegungsgewohnheiten frühzeitig zu erkennen, bevor sie sich festigen.
 

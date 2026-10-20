@@ -46,7 +46,7 @@ Für die Praxis heißt das: Widerstandssprints als Potenzierungsstimulus funktio
 
 ## Seilzugtraining mit Unterstützung: Auf Pause und Trainingsstand kommt es an
 
-Bei unterstütztem Sprinten zeigte sich ein anderes Bild. Die Gesamtzeit über 20 m verbesserte sich in keiner Gruppe. Allerdings verkürzte sich die 0–5-m-Splitzeit bei trainierten Kaderathleten signifikant, wenn sie nach dem Overspeed-Sprint 1 oder 2 Minuten gewartet hatten:
+Bei unterstütztem Sprinten zeigte sich ein anderes Bild. Die Gesamtzeit über 20 m verbesserte sich in keiner Gruppe. Allerdings verkürzte sich die 0–5-m-Splitzeit bei trainierten Kaderathleten signifikant, wenn sie nach dem [Overspeed-Sprint](/blog/overspeed-training-wie-es-wirkt-wer-profitiert) 1 oder 2 Minuten gewartet hatten:
 
 - Baseline: 1,21 ± 0,04 s
 - Nach 1 Min. Pause: 1,15 ± 0,06 s
