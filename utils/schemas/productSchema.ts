@@ -11,8 +11,10 @@ export interface ProductSchemaData {
   image: string | string[]
   sku?: string
   brand?: string
+  seller?: string
   price: number
   priceCurrency?: string
+  priceValidUntil?: string
   availability?: 'InStock' | 'OutOfStock' | 'PreOrder' | 'Discontinued'
   condition?: 'NewCondition' | 'UsedCondition' | 'RefurbishedCondition'
   url?: string
@@ -57,12 +59,18 @@ export function createProductSchema(product: ProductSchemaData) {
   }
 
   // Offer
+  const nextYearEnd = new Date(new Date().getFullYear() + 1, 11, 31).toISOString().split('T')[0]
   schema.offers = {
     '@type': 'Offer',
     price: product.price.toFixed(2),
     priceCurrency: product.priceCurrency || 'EUR',
+    priceValidUntil: product.priceValidUntil || nextYearEnd,
     availability: `https://schema.org/${product.availability || 'InStock'}`,
     itemCondition: `https://schema.org/${product.condition || 'NewCondition'}`,
+    seller: {
+      '@type': 'Organization',
+      name: product.seller || 'Vitesse Sports',
+    },
   }
 
   if (product.url) {

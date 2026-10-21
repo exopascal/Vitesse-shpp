@@ -17,25 +17,31 @@ useSeoMeta({
 
 useHead({
   link: [{ rel: 'canonical', href: canonical }],
-  script: [{
-    type: 'application/ld+json',
-    innerHTML: JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'WebPage',
-      name: 'T-Apex Fußballtraining',
-      description: 'Seilzugtraining für Fußball – Antritt, Lateralität, Richtungswechsel und positionsspezifische Schnelligkeit mit T-Apex.',
-      url: canonical,
-      isPartOf: { '@type': 'WebSite', url: siteUrl },
-      breadcrumb: {
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: 'T-Apex Fußballtraining',
+        description: 'Seilzugtraining für Fußball – Antritt, Lateralität, Richtungswechsel und positionsspezifische Schnelligkeit mit T-Apex.',
+        url: canonical,
+        isPartOf: { '@type': 'WebSite', url: siteUrl },
+      }),
+    },
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
           { '@type': 'ListItem', position: 2, name: 'T-Apex', item: `${siteUrl}/products/t-apex` },
           { '@type': 'ListItem', position: 3, name: 'Fußballtraining', item: canonical },
         ],
-      },
-    }),
-  }],
+      }),
+    },
+  ],
 })
 
 const drills = [

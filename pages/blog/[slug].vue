@@ -53,19 +53,26 @@ const tocLinks = computed(() => {
   return links
 })
 
-const jsonLd = {
+const PUBLISHER_LOGO = `${siteUrl}/Vitesse-Wortmarke-Bildmarke.png`
+
+const jsonLd = computed(() => ({
   '@context': 'https://schema.org',
   '@type': 'BlogPosting',
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
-  headline: post.value.title,
-  description: post.value.description,
-  datePublished: post.value.date,
-  dateModified: post.value.date,
+  headline: post.value?.title,
+  description: post.value?.description,
+  ...(heroImage.value ? { image: { '@type': 'ImageObject', url: heroImage.value } } : {}),
+  datePublished: publishedDateISO.value,
+  dateModified: publishedDateISO.value,
   author: { '@type': 'Organization', name: PUBLISHER_NAME },
-  publisher: { '@type': 'Organization', name: PUBLISHER_NAME },
-  articleSection: post.value.category,
+  publisher: {
+    '@type': 'Organization',
+    name: PUBLISHER_NAME,
+    logo: { '@type': 'ImageObject', url: PUBLISHER_LOGO },
+  },
+  articleSection: post.value?.category,
   inLanguage: 'de-DE',
-}
+}))
 
 const shopifyStore = useShopifyStore()
 const shopifyCardStore = useShopifyCardStore()
@@ -102,7 +109,7 @@ useHead({
     {
       key: 'ldjson-blog',
       type: 'application/ld+json',
-      innerHTML: JSON.stringify(jsonLd),
+      innerHTML: () => JSON.stringify(jsonLd.value),
     },
   ],
 })

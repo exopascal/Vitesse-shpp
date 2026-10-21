@@ -105,7 +105,7 @@
 </template>
   
   <script setup lang="ts">
-import { ref, computed, onMounted, watch } from "vue";
+import { ref, computed, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useShopifyStore } from "../../store/shopifyStore";
 import { useShopifyCardStore } from "../../store/shopifyCardStore";
@@ -135,16 +135,20 @@ const route = useRoute();
 const shopifyStore = useShopifyStore();
 const shopifyCardStore = useShopifyCardStore();
 const { openCart } = useCartSidebar();
+const siteUrl = (useRuntimeConfig().public.siteUrl as string) || 'https://www.vitesse-sports.de'
 
-// Produkt-Daten und Status
-const product = ref<any>(null);
-const loadingError = ref(false);
-const isLoading = ref(true);
 const quantity = ref(1);
 const selectedOptions = ref<Record<string, string>>({});
 
 // Produkt-Handle aus der Route
 const handle = computed(() => route.params.id as string);
+
+// SSR-kompatibler Produkt-Fetch – liefert Daten auch beim ersten Googlebot-Crawl
+const { data: product, status: productStatus } = await useAsyncData(
+  () => `product-${handle.value}`,
+  () => shopifyStore.fetchProductByHandle(handle.value),
+)
+const isLoading = computed(() => productStatus.value === 'pending')
 
 // Ausgewählte Variante basierend auf den gewählten Optionen
 const selectedVariant = computed(() => {
@@ -175,36 +179,18 @@ const isAvailable = computed(() => {
 
 // Removed: base64ProductId - now using handle directly
 
-// Produkt laden
-async function loadProduct() {
-  isLoading.value = true;
-
-  try {
-    // Produkt aus API laden (verwende Handle statt ID)
-    product.value = await (shopifyStore as any).fetchProductByHandle(handle.value);
-    console.log("Product-Details:", product);
-    console.log("Selected Options:", product.value.options);
-    // Standardoptionen auswählen (erste verfügbare Option für jede Option)
-    if (product.value && product.value.options) {
-      product.value.options.forEach((option: any) => {
-        // Erste verfügbare Option auswählen
-        for (const value of option.values) {
-          if (isOptionValueAvailable(option.name, value)) {
-            selectedOptions.value[option.name] = value;
-            break;
-          }
-        }
-      });
-    } else {
-      console.log("Keine Optionen für das Produkt gefunden.");
-      console.log("Produkt-Details:", product.value);
+// Standardoptionen initialisieren sobald Produktdaten vorliegen
+watch(product, (p) => {
+  if (!p?.options || Object.keys(selectedOptions.value).length > 0) return
+  p.options.forEach((option: any) => {
+    for (const value of option.values) {
+      if (isOptionValueAvailable(option.name, value)) {
+        selectedOptions.value[option.name] = value
+        break
+      }
     }
-  } catch (error) {
-    console.error("Error loading product:", error);
-  } finally {
-    isLoading.value = false;
-  }
-}
+  })
+}, { immediate: true })
 
 // Prüfen, ob eine Optionskombination verfügbar ist
 function isOptionValueAvailable(optionName: string, optionValue: string) {
@@ -296,13 +282,12 @@ function formatPrice(price: number) {
   }).format(price);
 }
 
-// SEO: Meta tags + Schema.org (reaktiv auf Produktdaten)
+// SEO: Meta tags + Schema.org (reaktiv auf Produktdaten, inkl. SSR durch useAsyncData)
 watch(product, (p) => {
   if (!p) return
 
   const price = p.price ?? 0
   const image = p.featured_image ?? ''
-  const siteUrl = useRuntimeConfig().public.siteUrl as string
   const url = `${siteUrl}/products/${handle.value}`
   const seoMeta = productDetailContent.value.seoMeta
   const pageTitle = seoMeta?.title || p.title
@@ -354,18 +339,11 @@ watch(product, (p) => {
   useHead({ script: scripts })
 }, { immediate: true })
 
-// Produkt bei Seitenaufruf laden
-onMounted(() => {
-  loadProduct();
-});
-
-// Bei Änderung der Route (z.B. Navigation zu einem anderen Produkt) neu laden
+// Zustand bei Routenwechsel zurücksetzen (useAsyncData lädt automatisch neu via computed key)
 watch(
   () => route.params.id,
   () => {
     if (route.params.id) {
-      loadProduct();
-      // Zurücksetzen des Zustands
       selectedOptions.value = {};
       quantity.value = 1;
     }
