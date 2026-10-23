@@ -49,7 +49,16 @@ const config = {
       required: false,
       description: 'Speichert deinen Warenkorb zwischen Seitenbesuchen (localStorage).',
     },
-    // Analytics- und Marketing-Services hier ergänzen, sobald aktiv.
+    {
+      name: 'shopify-analytics',
+      title: 'Shopify Analytics',
+      purposes: ['analytics'],
+      cookies: [/_shopify_s/, /_shopify_y/, /shopify_visit/, /shopify_uniq/],
+      required: false,
+      description: 'Ermöglicht Shopify, Besuche und Sessions zu messen (Besucherzählung, Conversion-Tracking).',
+      onAccept: `window.dispatchEvent(new CustomEvent('shopify-analytics:consent'))`,
+      onDecline: `window.dispatchEvent(new CustomEvent('shopify-analytics:revoke'))`,
+    },
     // Beispiel Google Analytics:
     // {
     //   name: 'google-analytics',
@@ -66,4 +75,6 @@ export default defineNuxtPlugin(async () => {
   const klaroModule = await import('klaro')
   const klaro = (klaroModule as any).default ?? klaroModule
   klaro.setup(config)
+  // Expose on window so other plugins can access the consent manager
+  ;(window as any).klaro = klaro
 })

@@ -78,11 +78,9 @@ const shopifyStore = useShopifyStore()
 const shopifyCardStore = useShopifyCardStore()
 const { openCart } = useCartSidebar()
 
-const tApex = ref<any>(null)
-
-onMounted(async () => {
-  tApex.value = await (shopifyStore as any).fetchProductByHandle('t-apex')
-})
+const { data: tApex } = await useAsyncData('blog-sidebar-t-apex', () =>
+  (shopifyStore as any).fetchProductByHandle('t-apex'),
+)
 
 function formatProductPrice(price: number) {
   if (!price) return ''
