@@ -2,7 +2,9 @@
   <section class="commercial-banner" aria-label="Aktuelle Angebote und Hinweise">
     <div class="commercial-banner__inner">
       <p class="commercial-banner__text">
-        <span>Verkauf nur an Geschäftskunden (B2B)</span><span class="commercial-banner__sep"> – </span><span>Kein Verkauf an Verbraucher</span>
+        <span class="commercial-banner__line1">Shop für Geschäftskunden. Alle Preise exkl. MwSt. – Vereine, Behörden, Institutionen</span>
+        <span class="commercial-banner__sep"> · </span>
+        <span class="commercial-banner__line2">Privatkunden setzen sich bitte direkt mit uns in Verbindung</span>
       </p>
     </div>
   </section>
@@ -68,8 +70,7 @@
     display: none;
   }
 
-  .commercial-banner__text span:first-child::after {
-    content: '';
+  .commercial-banner__line2 {
     display: block;
   }
 }

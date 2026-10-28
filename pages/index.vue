@@ -13,6 +13,27 @@
       size-variant="home"
     />
 
+    <section class="speed-summit-section" aria-label="Speed Summit 2026">
+      <div class="speed-summit-inner">
+        <img
+          src="https://cdn.shopify.com/s/files/1/0347/9214/5029/files/logo-speed-summit-2026.avif?v=1793197356"
+          alt="Speed Summit 2026"
+          class="speed-summit-logo"
+          loading="eager"
+          decoding="async"
+        />
+        <span class="speed-summit-text">T-Apex live erleben: Speed Summit. 14. – 15. November in Dortmund.</span>
+        <img
+          src="https://cdn.shopify.com/s/files/1/0347/9214/5029/files/logo-speed-summit-2026.avif?v=1793197356"
+          alt="Speed Summit 2026"
+          class="speed-summit-logo"
+          loading="eager"
+          decoding="async"
+          aria-hidden="true"
+        />
+      </div>
+    </section>
+
     <section class="brand-strip-section" aria-label="Unsere Marken">
       <div class="brand-strip-column">
         <component
@@ -226,6 +247,49 @@ onBeforeUnmount(() => {
   background:
     radial-gradient(circle at top left, rgba(34, 197, 94, 0.14), transparent 28rem),
     linear-gradient(180deg, #f7fbf8 0%, #ffffff 100%);
+}
+
+.speed-summit-section {
+  width: 100%;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.5rem;
+}
+
+.speed-summit-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.speed-summit-logo {
+  height: 4.5rem;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+}
+
+.speed-summit-text {
+  color: #fff;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .speed-summit-text {
+    white-space: normal;
+    font-size: 1rem;
+  }
+
+  .speed-summit-logo {
+    height: 3rem;
+  }
 }
 
 .brand-strip-section {
