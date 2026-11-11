@@ -1,6 +1,10 @@
 // Shopify Analytics for headless storefront.
-// Phase 1: Sets _shopify_y / _shopify_s as first-party cookies on this domain.
-// Phase 2: Sends page_viewed events to Shopify Monorail (same endpoint as hydrogen-react).
+// Tracking values (uniqueToken / visitToken) come from Shopify via our Storefront API
+// proxy (/api/shopify-proxy), which reads them from the Server-Timing header and keeps
+// Shopify's cookies first-party. The deprecated _shopify_y / _shopify_s cookies are no
+// longer generated client-side.
+// See: https://shopify.dev/docs/storefronts/headless/legacy/hydrogen/migrate/cookies-custom-setup
+// Page views are sent to Shopify Monorail (same endpoint as hydrogen-react).
 // Only runs when Klaro analytics consent is granted.
 
 const MONORAIL_ENDPOINT = '/.well-known/shopify/monorail/unstable/produce_batch'
@@ -8,13 +12,13 @@ const SCHEMA_TREKKIE = 'trekkie_storefront_page_view/1.4'
 const SCHEMA_CUSTOM = 'custom_storefront_customer_tracking/1.2'
 const HEADLESS_APP_ID = '12875497473'
 
-// --- Cookie helpers ---
-
-function getCookie(name: string): string {
-  const match = document.cookie.match(new RegExp(`(?:^|;\\s*)${name}=([^;]*)`))
-  return match ? decodeURIComponent(match[1]) : ''
+interface TrackingValues {
+  shopId: string | null
+  uniqueToken: string | null
+  visitToken: string | null
 }
 
+// Random IDs for per-event fields (event_id, microSessionId) — NOT for visitor/session tokens
 function generateToken(): string {
   if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID()
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
@@ -23,16 +27,14 @@ function generateToken(): string {
   })
 }
 
-function setFirstPartyCookie(name: string, value: string, days: number) {
-  const expires = new Date(Date.now() + days * 864e5).toUTCString()
-  const secure = location.protocol === 'https:' ? '; Secure' : ''
-  document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax${secure}`
-}
-
-function ensureTrackingCookies() {
-  if (!getCookie('_shopify_y')) setFirstPartyCookie('_shopify_y', generateToken(), 365)
-  // Refresh _shopify_s on every page to keep the 30-min rolling window alive
-  setFirstPartyCookie('_shopify_s', getCookie('_shopify_s') || generateToken(), 0.021)
+// Fetches Shopify's tracking values through the proxy. Each call also refreshes
+// Shopify's first-party cookies, which keeps the visit (session) window rolling.
+async function fetchTrackingValues(): Promise<TrackingValues | null> {
+  try {
+    return await $fetch<TrackingValues>('/api/shopify-proxy', { credentials: 'same-origin' })
+  } catch {
+    return null // Non-critical — analytics must not break the storefront
+  }
 }
 
 // --- Page type mapping ---
@@ -126,32 +128,22 @@ export default defineNuxtPlugin((nuxtApp) => {
   const shopDomain = config.public.shopify.domain as string
 
   let analyticsConsented = false
-  let shopNumericId = 0
-
-  async function initTracking() {
-    ensureTrackingCookies()
-    try {
-      const result = await $fetch<{ shopId: string | null }>('/api/shopify-proxy')
-      if (result?.shopId) {
-        // Extract numeric ID from "gid://shopify/Shop/12345"
-        const match = result.shopId.match(/\/(\d+)$/)
-        if (match) shopNumericId = parseInt(match[1])
-      }
-    } catch { /* non-critical */ }
-    console.debug('[shopify-analytics] Initialized, shopId:', shopNumericId)
-  }
 
   async function trackPageView() {
-    if (!shopNumericId || !shopDomain) return
-    const uniqueToken = getCookie('_shopify_y')
-    const visitToken = getCookie('_shopify_s')
-    if (!uniqueToken || !visitToken) return
+    if (!shopDomain) return
+    const values = await fetchTrackingValues()
+    // Extract numeric ID from "gid://shopify/Shop/12345"
+    const shopNumericId = Number(values?.shopId?.match(/\/(\d+)$/)?.[1] ?? 0)
+    if (!shopNumericId || !values?.uniqueToken || !values?.visitToken) {
+      console.debug('[shopify-analytics] No tracking values from Shopify, skipping page view')
+      return
+    }
 
     const events = buildPageViewEvents({
       shopNumericId,
       shopDomain,
-      uniqueToken,
-      visitToken,
+      uniqueToken: values.uniqueToken,
+      visitToken: values.visitToken,
       pageType: getPageType(location.pathname),
       url: location.href,
       path: location.pathname,
@@ -163,8 +155,8 @@ export default defineNuxtPlugin((nuxtApp) => {
   }
 
   async function onConsentGranted() {
+    if (analyticsConsented) return // already active (Klaro restore + onAccept can both fire)
     analyticsConsented = true
-    await initTracking()
     await trackPageView()
   }
 
@@ -183,10 +175,9 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
   })
 
-  // Track every client-side navigation + refresh session cookie
+  // Track every client-side navigation (also refreshes Shopify's session via the proxy)
   nuxtApp.hook('page:finish', async () => {
     if (!analyticsConsented) return
-    ensureTrackingCookies()
     await trackPageView()
   })
 })
