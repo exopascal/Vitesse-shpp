@@ -49,6 +49,20 @@ function getPageType(path: string): string {
 }
 
 // --- Monorail event builder ---
+// Payloads mirror hydrogen-react 2026.4 (analytics-schema-*.mjs formatPayload).
+
+// Same logic as hydrogen-react getNavigationType()
+function getNavigationType(): [string, string] {
+  try {
+    const entry = performance.getEntriesByType?.('navigation')?.[0] as PerformanceNavigationTiming | undefined
+    if (entry?.type) return [String(entry.type), 'PerformanceNavigationTiming']
+  } catch { /* fall through */ }
+  return ['unknown', 'unknown']
+}
+
+function getCanonicalUrl(fallback: string): string {
+  return document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href || fallback
+}
 
 function buildPageViewEvents(params: {
   shopNumericId: number
@@ -60,8 +74,13 @@ function buildPageViewEvents(params: {
   path: string
   referrer: string
   title: string
+  // Actual consent state from Klaro — never hardcode to true
+  analyticsAllowed: boolean
+  marketingAllowed: boolean
+  saleOfDataAllowed: boolean
 }) {
   const now = Date.now()
+  const [navigationType, navigationApi] = getNavigationType()
   const trekkiePayload = {
     appClientId: HEADLESS_APP_ID,
     isMerchantRequest: false,
@@ -93,14 +112,19 @@ function buildPageViewEvents(params: {
     event_source_url: params.url,
     referrer: params.referrer,
     user_agent: navigator.userAgent,
-    navigation_type: 'navigate',
-    navigation_api: 'PerformanceNavigationTiming',
+    navigation_type: navigationType,
+    navigation_api: navigationApi,
     shop_id: params.shopNumericId,
     currency: 'EUR',
     ccpa_enforced: false,
     gdpr_enforced: true,
     gdpr_enforced_as_string: 'true',
-    event_name: 'PAGE_RENDERED',
+    analytics_allowed: params.analyticsAllowed,
+    marketing_allowed: params.marketingAllowed,
+    sale_of_data_allowed: params.saleOfDataAllowed,
+    // SDK constant PAGE_RENDERED_EVENT_NAME is lowercase
+    event_name: 'page_rendered',
+    canonical_url: getCanonicalUrl(params.url),
   }
   return [
     { schema_id: SCHEMA_TREKKIE, payload: trekkiePayload, metadata: { event_created_at_ms: now } },
@@ -110,12 +134,22 @@ function buildPageViewEvents(params: {
 
 async function sendToMonorail(events: object[], shopDomain: string) {
   try {
-    await fetch(`https://${shopDomain}${MONORAIL_ENDPOINT}`, {
+    const response = await fetch(`https://${shopDomain}${MONORAIL_ENDPOINT}`, {
       method: 'POST',
       headers: { 'content-type': 'text/plain' },
       body: JSON.stringify({ events, metadata: { event_sent_at_ms: Date.now() } }),
       keepalive: true,
     })
+    // Like hydrogen-react: a 207 or a body with per-event result[].status signals rejected events
+    const text = await response.text()
+    if (!response.ok) {
+      console.warn('[shopify-analytics] Monorail request failed:', response.status, text)
+    } else if (text) {
+      const json = JSON.parse(text) as { result?: { status: number, message?: string }[] }
+      json.result?.forEach((r) => {
+        if (r.status !== 200) console.warn('[shopify-analytics] Monorail rejected event:', r.status, r.message)
+      })
+    }
   } catch {
     // Non-critical — analytics must not break the storefront
   }
@@ -128,6 +162,20 @@ export default defineNuxtPlugin((nuxtApp) => {
   const shopDomain = config.public.shopify.domain as string
 
   let analyticsConsented = false
+
+  // Maps the visitor's Klaro choices to Shopify's consent fields.
+  // Marketing / sale of data: true only if the visitor accepted a service with that purpose.
+  function getConsentState() {
+    const manager = (window as any).klaro?.getManager?.()
+    const services: { name: string, purposes?: string[] }[] = manager?.config?.services ?? []
+    const hasPurposeConsent = (purpose: string) =>
+      services.some(s => s.purposes?.includes(purpose) && manager?.getConsent?.(s.name))
+    return {
+      analyticsAllowed: analyticsConsented,
+      marketingAllowed: hasPurposeConsent('marketing'),
+      saleOfDataAllowed: hasPurposeConsent('marketing'),
+    }
+  }
 
   async function trackPageView() {
     if (!shopDomain) return
@@ -149,6 +197,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       path: location.pathname,
       referrer: document.referrer,
       title: document.title,
+      ...getConsentState(),
     })
     await sendToMonorail(events, shopDomain)
     console.debug('[shopify-analytics] page_viewed sent:', location.pathname)
